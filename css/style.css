@@ -277,3 +277,10 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .rt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
 .rt-or { color: var(--ink-soft); }
 .rt-code { font-size: 1.5rem; letter-spacing: .2em; color: var(--cinnabar); }
+
+/* 立繪圖：載入成功時取代 emoji 佔位 */
+.art-slot { display: inline-flex; align-items: center; justify-content: center; }
+.art-slot img { width: 1.6em; height: 1.6em; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
+.master-icon.art-slot img { width: 64px; height: 64px; }
+.duel-portrait-art img { width: 96px; height: 96px; }
+.pet-icon .art-slot img { width: 72px; height: 72px; }

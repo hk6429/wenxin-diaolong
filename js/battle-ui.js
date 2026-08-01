@@ -16,6 +16,12 @@ let battle = null;    // { master, bctx, state, queue, qi, current, maxHpB, ende
 
 const AUTO_NEXT_MS = 2500;
 
+// 立繪：有 assets/img/<id>.webp 用圖，載入失敗回退 emoji（美術可分批補齊）
+function artHtml(id, emoji, cls) {
+  return `<span class="${cls} art-slot"><img src="assets/img/${id}.webp" alt="" loading="lazy"
+    onerror="this.parentElement.textContent='${emoji}'"></span>`;
+}
+
 export async function initBattleUI(d) {
   deps = d;
   try {
@@ -43,7 +49,7 @@ function renderRoster() {
     const wins = meta.pvpMasters?.[m.id]?.wins || 0;
     const prog = masterProgress(meta, m);
     return `<button class="master-card ${unlocked ? '' : 'locked'}" data-master="${m.id}" ${unlocked ? '' : 'disabled'}>
-      <span class="master-icon">${unlocked ? m.icon : '🌑'}</span>
+      ${unlocked ? artHtml(m.id, m.icon, 'master-icon') : '<span class="master-icon">🌑</span>'}
       <span class="master-name">${unlocked ? m.name : '？？？'}</span>
       <span class="master-spec">${m.specialty}</span>
       ${unlocked
@@ -59,7 +65,7 @@ function showIntro(master) {
   $('master-roster').hidden = true;
   $('duel-panel').hidden = false;
   $('duel-stage').innerHTML = `<div class="duel-intro">
-    <div class="duel-portrait">${master.icon}</div>
+    <div class="duel-portrait">${artHtml(master.id, master.icon, 'duel-portrait-art')}</div>
     <h3>${master.name}</h3>
     <p class="duel-line">${escapeHtml(master.intro)}</p>
     <p class="duel-taunt">「${escapeHtml(master.taunt)}」</p>
@@ -197,7 +203,7 @@ function endBattle() {
   deps.renderHud();
   const m = battle.master;
   $('duel-stage').innerHTML = `<div class="duel-intro">
-    <div class="duel-portrait">${won ? '🏆' : m.icon}</div>
+    <div class="duel-portrait">${won ? '🏆' : artHtml(m.id, m.icon, 'duel-portrait-art')}</div>
     <h3>${won ? '勝！' : '敗北……'}</h3>
     <p class="duel-line">「${escapeHtml(won ? m.winLine : m.loseLine)}」</p>
     ${firstWin ? '<p class="duel-taunt">🎉 首次破關！名單上多了一枚徽章。</p>' : ''}

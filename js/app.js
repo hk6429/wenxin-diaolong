@@ -292,7 +292,9 @@ function renderPets() {
     const isActive = ctx.meta.pet.active === p.id;
     return `<div class="pet-card ${unlocked ? '' : 'locked'} ${isActive ? 'active-pet' : ''}" data-pet="${p.id}"
       role="button" tabindex="${unlocked ? 0 : -1}" aria-label="${p.name}">
-      <div class="pet-icon">${unlocked ? p.icon : '❓'}</div>
+      <div class="pet-icon">${unlocked
+        ? `<span class="art-slot"><img src="assets/img/${p.id}.webp" alt="" loading="lazy" onerror="this.parentElement.textContent='${p.icon}'"></span>`
+        : '❓'}</div>
       <div class="pet-name">${unlocked ? p.name : '？？？'}</div>
       <div class="pet-level">${unlocked ? `Lv.${lv}｜${p.category}` : `${p.category}精通 ${Math.floor(mastery)}／${p.unlockAt} 解鎖`}</div>
       <div class="bar"><i style="width:${pct}%"></i></div>
