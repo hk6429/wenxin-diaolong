@@ -56,6 +56,21 @@ if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 await page.click('#btn-adventure');
 await page.waitForSelector('#adventure-stage h2');
 if (!(await page.textContent('#adventure-stage'))?.includes('開卷立誓')) fail('莊子篇沒有《文豪笑傳》式開卷立誓');
+if (await page.locator('.adventure-cover').count() !== 1) fail('莊子篇沒有滿版章回封面');
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-zhuangzi-butterfly.webp')) fail('莊子篇滿版封面未使用章回主視覺');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+const coverLayout = await page.locator('.adventure-cover').evaluate((cover) => {
+  const image = cover.querySelector('img');
+  const title = cover.querySelector('h2');
+  return {
+    imageCoverage: image.getBoundingClientRect().width / cover.getBoundingClientRect().width,
+    titleInside: cover.contains(title),
+    objectFit: getComputedStyle(image).objectFit,
+  };
+});
+if (coverLayout.imageCoverage < .99 || coverLayout.objectFit !== 'cover') fail('莊子篇主視覺沒有真正滿版鋪滿');
+if (!coverLayout.titleInside) fail('莊子篇標題沒有疊在主視覺上');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/adventure-cover.png`, fullPage: true });
 if (await page.locator('[data-vow-id]').count() !== 3) fail('莊子篇立誓選項不是三句');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('殘卷飛蝶'));
@@ -138,6 +153,7 @@ await page.waitForSelector('#btn-adventure');
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('開卷立誓'));
 if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》章回模式')) fail('屈原篇沒有沿用《文豪笑傳》章回模式');
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
 if (await page.locator('.adventure-chapter-tab').count() !== 2) fail('冒險沒有顯示莊子、屈原兩章');

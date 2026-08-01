@@ -28,8 +28,30 @@ const LEVEL_NOTES = {
   國中: '增加概念辨析與四大句型，委託只抽國中專屬題庫。',
   高中: '加入文言語法與深入格律，委託只抽高中專屬題庫。',
 };
+const CHAPTER_COVER_ART = {
+  'preqin-zhuangzi': 'adventure-zhuangzi-butterfly.webp',
+  'warring-quyuan': 'adventure-quyuan-fragrant.webp',
+};
 let deps;
 let chapterMap = null;
+
+function setAdventureStage(content, cinematic = false) {
+  const stage = $('adventure-stage');
+  stage.className = `adventure-stage${cinematic ? ' adventure-stage-cinematic' : ''}`;
+  stage.innerHTML = content;
+}
+
+function cinematicHeader(definition, kicker, title, extra = '') {
+  const art = CHAPTER_COVER_ART[definition.id] || `${definition.art}.webp`;
+  return `<div class="adventure-cover adventure-cover-${definition.id}">
+    <img src="assets/img/${art}" alt="${definition.figure}章回情境插畫">
+    <div class="adventure-cover-copy">
+      <p class="scene-kicker">${kicker}</p>
+      <h2>${title}</h2>
+      ${extra}
+    </div>
+  </div>`;
+}
 
 function goHome() {
   deps.renderHome();
@@ -99,16 +121,14 @@ function renderChapterNav(meta, root) {
 
 function renderVow(root, definition, chapter) {
   const frame = chapter.storyFrame;
-  $('adventure-stage').innerHTML = `
-    <div class="adventure-character"><img src="assets/img/${definition.art}.webp" alt="${definition.figure}" onerror="this.replaceWith('文')"></div>
-    <p class="scene-kicker">《文豪笑傳》章回模式</p>
-    <h2>開卷立誓・遇見${definition.figure}</h2>
-    <p class="story-tagline">${frame.tagline}</p>
-    <p class="story-epithet">${frame.epithet}</p>
-    <div class="story-vows" role="group" aria-label="選擇本章行囊">
-      ${frame.vows.map((vow) => `<button class="story-choice" data-vow-id="${vow.id}"><b>帶著這句話上路</b><span>「${vow.quote}」</span><small>${vow.insight}</small></button>`).join('')}
-    </div>
-    <p class="story-origin">本章採用<a href="https://wenhao-xiaozhuan.pages.dev/" target="_blank" rel="noopener noreferrer">《文豪笑傳》</a>的「立誓—章回—選擇—史實小註」節奏重新編寫；故事對話為本站原創。</p>`;
+  setAdventureStage(`
+    ${cinematicHeader(definition, '《文豪笑傳》章回模式', `開卷立誓・遇見${definition.figure}`, `<p class="story-tagline">${frame.tagline}</p><p class="story-epithet">${frame.epithet}</p>`)}
+    <div class="adventure-stage-body">
+      <div class="story-vows" role="group" aria-label="選擇本章行囊">
+        ${frame.vows.map((vow) => `<button class="story-choice" data-vow-id="${vow.id}"><b>帶著這句話上路</b><span>「${vow.quote}」</span><small>${vow.insight}</small></button>`).join('')}
+      </div>
+      <p class="story-origin">本章採用<a href="https://wenhao-xiaozhuan.pages.dev/" target="_blank" rel="noopener noreferrer">《文豪笑傳》</a>的「立誓—章回—選擇—史實小註」節奏重新編寫；故事對話為本站原創。</p>
+    </div>`, true);
   document.querySelectorAll('[data-vow-id]').forEach((button) => button.addEventListener('click', () => {
     if (!chooseChapterVow(deps.getCtx().meta, button.dataset.vowId, definition.id)) return;
     saveMeta(deps.getCtx().meta);
@@ -123,18 +143,19 @@ function renderFound(root, definition, progress) {
   const friendLine = definition.id === 'preqin-zhuangzi'
     ? '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。'
     : '屈原已成為你的第二位文友，香草流蘇也收入守卷閣。';
-  $('adventure-stage').innerHTML = `
-    <div class="adventure-character"><img src="assets/img/${definition.art}.webp" alt="${definition.figure}" onerror="this.replaceWith('文')"></div>
-    <p class="scene-kicker">第${definition.order}張文脈殘頁</p><h2>${definition.pageName}・${progress.chapterStatus === 'stable' ? '已穩固' : '已尋回'}</h2>
-    <p>${friendLine}真正的理解，要交給時間驗證。</p>
-    ${progress.chapterStatus === 'stable'
-      ? `<p class="adventure-success">${definition.echoTitle}已通過。這一頁的理解，穩穩留住了。</p>`
-      : due
-        ? `<button id="btn-echo" class="primary-btn">接受三題「${definition.echoTitle}」</button>`
-        : `<p class="adventure-wait">${dueText} 後再回來完成三題短驗收；主線旅程可以繼續。</p>`}
-    ${nextDefinition ? `<button id="btn-next-chapter" class="primary-btn">前往第${nextDefinition.number}章・遇見${nextDefinition.figure}</button>` : ''}
-    <button id="btn-replay-chapter" class="ghost-btn">重新遊歷本章</button>
-    <button id="btn-adventure-home" class="ghost-btn">收卷回首頁</button>`;
+  setAdventureStage(`
+    ${cinematicHeader(definition, `第${definition.order}張文脈殘頁`, `${definition.pageName}・${progress.chapterStatus === 'stable' ? '已穩固' : '已尋回'}`)}
+    <div class="adventure-stage-body">
+      <p>${friendLine}真正的理解，要交給時間驗證。</p>
+      ${progress.chapterStatus === 'stable'
+        ? `<p class="adventure-success">${definition.echoTitle}已通過。這一頁的理解，穩穩留住了。</p>`
+        : due
+          ? `<button id="btn-echo" class="primary-btn">接受三題「${definition.echoTitle}」</button>`
+          : `<p class="adventure-wait">${dueText} 後再回來完成三題短驗收；主線旅程可以繼續。</p>`}
+      ${nextDefinition ? `<button id="btn-next-chapter" class="primary-btn">前往第${nextDefinition.number}章・遇見${nextDefinition.figure}</button>` : ''}
+      <button id="btn-replay-chapter" class="ghost-btn">重新遊歷本章</button>
+      <button id="btn-adventure-home" class="ghost-btn">收卷回首頁</button>
+    </div>`, true);
   $('btn-adventure-home').addEventListener('click', goHome);
   $('btn-echo')?.addEventListener('click', startEcho);
   $('btn-next-chapter')?.addEventListener('click', () => {
@@ -166,7 +187,6 @@ async function renderAdventure() {
   const body = selectLevelText(scene.body, root.level);
   const story = selectLevelText(scene.story, root.level);
   const isFinal = scene.id === definition.sceneIds.at(-1);
-  const art = isFinal ? 'diaolong' : definition.art;
   const selectedChoiceId = progress.sceneChoices[scene.id];
   const selectedChoice = scene.choices.find((choice) => choice.id === selectedChoiceId);
   const choiceBlock = selectedChoice
@@ -174,15 +194,16 @@ async function renderAdventure() {
     : `<div class="story-choices" role="group" aria-label="替${definition.figure}作出選擇">
         ${scene.choices.map((choice) => `<button class="story-choice" data-scene-choice="${choice.id}"><span>${choice.label}</span></button>`).join('')}
       </div>`;
-  $('adventure-stage').innerHTML = `
-    <div class="adventure-character"><img src="assets/img/${art}.webp" alt="${isFinal ? '雕龍' : definition.figure}" onerror="this.replaceWith('文')"></div>
-    <p class="scene-kicker">第 ${progress.sceneIndex + 1} 幕・${chapter.title}</p><h2>${scene.title}</h2>
-    <div class="story-scene">${renderZhuyin(story, chapter.annotations, root.zhuyinMode)}</div>
-    <div class="adventure-copy">${renderZhuyin(body, chapter.annotations, root.zhuyinMode)}</div>
-    <aside class="story-fact"><b>史實小註</b><p>${scene.factNote}</p></aside>
-    ${choiceBlock}
-    ${sourceLine(chapter, scene)}
-    ${selectedChoice ? `<button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '翻到下一幕'}</button>` : '<p class="story-choice-hint">先替角色作出選擇，故事才會繼續。</p>'}`;
+  setAdventureStage(`
+    ${cinematicHeader(definition, `第 ${progress.sceneIndex + 1} 幕・${chapter.title}`, scene.title)}
+    <div class="adventure-stage-body">
+      <div class="story-scene">${renderZhuyin(story, chapter.annotations, root.zhuyinMode)}</div>
+      <div class="adventure-copy">${renderZhuyin(body, chapter.annotations, root.zhuyinMode)}</div>
+      <aside class="story-fact"><b>史實小註</b><p>${scene.factNote}</p></aside>
+      ${choiceBlock}
+      ${sourceLine(chapter, scene)}
+      ${selectedChoice ? `<button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '翻到下一幕'}</button>` : '<p class="story-choice-hint">先替角色作出選擇，故事才會繼續。</p>'}
+    </div>`, true);
   document.querySelectorAll('[data-scene-choice]').forEach((button) => button.addEventListener('click', () => {
     if (!chooseScenePath(meta, scene.id, button.dataset.sceneChoice, definition.id)) return;
     saveMeta(meta);
@@ -256,7 +277,7 @@ async function startEcho() {
 
 export async function openAdventureScreen() {
   deps.showScreen('screen-adventure');
-  $('adventure-stage').innerHTML = '<p class="home-today">正在展開文心卷……</p>';
+  setAdventureStage('<p class="home-today">正在展開文心卷……</p>');
   try {
     await loadChapters();
     const root = ensureAdventure(deps.getCtx().meta);
@@ -264,7 +285,7 @@ export async function openAdventureScreen() {
     saveMeta(deps.getCtx().meta);
     renderAdventure();
   } catch {
-    $('adventure-stage').innerHTML = '<h2>文心卷暫時無法展開</h2><p>你的練功與收藏都還在，可以先回首頁繼續修練。</p><button id="btn-adventure-home" class="primary-btn">回首頁</button>';
+    setAdventureStage('<h2>文心卷暫時無法展開</h2><p>你的練功與收藏都還在，可以先回首頁繼續修練。</p><button id="btn-adventure-home" class="primary-btn">回首頁</button>');
     $('btn-adventure-home').addEventListener('click', goHome);
   }
 }
