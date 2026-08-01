@@ -5,9 +5,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  CHAPTERS,
   CHAPTER_ID,
   SCENE_IDS,
   ensureAdventure,
+  getChapterProgress,
+  isChapterUnlocked,
+  selectChapter,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -74,6 +78,47 @@ test('莊子首章具備七幕、三學段、來源分層與可執行任務', ()
   assert.ok(chapter.sources.every((source) => ['primary', 'reference', 'fiction'].includes(source.kind)));
 });
 
+test('屈原第二章需完成莊子主線才解鎖，兩章進度互不覆蓋', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  assert.equal(isChapterUnlocked(meta, 'warring-quyuan'), false);
+  assert.equal(selectChapter(meta, 'warring-quyuan'), false);
+  markChapterFound(meta, new Date('2026-08-01T00:00:00+08:00'), CHAPTER_ID);
+  assert.equal(isChapterUnlocked(meta, 'warring-quyuan'), true);
+  assert.equal(selectChapter(meta, 'warring-quyuan'), true);
+  assert.equal(meta.adventure.currentChapterId, 'warring-quyuan');
+  assert.equal(completeScene(meta, 'chu-prologue', 'warring-quyuan'), true);
+  assert.equal(getChapterProgress(meta, 'warring-quyuan').sceneIndex, 1);
+  assert.equal(getChapterProgress(meta, CHAPTER_ID).chapterStatus, 'found');
+});
+
+test('屈原第二章具備七幕、三學段、公版來源與四組可執行委託', () => {
+  const definition = CHAPTERS.find((item) => item.id === 'warring-quyuan');
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/quyuan.json'), 'utf8'));
+  const result = validateChapter(chapter);
+  assert.deepEqual(result.errors, []);
+  assert.equal(chapter.scenes.length, 7);
+  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
+  assert.equal(chapter.scenes.filter((scene) => scene.quest?.count === 5).length, 4);
+  assert.ok(chapter.sources.filter((source) => source.kind === 'primary').every((source) => source.url?.startsWith('https://zh.wikisource.org/')));
+});
+
+test('每個學段的屈原委託都能從正式題庫選足五題', () => {
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/quyuan.json'), 'utf8'));
+  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
+    const banks = {
+      rhetoric: JSON.parse(fs.readFileSync(path.join(ROOT, `data/rhetoric-${suffix}.json`), 'utf8')),
+      grammar: JSON.parse(fs.readFileSync(path.join(ROOT, `data/grammar-${suffix}.json`), 'utf8')),
+      prosody: JSON.parse(fs.readFileSync(path.join(ROOT, `data/prosody-${suffix}.json`), 'utf8')),
+    };
+    banks.mixed = [...banks.rhetoric, ...banks.grammar, ...banks.prosody];
+    for (const scene of chapter.scenes.filter((item) => item.quest)) {
+      const quest = resolveQuest(scene.quest, level);
+      assert.equal(selectQuestEntries(banks[quest.bankKey], quest).length, 5, `${level} ${scene.id} 題目不足`);
+    }
+  }
+});
+
 test('舊玩家資料遷移時保留文心珠並補上冒險狀態', () => {
   const old = { v: 1, collection: { 'rh-e-0001': { earnedAt: '2026-01-01', grade: 0 } } };
   const map = new Map([[META_KEY, JSON.stringify(old)]]);
@@ -83,9 +128,11 @@ test('舊玩家資料遷移時保留文心珠並補上冒險狀態', () => {
     removeItem: (key) => map.delete(key),
   });
   const migrated = loadMeta();
+  ensureAdventure(migrated);
   assert.equal(migrated.collection['rh-e-0001'].earnedAt, '2026-01-01');
   assert.equal(migrated.adventure.chapterId, CHAPTER_ID);
   assert.equal(migrated.adventure.sceneIndex, 0);
+  assert.ok(migrated.adventure.chapters[CHAPTER_ID]);
 });
 
 test('冒險任務只從指定修辭類別選出不重複題目', () => {

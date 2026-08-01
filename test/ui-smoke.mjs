@@ -88,15 +88,20 @@ if (adventureSaved.rewards?.length !== 3) fail('章回三項獎勵未正確保�
 await page.reload();
 await page.waitForSelector('#btn-adventure');
 await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
+if (await page.locator('.adventure-chapter-tab').count() !== 2) fail('冒險沒有顯示莊子、屈原兩章');
+await page.click('[data-adventure-chapter="preqin-zhuangzi"]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('觀物之頁'));
 await page.evaluate(() => {
   const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
   meta.adventure.echoDueAt = '2000-01-01T00:00:00.000Z';
+  meta.adventure.chapters['preqin-zhuangzi'].echoDueAt = '2000-01-01T00:00:00.000Z';
   meta.adventure.zhuyinMode = 'off';
   localStorage.setItem('wxdl_meta', JSON.stringify(meta));
 });
 await page.reload();
 await page.click('#btn-adventure');
+await page.click('[data-adventure-chapter="preqin-zhuangzi"]');
 await page.waitForSelector('#btn-echo');
 await page.click('#btn-echo');
 const elementaryRhetoric = JSON.parse(await readFile(join(ROOT, 'data/rhetoric-elementary.json'), 'utf8'));
@@ -114,10 +119,10 @@ for (let i = 0; i < 3; i += 1) {
   if (i < 2) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
 }
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('已穩固'));
-const stableStatus = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure.chapterStatus);
+const stableStatus = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure.chapters['preqin-zhuangzi'].chapterStatus);
 if (stableStatus !== 'stable') fail('蝶夢回聲通過後未穩固');
 await page.click('#btn-adventure-back');
-await page.waitForFunction(() => document.querySelector('#adventure-hero-kicker')?.textContent.includes('已穩固'));
+await page.waitForFunction(() => document.querySelector('#adventure-hero-kicker')?.textContent.includes('第二章'));
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');

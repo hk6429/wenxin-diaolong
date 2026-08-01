@@ -22,6 +22,11 @@
 切換文字與正式題庫類別；提供智慧注音、較完整注音與關閉注音。章回完成後尋回
 「觀物之頁」，七日後以三題「蝶夢回聲」驗收是否穩固。
 
+完成莊子主線後解鎖第二章「戰國楚地・屈原〈香草求索〉」：楚澤香草、江潭清濁、
+九歌風陣、忠直之門、屈原問志與守卷閣楚聲歸來。第二章同樣提供三學段文字、智慧
+注音、四組五題委託、三項收藏獎勵，以及七日後的「楚聲回音」；各章進度分開保存，
+可從章回選擇返回莊子篇複習。
+
 冒險作答仍走既有 kernel、Leitner、文心珠與四靈進度，不建立第二套學習紀錄。
 
 學段：國小／國中／高中／實戰（實戰＝基測會考學測指考真題，答案照官方卡，附官方通過率）。
@@ -55,9 +60,10 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `js/schema.js`＋`js/quiz-loader.js`＋`js/bank.js`：資料層（分級分檔、載入即驗證）
 - `js/meta/kernel.js`：養成機制唯一整合接縫（練習／對戰掛鉤 → events 陣列）
 - `js/meta/pet.js`：文心四靈（等級＝該區精通題數÷20，答錯過的題加權 1.5）
-- `js/adventure.js`＋`js/adventure-ui.js`：章回進度、七日驗收與冒險 UI
+- `js/adventure.js`＋`js/adventure-ui.js`：多章解鎖、各章進度、七日驗收與冒險 UI
 - `js/story-content.js`＋`js/zhuyin.js`：三學段內容選版與注音安全渲染
 - `data/adventure/zhuangzi.json`：莊子七幕、來源分層、任務與注音資料
+- `data/adventure/quyuan.json`：屈原七幕、公版原典來源、分級任務與注音資料
 - `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
 - `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；
   鏡像平台透過 `js/meta/api.js` 打回權威平台 `wenxin-diaolong.pages.dev`

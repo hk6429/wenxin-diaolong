@@ -1,0 +1,120 @@
+{
+  "id": "warring-quyuan",
+  "title": "戰國楚地・屈原〈香草求索〉",
+  "version": 1,
+  "sources": [
+    { "id": "chuci-lisao", "kind": "primary", "label": "《楚辭・離騷》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/離騷" },
+    { "id": "chuci-yufu", "kind": "primary", "label": "《楚辭・漁父》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/漁父" },
+    { "id": "chuci-jiuge", "kind": "primary", "label": "《楚辭・九歌》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/楚辭" },
+    { "id": "shiji-quyuan", "kind": "primary", "label": "《史記・屈原賈生列傳》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/屈原列傳" },
+    { "id": "quyuan-game-fiction", "kind": "fiction", "label": "楚澤失聲、香草路標與穿越對話均為本站原創" }
+  ],
+  "annotations": [
+    { "text": "屈原", "bopomofo": ["ㄑㄩ", "ㄩㄢˊ"] },
+    { "text": "戰國", "bopomofo": ["ㄓㄢˋ", "ㄍㄨㄛˊ"] },
+    { "text": "楚地", "bopomofo": ["ㄔㄨˇ", "ㄉㄧˋ"] },
+    { "text": "香草", "bopomofo": ["ㄒㄧㄤ", "ㄘㄠˇ"] },
+    { "text": "求索", "bopomofo": ["ㄑㄧㄡˊ", "ㄙㄨㄛˇ"] },
+    { "text": "汨羅", "bopomofo": ["ㄇㄧˋ", "ㄌㄨㄛˊ"] },
+    { "text": "離騷", "bopomofo": ["ㄌㄧˊ", "ㄙㄠ"] },
+    { "text": "漁父", "bopomofo": ["ㄩˊ", "ㄈㄨˇ"] },
+    { "text": "江潭", "bopomofo": ["ㄐㄧㄤ", "ㄊㄢˊ"] },
+    { "text": "忠直", "bopomofo": ["ㄓㄨㄥ", "ㄓˊ"] },
+    { "text": "讒言", "bopomofo": ["ㄔㄢˊ", "ㄧㄢˊ"] },
+    { "text": "流蘇", "bopomofo": ["ㄌㄧㄡˊ", "ㄙㄨ"] },
+    { "text": "楚辭", "bopomofo": ["ㄔㄨˇ", "ㄘˊ"] },
+    { "text": "清濁", "bopomofo": ["ㄑㄧㄥ", "ㄓㄨㄛˊ"], "fullOnly": true },
+    { "text": "文心卷", "bopomofo": ["ㄨㄣˊ", "ㄒㄧㄣ", "ㄐㄩㄢˋ"], "fullOnly": true },
+    { "text": "求索之頁", "bopomofo": ["ㄑㄧㄡˊ", "ㄙㄨㄛˇ", "ㄓ", "ㄧㄝˋ"], "fullOnly": true }
+  ],
+  "scenes": [
+    {
+      "id": "chu-prologue", "title": "楚澤・香草失色", "contentKind": "fiction", "sourceIds": ["quyuan-game-fiction"],
+      "body": {
+        "國小": "觀物之頁發出一道青光，把你帶到水霧中的楚地。岸邊的香草失去了顏色，一位抱著長卷的人正在找尋散落的文字。",
+        "國中": "文心卷越過先秦的蝶夢，落入戰國楚地。江霧吞沒香草的氣味，一位行吟者正追尋被讒言吹散的楚聲。",
+        "高中": "離開莊周的蝶夢後，文心卷轉入戰國楚地。香草意象逐一褪色，江畔行吟者試圖從失序的語言中守住志節。"
+      }
+    },
+    {
+      "id": "fragrant-path", "title": "香草之徑", "contentKind": "reference", "sourceIds": ["chuci-lisao", "quyuan-game-fiction"],
+      "body": {
+        "國小": "屈原告訴你，故事裡的香草不只是一株植物，也可以代表美好的品格。找出文字藏著的第二層意思，香草路標才會亮起來。",
+        "國中": "《離騷》常用香草寄託品格與理想。辨認譬喻、象徵與引用線索，不能只看字面上是否真的出現植物。",
+        "高中": "香草美人形成《離騷》重要的意象系統。判讀時須連結語境、反覆出現的位置與價值指向，避免把單一意象簡化成固定答案。"
+      },
+      "quest": {
+        "id": "fragrant-path-quest", "bankKey": "rhetoric", "count": 5,
+        "catsByLevel": {
+          "國小": ["譬喻", "轉化", "摹寫", "感嘆"],
+          "國中": ["引用", "映襯", "借代", "轉品"],
+          "高中": ["引用", "譬喻", "映襯", "轉化"]
+        }
+      }
+    },
+    {
+      "id": "river-dialogue", "title": "江潭清濁", "contentKind": "reference", "sourceIds": ["chuci-yufu", "quyuan-game-fiction"],
+      "body": {
+        "國小": "漁父說，水清時可以洗帽帶，水濁時可以洗腳。屈原卻不願放棄心中的原則。兩個人有不同選擇，也各有理由。",
+        "國中": "《漁父》把堅守與隨時調整放進一場問答。先分清兩人的主張與理由，再判斷清濁意象如何幫助表達。",
+        "高中": "江潭問答並置兩種處世立場：屈原守潔，漁父與世推移。閱讀重點不是倉促裁定對錯，而是比較價值前提與修辭策略。"
+      }
+    },
+    {
+      "id": "nine-song-wind", "title": "九歌風陣", "contentKind": "reference", "sourceIds": ["chuci-jiuge", "quyuan-game-fiction"],
+      "body": {
+        "國小": "江風吹來長長短短的歌聲，句尾還常有相同的聲音。聽出押韻與節奏，才能讓散亂的歌聲重新排好。",
+        "國中": "楚辭句式長短參差，常以語氣詞形成節奏。從押韻、停頓與句式辨認它和整齊近體詩的不同。",
+        "高中": "楚辭體以參差句式、語氣節點與兮字節奏形成獨特聲情。比較詩體時，應以句式結構與韻律證據判斷。"
+      },
+      "quest": {
+        "id": "nine-song-quest", "bankKey": "prosody", "count": 5,
+        "catsByLevel": {
+          "國小": ["押韻", "對聯"],
+          "國中": ["押韻", "對仗", "詩體判別"],
+          "高中": ["詩體判別", "詞曲常識", "對仗"]
+        }
+      }
+    },
+    {
+      "id": "loyalty-gate", "title": "忠直之門", "contentKind": "reference", "sourceIds": ["shiji-quyuan", "quyuan-game-fiction"],
+      "body": {
+        "國小": "屈原明明忠心，卻被壞話誤會。看清楚句子裡是誰做事、誰受到影響，才能推開這扇門。",
+        "國中": "列傳寫屈原有才能卻遭讒言。辨認主語、動作與承受者，並比較主動、被動與判斷句。",
+        "高中": "《屈原列傳》以見、被等形式呈現忠而見疑的處境。請結合文言虛詞與句式，判斷語法如何推進人物衝突。"
+      },
+      "quest": {
+        "id": "loyalty-gate-quest", "bankKey": "grammar", "count": 5,
+        "catsByLevel": {
+          "國小": ["詞性", "句型"],
+          "國中": ["句型", "詞性", "詞語結構"],
+          "高中": ["文言句式", "文言虛詞", "詞類活用"]
+        }
+      }
+    },
+    {
+      "id": "quyuan-trial", "title": "屈原問志", "contentKind": "fiction", "sourceIds": ["quyuan-game-fiction"],
+      "body": {
+        "國小": "屈原把香草、江水和歌聲變成五道題目。只要說出你看到的線索，就能找回求索之頁。",
+        "國中": "最後五問同時考驗意象、立場、句型與韻律。每個答案都要從文字中找到可以說明的證據。",
+        "高中": "屈原問志不要求背誦生平，而要求你整合意象系統、對話立場、文言句式與楚辭聲律。"
+      },
+      "quest": {
+        "id": "quyuan-trial", "bankKey": "mixed", "count": 5,
+        "catsByLevel": {
+          "國小": ["譬喻", "轉化", "詞性", "押韻"],
+          "國中": ["引用", "映襯", "句型", "詩體判別"],
+          "高中": ["引用", "文言句式", "詩體判別", "對仗"]
+        }
+      }
+    },
+    {
+      "id": "archive-return-quyuan", "title": "守卷閣・楚聲歸來", "contentKind": "fiction", "sourceIds": ["quyuan-game-fiction"],
+      "body": {
+        "國小": "求索之頁回來了！屈原送你一條香草流蘇，提醒你遇到困難時，還可以繼續尋找答案。",
+        "國中": "求索之頁重新發光。屈原留下香草流蘇，也留下以文字守住選擇、持續求索的提醒。",
+        "高中": "求索之頁完成尋回。這一章留下的不是單一英雄結論，而是理想、處境與選擇之間仍可持續追問的張力。"
+      }
+    }
+  ]
+}

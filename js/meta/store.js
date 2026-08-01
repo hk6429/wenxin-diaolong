@@ -57,6 +57,7 @@ export function defaultMeta() {
     pvp: { nick: '', wins: 0, losses: 0 },
     adventure: {
       chapterId: CHAPTER_ID,
+      currentChapterId: CHAPTER_ID,
       sceneIndex: 0,
       chapterStatus: 'locked',
       echoDueAt: '',
@@ -64,6 +65,7 @@ export function defaultMeta() {
       zhuyinMode: 'smart',
       questResults: {},
       rewards: [],
+      chapters: {},
     },
   };
 }

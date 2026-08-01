@@ -1,6 +1,10 @@
 import {
-  SCENE_IDS,
+  CHAPTERS,
+  chapterDefinition,
   ensureAdventure,
+  getChapterProgress,
+  isChapterUnlocked,
+  selectChapter,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -21,98 +25,133 @@ const LEVEL_NOTES = {
   高中: '加入文言語法與深入格律，委託只抽高中專屬題庫。',
 };
 let deps;
-let chapter;
+let chapterMap = null;
 
 function goHome() {
   deps.renderHome();
   deps.showScreen('screen-home');
 }
 
-async function loadChapter() {
-  if (chapter) return chapter;
-  const response = await fetch('data/adventure/zhuangzi.json');
-  if (!response.ok) throw new Error(`chapter ${response.status}`);
-  chapter = await response.json();
-  return chapter;
+async function loadChapters() {
+  if (chapterMap) return chapterMap;
+  const loaded = await Promise.all(CHAPTERS.map(async (definition) => {
+    const response = await fetch(`data/adventure/${definition.file}.json`);
+    if (!response.ok) throw new Error(`chapter ${definition.id} ${response.status}`);
+    return [definition.id, await response.json()];
+  }));
+  chapterMap = new Map(loaded);
+  return chapterMap;
 }
 
-function sourceLine(scene) {
+function currentContext() {
+  const meta = deps.getCtx().meta;
+  const root = ensureAdventure(meta);
+  const definition = chapterDefinition(root.currentChapterId);
+  return { meta, root, definition, progress: getChapterProgress(meta, definition.id), chapter: chapterMap.get(definition.id) };
+}
+
+function sourceLine(chapter, scene) {
   const labels = (scene.sourceIds || []).map((id) => chapter.sources.find((s) => s.id === id)?.label).filter(Boolean);
   return labels.length ? `<p class="adventure-source">內容依據：${labels.join('；')}</p>` : '';
 }
 
-function progressLabel(state) {
-  if (state.chapterStatus === 'stable') return '觀物之頁・已穩固';
-  if (state.chapterStatus === 'found') return '觀物之頁・已尋回';
-  return `第一章・${state.sceneIndex + 1}／${SCENE_IDS.length}`;
+function progressLabel(definition, progress) {
+  if (progress.chapterStatus === 'stable') return `${definition.pageName}・已穩固`;
+  if (progress.chapterStatus === 'found') return `${definition.pageName}・已尋回`;
+  return `第${definition.number}章・${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
 }
 
-function renderControls(state) {
+function renderControls(root) {
   document.querySelectorAll('[data-story-level]').forEach((button) => {
-    const active = button.dataset.storyLevel === state.level;
+    const active = button.dataset.storyLevel === root.level;
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
   document.querySelectorAll('[data-zhuyin]').forEach((button) => {
-    const active = button.dataset.zhuyin === state.zhuyinMode;
+    const active = button.dataset.zhuyin === root.zhuyinMode;
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-  $('adventure-level-note').innerHTML = `<strong>目前冒險：${state.level}版</strong>｜${LEVEL_NOTES[state.level]}切換後，故事文字與五題挑戰會一起更換，不只是按鈕外觀。`;
+  $('adventure-level-note').innerHTML = `<strong>目前冒險：${root.level}版</strong>｜${LEVEL_NOTES[root.level]}切換後，故事文字與五題挑戰會一起更換，不只是按鈕外觀。`;
 }
 
-function renderFound(state) {
-  const due = isEchoDue(deps.getCtx().meta);
-  const dueText = state.echoDueAt ? new Date(state.echoDueAt).toLocaleDateString('zh-TW') : '';
+function renderChapterNav(meta, root) {
+  $('adventure-chapters').innerHTML = CHAPTERS.map((definition) => {
+    const unlocked = isChapterUnlocked(meta, definition.id);
+    const active = definition.id === root.currentChapterId;
+    const progress = getChapterProgress(meta, definition.id);
+    const stateLabel = !unlocked ? '尚未解鎖' : progress.chapterStatus === 'stable' ? '已穩固' : progress.chapterStatus === 'found' ? '已尋回' : progress.sceneIndex ? '旅途中' : '可挑戰';
+    return `<button class="adventure-chapter-tab${active ? ' active' : ''}" data-adventure-chapter="${definition.id}" ${unlocked ? '' : 'disabled'} aria-pressed="${active}">
+      <small>第${definition.number}章・${definition.era}</small><b>${definition.figure}</b><span>${stateLabel}</span>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('[data-adventure-chapter]').forEach((button) => button.addEventListener('click', () => {
+    if (!selectChapter(deps.getCtx().meta, button.dataset.adventureChapter)) return;
+    saveMeta(deps.getCtx().meta);
+    renderAdventure();
+  }));
+}
+
+function renderFound(root, definition, progress) {
+  const due = isEchoDue(deps.getCtx().meta, new Date(), definition.id);
+  const dueText = progress.echoDueAt ? new Date(progress.echoDueAt).toLocaleDateString('zh-TW') : '';
+  const nextDefinition = CHAPTERS.find((item) => item.order === definition.order + 1);
+  const friendLine = definition.id === 'preqin-zhuangzi'
+    ? '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。'
+    : '屈原已成為你的第二位文友，香草流蘇也收入守卷閣。';
   $('adventure-stage').innerHTML = `
-    <div class="adventure-character"><img src="assets/img/diaolong.webp" alt="雕龍" onerror="this.replaceWith('🐉')"></div>
-    <p class="scene-kicker">第一張文脈殘頁</p><h2>觀物之頁・${state.chapterStatus === 'stable' ? '已穩固' : '已尋回'}</h2>
-    <p>莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。真正的理解，要交給時間驗證。</p>
-    ${state.chapterStatus === 'stable'
-      ? '<p class="adventure-success">蝶夢回聲已通過。這一頁的理解，穩穩留住了。</p>'
+    <div class="adventure-character"><img src="assets/img/${definition.art}.webp" alt="${definition.figure}" onerror="this.replaceWith('文')"></div>
+    <p class="scene-kicker">第${definition.order}張文脈殘頁</p><h2>${definition.pageName}・${progress.chapterStatus === 'stable' ? '已穩固' : '已尋回'}</h2>
+    <p>${friendLine}真正的理解，要交給時間驗證。</p>
+    ${progress.chapterStatus === 'stable'
+      ? `<p class="adventure-success">${definition.echoTitle}已通過。這一頁的理解，穩穩留住了。</p>`
       : due
-        ? '<button id="btn-echo" class="primary-btn">接受三題「蝶夢回聲」</button>'
-        : `<p class="adventure-wait">${dueText} 後再回來完成三題短驗收。現在可以安心收卷。</p>`}
+        ? `<button id="btn-echo" class="primary-btn">接受三題「${definition.echoTitle}」</button>`
+        : `<p class="adventure-wait">${dueText} 後再回來完成三題短驗收；主線旅程可以繼續。</p>`}
+    ${nextDefinition ? `<button id="btn-next-chapter" class="primary-btn">前往第${nextDefinition.number}章・遇見${nextDefinition.figure}</button>` : ''}
     <button id="btn-adventure-home" class="ghost-btn">收卷回首頁</button>`;
   $('btn-adventure-home').addEventListener('click', goHome);
   $('btn-echo')?.addEventListener('click', startEcho);
+  $('btn-next-chapter')?.addEventListener('click', () => {
+    if (!selectChapter(deps.getCtx().meta, nextDefinition.id)) return;
+    saveMeta(deps.getCtx().meta);
+    renderAdventure();
+  });
 }
 
 async function renderAdventure() {
-  const ctx = deps.getCtx();
-  const state = ensureAdventure(ctx.meta);
-  $('adventure-progress').textContent = progressLabel(state);
-  renderControls(state);
-  if (state.chapterStatus !== 'locked') {
-    renderFound(state);
+  const { meta, root, definition, progress, chapter } = currentContext();
+  $('adventure-progress').textContent = progressLabel(definition, progress);
+  renderControls(root);
+  renderChapterNav(meta, root);
+  if (progress.chapterStatus !== 'locked') {
+    renderFound(root, definition, progress);
     return;
   }
-  const scene = chapter.scenes[state.sceneIndex];
-  const body = selectLevelText(scene.body, state.level);
-  const isFinal = scene.id === SCENE_IDS.at(-1);
+  const scene = chapter.scenes[progress.sceneIndex];
+  const body = selectLevelText(scene.body, root.level);
+  const isFinal = scene.id === definition.sceneIds.at(-1);
+  const art = isFinal ? 'diaolong' : definition.art;
   $('adventure-stage').innerHTML = `
-    <div class="adventure-character"><img src="assets/img/${scene.id === 'zhuangzi-trial' ? 'zhuangzi' : scene.id === 'archive-return' ? 'diaolong' : 'zhuangzi'}.webp" alt="" onerror="this.replaceWith('🦋')"></div>
+    <div class="adventure-character"><img src="assets/img/${art}.webp" alt="${isFinal ? '雕龍' : definition.figure}" onerror="this.replaceWith('文')"></div>
     <p class="scene-kicker">${chapter.title}</p><h2>${scene.title}</h2>
-    <div class="adventure-copy">${renderZhuyin(body, chapter.annotations, state.zhuyinMode)}</div>
-    ${sourceLine(scene)}
-    <button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? '修復觀物之頁' : '繼續前進'}</button>`;
+    <div class="adventure-copy">${renderZhuyin(body, chapter.annotations, root.zhuyinMode)}</div>
+    ${sourceLine(chapter, scene)}
+    <button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '繼續前進'}</button>`;
   $('btn-scene-next').addEventListener('click', () => scene.quest ? startQuest(scene) : advanceScene(scene, isFinal));
 }
 
 function advanceScene(scene, isFinal) {
-  const ctx = deps.getCtx();
-  if (isFinal) {
-    markChapterFound(ctx.meta);
-  } else {
-    completeScene(ctx.meta, scene.id);
-  }
-  saveMeta(ctx.meta);
+  const { meta, definition } = currentContext();
+  if (isFinal) markChapterFound(meta, new Date(), definition.id);
+  else completeScene(meta, scene.id, definition.id);
+  saveMeta(meta);
   renderAdventure();
 }
 
 async function startQuest(scene) {
-  const state = ensureAdventure(deps.getCtx().meta);
-  const quest = resolveQuest(scene.quest, state.level);
+  const { root, definition, chapter } = currentContext();
+  const quest = resolveQuest(scene.quest, root.level);
   let entries;
   try { entries = await loadBank(quest.bankKey); }
   catch { deps.toast('委託題目暫時載入失敗，原有練功仍可使用'); return; }
@@ -125,33 +164,34 @@ async function startQuest(scene) {
     limit: quest.count,
     title: scene.title,
     annotations: chapter.annotations,
-    zhuyinMode: state.zhuyinMode,
+    zhuyinMode: root.zhuyinMode,
     onExit: openAdventureScreen,
     onComplete: (summary) => {
-      const ctx = deps.getCtx();
-      const fresh = ensureAdventure(ctx.meta);
-      fresh.questResults[scene.id] = { ...summary, completedAt: new Date().toISOString() };
-      completeScene(ctx.meta, scene.id);
-      saveMeta(ctx.meta);
+      const meta = deps.getCtx().meta;
+      const progress = getChapterProgress(meta, definition.id);
+      progress.questResults[scene.id] = { ...summary, completedAt: new Date().toISOString() };
+      completeScene(meta, scene.id, definition.id);
+      saveMeta(meta);
       openAdventureScreen();
     },
   });
 }
 
 async function startEcho() {
+  const { root, definition, chapter } = currentContext();
+  const quest = resolveQuest(definition.echoQuest, root.level);
   let entries;
-  try { entries = await loadBank('rhetoric'); }
-  catch { deps.toast('蝶夢回聲暫時載入失敗'); return; }
-  const selected = shuffle(selectQuestEntries(entries, { cats: ['譬喻', '轉化', '誇飾', '設問'], count: 3 }));
-  const state = ensureAdventure(deps.getCtx().meta);
+  try { entries = await loadBank(quest.bankKey); }
+  catch { deps.toast(`${definition.echoTitle}暫時載入失敗`); return; }
+  const selected = shuffle(selectQuestEntries(entries, quest));
   deps.startPractice(null, selected.map((entry) => entry.id), {
-    limit: 3, title: '蝶夢回聲', annotations: chapter.annotations, zhuyinMode: state.zhuyinMode,
+    limit: quest.count, title: definition.echoTitle, annotations: chapter.annotations, zhuyinMode: root.zhuyinMode,
     onExit: openAdventureScreen,
     onComplete: (summary) => {
-      const ctx = deps.getCtx();
-      if (summary.correct >= 2 && stabilizeChapter(ctx.meta)) deps.toast('觀物之頁已穩固！');
+      const meta = deps.getCtx().meta;
+      if (summary.correct >= 2 && stabilizeChapter(meta, new Date(), definition.id)) deps.toast(`${definition.pageName}已穩固！`);
       else deps.toast('再溫習一次也沒關係，理解正在長出來');
-      saveMeta(ctx.meta);
+      saveMeta(meta);
       openAdventureScreen();
     },
   });
@@ -161,9 +201,9 @@ export async function openAdventureScreen() {
   deps.showScreen('screen-adventure');
   $('adventure-stage').innerHTML = '<p class="home-today">正在展開文心卷……</p>';
   try {
-    await loadChapter();
-    const state = ensureAdventure(deps.getCtx().meta);
-    if (LEVELS.includes(deps.getLevel())) state.level = deps.getLevel();
+    await loadChapters();
+    const root = ensureAdventure(deps.getCtx().meta);
+    if (LEVELS.includes(deps.getLevel())) root.level = deps.getLevel();
     saveMeta(deps.getCtx().meta);
     renderAdventure();
   } catch {

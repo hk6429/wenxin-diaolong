@@ -19,7 +19,7 @@ import { initBattleUI, openBattleScreen } from './battle-ui.js';
 import { initRtUI, openRtScreen } from './rtbattle-ui.js';
 import { initAdventureUI, openAdventureScreen } from './adventure-ui.js';
 import { renderZhuyin } from './zhuyin.js';
-import { ensureAdventure, isEchoDue } from './adventure.js';
+import { CHAPTERS, chapterDefinition, ensureAdventure, getChapterProgress, isEchoDue, selectChapter } from './adventure.js';
 
 const $ = (id) => document.getElementById(id);
 const SCREENS = ['screen-home', 'screen-adventure', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets', 'screen-battle', 'screen-rt'];
@@ -78,18 +78,33 @@ function renderHome() {
   renderLevelGuides();
   const d = ctx.meta.daily;
   const adventure = ensureAdventure(ctx.meta);
-  if (adventure.chapterStatus === 'stable') {
-    $('adventure-hero-kicker').textContent = '第一章・已穩固';
-    $('adventure-hero-title').textContent = '觀物之頁重新發光';
+  let definition = chapterDefinition(adventure.currentChapterId);
+  let progress = getChapterProgress(ctx.meta, definition.id);
+  const nextDefinition = CHAPTERS.find((item) => item.order === definition.order + 1);
+  if (progress.chapterStatus !== 'locked' && nextDefinition && getChapterProgress(ctx.meta, nextDefinition.id).chapterStatus === 'locked') {
+    selectChapter(ctx.meta, nextDefinition.id);
+    saveMeta(ctx.meta);
+    definition = nextDefinition;
+    progress = getChapterProgress(ctx.meta, definition.id);
+  }
+  const heroImg = document.querySelector('.adventure-hero-art img');
+  if (heroImg) heroImg.src = `assets/img/${definition.art}.webp`;
+  if (progress.chapterStatus === 'stable') {
+    $('adventure-hero-kicker').textContent = `第${definition.number}章・已穩固`;
+    $('adventure-hero-title').textContent = `${definition.pageName}重新發光`;
     $('adventure-hero-cta').textContent = '回守卷閣看看 →';
-  } else if (adventure.chapterStatus === 'found') {
-    $('adventure-hero-kicker').textContent = isEchoDue(ctx.meta) ? '蝶夢回聲・可以驗收' : '第一章・已尋回';
-    $('adventure-hero-title').textContent = isEchoDue(ctx.meta) ? '七日後的三題挑戰到了' : '觀物之頁等待時間沉澱';
-    $('adventure-hero-cta').textContent = isEchoDue(ctx.meta) ? '接受回聲挑戰 →' : '查看旅程 →';
-  } else if (adventure.sceneIndex > 0) {
-    $('adventure-hero-kicker').textContent = `第一章・${adventure.sceneIndex + 1}／7`;
-    $('adventure-hero-title').textContent = '繼續〈蝶夢逍遙〉';
+  } else if (progress.chapterStatus === 'found') {
+    $('adventure-hero-kicker').textContent = isEchoDue(ctx.meta, new Date(), definition.id) ? `${definition.echoTitle}・可以驗收` : `第${definition.number}章・已尋回`;
+    $('adventure-hero-title').textContent = isEchoDue(ctx.meta, new Date(), definition.id) ? '七日後的三題挑戰到了' : `${definition.pageName}等待時間沉澱`;
+    $('adventure-hero-cta').textContent = isEchoDue(ctx.meta, new Date(), definition.id) ? '接受回聲挑戰 →' : '查看旅程 →';
+  } else if (progress.sceneIndex > 0) {
+    $('adventure-hero-kicker').textContent = `第${definition.number}章・${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
+    $('adventure-hero-title').textContent = `繼續遇見${definition.figure}`;
     $('adventure-hero-cta').textContent = '從書籤繼續 →';
+  } else {
+    $('adventure-hero-kicker').textContent = `第${definition.number}章・${definition.era}`;
+    $('adventure-hero-title').textContent = definition.heroTitle;
+    $('adventure-hero-cta').textContent = '開始冒險 →';
   }
   $('home-today').textContent = d.todayAnswered > 0
     ? `今日已練 ${d.todayAnswered} 題，答對 ${d.todayCorrect} 題——${d.todayCorrect / d.todayAnswered >= 0.8 ? '文氣充沛！' : '穩穩累積中。'}`
