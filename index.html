@@ -39,32 +39,32 @@
     </button>
     <nav class="entry-grid" aria-label="主功能">
       <button class="entry-card entry-practice" id="btn-practice">
-        <span class="entry-icon" aria-hidden="true">⚔️</span>
+        <img class="entry-art" src="assets/img/home-practice.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">練功</span>
         <span class="entry-desc">修辭・文法・格律 分區闖關</span>
       </button>
       <button class="entry-card entry-codex" id="btn-codex">
-        <span class="entry-icon" aria-hidden="true">📖</span>
+        <img class="entry-art" src="assets/img/home-codex.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">文心圖鑑</span>
         <span class="entry-desc">概念卡與文心珠收藏</span>
       </button>
       <button class="entry-card entry-weak" id="btn-weak">
-        <span class="entry-icon" aria-hidden="true">🎯</span>
+        <img class="entry-art" src="assets/img/home-weak.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">弱點複習</span>
         <span class="entry-desc">哪裡跌倒哪裡練</span>
       </button>
       <button class="entry-card entry-pets" id="btn-pets">
-        <span class="entry-icon" aria-hidden="true">🐲</span>
+        <img class="entry-art" src="assets/img/home-pets.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">文心四靈</span>
         <span class="entry-desc">練得愈熟，靈獸愈強</span>
       </button>
       <button class="entry-card entry-battle" id="btn-battle">
-        <span class="entry-icon" aria-hidden="true">🏯</span>
+        <img class="entry-art" src="assets/img/home-trial.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">文心試煉</span>
         <span class="entry-desc">挑戰歷代文心大師</span>
       </button>
       <button class="entry-card entry-rt" id="btn-rt">
-        <span class="entry-icon" aria-hidden="true">🤝</span>
+        <img class="entry-art" src="assets/img/home-duel.webp" alt="" aria-hidden="true" onerror="this.hidden=true">
         <span class="entry-title">文友過招</span>
         <span class="entry-desc">開房對戰，同題比拚</span>
       </button>
@@ -174,16 +174,22 @@
       <button id="btn-rt-back" class="ghost-btn">← 回首頁</button>
     </div>
     <div id="rt-lobby">
-      <h2>文友過招</h2>
-      <p class="pets-hint">兩人同一組題目比拚，答對造成傷害、連對加成。20 題定勝負。</p>
-      <label class="rt-field">暱稱<input id="rt-nick" maxlength="12" placeholder="無名文士"></label>
-      <div class="rt-actions">
-        <button id="btn-rt-create" class="primary-btn">開房（取得房號）</button>
-        <span class="rt-or">或</span>
-        <label class="rt-field">房號<input id="rt-code" inputmode="numeric" maxlength="4" placeholder="4 位數"></label>
-        <button id="btn-rt-join" class="primary-btn">加入</button>
+      <div class="rt-lobby-hero">
+        <img src="assets/img/home-duel.webp" alt="兩位文士以筆墨過招" onerror="this.hidden=true">
+        <div><small>回合制文心對決</small><h2>文友過招</h2><p>以題為招・以筆墨定勝負</p></div>
       </div>
-      <p id="rt-status" class="home-today" aria-live="polite"></p>
+      <div class="rt-lobby-panel">
+        <div class="rt-rule-chips" aria-label="對戰規則"><span>同題競速</span><span>答對出招</span><span>三連增幅</span><span>20 回合</span></div>
+        <p class="pets-hint">兩人使用同一組題目比拚；答對削減對手文氣，連續答對會發動更強筆勢。</p>
+        <label class="rt-field">文士名<input id="rt-nick" maxlength="12" placeholder="無名文士"></label>
+        <div class="rt-actions">
+          <button id="btn-rt-create" class="primary-btn">建立對決（取得房號）</button>
+          <span class="rt-or">或</span>
+          <label class="rt-field">房號<input id="rt-code" inputmode="numeric" maxlength="4" placeholder="4 位數"></label>
+          <button id="btn-rt-join" class="primary-btn">應戰</button>
+        </div>
+        <p id="rt-status" class="home-today" aria-live="polite"></p>
+      </div>
     </div>
     <div id="rt-arena" hidden>
       <p id="rt-arena-head" class="home-today"></p>

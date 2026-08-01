@@ -36,11 +36,13 @@
 - `js/shuffle.js`、`js/session-checkpoint.js`、`js/overlay-a11y.js`、`js/announce.js`、`js/sound.js`（自行看檔頭註解使用）。
 
 ## 畫面（section 切換，單頁）
-1. **screen-home 首頁**：站名「文心雕龍」＋副標「文法修辭練功站」；學制切換（國小/國中/高中/實戰 四顆按鈕，呼叫 setLevel 後重載題庫與 ctx）；狀態列（墨珠餘額/文氣境界/連續天數/今日已練題數）；四大入口卡：練功（練習）、文心圖鑑、弱點複習、文心四靈；預留「對戰」入口卡但標「即將開放」disabled。
+1. **screen-home 首頁**：站名「文心雕龍」＋副標「文法修辭練功站」；學制切換（國小/國中/高中/實戰 四顆按鈕，呼叫 setLevel 後重載題庫與 ctx）；狀態列（墨珠餘額/文氣境界/連續天數/今日已練題數）；六個入口卡：練功、文心圖鑑、弱點複習、文心四靈、文心試煉、文友過招。
 2. **screen-practice 練功**：先選分區（修辭/文法/格律/綜合＝mixed），再進答題。出題順序：practice-round 一輪不重複＋pickFn 用 leitner.nextQuestionId。每題渲染題幹（\n 要轉換行）、選項按鈕（1-4 數字鍵可作答）、作答後立即標對錯並顯示 explain 與 citation（有引文出處要顯示）、手動「下一題」；每題作答呼叫 onPracticeAnswer 並渲染 events。頂部顯示本輪進度與 combo。每 15 題（session-checkpoint）彈「今日已練 N 題，要休息還是繼續？」。實戰學制答題後額外顯示官方 `pass`（通過率）當難度參考（有才顯示）。複選真題要支援多選＋送出鈕，全對才算對。
 3. **screen-codex 文心圖鑑**：讀 `data/concepts.json`（fetch 失敗或檔案不存在時顯示「圖鑑建置中」，不可炸）。依 zone 分三欄/三頁籤列出概念卡：cat 名＋definition＋tips＋examples（例句附 citation 與 note；韻文例標「韻」徽章）。每張卡顯示該 cat 的精通進度（用該 cat 題目的 getMasteryStats 算：分母＝目前學制該 cat 題數）。精通 ≥5 題卡片「點亮」（彩色 vs 灰階）。另一個頁籤「文心珠」：getCollection 的白珠/青珠/金珠/墨玉 數量與蒙塵清單。
-4. **screen-weak 弱點複習**：getWeaknessSummary 列正確率低到高的 zone·cat 清單（附進度條）；「開始弱點特訓」＝抽 getMostWrong 前 15 題進練習流程（同 screen-practice 的答題 UI，複用同一套渲染函式）。
-5. **screen-pets 文心四靈**：四張靈獸卡（icon/名/intro/等級/精通進度條/羈絆台詞依 bondStage 顯示第幾句）；未解鎖顯示剪影＋解鎖條件（「精通 N 題」）；點卡可設 active（寫 meta.pet.active 後用 kernel 的 saveMeta——meta 物件直接改、再 import { saveMeta } from './js/meta/store.js' 存）。
+4. **首頁功能入口配圖**：練功、文心圖鑑、弱點複習、文心四靈、文心試煉、文友過招六張卡片都使用 `assets/img/home-*.webp` 原創配圖，不回退成 emoji icon。文字由 HTML 疊放，圖檔不得內嵌標題文字。
+5. **文友過招戰場**：大廳與對戰共用 `home-duel.webp` 世界觀；對戰進行時採左右對峙構圖，畫面必須同時顯示回合、雙方文氣、境界、連擊與招式規則，題目卡置於戰場下方。
+6. **screen-weak 弱點複習**：getWeaknessSummary 列正確率低到高的 zone·cat 清單（附進度條）；「開始弱點特訓」＝抽 getMostWrong 前 15 題進練習流程（同 screen-practice 的答題 UI，複用同一套渲染函式）。
+7. **screen-pets 文心四靈**：四張靈獸卡（icon/名/intro/等級/精通進度條/羈絆台詞依 bondStage 顯示第幾句）；未解鎖顯示剪影＋解鎖條件（「精通 N 題」）；點卡可設 active（寫 meta.pet.active 後用 kernel 的 saveMeta——meta 物件直接改、再 import { saveMeta } from './js/meta/store.js' 存）。
 
 ## 視覺
 國風文人宇宙：宣紙米白底（#f5efe2 系）＋墨黑主文字＋朱砂紅（#b3402a 系）點綴＋金色強調；

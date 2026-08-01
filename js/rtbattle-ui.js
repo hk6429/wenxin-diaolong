@@ -57,7 +57,7 @@ async function lobbyAction(kind) {
   rt = {
     code: kind === 'create' ? res.code : body.code,
     role: kind === 'create' ? 'p1' : 'p2',
-    token: res.token, seed: res.seed,
+    token: res.token, seed: res.seed, mySnap: body.snap,
     questions: null, qi: 0,
     myDmg: 0, myCorrect: 0, combo: 0, bestCombo: 0, done: false,
     oppSnap: kind === 'join' ? res.opp : null, oppState: null, oppHb: Date.now(),
@@ -118,6 +118,9 @@ function renderRtHp() {
     $('rt-hp-a').textContent = myHp();
     $('rt-hp-b').textContent = oppHp();
     $('rt-progress').textContent = `你 ${rt.qi}／${ROUNDS} 題・對方 ${rt.oppState?.round || 0}／${ROUNDS} 題`;
+    if ($('rt-round')) $('rt-round').textContent = `第 ${Math.min(rt.qi + 1, ROUNDS)} 回合`;
+    if ($('rt-combo-a')) $('rt-combo-a').textContent = `連擊 ${rt.combo}`;
+    if ($('rt-combo-b')) $('rt-combo-b').textContent = `連擊 ${rt.oppState?.combo || 0}`;
   }
 }
 
@@ -127,17 +130,24 @@ function renderRtQuestion() {
   const q = rt.questions[rt.qi];
   if (!$('rt-hp-row')) {
     body.innerHTML = `
-      <div class="duel-hp-row" id="rt-hp-row">
-        <div class="duel-side"><span>你</span><div class="bar hp-a"><i></i></div><b id="rt-hp-a"></b></div>
-        <div class="duel-vs">⚔️</div>
-        <div class="duel-side"><span>${escapeHtml(rt.oppSnap?.nick || '對手')}</span><div class="bar hp-b"><i></i></div><b id="rt-hp-b"></b></div>
+      <section class="rt-battle-board">
+      <div class="rt-battle-visual">
+        <img src="assets/img/home-duel.webp" alt="" aria-hidden="true">
+        <div class="rt-round-banner"><small>文心過招</small><b id="rt-round">第 1 回合</b></div>
+        <div class="duel-hp-row" id="rt-hp-row">
+          <div class="duel-side rt-fighter rt-fighter-a"><span>${escapeHtml(rt.mySnap?.nick || '無名文士')}</span><small class="rt-loadout">${escapeHtml(rt.mySnap?.petName || '墨靈')}・境界 ${rt.mySnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-a"></em></b><small id="rt-combo-a">連擊 0</small></div><div class="bar hp-a"><i></i></div></div>
+          <div class="duel-vs"><span>文</span><small>VS</small></div>
+          <div class="duel-side rt-fighter rt-fighter-b"><span>${escapeHtml(rt.oppSnap?.nick || '對手')}</span><small class="rt-loadout">${escapeHtml(rt.oppSnap?.petName || '墨靈')}・境界 ${rt.oppSnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-b"></em></b><small id="rt-combo-b">連擊 0</small></div><div class="bar hp-b"><i></i></div></div>
+        </div>
+        <div class="rt-battle-rules"><span>答對・筆鋒 +10</span><span>三連・連珠 +15</span><span>文氣歸零者敗</span></div>
       </div>
       <p id="rt-progress" class="home-today"></p>
-      <article class="quiz-card">
+      <article class="quiz-card rt-quiz-card">
         <p class="quiz-tag" id="rt-tag"></p>
         <div class="quiz-question" id="rt-question"></div>
         <div class="quiz-options" id="rt-options" role="group" aria-label="選項"></div>
-      </article>`;
+      </article>
+      </section>`;
   }
   $('rt-tag').textContent = `第 ${rt.qi + 1} 題`;
   $('rt-question').textContent = q.question;

@@ -92,15 +92,15 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .entry-card {
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
-  min-height: 104px; padding: 14px; border-radius: var(--radius);
+  min-height: 220px; padding: 0; overflow: hidden; border-radius: var(--radius);
   background: var(--card); border: 1px solid rgba(92, 83, 70, .25);
   box-shadow: var(--shadow); text-align: left; transition: transform .12s;
 }
 .entry-card:not([disabled]):hover { transform: translateY(-2px); }
 .entry-card[disabled] { opacity: .55; cursor: not-allowed; }
-.entry-icon { font-size: 1.6rem; }
-.entry-title { font-weight: bold; font-size: 1.1rem; letter-spacing: .12em; }
-.entry-desc { color: var(--ink-soft); font-size: .8rem; }
+.entry-art { width: 100%; height: 132px; object-fit: cover; object-position: center; border-bottom: 1px solid rgba(92, 83, 70, .16); }
+.entry-title { margin: 10px 14px 0; font-weight: bold; font-size: 1.1rem; letter-spacing: .12em; }
+.entry-desc { margin: 0 14px 12px; color: var(--ink-soft); font-size: .8rem; }
 .entry-practice { border-top: 4px solid var(--rh); }
 .entry-codex { border-top: 4px solid var(--gold); }
 .entry-weak { border-top: 4px solid var(--gr); }
@@ -399,6 +399,39 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .rt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
 .rt-or { color: var(--ink-soft); }
 .rt-code { font-size: 1.5rem; letter-spacing: .2em; color: var(--cinnabar); }
+#rt-lobby { overflow: hidden; }
+.rt-lobby-hero { position: relative; min-height: 300px; overflow: hidden; border-radius: 20px; box-shadow: var(--shadow); background: var(--paper-deep); }
+.rt-lobby-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rt-lobby-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(28,42,50,.72), transparent 38%, transparent 62%, rgba(92,36,28,.68)); }
+.rt-lobby-hero > div { position: absolute; z-index: 1; inset: 0; display: grid; place-content: center; text-align: center; color: #fff8df; text-shadow: 0 2px 12px rgba(25,18,10,.8); }
+.rt-lobby-hero small { color: #f0d487; letter-spacing: .22em; font-weight: 800; }
+.rt-lobby-hero h2 { margin: 4px 0; font-size: clamp(2rem, 7vw, 3.4rem); }
+.rt-lobby-hero p { margin: 0; font-weight: 800; letter-spacing: .14em; }
+.rt-lobby-panel { position: relative; z-index: 2; margin: -28px 18px 0; padding: 16px 18px; border: 1px solid rgba(168,132,44,.38); border-radius: 16px; background: color-mix(in srgb, var(--card) 94%, transparent); box-shadow: var(--shadow); backdrop-filter: blur(10px); }
+.rt-rule-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
+.rt-rule-chips span { padding: 3px 9px; border: 1px solid rgba(168,132,44,.5); border-radius: 999px; color: var(--cinnabar); font-size: .72rem; font-weight: 800; }
+.rt-battle-board { display: grid; gap: 12px; }
+.rt-battle-visual { position: relative; min-height: 360px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(168,132,44,.55); box-shadow: 0 18px 42px rgba(43,29,18,.22); background: var(--paper-deep); }
+.rt-battle-visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rt-battle-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,20,24,.56), transparent 35%, transparent 65%, rgba(20,16,12,.66)); pointer-events: none; }
+.rt-round-banner { position: absolute; z-index: 2; left: 50%; top: 14px; transform: translateX(-50%); min-width: 160px; padding: 6px 18px 8px; border: 1px solid rgba(240,212,135,.7); border-radius: 6px; background: rgba(35,27,20,.84); color: #fff1c4; text-align: center; box-shadow: 0 5px 18px rgba(0,0,0,.25); }
+.rt-round-banner small { display: block; color: #d8b85d; font-size: .65rem; letter-spacing: .2em; }
+.rt-round-banner b { display: block; margin-top: 1px; font-size: 1.05rem; }
+.rt-battle-visual .duel-hp-row { position: absolute; z-index: 2; inset: auto 16px 48px; margin: 0; align-items: end; }
+.rt-fighter { max-width: 240px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; color: #fff; backdrop-filter: blur(8px); box-shadow: 0 5px 16px rgba(0,0,0,.28); }
+.rt-fighter-a { background: rgba(24,55,73,.82); }
+.rt-fighter-b { background: rgba(99,38,28,.82); text-align: right; }
+.rt-fighter > span { font-weight: 900; font-size: 1rem; }
+.rt-loadout { color: rgba(255,255,255,.72); font-size: .64rem; }
+.rt-statline { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: .7rem; }
+.rt-statline b { color: #f6dda1; }
+.rt-statline em { font-style: normal; }
+.rt-statline small { color: rgba(255,255,255,.78); }
+.rt-battle-visual .bar { background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.18); }
+.rt-battle-visual .duel-vs { align-self: end; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(36,27,18,.86); color: #f8d768; border: 1px solid #d8b85d; font-family: serif; font-size: 1.45rem; }
+.rt-battle-visual .duel-vs small { display: block; margin-top: -7px; color: #fff; font: 600 .5rem system-ui; }
+.rt-battle-rules { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; min-height: 34px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 18px; padding: 6px 12px; background: rgba(28,22,17,.84); color: #f3dfaa; font-size: .66rem; }
+.rt-quiz-card { margin-top: 0; border-top: 4px solid var(--gold); }
 
 /* 立繪圖：載入成功時取代 emoji 佔位 */
 .art-slot { display: inline-flex; align-items: center; justify-content: center; }
@@ -419,3 +452,4 @@ ruby{ruby-align:center}rt{font-size:.48em;color:var(--cinnabar);font-family:syst
 @media(prefers-color-scheme:dark){.adventure-stage{background:radial-gradient(circle at 80% 5%,rgba(217,106,82,.15),transparent 30%),linear-gradient(145deg,rgba(38,33,25,.98),rgba(29,26,22,.96))}.adventure-wait{background:rgba(201,169,78,.1)}}
 @media(prefers-reduced-motion:reduce){.adventure-hero,.adventure-character img{transition:none;transform:none!important}}
 @media(max-width:560px){.adventure-hero{padding:14px;gap:10px;min-height:120px}.adventure-hero-art{flex-basis:86px;height:86px}.adventure-stage{min-height:430px;padding:26px 20px}.adventure-character{width:42%;margin-left:10px}.mini-switch{width:100%;justify-content:center}.mini-switch button{flex:1;padding-inline:4px;font-size:.86rem}}
+@media(max-width:560px){.entry-card{min-height:176px}.entry-art{height:96px}.entry-title{margin:8px 10px 0;font-size:.95rem}.entry-desc{margin:0 10px 10px;font-size:.7rem}.rt-lobby-hero{min-height:230px}.rt-lobby-panel{margin:-18px 8px 0;padding:13px}.rt-battle-visual{min-height:330px}.rt-battle-visual .duel-hp-row{inset:auto 8px 46px;gap:5px}.rt-fighter{padding:7px;max-width:42%}.rt-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.rt-battle-rules{gap:4px 8px}.rt-round-banner{top:8px;min-width:135px}.rt-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;width:100%}.rt-actions #btn-rt-create,.rt-actions .rt-or{grid-column:1/-1}.rt-actions #btn-rt-create{width:100%}.rt-actions .rt-or{text-align:center}.rt-actions .rt-field{display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;margin:0}.rt-actions .rt-field input{width:100%;min-width:0}.rt-actions #btn-rt-join{white-space:nowrap}}

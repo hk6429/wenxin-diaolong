@@ -36,6 +36,10 @@ await page.waitForTimeout(600);
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
 const levelGuide = await page.textContent('#level-guide');
 if (!levelGuide?.includes('國小') || !levelGuide.includes('527 題')) fail('首頁未說明國小專屬題庫與題數');
+if (await page.locator('.entry-card .entry-art').count() !== 6) fail('六個首頁入口未全部改用配圖');
+if (await page.locator('.entry-card .entry-icon').count() !== 0) fail('首頁入口仍殘留 emoji icon');
+const failedEntryArt = await page.locator('.entry-card .entry-art').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
+if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 
 // 古代冒險：序章→智慧/全文注音→蝶夢五題委託→北冥風口
 await page.click('#btn-adventure');
@@ -246,11 +250,27 @@ await page.waitForSelector('#master-roster:not([hidden])');
 // PvP：無後端環境下優雅降級（本機 127.0.0.1 走同源 /api → 404 → res 非 ok）
 await page.click('#btn-battle-back');
 await page.click('#btn-rt');
+if (await page.locator('#rt-lobby .rt-lobby-hero img').count() !== 1) fail('文友過招大廳缺少生圖主視覺');
+if (!(await page.locator('#rt-lobby .rt-rule-chips').textContent())?.includes('三連增幅')) fail('文友過招大廳缺少回合規則');
 await page.fill('#rt-nick', '測試文士');
 await page.click('#btn-rt-create');
 await page.waitForTimeout(800);
 const rtStatus = await page.textContent('#rt-status');
 if (!rtStatus?.trim()) fail('PvP 降級訊息未顯示');
+await page.evaluate(() => {
+  window.WXAPI.call = async (_path, { body }) => {
+    if (body.op === 'join') return { ok: 1, token: 'smoke-token', seed: 42, opp: { nick: '對手墨客', petName: '鳴鳳', lv: 3 } };
+    if (body.op === 'poll') return { ok: 1, opp: { snap: { nick: '對手墨客', petName: '鳴鳳', lv: 3 }, state: { dmg: 0, round: 0, combo: 0, correct: 0, done: 0 }, hb: Date.now() } };
+    return { ok: 1 };
+  };
+});
+await page.fill('#rt-code', '2468');
+await page.click('#btn-rt-join');
+await page.waitForSelector('.rt-battle-board');
+if (await page.locator('.rt-battle-visual > img').count() !== 1) fail('文友過招戰場缺少左右對峙主視覺');
+if (!(await page.locator('.rt-round-banner').textContent())?.includes('第 1 回合')) fail('文友過招戰場缺回合標示');
+if (await page.locator('.rt-fighter').count() !== 2) fail('文友過招戰場不是雙方對峙版面');
+if (!(await page.locator('.rt-battle-rules').textContent())?.includes('三連')) fail('文友過招戰場缺招式規則');
 await page.click('#btn-rt-back');
 
 // 學段切換
