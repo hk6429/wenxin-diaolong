@@ -5,6 +5,9 @@ export function validateChapter(chapter) {
   const errors = [];
   if (!chapter || typeof chapter !== 'object') return { valid: false, errors: ['章回必須是物件'] };
   if (!chapter.id) errors.push('章回 id 必填');
+  if (!chapter.storyFrame?.tagline || !chapter.storyFrame?.epithet || !Array.isArray(chapter.storyFrame?.vows) || chapter.storyFrame.vows.length < 3) {
+    errors.push('storyFrame 需包含人物標語、稱號與至少三句開卷立誓');
+  }
   const sourceIds = new Set();
   if (!Array.isArray(chapter.sources) || !chapter.sources.length) errors.push('sources 必填');
   else for (const source of chapter.sources) {
@@ -21,6 +24,12 @@ export function validateChapter(chapter) {
     if (!scene.id || !scene.title) errors.push('每幕需有 id 與 title');
     for (const level of LEVELS) {
       if (!scene.body?.[level]) errors.push(`${scene.id || '未知場景'} 缺少${level}文字`);
+      if (!scene.story?.[level]) errors.push(`${scene.id || '未知場景'} 缺少${level}故事包裝`);
+    }
+    if (!scene.factNote) errors.push(`${scene.id} 缺少史實小註`);
+    if (!Array.isArray(scene.choices) || scene.choices.length < 3) errors.push(`${scene.id} 至少需要三個故事選擇`);
+    else if (new Set(scene.choices.map((choice) => choice.id)).size !== scene.choices.length || scene.choices.some((choice) => !choice.id || !choice.label || !choice.response)) {
+      errors.push(`${scene.id} 故事選擇需有不重複 id、文字與回應`);
     }
     if (!['primary', 'reference', 'fiction'].includes(scene.contentKind)) errors.push(`${scene.id} 缺少內容分層`);
     for (const sourceId of scene.sourceIds || []) {

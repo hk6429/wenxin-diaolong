@@ -42,6 +42,8 @@ function normalizeProgress(progress, definition) {
     ? value.chapterStatus : 'locked';
   value.echoDueAt = typeof value.echoDueAt === 'string' ? value.echoDueAt : '';
   value.questResults = value.questResults && typeof value.questResults === 'object' ? value.questResults : {};
+  value.vowId = typeof value.vowId === 'string' ? value.vowId : '';
+  value.sceneChoices = value.sceneChoices && typeof value.sceneChoices === 'object' ? value.sceneChoices : {};
   value.rewards = Array.isArray(value.rewards) ? [...new Set(value.rewards)] : [];
   return value;
 }
@@ -99,6 +101,25 @@ export function selectChapter(meta, chapterId) {
   const state = ensureAdventure(meta);
   if (!isChapterUnlocked(meta, chapterId)) return false;
   state.currentChapterId = chapterId;
+  syncLegacyAliases(state);
+  return true;
+}
+
+export function chooseChapterVow(meta, vowId, chapterId = null) {
+  const state = ensureAdventure(meta);
+  const progress = state.chapters[chapterId || state.currentChapterId];
+  if (!vowId || progress.vowId) return false;
+  progress.vowId = vowId;
+  syncLegacyAliases(state);
+  return true;
+}
+
+export function chooseScenePath(meta, sceneId, choiceId, chapterId = null) {
+  const state = ensureAdventure(meta);
+  const id = chapterId || state.currentChapterId;
+  const progress = state.chapters[id];
+  if (!sceneId || !choiceId || progress.sceneChoices[sceneId]) return false;
+  progress.sceneChoices[sceneId] = choiceId;
   syncLegacyAliases(state);
   return true;
 }

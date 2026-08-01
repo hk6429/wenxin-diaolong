@@ -64,6 +64,8 @@ export function defaultMeta() {
       level: '國小',
       zhuyinMode: 'smart',
       questResults: {},
+      vowId: '',
+      sceneChoices: {},
       rewards: [],
       chapters: {},
     },

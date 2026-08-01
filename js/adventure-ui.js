@@ -5,6 +5,8 @@ import {
   getChapterProgress,
   isChapterUnlocked,
   selectChapter,
+  chooseChapterVow,
+  chooseScenePath,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -92,6 +94,25 @@ function renderChapterNav(meta, root) {
   }));
 }
 
+function renderVow(root, definition, chapter) {
+  const frame = chapter.storyFrame;
+  $('adventure-stage').innerHTML = `
+    <div class="adventure-character"><img src="assets/img/${definition.art}.webp" alt="${definition.figure}" onerror="this.replaceWith('文')"></div>
+    <p class="scene-kicker">《文豪笑傳》章回模式</p>
+    <h2>開卷立誓・遇見${definition.figure}</h2>
+    <p class="story-tagline">${frame.tagline}</p>
+    <p class="story-epithet">${frame.epithet}</p>
+    <div class="story-vows" role="group" aria-label="選擇本章行囊">
+      ${frame.vows.map((vow) => `<button class="story-choice" data-vow-id="${vow.id}"><b>帶著這句話上路</b><span>「${vow.quote}」</span><small>${vow.insight}</small></button>`).join('')}
+    </div>
+    <p class="story-origin">本章採用<a href="https://wenhao-xiaozhuan.pages.dev/" target="_blank" rel="noopener noreferrer">《文豪笑傳》</a>的「立誓—章回—選擇—史實小註」節奏重新編寫；故事對話為本站原創。</p>`;
+  document.querySelectorAll('[data-vow-id]').forEach((button) => button.addEventListener('click', () => {
+    if (!chooseChapterVow(deps.getCtx().meta, button.dataset.vowId, definition.id)) return;
+    saveMeta(deps.getCtx().meta);
+    renderAdventure();
+  }));
+}
+
 function renderFound(root, definition, progress) {
   const due = isEchoDue(deps.getCtx().meta, new Date(), definition.id);
   const dueText = progress.echoDueAt ? new Date(progress.echoDueAt).toLocaleDateString('zh-TW') : '';
@@ -128,17 +149,37 @@ async function renderAdventure() {
     renderFound(root, definition, progress);
     return;
   }
+  if (!progress.vowId) {
+    renderVow(root, definition, chapter);
+    return;
+  }
   const scene = chapter.scenes[progress.sceneIndex];
   const body = selectLevelText(scene.body, root.level);
+  const story = selectLevelText(scene.story, root.level);
   const isFinal = scene.id === definition.sceneIds.at(-1);
   const art = isFinal ? 'diaolong' : definition.art;
+  const selectedChoiceId = progress.sceneChoices[scene.id];
+  const selectedChoice = scene.choices.find((choice) => choice.id === selectedChoiceId);
+  const choiceBlock = selectedChoice
+    ? `<div class="story-choice-result"><small>你的選擇</small><b>${selectedChoice.label}</b><p>${selectedChoice.response}</p></div>`
+    : `<div class="story-choices" role="group" aria-label="替${definition.figure}作出選擇">
+        ${scene.choices.map((choice) => `<button class="story-choice" data-scene-choice="${choice.id}"><span>${choice.label}</span></button>`).join('')}
+      </div>`;
   $('adventure-stage').innerHTML = `
     <div class="adventure-character"><img src="assets/img/${art}.webp" alt="${isFinal ? '雕龍' : definition.figure}" onerror="this.replaceWith('文')"></div>
-    <p class="scene-kicker">${chapter.title}</p><h2>${scene.title}</h2>
+    <p class="scene-kicker">第 ${progress.sceneIndex + 1} 幕・${chapter.title}</p><h2>${scene.title}</h2>
+    <div class="story-scene">${renderZhuyin(story, chapter.annotations, root.zhuyinMode)}</div>
     <div class="adventure-copy">${renderZhuyin(body, chapter.annotations, root.zhuyinMode)}</div>
+    <aside class="story-fact"><b>史實小註</b><p>${scene.factNote}</p></aside>
+    ${choiceBlock}
     ${sourceLine(chapter, scene)}
-    <button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '繼續前進'}</button>`;
-  $('btn-scene-next').addEventListener('click', () => scene.quest ? startQuest(scene) : advanceScene(scene, isFinal));
+    ${selectedChoice ? `<button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '翻到下一幕'}</button>` : '<p class="story-choice-hint">先替角色作出選擇，故事才會繼續。</p>'}`;
+  document.querySelectorAll('[data-scene-choice]').forEach((button) => button.addEventListener('click', () => {
+    if (!chooseScenePath(meta, scene.id, button.dataset.sceneChoice, definition.id)) return;
+    saveMeta(meta);
+    renderAdventure();
+  }));
+  $('btn-scene-next')?.addEventListener('click', () => scene.quest ? startQuest(scene) : advanceScene(scene, isFinal));
 }
 
 function advanceScene(scene, isFinal) {

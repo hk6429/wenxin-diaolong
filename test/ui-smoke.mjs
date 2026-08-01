@@ -41,9 +41,13 @@ if (await page.locator('.entry-card .entry-icon').count() !== 0) fail('首頁入
 const failedEntryArt = await page.locator('.entry-card .entry-art').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
 if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 
-// 古代冒險：序章→智慧/全文注音→蝶夢五題委託→北冥風口
+// 古代冒險：開卷立誓→章回選擇→智慧/全文注音→五題委託
 await page.click('#btn-adventure');
 await page.waitForSelector('#adventure-stage h2');
+if (!(await page.textContent('#adventure-stage'))?.includes('開卷立誓')) fail('莊子篇沒有《文豪笑傳》式開卷立誓');
+if (await page.locator('[data-vow-id]').count() !== 3) fail('莊子篇立誓選項不是三句');
+await page.click('[data-vow-id]');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('殘卷飛蝶'));
 if (!(await page.textContent('#adventure-stage'))?.includes('殘卷飛蝶')) fail('莊子序章未顯示');
 if (!(await page.textContent('#adventure-level-note'))?.includes('五題挑戰會一起更換')) fail('冒險學段差異未說明');
 await page.click('[data-story-level="國中"]');
@@ -54,8 +58,12 @@ await page.click('[data-story-level="國小"]');
 await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('你翻開一本'));
 await page.click('[data-zhuyin="full"]');
 if ((await page.$$('#adventure-stage ruby')).length === 0) fail('全文注音模式沒有 ruby 標記');
+if (!(await page.textContent('.story-fact'))?.includes('史實小註')) fail('莊子序章缺少史實小註');
+if (await page.locator('[data-scene-choice]').count() !== 3) fail('莊子序章不是三個故事選擇');
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('蝶夢之門'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForSelector('#quiz-options .opt-btn');
 for (let i = 0; i < 5; i += 1) {
@@ -65,12 +73,16 @@ for (let i = 0; i < 5; i += 1) {
   if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
 }
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('北冥風口'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('庖丁迷陣'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('濠梁水畔'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('莊周論藝'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForSelector('#quiz-options .opt-btn');
 for (let i = 0; i < 5; i += 1) {
@@ -80,6 +92,7 @@ for (let i = 0; i < 5; i += 1) {
   if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
 }
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('守卷閣歸來'));
+await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('觀物之頁'));
 const adventureSaved = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure);
@@ -88,6 +101,9 @@ if (adventureSaved.rewards?.length !== 3) fail('章回三項獎勵未正確保�
 await page.reload();
 await page.waitForSelector('#btn-adventure');
 await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('開卷立誓'));
+if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》章回模式')) fail('屈原篇沒有沿用《文豪笑傳》章回模式');
+await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
 if (await page.locator('.adventure-chapter-tab').count() !== 2) fail('冒險沒有顯示莊子、屈原兩章');
 await page.click('[data-adventure-chapter="preqin-zhuangzi"]');

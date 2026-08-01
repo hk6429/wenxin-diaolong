@@ -12,6 +12,8 @@ import {
   getChapterProgress,
   isChapterUnlocked,
   selectChapter,
+  chooseChapterVow,
+  chooseScenePath,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -75,7 +77,24 @@ test('莊子首章具備七幕、三學段、來源分層與可執行任務', ()
   assert.equal(chapter.scenes.length, 7);
   assert.deepEqual(chapter.scenes.map((scene) => scene.id), SCENE_IDS);
   assert.ok(chapter.scenes.some((scene) => scene.quest?.count === 5));
+  assert.equal(chapter.storyFrame.vows.length, 3);
+  assert.ok(chapter.scenes.every((scene) => scene.choices.length === 3 && scene.factNote));
   assert.ok(chapter.sources.every((source) => ['primary', 'reference', 'fiction'].includes(source.kind)));
+});
+
+test('開卷立誓與每幕選擇只記錄一次，且兩章互不覆蓋', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  assert.equal(chooseChapterVow(meta, 'life-and-learning', CHAPTER_ID), true);
+  assert.equal(chooseChapterVow(meta, 'one-with-things', CHAPTER_ID), false);
+  assert.equal(chooseScenePath(meta, 'modern-prologue', 'follow-butterfly', CHAPTER_ID), true);
+  assert.equal(chooseScenePath(meta, 'modern-prologue', 'fix-ledger', CHAPTER_ID), false);
+  markChapterFound(meta, new Date('2026-08-01T00:00:00+08:00'), CHAPTER_ID);
+  assert.equal(selectChapter(meta, 'warring-quyuan'), true);
+  assert.equal(getChapterProgress(meta, 'warring-quyuan').vowId, '');
+  assert.equal(chooseChapterVow(meta, 'keep-seeking', 'warring-quyuan'), true);
+  assert.equal(getChapterProgress(meta, CHAPTER_ID).vowId, 'life-and-learning');
+  assert.equal(getChapterProgress(meta, CHAPTER_ID).sceneChoices['modern-prologue'], 'follow-butterfly');
 });
 
 test('屈原第二章需完成莊子主線才解鎖，兩章進度互不覆蓋', () => {
@@ -100,6 +119,8 @@ test('屈原第二章具備七幕、三學段、公版來源與四組可執行�
   assert.equal(chapter.scenes.length, 7);
   assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
   assert.equal(chapter.scenes.filter((scene) => scene.quest?.count === 5).length, 4);
+  assert.equal(chapter.storyFrame.vows.length, 3);
+  assert.ok(chapter.scenes.every((scene) => Object.keys(scene.story).length === 3 && scene.choices.length === 3 && scene.factNote));
   assert.ok(chapter.sources.filter((source) => source.kind === 'primary').every((source) => source.url?.startsWith('https://zh.wikisource.org/')));
 });
 
