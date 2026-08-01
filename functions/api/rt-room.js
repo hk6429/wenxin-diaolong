@@ -36,8 +36,8 @@ const newRoleToken = () => randomBytes(24).toString('base64url');
 const tokenHash = (token) => createHash('sha256').update(String(token || '')).digest('hex');
 const tokenMatches = (record, token) => !!record?.tokenHash && record.tokenHash === tokenHash(token);
 
-const OK_BANK = new Set(['ziyin', 'chengyu', 'mixed']);
-const OK_LEVEL = new Set(['國小', '國中']);
+const OK_BANK = new Set(['rhetoric', 'grammar', 'prosody', 'mixed']);
+const OK_LEVEL = new Set(['國小', '國中', '高中', '實戰']);
 const OK_DIFF = new Set(['all', '易', '中', '難']);
 
 // CORS 白名單：只回信任的來源，其餘退回主站

@@ -15,8 +15,11 @@ import { shouldCheckpoint } from './session-checkpoint.js';
 // 作答結果已透過 toast-zone（aria-live=polite）播報，這裡不需另設播報器
 function announce(_msg) {}
 
+import { initBattleUI, openBattleScreen } from './battle-ui.js';
+import { initRtUI, openRtScreen } from './rtbattle-ui.js';
+
 const $ = (id) => document.getElementById(id);
-const SCREENS = ['screen-home', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets'];
+const SCREENS = ['screen-home', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets', 'screen-battle', 'screen-rt'];
 
 let ctx = null;          // kernel session ctx（依目前學制的 mixed 全庫）
 let fullBank = [];       // 目前學制 mixed 全部題目
@@ -330,6 +333,12 @@ document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () 
 $('btn-weak-train').addEventListener('click', startWeakTraining);
 $('btn-continue').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; });
 $('btn-rest').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; exitPractice(); });
+
+$('btn-battle').addEventListener('click', openBattleScreen);
+$('btn-rt').addEventListener('click', openRtScreen);
+const battleDeps = { getCtx: () => ctx, toast, renderEvents, renderHud, showScreen };
+initBattleUI(battleDeps);
+initRtUI(battleDeps);
 
 document.addEventListener('keydown', (ev) => {
   if (!quiz || $('quiz-panel').hidden) return;

@@ -98,6 +98,7 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .entry-weak { border-top: 4px solid var(--gr); }
 .entry-pets { border-top: 4px solid var(--yl); }
 .entry-battle { border-top: 4px solid var(--ink-soft); }
+.entry-rt { border-top: 4px solid var(--indigo); }
 .home-progress { margin-top: 16px; display: grid; gap: 8px; }
 .zone-progress {
   background: var(--card); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow);
@@ -240,3 +241,39 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   .brand-text strong { font-size: 1.05rem; }
   .hud-item { font-size: .78rem; }
 }
+
+/* ---------- 對戰（PvE 試煉＋PvP 過招） ---------- */
+.master-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 12px; }
+.master-card {
+  background: var(--card); border: 1px solid var(--paper-deep); border-radius: var(--radius);
+  padding: 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer; box-shadow: var(--shadow); font: inherit; color: inherit;
+}
+.master-card:not(.locked):hover { transform: translateY(-2px); }
+.master-card.locked { filter: grayscale(1); opacity: .55; cursor: default; }
+.master-icon { font-size: 2rem; }
+.master-name { font-weight: 700; }
+.master-spec { font-size: .82rem; color: var(--ink-soft); }
+.master-badge { font-size: .78rem; color: var(--ink-soft); }
+.master-badge.new { color: var(--cinnabar); font-weight: 700; }
+.duel-intro { text-align: center; background: var(--card); border-radius: var(--radius); padding: 24px 16px; box-shadow: var(--shadow); }
+.duel-portrait { font-size: 3.4rem; margin-bottom: 6px; }
+.duel-line { color: var(--ink-soft); }
+.duel-taunt { font-weight: 700; color: var(--cinnabar); }
+.duel-intro .overlay-actions { justify-content: center; }
+.duel-hp-row { display: flex; align-items: center; gap: 10px; margin: 10px 0 14px; }
+.duel-side { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: .85rem; }
+.duel-side .bar { height: 12px; background: var(--paper-deep); border-radius: 6px; overflow: hidden; }
+.duel-side .bar > i { display: block; height: 100%; transition: width .35s; }
+.duel-side .hp-a > i { background: linear-gradient(90deg, var(--ok), #7cc79a); }
+.duel-side .hp-b > i { background: linear-gradient(90deg, var(--cinnabar), #d98a76); }
+.duel-vs { font-size: 1.3rem; }
+.duel-feedback { font-weight: 700; margin-top: 8px; }
+.rt-field { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0; }
+.rt-field input {
+  font: inherit; padding: 8px 10px; border: 1px solid var(--paper-deep); border-radius: 8px;
+  background: var(--card); color: var(--ink); width: 130px;
+}
+.rt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
+.rt-or { color: var(--ink-soft); }
+.rt-code { font-size: 1.5rem; letter-spacing: .2em; color: var(--cinnabar); }

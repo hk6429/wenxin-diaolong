@@ -53,10 +53,15 @@
         <span class="entry-title">文心四靈</span>
         <span class="entry-desc">練得愈熟，靈獸愈強</span>
       </button>
-      <button class="entry-card entry-battle" id="btn-battle" disabled aria-disabled="true">
+      <button class="entry-card entry-battle" id="btn-battle">
         <span class="entry-icon" aria-hidden="true">🏯</span>
         <span class="entry-title">文心試煉</span>
-        <span class="entry-desc">即將開放</span>
+        <span class="entry-desc">挑戰歷代文心大師</span>
+      </button>
+      <button class="entry-card entry-rt" id="btn-rt">
+        <span class="entry-icon" aria-hidden="true">🤝</span>
+        <span class="entry-title">文友過招</span>
+        <span class="entry-desc">開房對戰，同題比拚</span>
       </button>
     </nav>
     <div class="home-progress" id="home-progress"></div>
@@ -111,6 +116,46 @@
     <h2>弱點雷達</h2>
     <div id="weak-list"></div>
     <button id="btn-weak-train" class="primary-btn">開始弱點特訓（常錯 15 題）</button>
+  </section>
+
+  <!-- 文心試煉（PvE） -->
+  <section id="screen-battle" class="screen" hidden aria-label="文心試煉">
+    <div class="quiz-top">
+      <button id="btn-battle-back" class="ghost-btn">← 回首頁</button>
+      <span id="battle-beaten"></span>
+    </div>
+    <div id="master-roster">
+      <h2>文心試煉・歷代大師</h2>
+      <p class="pets-hint">解鎖大師的唯一方法：把對應分區的題目真正練熟。</p>
+      <div id="master-grid" class="master-grid"></div>
+    </div>
+    <div id="duel-panel" hidden>
+      <div class="quiz-top"><button id="btn-duel-flee" class="ghost-btn">← 棄戰回名單</button></div>
+      <div id="duel-stage"></div>
+    </div>
+  </section>
+
+  <!-- 文友過招（PvP） -->
+  <section id="screen-rt" class="screen" hidden aria-label="文友過招">
+    <div class="quiz-top">
+      <button id="btn-rt-back" class="ghost-btn">← 回首頁</button>
+    </div>
+    <div id="rt-lobby">
+      <h2>文友過招</h2>
+      <p class="pets-hint">兩人同一組題目比拚，答對造成傷害、連對加成。20 題定勝負。</p>
+      <label class="rt-field">暱稱<input id="rt-nick" maxlength="12" placeholder="無名文士"></label>
+      <div class="rt-actions">
+        <button id="btn-rt-create" class="primary-btn">開房（取得房號）</button>
+        <span class="rt-or">或</span>
+        <label class="rt-field">房號<input id="rt-code" inputmode="numeric" maxlength="4" placeholder="4 位數"></label>
+        <button id="btn-rt-join" class="primary-btn">加入</button>
+      </div>
+      <p id="rt-status" class="home-today" aria-live="polite"></p>
+    </div>
+    <div id="rt-arena" hidden>
+      <p id="rt-arena-head" class="home-today"></p>
+      <div id="rt-body"></div>
+    </div>
   </section>
 
   <!-- 文心四靈 -->

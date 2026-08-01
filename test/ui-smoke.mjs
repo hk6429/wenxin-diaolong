@@ -22,7 +22,11 @@ const CHROME = process.env.CHROME_PATH ||
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 const errors = [];
-page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('console', (m) => {
+  // 本機無後端：/api 的 404 資源載入訊息是預期中的降級路徑，不算錯
+  if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text());
+});
+page.on('requestfailed', () => {});
 page.on('pageerror', (e) => errors.push(String(e)));
 
 const fail = (msg) => { console.error('FAIL:', msg); process.exitCode = 1; };
@@ -57,6 +61,32 @@ await page.click('#btn-home'); await page.click('#btn-weak');
 await page.click('#btn-home'); await page.click('#btn-pets');
 const pets = await page.$$('.pet-card');
 if (pets.length !== 4) fail(`pet-card 數量 ${pets.length} ≠ 4`);
+
+// PvE 試煉：名單→阿誦→答一題（新玩家只有阿誦可戰）
+await page.click('#btn-home');
+await page.click('#btn-battle');
+await page.waitForTimeout(400);
+const unlockedMasters = await page.$$('.master-card:not(.locked)');
+if (unlockedMasters.length !== 1) fail(`新玩家可挑戰大師數 ${unlockedMasters.length} ≠ 1`);
+await unlockedMasters[0].click();
+await page.click('#btn-duel-start');
+await page.waitForSelector('#duel-options .opt-btn');
+await page.click('#duel-options .opt-btn');
+await page.waitForSelector('#duel-feedback:not([hidden])');
+const hpB = await page.textContent('#hp-b-num');
+if (!hpB?.includes('／')) fail('大師血條未渲染');
+await page.click('#btn-duel-flee');
+await page.waitForSelector('#master-roster:not([hidden])');
+
+// PvP：無後端環境下優雅降級（本機 127.0.0.1 走同源 /api → 404 → res 非 ok）
+await page.click('#btn-battle-back');
+await page.click('#btn-rt');
+await page.fill('#rt-nick', '測試文士');
+await page.click('#btn-rt-create');
+await page.waitForTimeout(800);
+const rtStatus = await page.textContent('#rt-status');
+if (!rtStatus?.trim()) fail('PvP 降級訊息未顯示');
+await page.click('#btn-rt-back');
 
 // 學段切換
 await page.click('#btn-home');

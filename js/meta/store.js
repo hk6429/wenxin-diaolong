@@ -40,8 +40,11 @@ export function defaultMeta() {
     xp: { value: 0, rank: 0, totalAnswered: 0, totalCorrect: 0 },
     daily: {
       date: '', todayCorrect: 0, todayAnswered: 0, todayBattles: 0,
-      streak: 0, best: 0,
+      streak: 0, best: 0, charms: 0,
     },
+    // 文房法寶／煉字文訣（對戰加成，battle-adapter 讀取）
+    gear: { owned: [], loadout: [] },
+    arts: { unlocked: [], equipped: null, battlesWon: 0 },
     // 弱點分類統計：{ [`${zone}·${cat}`]: { correct, wrong } }
     weak: {},
     ach: {
