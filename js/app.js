@@ -323,7 +323,7 @@ async function renderCodex(tab = '修辭') {
   document.querySelectorAll('[data-concept-level]').forEach((b) => b.classList.toggle('active', b.dataset.conceptLevel === codexLevel));
   const zoneConcepts = concepts.filter((c) => c.zone === tab);
   const list = zoneConcepts.filter((c) => codexLevel === '全部' || SCHOOL_LEVEL_ORDER[c.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
-  body.innerHTML = `<p class="codex-summary">${tab}共有 ${zoneConcepts.length} 個主題；目前顯示 ${codexLevel === '全部' ? '完整講義' : `${codexLevel}適用（含前階段基礎）`}的 ${list.length} 個。長篇內容已拆成解構步驟，讀完一節就會記錄進度。</p>` + list.map((c) => {
+  body.innerHTML = renderLearningOutline(tab) + `<p class="codex-summary">${tab}共有 ${zoneConcepts.length} 個主題；目前顯示 ${codexLevel === '全部' ? '完整講義' : `${codexLevel}適用（含前階段基礎）`}的 ${list.length} 個。長篇內容已拆成解構步驟，讀完一節就會記錄進度。</p>` + list.map((c) => {
     const bank = fullBank.filter((e) => e.zone === c.zone && e.cat === c.cat);
     const s = getMasteryStats(ctx.meta, bank);
     const lit = s.known >= 5;
@@ -340,6 +340,24 @@ async function renderCodex(tab = '修辭') {
     </article>`;
   }).join('');
   wireConceptReaders();
+}
+
+function renderLearningOutline(tab) {
+  if (tab !== '修辭') return '';
+  const stages = [
+    { level: '國小', title: '先看懂大方向', detail: '8 種基礎修辭：譬喻、轉化、誇飾、排比、設問、類疊、摹寫、感嘆；先從生活語句找明顯線索。' },
+    { level: '國中', title: '拆結構、分細類', detail: '保留國小基礎，再加入 10 種進階修辭；核心大類向下細分，例如譬喻分成明喻、暗喻、略喻、借喻。' },
+    { level: '高中', title: '讀文言、辨複合效果', detail: '再加入互文、示現、錯綜、藏詞、飛白、移覺，並處理多種修辭並用、文言省略與表達效果。' },
+  ];
+  return `<aside class="learning-outline" aria-label="修辭分級大綱">
+    <div class="outline-head"><strong>修辭分級大綱</strong><span>從辨認大類，走到結構分析與文本效果</span></div>
+    <div class="outline-stages">${stages.map((stage) => {
+      const included = codexLevel === '全部' || SCHOOL_LEVEL_ORDER[stage.level] <= SCHOOL_LEVEL_ORDER[codexLevel];
+      return `<section class="outline-stage${included ? ' included' : ''}${codexLevel === stage.level ? ' active' : ''}">
+        <b>${stage.level}｜${stage.title}</b><p>${stage.detail}</p>
+      </section>`;
+    }).join('')}</div>
+  </aside>`;
 }
 
 function renderDeepSections(c) {

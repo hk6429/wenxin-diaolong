@@ -168,3 +168,23 @@ test('國中詞性重點題型皆有足量練習', () => {
     assert.ok(count >= minimum, `${subcat} 題數 ${count}，至少須有 ${minimum} 題`);
   }
 });
+
+test('國中譬喻必須完整覆蓋四種類型與分級講義', () => {
+  const concepts = read('concepts.json');
+  const card = concepts.find((item) => item.cat === '譬喻');
+  assert.ok(card.sections.length >= 12, `譬喻講義只有 ${card.sections.length} 步`);
+  const lecture = JSON.stringify(card);
+  for (const term of ['喻體', '喻詞', '喻依', '明喻', '暗喻', '略喻', '借喻']) {
+    assert.ok(lecture.includes(term), `譬喻講義缺「${term}」`);
+  }
+  for (const level of ['國小', '國中', '高中']) {
+    assert.ok(card.sections.some((section) => section.level === level), `譬喻講義缺 ${level} 步驟`);
+  }
+
+  const questions = read('rhetoric-junior.json').filter((question) => question.cat === '譬喻');
+  for (const subcat of ['明喻', '暗喻', '略喻', '借喻']) {
+    assert.ok(questions.filter((question) => question.subcat === subcat).length >= 4, `${subcat} 國中題目不足 4 題`);
+  }
+  assert.ok(questions.some((question) => question.genre === '韻文'), '國中譬喻缺韻文題');
+  assert.ok(questions.some((question) => question.genre === '非韻文'), '國中譬喻缺非韻文題');
+});

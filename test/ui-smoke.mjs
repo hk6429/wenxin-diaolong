@@ -133,7 +133,16 @@ await page.click('#btn-codex');
 await page.waitForTimeout(400);
 const codex = await page.textContent('#codex-body');
 if (!codex?.includes('譬喻') && !codex?.includes('建置中')) fail('圖鑑內容異常: ' + codex?.slice(0, 60));
+if (!codex?.includes('修辭分級大綱') || !codex.includes('從辨認大類')) fail('修辭分級大綱未顯示');
 if (!(await page.locator('[data-concept-level="國小"]').getAttribute('class'))?.includes('active')) fail('圖鑑未跟隨首頁學段');
+await page.click('[data-concept-level="國中"]');
+const metaphorCard = page.locator('.concept-card[data-concept-cat="譬喻"]');
+if (!(await metaphorCard.locator('.concept-deep > summary').textContent())?.includes('9 步')) fail('國中譬喻未顯示國小基礎＋國中細分的 9 步');
+await metaphorCard.locator('.concept-deep > summary').click();
+const metaphorLecture = await metaphorCard.textContent();
+for (const term of ['喻體', '喻詞', '喻依', '明喻', '暗喻', '略喻', '借喻']) {
+  if (!metaphorLecture?.includes(term)) fail(`國中譬喻講義缺 ${term}`);
+}
 await page.click('[data-concept-level="高中"]');
 await page.click('.tab[data-tab="文法"]');
 await page.evaluate(() => localStorage.removeItem('wenxin-reading-progress-v1'));

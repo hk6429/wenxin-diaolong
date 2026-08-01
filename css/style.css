@@ -202,6 +202,16 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   border: 1px solid rgba(92, 83, 70, .35); background: var(--paper);
 }
 .concept-level-filter button.active { background: var(--cinnabar); color: #fff; border-color: var(--cinnabar); }
+.learning-outline { margin: 0 0 12px; padding: 12px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+.outline-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+.outline-head strong { color: var(--cinnabar); }
+.outline-head span { color: var(--ink-soft); font-size: .78rem; }
+.outline-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.outline-stage { padding: 9px; border: 1px solid rgba(92, 83, 70, .2); border-radius: 9px; opacity: .48; }
+.outline-stage.included { opacity: 1; }
+.outline-stage.active { border-color: var(--cinnabar); box-shadow: inset 0 0 0 1px var(--cinnabar); }
+.outline-stage b { font-size: .82rem; color: var(--indigo); }
+.outline-stage p { margin: 4px 0 0; font-size: .76rem; color: var(--ink-soft); line-height: 1.45; }
 .codex-summary { color: var(--ink-soft); font-size: .86rem; margin: 0 0 10px; }
 .concept-card {
   background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
@@ -265,6 +275,9 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .concept-sources { margin-top: 10px; font-size: .78rem; color: var(--ink-soft); }
 .concept-sources a { color: var(--indigo); }
 @media (max-width: 540px) {
+  .outline-head { display: block; }
+  .outline-head span { display: block; margin-top: 2px; }
+  .outline-stages { grid-template-columns: 1fr; }
   .concept-step > summary { grid-template-columns: auto 1fr; }
   .step-level { grid-column: 2; justify-self: start; }
   .concept-step.completed > summary { grid-template-columns: auto 1fr auto; }
