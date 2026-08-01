@@ -36,6 +36,7 @@ const LEVEL_PROFILES = {
   實戰: { audience: '準備大型考試的學生', focus: '歷屆考題原貌與官方答案', note: '只載入基測、會考、學測、指考等實戰題庫；不是更難的隨機題，也不是裝飾按鈕。' },
 };
 const SCHOOL_LEVEL_ORDER = { 國小: 1, 國中: 2, 高中: 3 };
+const READING_PROGRESS_KEY = 'wenxin-reading-progress-v1';
 
 /* ---------- 初始化與學制 ---------- */
 async function boot() {
@@ -311,7 +312,7 @@ async function renderCodex(tab = '修辭') {
   }
   if (concepts === null) {
     try {
-      const r = await fetch('data/concepts.json?v=20260801-content-depth');
+      const r = await fetch('data/concepts.json?v=20260801-reading-path');
       concepts = r.ok ? await r.json() : [];
     } catch { concepts = []; }
   }
@@ -322,11 +323,11 @@ async function renderCodex(tab = '修辭') {
   document.querySelectorAll('[data-concept-level]').forEach((b) => b.classList.toggle('active', b.dataset.conceptLevel === codexLevel));
   const zoneConcepts = concepts.filter((c) => c.zone === tab);
   const list = zoneConcepts.filter((c) => codexLevel === '全部' || SCHOOL_LEVEL_ORDER[c.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
-  body.innerHTML = `<p class="codex-summary">${tab}共有 ${zoneConcepts.length} 個主題；目前顯示 ${codexLevel === '全部' ? '全部學段' : `${codexLevel}適用（含前階段基礎）`}的 ${list.length} 個。</p>` + list.map((c) => {
+  body.innerHTML = `<p class="codex-summary">${tab}共有 ${zoneConcepts.length} 個主題；目前顯示 ${codexLevel === '全部' ? '完整講義' : `${codexLevel}適用（含前階段基礎）`}的 ${list.length} 個。長篇內容已拆成解構步驟，讀完一節就會記錄進度。</p>` + list.map((c) => {
     const bank = fullBank.filter((e) => e.zone === c.zone && e.cat === c.cat);
     const s = getMasteryStats(ctx.meta, bank);
     const lit = s.known >= 5;
-    return `<article class="concept-card ${lit ? `lit-${c.zone}` : 'dim'}">
+    return `<article class="concept-card ${lit ? `lit-${c.zone}` : 'dim'}" data-concept-cat="${escapeHtml(c.cat)}">
       <div class="concept-head"><h3>${c.cat}</h3><span class="concept-level">本站建議：${c.level}起</span>
         <span class="concept-progress">${lit ? '已點亮' : ''} 精通 ${s.known}／${s.total || '—'}</span></div>
       <p class="concept-def">${escapeHtml(c.definition)}</p>
@@ -338,21 +339,86 @@ async function renderCodex(tab = '修辭') {
       ${renderDeepSections(c)}
     </article>`;
   }).join('');
+  wireConceptReaders();
 }
 
 function renderDeepSections(c) {
   if (!Array.isArray(c.sections) || !c.sections.length) return '';
+  const visibleSections = c.sections
+    .map((section, index) => ({ ...section, originalIndex: index, level: section.level || c.level }))
+    .filter((section) => codexLevel === '全部' || SCHOOL_LEVEL_ORDER[section.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
+  if (!visibleSections.length) return '';
+  const readingKey = `${c.zone}:${c.cat}`;
+  const completed = new Set(loadReadingProgress()[readingKey] || []);
+  const completedVisible = visibleSections.filter((section) => completed.has(section.originalIndex)).length;
+  const percent = Math.round((completedVisible / visibleSections.length) * 100);
+  const firstIncompleteIndex = visibleSections.findIndex((section) => !completed.has(section.originalIndex));
   const sources = (c.sources || []).map((s) => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title)}</a>`).join('、');
   return `<details class="concept-deep">
-    <summary>展開完整講義（${c.sections.length} 節）</summary>
-    ${c.sections.map((section) => `<section class="concept-section">
-      <h4>${escapeHtml(section.title)}</h4>
-      ${section.body ? `<p>${escapeHtml(section.body)}</p>` : ''}
-      ${Array.isArray(section.points) ? `<ul>${section.points.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>` : ''}
-      ${Array.isArray(section.patterns) ? `<div class="pattern-grid">${section.patterns.map((p) => `<div class="pattern-row"><code>${escapeHtml(p.name)}</code><span>${escapeHtml(p.form)}</span></div>`).join('')}</div>` : ''}
-    </section>`).join('')}
-    ${sources ? `<p class="concept-sources">資料參考：${sources}</p>` : ''}
+    <summary>開始逐步解構（${visibleSections.length} 步）</summary>
+    <div class="concept-reader" data-reading-key="${escapeHtml(readingKey)}">
+      <div class="reading-progress" aria-live="polite">
+        <div><strong>閱讀進度</strong><span class="reading-progress-text">${completedVisible}／${visibleSections.length} 步・${percent}%</span></div>
+        <div class="reading-progress-bar" role="progressbar" aria-label="${escapeHtml(c.cat)}閱讀進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><i style="width:${percent}%"></i></div>
+      </div>
+      <p class="reader-hint">一次讀一個解構步驟；讀完按下按鈕，系統會記住位置並開啟下一步。</p>
+      ${visibleSections.map((section, visibleIndex) => `<details class="concept-step${completed.has(section.originalIndex) ? ' completed' : ''}" ${visibleIndex === firstIncompleteIndex ? 'open' : ''}>
+        <summary><span class="step-number">步驟 ${visibleIndex + 1}</span><span>${escapeHtml(section.title)}</span><span class="step-level">${escapeHtml(section.level)}</span></summary>
+        <div class="concept-section">
+          ${section.body ? `<p>${escapeHtml(section.body)}</p>` : ''}
+          ${Array.isArray(section.points) ? `<ul>${section.points.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>` : ''}
+          ${Array.isArray(section.patterns) ? `<div class="pattern-grid">${section.patterns.map((p) => `<div class="pattern-row"><code>${escapeHtml(p.name)}</code><span>${escapeHtml(p.form)}</span></div>`).join('')}</div>` : ''}
+          <button class="step-complete" data-section-index="${section.originalIndex}" type="button" ${completed.has(section.originalIndex) ? 'disabled' : ''}>${completed.has(section.originalIndex) ? '✓ 已讀完' : '讀完這一步，前往下一步 →'}</button>
+        </div>
+      </details>`).join('')}
+      ${sources ? `<p class="concept-sources">資料參考：${sources}</p>` : ''}
+    </div>
   </details>`;
+}
+
+function loadReadingProgress() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(READING_PROGRESS_KEY) || '{}');
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  }
+  catch { return {}; }
+}
+
+function saveReadingProgress(progress) {
+  try { localStorage.setItem(READING_PROGRESS_KEY, JSON.stringify(progress)); }
+  catch { /* 無痕模式或儲存空間受限時，仍可繼續閱讀 */ }
+}
+
+function wireConceptReaders() {
+  document.querySelectorAll('.concept-reader').forEach((reader) => {
+    reader.querySelectorAll('.step-complete').forEach((button) => button.addEventListener('click', () => {
+      const progress = loadReadingProgress();
+      const key = reader.dataset.readingKey;
+      const completed = new Set(progress[key] || []);
+      completed.add(Number(button.dataset.sectionIndex));
+      progress[key] = [...completed].sort((a, b) => a - b);
+      saveReadingProgress(progress);
+
+      const steps = [...reader.querySelectorAll('.concept-step')];
+      const currentStep = button.closest('.concept-step');
+      currentStep.classList.add('completed');
+      button.disabled = true;
+      button.textContent = '✓ 已讀完';
+      const completedVisible = steps.filter((step) => step.classList.contains('completed')).length;
+      const percent = Math.round((completedVisible / steps.length) * 100);
+      reader.querySelector('.reading-progress-text').textContent = `${completedVisible}／${steps.length} 步・${percent}%`;
+      const bar = reader.querySelector('.reading-progress-bar');
+      bar.setAttribute('aria-valuenow', String(percent));
+      bar.querySelector('i').style.width = `${percent}%`;
+
+      const nextStep = steps.slice(steps.indexOf(currentStep) + 1).find((step) => !step.classList.contains('completed'));
+      if (nextStep) {
+        currentStep.open = false;
+        nextStep.open = true;
+        nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }));
+  });
 }
 
 /* ---------- 弱點複習 ---------- */

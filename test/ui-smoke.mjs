@@ -136,12 +136,23 @@ if (!codex?.includes('譬喻') && !codex?.includes('建置中')) fail('圖鑑內
 if (!(await page.locator('[data-concept-level="國小"]').getAttribute('class'))?.includes('active')) fail('圖鑑未跟隨首頁學段');
 await page.click('[data-concept-level="高中"]');
 await page.click('.tab[data-tab="文法"]');
-const posCard = page.locator('.concept-card', { hasText: '詞性' }).first();
-await posCard.locator('summary').click();
+await page.evaluate(() => localStorage.removeItem('wenxin-reading-progress-v1'));
+const posCard = page.locator('.concept-card[data-concept-cat="詞性"]');
+await posCard.locator('.concept-deep > summary').click();
 const posLecture = await posCard.textContent();
 for (const term of ['實詞六類', '虛詞四類', '中綴', '時貌助詞']) {
   if (!posLecture?.includes(term)) fail(`詞性完整講義缺 ${term}`);
 }
+const stepLevels = await posCard.locator('.step-level').allTextContents();
+for (const level of ['國小', '國中', '高中']) {
+  if (!stepLevels.includes(level)) fail(`詞性解構步驟缺 ${level} 標示`);
+}
+if (!(await posCard.locator('.reading-progress-text').textContent())?.includes('0%')) fail('閱讀進度初始值不是 0%');
+await posCard.locator('.concept-step[open] .step-complete').click();
+if ((await posCard.locator('.reading-progress-text').textContent())?.includes('0%')) fail('讀完步驟後百分比未更新');
+if (!(await posCard.locator('.concept-step[open] .step-number').textContent())?.includes('2')) fail('讀完後未自動開啟下一步');
+const savedReading = await page.evaluate(() => JSON.parse(localStorage.getItem('wenxin-reading-progress-v1') || '{}'));
+if (!savedReading['文法:詞性']?.includes(0)) fail('閱讀位置未寫入瀏覽器');
 await page.click('.tab[data-tab="珠"]');
 await page.waitForTimeout(200);
 

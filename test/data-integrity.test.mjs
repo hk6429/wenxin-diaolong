@@ -146,6 +146,20 @@ test('文法與格律核心講義不得再縮成短卡', () => {
   }
 });
 
+test('長篇講義每個解構步驟都必須標示學段', () => {
+  const arr = read('concepts.json');
+  const allowed = new Set(['國小', '國中', '高中']);
+  for (const card of arr.filter((item) => Array.isArray(item.sections))) {
+    for (const [index, section] of card.sections.entries()) {
+      assert.ok(allowed.has(section.level), `${card.cat} 步驟 ${index + 1} 缺有效學段`);
+    }
+  }
+  const partsOfSpeech = arr.find((item) => item.cat === '詞性');
+  for (const level of allowed) {
+    assert.ok(partsOfSpeech.sections.some((section) => section.level === level), `詞性講義缺 ${level} 內容`);
+  }
+});
+
 test('國中詞性重點題型皆有足量練習', () => {
   const questions = read('grammar-junior.json');
   const minimums = { 數量詞: 6, 助詞分類: 6, 前綴: 2, 中綴: 2, 後綴: 2, 一詞多性: 6 };
