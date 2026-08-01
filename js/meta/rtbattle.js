@@ -4,6 +4,16 @@ import { BATTLE_EVENTS } from './encounter.js';
 import { baseModifiers } from './gear.js';
 
 export const ROUNDS = 20;
+export const COMPUTER_ROUNDS = 12;
+export const COMPUTER_BASE_DMG = 8;
+export const COMPUTER_COMBO_DMG = 12;
+export const COMPUTER_COMBO_AT = 3;
+export const COMPUTER_ACCURACY = Object.freeze({
+  '國小': 0.52,
+  '國中': 0.62,
+  '高中': 0.70,
+  '實戰': 0.76,
+});
 export const ROUND_SEC = 15;
 export const POLL_MS = 1500;
 export const DEAD_MS = 20000;
@@ -92,6 +102,29 @@ export const ASSASSIN_SPAN = 60;
 export function assassinTargetScore(dateStr) {
   const rng = mulberry32(assassinSeed(dateStr));
   return ASSASSIN_BASE + Math.floor(rng() * ASSASSIN_SPAN);
+}
+
+// 電腦對手使用固定種子與學段門檻：同一天、同一學段的出招完全一致，
+// 高學段只會在低學段已答對的回合之外增加答對，不會出現難度倒掛。
+export function buildComputerScript(seed, level, rounds = COMPUTER_ROUNDS) {
+  const rng = mulberry32((seed ^ 0xC04D3E1) >>> 0);
+  const accuracy = COMPUTER_ACCURACY[level] ?? COMPUTER_ACCURACY['國中'];
+  return Array.from({ length: Math.max(0, rounds) }, () => rng() < accuracy);
+}
+
+export function applyComputerTurn(state, correct) {
+  const current = state || { dmg: 0, round: 0, combo: 0, correct: 0 };
+  const combo = correct ? current.combo + 1 : 0;
+  const damage = correct
+    ? (combo >= COMPUTER_COMBO_AT ? COMPUTER_COMBO_DMG : COMPUTER_BASE_DMG)
+    : 0;
+  return {
+    ...current,
+    round: current.round + 1,
+    combo,
+    correct: current.correct + (correct ? 1 : 0),
+    dmg: current.dmg + damage,
+  };
 }
 
 // ---------- 對戰內數值歸一化（戰力封頂，Task 1） ----------
