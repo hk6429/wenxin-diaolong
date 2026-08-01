@@ -219,3 +219,13 @@ test('修辭細分類必須依學段深化，不得混成同一層', () => {
     assert.ok(senior.filter((question) => question.cat === '鑲嵌' && question.subcat === subcat).length >= 4, `高中鑲嵌缺 ${subcat} 題`);
   }
 });
+
+test('圖鑑示例必須全部自編，不得混入外部引文', () => {
+  const cards = read('concepts.json');
+  const examples = cards.flatMap((card) => (card.examples || []).map((example) => ({ card: card.cat, ...example })));
+  assert.ok(examples.length > 0, '圖鑑至少要有一組示例');
+  for (const example of examples) {
+    assert.equal(example.citation, '', `${example.card} 的圖鑑示例不得填入外部引文：${example.text}`);
+    assert.ok(example.text?.trim(), `${example.card} 的自編示例不可為空`);
+  }
+});

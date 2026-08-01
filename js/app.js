@@ -335,7 +335,7 @@ async function renderCodex(tab = '修辭') {
       ${renderSubtypeMap(c)}
       ${(c.examples || []).map((x) => `<div class="concept-ex">
         <span class="badge ${x.genre === '韻文' ? 'yun' : 'sanwen'}">${x.genre === '韻文' ? '韻' : '文'}</span>${escapeHtml(x.text)}
-        <cite>${x.citation ? escapeHtml(x.citation) : '自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
+        <cite>${x.citation ? escapeHtml(x.citation) : '本站自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
       </div>`).join('')}
       ${renderDeepSections(c)}
     </article>`;
