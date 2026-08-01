@@ -162,8 +162,13 @@ for (const term of ['鑲字', '嵌字', '增字', '配字']) {
 }
 if (inlaySubtypes.some((term) => term.includes('雙關'))) fail('雙關被錯列為鑲嵌子類');
 await page.click('.tab[data-tab="文法"]');
+const grammarOutline = page.locator('.learning-outline[aria-label="文法分級大綱"]');
+if (await grammarOutline.count() !== 1) fail('文法分級大綱未顯示');
+if (!(await grammarOutline.textContent())?.includes('從詞句基本零件')) fail('文法分級路徑說明缺失');
 await page.evaluate(() => localStorage.removeItem('wenxin-reading-progress-v1'));
 await page.click('[data-concept-level="國小"]');
+if (await grammarOutline.locator('.outline-stage.active').count() !== 1) fail('文法大綱未跟隨國小篩選');
+if (!(await grammarOutline.locator('.outline-stage.active').textContent())?.includes('認識詞句基本零件')) fail('文法國小階段內容錯誤');
 const sentenceCard = page.locator('.concept-card[data-concept-cat="句型"]');
 const elementarySentenceSubtypes = await sentenceCard.locator('.subtype-item b').allTextContents();
 for (const term of ['並列句', '承接句', '轉折句', '因果句', '條件句', '選擇句', '假設句', '遞進句', '目的句']) {
@@ -189,7 +194,12 @@ if (!(await posCard.locator('.concept-step[open] .step-number').textContent())?.
 const savedReading = await page.evaluate(() => JSON.parse(localStorage.getItem('wenxin-reading-progress-v1') || '{}'));
 if (!savedReading['文法:詞性']?.includes(0)) fail('閱讀位置未寫入瀏覽器');
 await page.click('.tab[data-tab="格律"]');
+const prosodyOutline = page.locator('.learning-outline[aria-label="格律分級大綱"]');
+if (await prosodyOutline.count() !== 1) fail('格律分級大綱未顯示');
+if (!(await prosodyOutline.textContent())?.includes('從聽見韻腳')) fail('格律分級路徑說明缺失');
 await page.click('[data-concept-level="國中"]');
+if (await prosodyOutline.locator('.outline-stage.active').count() !== 1) fail('格律大綱未跟隨國中篩選');
+if (!(await prosodyOutline.locator('.outline-stage.active').textContent())?.includes('辨詩體、查八種格式')) fail('格律國中階段內容錯誤');
 const toneCard = page.locator('.concept-card[data-concept-cat="平仄"]');
 if (await toneCard.count() !== 1) fail('國中格律未顯示平仄卡');
 const metricalFamilies = await toneCard.locator('.metrical-family h4').allTextContents();

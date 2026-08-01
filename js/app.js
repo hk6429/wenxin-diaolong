@@ -345,15 +345,37 @@ async function renderCodex(tab = '修辭') {
 }
 
 function renderLearningOutline(tab) {
-  if (tab !== '修辭') return '';
-  const stages = [
-    { level: '國小', title: '先看懂大方向', detail: '8 種基礎修辭：譬喻、轉化、誇飾、排比、設問、類疊、摹寫、感嘆；先從生活語句找明顯線索。' },
-    { level: '國中', title: '拆結構、分細類', detail: '保留國小基礎，再加入 10 種進階修辭；核心大類向下細分，例如譬喻分成明喻、暗喻、略喻、借喻。' },
-    { level: '高中', title: '讀文言、辨複合效果', detail: '再加入互文、示現、錯綜、鑲嵌、藏詞、飛白、移覺，並處理多種修辭並用、文言省略與表達效果。' },
-  ];
-  return `<aside class="learning-outline" aria-label="修辭分級大綱">
-    <div class="outline-head"><strong>修辭分級大綱</strong><span>從辨認大類，走到結構分析與文本效果</span></div>
-    <div class="outline-stages">${stages.map((stage) => {
+  const outlines = {
+    修辭: {
+      subtitle: '從辨認大類，走到結構分析與文本效果',
+      stages: [
+        { level: '國小', title: '先看懂大方向', detail: '8 種基礎修辭：譬喻、轉化、誇飾、排比、設問、類疊、摹寫、感嘆；先從生活語句找明顯線索。' },
+        { level: '國中', title: '拆結構、分細類', detail: '保留國小基礎，再加入 10 種進階修辭；核心大類向下細分，例如譬喻分成明喻、暗喻、略喻、借喻。' },
+        { level: '高中', title: '讀文言、辨複合效果', detail: '再加入互文、示現、錯綜、鑲嵌、藏詞、飛白、移覺，並處理多種修辭並用、文言省略與表達效果。' },
+      ],
+    },
+    文法: {
+      subtitle: '從詞句基本零件，走到句法分析與文言運用',
+      stages: [
+        { level: '國小', title: '認識詞句基本零件', detail: '先學常見名詞、動詞、形容詞、代詞、數量詞與嘆詞；搭配標點，辨認並列、轉折、因果等 9 類關聯複句。' },
+        { level: '國中', title: '拆詞性、判四大句型', detail: '補齊實詞六類、虛詞四類、助詞與詞綴，並學詞語結構、語病，以及敘事、有無、表態、判斷四大句型。' },
+        { level: '高中', title: '進入文言深層結構', detail: '把現代詞性知識帶入文言文，進一步判斷文言虛詞、特殊句式、詞類活用與複雜語法功能。' },
+      ],
+    },
+    格律: {
+      subtitle: '從聽見韻腳，走到判讀近體詩完整聲律',
+      stages: [
+        { level: '國小', title: '先聽節奏、找韻腳', detail: '從童謠與短詩感受節奏，辨認句末押韻；對聯先掌握字數相等、內容相應等基礎。' },
+        { level: '國中', title: '辨詩體、查八種格式', detail: '學對仗、五言七言與絕句律詩，並能查表判斷平起／仄起、首句入韻／不入韻八種基準格式。' },
+        { level: '高中', title: '推導聲律、辨析變格', detail: '再用對、黏推導全詩，掌握一三五不論的限制，並辨析古入聲、孤平、三平尾、三仄尾與拗救。' },
+      ],
+    },
+  };
+  const outline = outlines[tab];
+  if (!outline) return '';
+  return `<aside class="learning-outline" aria-label="${escapeHtml(tab)}分級大綱">
+    <div class="outline-head"><strong>${escapeHtml(tab)}分級大綱</strong><span>${escapeHtml(outline.subtitle)}</span></div>
+    <div class="outline-stages">${outline.stages.map((stage) => {
       const included = codexLevel === '全部' || SCHOOL_LEVEL_ORDER[stage.level] <= SCHOOL_LEVEL_ORDER[codexLevel];
       return `<section class="outline-stage${included ? ' included' : ''}${codexLevel === stage.level ? ' active' : ''}">
         <b>${stage.level}｜${stage.title}</b><p>${stage.detail}</p>
