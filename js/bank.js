@@ -9,18 +9,21 @@ export const BANK_SOURCES = {
     grammar: [L('grammar-elementary')],
     prosody: [L('prosody-elementary')],
     mixed: [L('rhetoric-elementary'), L('grammar-elementary'), L('prosody-elementary')],
+    lunyu: [L('lunyu-elementary')],
   },
   國中: {
     rhetoric: [L('rhetoric-junior')],
     grammar: [L('grammar-junior')],
     prosody: [L('prosody-junior')],
     mixed: [L('rhetoric-junior'), L('grammar-junior'), L('prosody-junior')],
+    lunyu: [L('lunyu-junior')],
   },
   高中: {
     rhetoric: [L('rhetoric-senior')],
     grammar: [L('grammar-senior')],
     prosody: [L('prosody-senior')],
     mixed: [L('rhetoric-senior'), L('grammar-senior'), L('prosody-senior')],
+    lunyu: [L('lunyu-senior')],
   },
   實戰: {
     rhetoric: [L('exam-rhetoric')],

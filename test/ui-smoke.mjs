@@ -156,7 +156,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 2) fail('冒險沒有顯示莊子、屈原兩章');
+if (await page.locator('.adventure-chapter-tab').count() !== 3) fail('冒險沒有顯示莊子、屈原與孔子外篇三章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -200,6 +200,59 @@ const stableStatus = await page.evaluate(() => JSON.parse(localStorage.getItem('
 if (stableStatus !== 'stable') fail('蝶夢回聲通過後未穩固');
 await page.click('#btn-adventure-back');
 await page.waitForFunction(() => document.querySelector('#adventure-hero-kicker')?.textContent.includes('第二章'));
+
+// 外篇・孔子：完成屈原後解鎖，所有委託題只來自《論語》專屬題庫
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['warring-quyuan'].chapterStatus = 'found';
+  meta.adventure.currentChapterId = 'dream-confucius';
+  meta.adventure.chapterId = 'dream-confucius';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
+if (await page.locator('.adventure-chapter-tab').count() !== 3) fail('冒險沒有顯示第三章孔子外篇');
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
+await page.click('[data-vow-id]');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('枕書入夢'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('學而之門'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-confucius-academy.webp')) fail('孔子論語委託沒有杏壇配圖');
+const lunyuElementary = JSON.parse(await readFile(join(ROOT, 'data/lunyu-elementary.json'), 'utf8'));
+const lunyuQuestions = new Set(lunyuElementary.map((entry) => entry.question));
+for (let i = 0; i < 5; i += 1) {
+  const question = await page.textContent('#quiz-question');
+  if (!lunyuQuestions.has(question)) fail('孔子外篇混入非論語專屬題庫');
+  await page.click('#quiz-options .opt-btn');
+  await page.waitForSelector('#quiz-feedback:not([hidden])');
+  await page.click('#btn-next');
+  if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+}
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('知之鏡'));
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['dream-confucius'].sceneIndex = 5;
+  meta.adventure.sceneIndex = 5;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('孔子問學'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-confucius-duel.webp')) fail('孔子最終問學沒有專屬對戰圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '孔子') fail('孔子外篇最終對戰的對手不是孔子');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-duel.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
+await page.click('#btn-adventure-back');
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');

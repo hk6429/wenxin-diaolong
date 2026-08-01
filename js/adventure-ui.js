@@ -31,6 +31,12 @@ const LEVEL_NOTES = {
 const CHAPTER_COVER_ART = {
   'preqin-zhuangzi': 'adventure-zhuangzi-butterfly.webp',
   'warring-quyuan': 'adventure-quyuan-fragrant.webp',
+  'dream-confucius': 'adventure-confucius-dream.webp',
+};
+const CHAPTER_FRIEND_LINES = {
+  'preqin-zhuangzi': '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。',
+  'warring-quyuan': '屈原已成為你的第二位文友，香草流蘇也收入守卷閣。',
+  'dream-confucius': '孔子已成為你的第三位文友，竹簡書籤也從夢中落入守卷閣。',
 };
 let deps;
 let chapterMap = null;
@@ -140,9 +146,7 @@ function renderFound(root, definition, progress) {
   const due = isEchoDue(deps.getCtx().meta, new Date(), definition.id);
   const dueText = progress.echoDueAt ? new Date(progress.echoDueAt).toLocaleDateString('zh-TW') : '';
   const nextDefinition = CHAPTERS.find((item) => item.order === definition.order + 1);
-  const friendLine = definition.id === 'preqin-zhuangzi'
-    ? '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。'
-    : '屈原已成為你的第二位文友，香草流蘇也收入守卷閣。';
+  const friendLine = CHAPTER_FRIEND_LINES[definition.id] || `${definition.figure}已成為你的文友。`;
   setAdventureStage(`
     ${cinematicHeader(definition, `第${definition.order}張文脈殘頁`, `${definition.pageName}・${progress.chapterStatus === 'stable' ? '已穩固' : '已尋回'}`)}
     <div class="adventure-stage-body">
@@ -232,7 +236,8 @@ async function startQuest(scene) {
     deps.toast('這項委託的可用題目不足，已停止發布以避免重複灌題');
     return;
   }
-  deps.startPractice(null, selected.map((entry) => entry.id), {
+  deps.startPractice(null, null, {
+    entries: selected,
     limit: quest.count,
     title: scene.title,
     annotations: chapter.annotations,
@@ -262,7 +267,8 @@ async function startEcho() {
   try { entries = await loadBank(quest.bankKey); }
   catch { deps.toast(`${definition.echoTitle}暫時載入失敗`); return; }
   const selected = shuffle(selectQuestEntries(entries, quest));
-  deps.startPractice(null, selected.map((entry) => entry.id), {
+  deps.startPractice(null, null, {
+    entries: selected,
     limit: quest.count, title: definition.echoTitle, annotations: chapter.annotations, zhuyinMode: root.zhuyinMode,
     onExit: openAdventureScreen,
     onComplete: (summary) => {

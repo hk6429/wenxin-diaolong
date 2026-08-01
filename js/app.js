@@ -151,7 +151,9 @@ function renderLevelGuides() {
 async function startPractice(bankKey, fixedIds = null, options = {}) {
   let entries;
   try {
-    entries = fixedIds
+    entries = Array.isArray(options.entries) && options.entries.length
+      ? options.entries
+      : fixedIds
       ? fixedIds.map((id) => ctx.byId.get(id)).filter(Boolean)
       : await loadBank(bankKey);
   } catch { entries = []; }
@@ -185,7 +187,7 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
 }
 
 function pickNext(candidates) {
-  return nextQuestionId(ctx.leitner, candidates, ctx.byId);
+  return nextQuestionId(ctx.leitner, candidates, quiz?.byId || ctx.byId);
 }
 
 function nextQuestion() {

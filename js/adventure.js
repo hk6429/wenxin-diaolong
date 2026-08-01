@@ -22,6 +22,21 @@ export const CHAPTERS = Object.freeze([
       },
     },
   },
+  {
+    id: 'dream-confucius', order: 3, number: '三', era: '外篇・夢境', figure: '孔子', file: 'confucius',
+    title: '外篇・孔子〈夢入杏壇〉', heroTitle: '枕書入夢，遇見孔子',
+    pageName: '好學之頁', echoTitle: '杏壇回聲', art: 'confucius',
+    sceneIds: ['dream-prologue', 'learning-gate', 'knowing-mirror', 'ren-path', 'junzi-court', 'confucius-trial', 'wake-return'],
+    rewards: ['learning-page', 'bamboo-slip-bookmark', 'friend-confucius'],
+    echoQuest: {
+      bankKey: 'lunyu', count: 3,
+      catsByLevel: {
+        '國小': ['詞性', '句型', '設問'],
+        '國中': ['文言虛詞', '文言句式', '引用'],
+        '高中': ['文言虛詞', '文言句式', '詞類活用'],
+      },
+    },
+  },
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。
