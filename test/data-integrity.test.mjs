@@ -49,8 +49,9 @@ for (const [file, spec] of Object.entries(SELF_FILES)) {
       assert.equal(e.zone, spec.zone, `${e.id} zone 混檔`);
       assert.ok(!ids.has(e.id), `${e.id} id 重複`);
       ids.add(e.id);
-      const qk = String(e.question).replace(/\s+/g, '');
-      assert.ok(!qkeys.has(qk), `${e.id} 題幹重複`);
+      // 制式問法（pick/odd/語病等）題幹相同、內容在選項——唯一鍵＝題幹＋選項組合
+      const qk = String(e.question).replace(/\s+/g, '') + '|' + [...e.options].sort().join('§');
+      assert.ok(!qkeys.has(qk), `${e.id} 題幹＋選項重複`);
       qkeys.add(qk);
       assert.ok(!SIMPLIFIED.test(entryText(e)), `${e.id} 含簡體字`);
       // 題幹不洩題（正解術語不得出現在題幹）——僅對「選出術語名」類題型檢查
