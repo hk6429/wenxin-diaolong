@@ -169,13 +169,12 @@ function renderRtQuestion() {
       <section class="rt-battle-board">
       <div class="rt-battle-visual">
         <img src="assets/img/rt-computer-arena.webp" alt="" aria-hidden="true" onerror="this.src='assets/img/home-duel.webp'">
-        <div class="rt-round-banner"><small>${rt.mode === 'computer' ? '墨靈演武' : '文心過招'}</small><b id="rt-round">第 1 回合</b></div>
+        <div class="rt-round-banner"><small>${rt.mode === 'computer' ? '墨靈演武' : '文心過招'}・書院山門</small><b id="rt-round">第 1 回合</b><span id="rt-phase">輪到你出招</span></div>
         <div class="duel-hp-row" id="rt-hp-row">
-          <div class="duel-side rt-fighter rt-fighter-a"><span>${escapeHtml(rt.mySnap?.nick || '無名文士')}</span><small class="rt-loadout">${escapeHtml(rt.mySnap?.petName || '墨靈')}・境界 ${rt.mySnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-a"></em></b><small id="rt-combo-a">連擊 0</small></div><div class="bar hp-a"><i></i></div><div class="rt-skills"><b>你的招式</b><span>識義・答對造成 10 點</span><span>連珠・三連後造成 15 點</span></div></div>
+          <div class="duel-side rt-fighter rt-fighter-a"><strong id="rt-hit-a" class="rt-hit" aria-hidden="true"></strong><span>${escapeHtml(rt.mySnap?.nick || '無名文士')}</span><small class="rt-loadout">${escapeHtml(rt.mySnap?.petName || '墨靈')}・境界 ${rt.mySnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-a"></em></b><small id="rt-combo-a">連擊 0</small></div><div class="bar hp-a"><i></i></div><div class="rt-skills"><b>你的招式</b><span>識義・答對造成 10 點</span><span>連珠・三連後造成 15 點</span></div></div>
           <div class="duel-vs"><span>文</span><small>VS</small></div>
-          <div class="duel-side rt-fighter rt-fighter-b"><span>${escapeHtml(rt.oppSnap?.nick || '對手')}</span><small class="rt-loadout">${escapeHtml(rt.oppSnap?.petName || '墨靈')}・境界 ${rt.oppSnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-b"></em></b><small id="rt-combo-b">連擊 0</small></div><div class="bar hp-b"><i></i></div><div class="rt-skills"><b>${rt.mode === 'computer' ? '墨靈招式' : '對手招式'}</b><span>觀文・答對造成 ${rt.mode === 'computer' ? '8' : '10'} 點</span><span>破句・三連後造成 ${rt.mode === 'computer' ? '12' : '15'} 點</span></div></div>
+          <div class="duel-side rt-fighter rt-fighter-b"><strong id="rt-hit-b" class="rt-hit" aria-hidden="true"></strong><span>${escapeHtml(rt.oppSnap?.nick || '對手')}</span><small class="rt-loadout">${escapeHtml(rt.oppSnap?.petName || '墨靈')}・境界 ${rt.oppSnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-b"></em></b><small id="rt-combo-b">連擊 0</small></div><div class="bar hp-b"><i></i></div><div class="rt-skills"><b>${rt.mode === 'computer' ? '墨靈招式' : '對手招式'}</b><span>觀文・答對造成 ${rt.mode === 'computer' ? '8' : '10'} 點</span><span>破句・三連後造成 ${rt.mode === 'computer' ? '12' : '15'} 點</span></div></div>
         </div>
-        <div class="rt-terrain"><b>戰場・書院山門</b><span>同題交鋒</span><span>文氣歸零者敗</span></div>
         <div class="rt-battle-rules"><span>你先出招・墨靈後應招</span><span>答錯斷連擊・三連發動強招</span><span>${rt.questions.length} 回合後以文氣判勝負</span></div>
       </div>
       <p id="rt-action-log" class="rt-action-log" aria-live="polite">輪到你出招</p>
@@ -199,6 +198,11 @@ function renderRtQuestion() {
     b.addEventListener('click', () => answerRt(q, opt));
     box.appendChild(b);
   });
+  if ($('rt-phase')) $('rt-phase').textContent = '輪到你出招';
+  if ($('rt-action-log')) {
+    $('rt-action-log').className = 'rt-action-log player-turn';
+    $('rt-action-log').textContent = '輪到你出招';
+  }
   renderRtHp();
 }
 
@@ -227,6 +231,9 @@ function answerRt(q, picked) {
   renderRtHp();
   if (rt.mode === 'computer') {
     const dealt = rt.myDmg - damageBefore;
+    if (correct) showDamage('b', dealt);
+    if ($('rt-phase')) $('rt-phase').textContent = '墨靈應招';
+    $('rt-action-log').className = 'rt-action-log computer-turn';
     $('rt-action-log').textContent = correct
       ? `你的「${rt.combo >= COMBO_AT ? '連珠' : '識義'}」命中，墨靈文氣 −${dealt}；墨靈正在應招……`
       : '你的判斷未中，連擊中斷；墨靈正在應招……';
@@ -247,10 +254,30 @@ function resolveComputerTurn(currentBattle) {
   rt.oppState.done = rt.qi >= rt.questions.length ? 1 : 0;
   renderRtHp();
   const dealt = rt.oppState.dmg - damageBefore;
+  if (computerCorrect) showDamage('a', dealt);
+  if ($('rt-phase')) $('rt-phase').textContent = '回合結束';
+  $('rt-action-log').className = 'rt-action-log computer-turn';
   $('rt-action-log').textContent = computerCorrect
     ? `墨靈以「${rt.oppState.combo >= 3 ? '破句' : '觀文'}」反擊，你的文氣 −${dealt}`
     : '墨靈判讀失誤，反擊落空；你的文氣不變';
   if (!checkEnd()) rt.turnTimer = setTimeout(renderRtQuestion, 900);
+}
+
+function showDamage(side, amount) {
+  const label = $(`rt-hit-${side}`);
+  const fighter = document.querySelector(`.rt-fighter-${side}`);
+  if (!label || !fighter || amount <= 0) return;
+  label.textContent = `−${amount}`;
+  label.classList.remove('show');
+  fighter.classList.remove('hit');
+  requestAnimationFrame(() => {
+    label.classList.add('show');
+    fighter.classList.add('hit');
+  });
+  setTimeout(() => {
+    label.classList.remove('show');
+    fighter.classList.remove('hit');
+  }, 700);
 }
 
 function checkEnd(force = false) {
@@ -276,14 +303,18 @@ function checkEnd(force = false) {
   const endEvents = onBattleEnd(kctx, { won: verdict === 'win', bestCombo: rt.bestCombo, perfect: rt.myCorrect === total });
   if (Array.isArray(endEvents?.events)) deps.renderEvents(endEvents.events);
   deps.renderHud();
-  const label = verdict === 'win' ? '你贏了！' : verdict === 'lose' ? '敗北……再練練' : '平手！';
+  const label = verdict === 'win' ? '筆鋒定局，你贏了！' : verdict === 'lose' ? '惜敗，整筆再戰！' : '文勢相當，平手！';
   const opponentResult = rt.mode === 'computer' ? `；墨靈答對 ${rt.oppState?.correct || 0} 題` : '';
-  $('rt-body').innerHTML = `<div class="duel-intro">
-    <div class="rt-verdict-seal">${verdict === 'win' ? '勝' : verdict === 'draw' ? '和' : '惜敗'}</div>
-    <h3>${label}</h3>
-    <p class="duel-line">你答對 ${rt.myCorrect} 題，輸出 ${rt.myDmg} 傷害${opponentResult}${verdict === 'win' ? '，墨珠 +20' : ''}</p>
-    <div class="overlay-actions"><button class="primary-btn" id="btn-rt-again">回大廳</button></div>
-  </div>`;
+  const resultArt = verdict === 'win' ? 'assets/img/rt-result-victory.webp'
+    : verdict === 'lose' ? 'assets/img/rt-result-defeat.webp' : 'assets/img/rt-computer-arena.webp';
+  $('rt-body').innerHTML = `<section class="rt-result rt-result-${verdict}">
+    <img src="${resultArt}" alt="${verdict === 'win' ? '青衣文士完成文心挑戰' : verdict === 'lose' ? '青衣文士整理筆墨準備再戰' : '兩位文士以筆墨戰成平手'}">
+    <div class="rt-result-content">
+      <div class="rt-verdict-seal">${verdict === 'win' ? '勝' : verdict === 'draw' ? '和' : '惜敗'}</div>
+      <div><h3>${label}</h3><p class="duel-line">你答對 ${rt.myCorrect} 題，輸出 ${rt.myDmg} 傷害${opponentResult}${verdict === 'win' ? '，墨珠 +20' : ''}</p></div>
+      <button class="primary-btn" id="btn-rt-again">回大廳</button>
+    </div>
+  </section>`;
   $('btn-rt-again').addEventListener('click', openRtScreen);
   return true;
 }

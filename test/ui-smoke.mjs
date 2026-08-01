@@ -283,6 +283,8 @@ await page.click('#btn-rt-join');
 await page.waitForSelector('.rt-battle-board');
 if (await page.locator('.rt-battle-visual > img').count() !== 1) fail('文友過招戰場缺少左右對峙主視覺');
 if (!(await page.locator('.rt-round-banner').textContent())?.includes('第 1 回合')) fail('文友過招戰場缺回合標示');
+if (!(await page.locator('.rt-round-banner').textContent())?.includes('書院山門')) fail('回合與戰場資訊尚未合併');
+if (await page.locator('.rt-terrain').count()) fail('舊戰場浮卡仍殘留，會造成版面堆疊');
 if (await page.locator('.rt-fighter').count() !== 2) fail('文友過招戰場不是雙方對峙版面');
 if (!(await page.locator('.rt-battle-rules').textContent())?.includes('三連')) fail('文友過招戰場缺招式規則');
 await page.click('#btn-rt-back');

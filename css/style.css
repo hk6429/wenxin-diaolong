@@ -422,11 +422,12 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .rt-battle-visual { position: relative; min-height: 500px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(168,132,44,.55); box-shadow: 0 18px 42px rgba(43,29,18,.22); background: var(--paper-deep); }
 .rt-battle-visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .rt-battle-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,20,24,.56), transparent 35%, transparent 65%, rgba(20,16,12,.66)); pointer-events: none; }
-.rt-round-banner { position: absolute; z-index: 2; left: 50%; top: 14px; transform: translateX(-50%); min-width: 160px; padding: 6px 18px 8px; border: 1px solid rgba(240,212,135,.7); border-radius: 6px; background: rgba(35,27,20,.84); color: #fff1c4; text-align: center; box-shadow: 0 5px 18px rgba(0,0,0,.25); }
+.rt-round-banner { position: absolute; z-index: 2; left: 50%; top: 14px; transform: translateX(-50%); min-width: 220px; padding: 6px 18px 8px; border: 1px solid rgba(240,212,135,.7); border-radius: 6px; background: rgba(35,27,20,.88); color: #fff1c4; text-align: center; box-shadow: 0 5px 18px rgba(0,0,0,.25); }
 .rt-round-banner small { display: block; color: #d8b85d; font-size: .65rem; letter-spacing: .2em; }
 .rt-round-banner b { display: block; margin-top: 1px; font-size: 1.05rem; }
+.rt-round-banner span { display: block; margin-top: 2px; color: rgba(255,255,255,.8); font-size: .58rem; letter-spacing: .08em; }
 .rt-battle-visual .duel-hp-row { position: absolute; z-index: 2; inset: auto 16px 62px; margin: 0; align-items: end; }
-.rt-fighter { max-width: 250px; padding: 11px 13px; border: 1px solid rgba(240,212,135,.5); border-radius: 10px; color: #fff; backdrop-filter: blur(8px); box-shadow: 0 5px 16px rgba(0,0,0,.28); }
+.rt-fighter { position: relative; box-sizing: border-box; width: min(40%,250px); padding: 11px 13px; border: 1px solid rgba(240,212,135,.5); border-radius: 10px; color: #fff; backdrop-filter: blur(8px); box-shadow: 0 5px 16px rgba(0,0,0,.28); }
 .rt-fighter-a { background: rgba(24,55,73,.82); }
 .rt-fighter-b { background: rgba(99,38,28,.82); text-align: right; }
 .rt-fighter > span { font-weight: 900; font-size: 1rem; }
@@ -438,15 +439,27 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .rt-skills { display: grid; gap: 3px; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(240,212,135,.24); font-size: .62rem; }
 .rt-skills b { color: #f4d778; font-size: .66rem; }
 .rt-skills span { color: rgba(255,255,255,.82); }
-.rt-terrain { position: absolute; z-index: 3; left: 50%; top: 88px; transform: translateX(-50%); width: 120px; display: grid; gap: 2px; padding: 8px; border: 1px solid rgba(240,212,135,.48); border-radius: 8px; background: rgba(31,26,20,.86); color: #f3dfaa; text-align: center; font-size: .56rem; }
-.rt-terrain b { color: #f7d56d; font-size: .65rem; }
+.rt-hit { position: absolute; z-index: 5; left: 50%; top: -30px; transform: translate(-50%,8px) scale(.8); color: #fff0a3; font: 900 1.55rem serif; text-shadow: 0 2px 3px #50140d,0 0 14px #ff6b3d; opacity: 0; pointer-events: none; }
+.rt-hit.show { animation: rt-damage-pop .68s ease-out both; }
+.rt-fighter.hit { animation: rt-panel-hit .35s ease-out; }
+@keyframes rt-damage-pop { 0%{opacity:0;transform:translate(-50%,10px) scale(.7)} 30%{opacity:1;transform:translate(-50%,-10px) scale(1.25)} 100%{opacity:0;transform:translate(-50%,-28px) scale(1)} }
+@keyframes rt-panel-hit { 30%{filter:brightness(1.65);transform:translateX(5px)} 60%{transform:translateX(-4px)} }
 .rt-battle-visual .bar { background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.18); }
 .rt-battle-visual .duel-vs { align-self: end; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(36,27,18,.86); color: #f8d768; border: 1px solid #d8b85d; font-family: serif; font-size: 1.45rem; }
 .rt-battle-visual .duel-vs small { display: block; margin-top: -7px; color: #fff; font: 600 .5rem system-ui; }
 .rt-battle-rules { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; min-height: 34px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 18px; padding: 6px 12px; background: rgba(28,22,17,.84); color: #f3dfaa; font-size: .66rem; }
 .rt-action-log { min-height: 34px; margin: 0; padding: 8px 12px; border-left: 4px solid var(--gold); border-radius: 8px; background: color-mix(in srgb, var(--card) 88%, var(--gold)); color: var(--ink); font-size: .82rem; font-weight: 800; }
+.rt-action-log.player-turn { border-color: #3c8f80; }
+.rt-action-log.computer-turn { border-color: var(--cinnabar); }
 .rt-quiz-card { margin-top: 0; border-top: 4px solid var(--gold); }
 .rt-verdict-seal { width: 72px; height: 72px; margin: 0 auto 8px; display: grid; place-items: center; border: 3px double var(--gold); border-radius: 50%; color: var(--cinnabar); font: 900 1.35rem serif; transform: rotate(-4deg); }
+.rt-result { position: relative; min-height: 460px; overflow: hidden; border: 1px solid rgba(168,132,44,.55); border-radius: 20px; background: #171b1c; box-shadow: 0 18px 42px rgba(43,29,18,.22); }
+.rt-result > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rt-result::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 38%,rgba(15,18,18,.92) 88%); }
+.rt-result-content { position: absolute; z-index: 2; inset: auto 18px 18px; display: grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding: 14px 16px; border: 1px solid rgba(240,212,135,.38); border-radius: 14px; background: rgba(24,24,21,.82); color: #fff8df; backdrop-filter: blur(8px); }
+.rt-result-content .rt-verdict-seal { margin: 0; color: #f4d778; }
+.rt-result-content h3,.rt-result-content p { margin: 2px 0; }
+.rt-result-content .duel-line { color: rgba(255,255,255,.8); }
 
 /* 立繪圖：載入成功時取代 emoji 佔位 */
 .art-slot { display: inline-flex; align-items: center; justify-content: center; }
@@ -467,4 +480,5 @@ ruby{ruby-align:center}rt{font-size:.48em;color:var(--cinnabar);font-family:syst
 @media(prefers-color-scheme:dark){.adventure-stage{background:radial-gradient(circle at 80% 5%,rgba(217,106,82,.15),transparent 30%),linear-gradient(145deg,rgba(38,33,25,.98),rgba(29,26,22,.96))}.adventure-wait{background:rgba(201,169,78,.1)}}
 @media(prefers-reduced-motion:reduce){.adventure-hero,.adventure-character img{transition:none;transform:none!important}}
 @media(max-width:560px){.adventure-hero{padding:14px;gap:10px;min-height:120px}.adventure-hero-art{flex-basis:86px;height:86px}.adventure-stage{min-height:430px;padding:26px 20px}.adventure-character{width:42%;margin-left:10px}.mini-switch{width:100%;justify-content:center}.mini-switch button{flex:1;padding-inline:4px;font-size:.86rem}}
-@media(max-width:560px){.entry-card{min-height:176px}.entry-art{height:96px}.entry-title{margin:8px 10px 0;font-size:.95rem}.entry-desc{margin:0 10px 10px;font-size:.7rem}.rt-lobby-hero{min-height:230px}.rt-lobby-panel{margin:-18px 8px 0;padding:13px}.rt-mode-card{align-items:stretch;flex-direction:column}.rt-mode-card .primary-btn{width:100%}.rt-battle-visual{min-height:430px}.rt-battle-visual .duel-hp-row{inset:auto 8px 56px;gap:5px}.rt-fighter{padding:7px;max-width:43%}.rt-skills{font-size:.52rem}.rt-terrain{display:none}.rt-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.rt-battle-rules{gap:4px 8px}.rt-round-banner{top:8px;min-width:135px}.rt-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;width:100%}.rt-actions #btn-rt-create,.rt-actions .rt-or{grid-column:1/-1}.rt-actions #btn-rt-create{width:100%}.rt-actions .rt-or{text-align:center}.rt-actions .rt-field{display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;margin:0}.rt-actions .rt-field input{width:100%;min-width:0}.rt-actions #btn-rt-join{white-space:nowrap}}
+@media(max-width:560px){.entry-card{min-height:176px}.entry-art{height:96px}.entry-title{margin:8px 10px 0;font-size:.95rem}.entry-desc{margin:0 10px 10px;font-size:.7rem}.rt-lobby-hero{min-height:230px}.rt-lobby-panel{margin:-18px 8px 0;padding:13px}.rt-mode-card{align-items:stretch;flex-direction:column}.rt-mode-card .primary-btn{width:100%}.rt-battle-visual{min-height:430px}.rt-battle-visual .duel-hp-row{inset:auto 8px 56px;gap:5px}.rt-fighter{width:43%;padding:7px}.rt-skills{font-size:.52rem}.rt-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.rt-battle-rules{gap:4px 8px}.rt-round-banner{top:8px;min-width:180px}.rt-result{min-height:430px}.rt-result-content{inset:auto 10px 10px;grid-template-columns:auto 1fr;gap:10px}.rt-result-content .primary-btn{grid-column:1/-1;width:100%}.rt-result-content .rt-verdict-seal{width:58px;height:58px}.rt-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;width:100%}.rt-actions #btn-rt-create,.rt-actions .rt-or{grid-column:1/-1}.rt-actions #btn-rt-create{width:100%}.rt-actions .rt-or{text-align:center}.rt-actions .rt-field{display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;margin:0}.rt-actions .rt-field input{width:100%;min-width:0}.rt-actions #btn-rt-join{white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.rt-hit.show,.rt-fighter.hit{animation:none}.rt-hit.show{opacity:1}}
