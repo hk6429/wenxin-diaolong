@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文心雕龍｜文法修辭練功站</title>
+<meta name="description" content="國小到高中的文法與修辭練功站：閃卡圖鑑、間隔複習、弱點特訓、文心大師對戰。韻文非韻文全覆蓋，會考學測真題實戰。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要內容</a>
+<header class="site-header">
+  <button id="btn-home" class="brand" aria-label="回首頁">
+    <span class="brand-icon" aria-hidden="true">🐉</span>
+    <span class="brand-text"><strong>文心雕龍</strong><small>文法修辭練功站</small></span>
+  </button>
+  <div id="hud" class="hud" aria-live="off">
+    <span class="hud-item" id="hud-pearls" title="墨珠">🪷 0</span>
+    <span class="hud-item" id="hud-rank" title="文氣境界">蒙童</span>
+    <span class="hud-item" id="hud-streak" title="連續天數">🔥 0</span>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 首頁 -->
+  <section id="screen-home" class="screen" aria-label="首頁">
+    <div class="level-bar" role="group" aria-label="學段切換">
+      <button class="level-btn" data-level="國小">國小</button>
+      <button class="level-btn" data-level="國中">國中</button>
+      <button class="level-btn" data-level="高中">高中</button>
+      <button class="level-btn" data-level="實戰">實戰</button>
+    </div>
+    <p id="home-today" class="home-today"></p>
+    <nav class="entry-grid" aria-label="主功能">
+      <button class="entry-card entry-practice" id="btn-practice">
+        <span class="entry-icon" aria-hidden="true">⚔️</span>
+        <span class="entry-title">練功</span>
+        <span class="entry-desc">修辭・文法・格律 分區闖關</span>
+      </button>
+      <button class="entry-card entry-codex" id="btn-codex">
+        <span class="entry-icon" aria-hidden="true">📖</span>
+        <span class="entry-title">文心圖鑑</span>
+        <span class="entry-desc">概念卡與文心珠收藏</span>
+      </button>
+      <button class="entry-card entry-weak" id="btn-weak">
+        <span class="entry-icon" aria-hidden="true">🎯</span>
+        <span class="entry-title">弱點複習</span>
+        <span class="entry-desc">哪裡跌倒哪裡練</span>
+      </button>
+      <button class="entry-card entry-pets" id="btn-pets">
+        <span class="entry-icon" aria-hidden="true">🐲</span>
+        <span class="entry-title">文心四靈</span>
+        <span class="entry-desc">練得愈熟，靈獸愈強</span>
+      </button>
+      <button class="entry-card entry-battle" id="btn-battle" disabled aria-disabled="true">
+        <span class="entry-icon" aria-hidden="true">🏯</span>
+        <span class="entry-title">文心試煉</span>
+        <span class="entry-desc">即將開放</span>
+      </button>
+    </nav>
+    <div class="home-progress" id="home-progress"></div>
+  </section>
+
+  <!-- 練功 -->
+  <section id="screen-practice" class="screen" hidden aria-label="練功">
+    <div id="practice-zones" class="zone-pick">
+      <h2>選擇練功分區</h2>
+      <div class="zone-grid">
+        <button class="zone-card zone-rh" data-bank="rhetoric"><span aria-hidden="true">🖌️</span>修辭</button>
+        <button class="zone-card zone-gr" data-bank="grammar"><span aria-hidden="true">🏛️</span>文法</button>
+        <button class="zone-card zone-yl" data-bank="prosody"><span aria-hidden="true">🎵</span>格律</button>
+        <button class="zone-card zone-mix" data-bank="mixed"><span aria-hidden="true">☯️</span>綜合</button>
+      </div>
+    </div>
+    <div id="quiz-panel" hidden>
+      <div class="quiz-top">
+        <button id="btn-quiz-exit" class="ghost-btn">← 離開</button>
+        <span id="quiz-progress"></span>
+        <span id="quiz-combo" class="combo" hidden></span>
+      </div>
+      <article class="quiz-card">
+        <p class="quiz-tag" id="quiz-tag"></p>
+        <div class="quiz-question" id="quiz-question"></div>
+        <div class="quiz-options" id="quiz-options" role="group" aria-label="選項"></div>
+        <button id="btn-submit-multi" class="primary-btn" hidden>送出答案</button>
+        <div class="quiz-feedback" id="quiz-feedback" hidden>
+          <p class="verdict" id="quiz-verdict"></p>
+          <div class="explain" id="quiz-explain"></div>
+          <p class="citation" id="quiz-citation" hidden></p>
+          <p class="official" id="quiz-official" hidden></p>
+          <button id="btn-next" class="primary-btn">下一題（Enter）</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 文心圖鑑 -->
+  <section id="screen-codex" class="screen" hidden aria-label="文心圖鑑">
+    <div class="tabs" role="tablist" aria-label="圖鑑分頁">
+      <button class="tab" role="tab" data-tab="修辭">修辭</button>
+      <button class="tab" role="tab" data-tab="文法">文法</button>
+      <button class="tab" role="tab" data-tab="格律">格律</button>
+      <button class="tab" role="tab" data-tab="珠">文心珠</button>
+    </div>
+    <div id="codex-body"></div>
+  </section>
+
+  <!-- 弱點複習 -->
+  <section id="screen-weak" class="screen" hidden aria-label="弱點複習">
+    <h2>弱點雷達</h2>
+    <div id="weak-list"></div>
+    <button id="btn-weak-train" class="primary-btn">開始弱點特訓（常錯 15 題）</button>
+  </section>
+
+  <!-- 文心四靈 -->
+  <section id="screen-pets" class="screen" hidden aria-label="文心四靈">
+    <h2>文心四靈</h2>
+    <p class="pets-hint">靈獸的力量來自你真正練熟的題目——沒有捷徑。</p>
+    <div id="pets-grid" class="pets-grid"></div>
+  </section>
+</main>
+
+<div id="toast-zone" class="toast-zone" aria-live="polite"></div>
+<div id="checkpoint-overlay" class="overlay" hidden>
+  <div class="overlay-card" role="dialog" aria-modal="true" aria-label="休息提醒">
+    <p id="checkpoint-text"></p>
+    <div class="overlay-actions">
+      <button id="btn-rest" class="ghost-btn">先休息</button>
+      <button id="btn-continue" class="primary-btn">繼續練</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

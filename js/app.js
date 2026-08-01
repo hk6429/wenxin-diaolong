@@ -1,0 +1,345 @@
+// 文心雕龍主控：畫面路由＋練習閉環。機制全走 js/meta/kernel.js 掛鉤，本檔只管 UI。
+import { getLevel, setLevel, loadBank } from './bank.js';
+import { initSession, onPracticeAnswer } from './meta/kernel.js';
+import { getMasteryStats, getCollection, getMostWrong, GRADES } from './meta/collection.js';
+import { getProgress } from './meta/progress.js';
+import { getBalance } from './meta/economy.js';
+import { getWeaknessSummary } from './meta/weakness.js';
+import { PETS, petLevel, isUnlocked, bondStage, categoryMastery, LEVEL_STEP, MAX_LEVEL } from './meta/pet.js';
+import { saveMeta } from './meta/store.js';
+import { nextQuestionId } from './leitner.js';
+import { createRoundState, nextInRound, recordRound, advanceRound } from './practice-round.js';
+import { shuffle } from './shuffle.js';
+import { shouldCheckpoint } from './session-checkpoint.js';
+
+// 作答結果已透過 toast-zone（aria-live=polite）播報，這裡不需另設播報器
+function announce(_msg) {}
+
+const $ = (id) => document.getElementById(id);
+const SCREENS = ['screen-home', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets'];
+
+let ctx = null;          // kernel session ctx（依目前學制的 mixed 全庫）
+let fullBank = [];       // 目前學制 mixed 全部題目
+let quiz = null;         // 進行中的練習 {entries, byId, rs, currentId, combo, answered, multiPicks}
+
+/* ---------- 初始化與學制 ---------- */
+async function boot() {
+  try {
+    fullBank = await loadBank('mixed');
+  } catch (e) {
+    console.warn('[文心雕龍] 題庫載入失敗', e);
+    fullBank = [];
+  }
+  ctx = initSession(fullBank);
+  renderHud();
+  renderHome();
+}
+
+async function switchLevel(level) {
+  if (!setLevel(level) && getLevel() !== level) return;
+  await boot();
+  showScreen('screen-home');
+}
+
+/* ---------- 畫面切換 ---------- */
+function showScreen(id) {
+  for (const s of SCREENS) $(s).hidden = s !== id;
+  window.scrollTo(0, 0);
+}
+
+/* ---------- HUD 與首頁 ---------- */
+function renderHud() {
+  const meta = ctx.meta;
+  $('hud-pearls').textContent = `🪷 ${getBalance(meta)}`;
+  $('hud-rank').textContent = getProgress(meta).rankName;
+  $('hud-streak').textContent = `🔥 ${meta.daily.streak || 0}`;
+}
+
+function renderHome() {
+  document.querySelectorAll('.level-btn').forEach((b) => {
+    b.classList.toggle('active', b.dataset.level === getLevel());
+  });
+  const d = ctx.meta.daily;
+  $('home-today').textContent = d.todayAnswered > 0
+    ? `今日已練 ${d.todayAnswered} 題，答對 ${d.todayCorrect} 題——${d.todayCorrect / d.todayAnswered >= 0.8 ? '文氣充沛！' : '穩穩累積中。'}`
+    : '今天還沒開張，來練幾題暖暖筆鋒吧。';
+  const zones = [
+    ['修辭', 'var(--rh)'], ['文法', 'var(--gr)'], ['格律', 'var(--yl)'],
+  ];
+  $('home-progress').innerHTML = zones.map(([zone, color]) => {
+    const bank = fullBank.filter((e) => e.zone === zone);
+    const s = getMasteryStats(ctx.meta, bank);
+    const pct = s.total ? Math.round((s.known / s.total) * 100) : 0;
+    return `<div class="zone-progress"><span>${zone}：已煉成 ${s.known}／${s.total} 題（精熟 ${s.mastered}）</span>
+      <div class="bar"><i style="width:${pct}%;background:${color}"></i></div></div>`;
+  }).join('');
+}
+
+/* ---------- 練習流程 ---------- */
+async function startPractice(bankKey, fixedIds = null) {
+  let entries;
+  try {
+    entries = fixedIds
+      ? fixedIds.map((id) => ctx.byId.get(id)).filter(Boolean)
+      : await loadBank(bankKey);
+  } catch { entries = []; }
+  if (!entries.length) {
+    toast('這個分區目前沒有題目');
+    return;
+  }
+  quiz = {
+    entries,
+    byId: new Map(entries.map((e) => [e.id, e])),
+    rs: createRoundState(shuffle(entries.map((e) => e.id))),
+    currentId: null,
+    combo: 0,
+    answered: 0,
+    multiPicks: new Set(),
+  };
+  $('practice-zones').hidden = true;
+  $('quiz-panel').hidden = false;
+  showScreen('screen-practice');
+  nextQuestion();
+}
+
+function pickNext(candidates) {
+  return nextQuestionId(ctx.leitner, candidates, ctx.byId);
+}
+
+function nextQuestion() {
+  let id = nextInRound(quiz.rs, pickNext);
+  if (id === null) {
+    const adv = advanceRound(quiz.rs, quiz.entries.map((e) => e.id), shuffle);
+    toast(adv.mode === 'wrong-review' ? `第 ${adv.round} 輪：複習剛剛答錯的 ${adv.size} 題` : `第 ${adv.round} 輪：整區重新開跑！`);
+    id = nextInRound(quiz.rs, pickNext);
+  }
+  quiz.currentId = id;
+  quiz.multiPicks = new Set();
+  renderQuestion(quiz.byId.get(id));
+}
+
+function renderQuestion(e) {
+  const isMulti = e.qformat === 'exam-mc-multi';
+  $('quiz-progress').textContent = `第 ${quiz.rs.round} 輪・${quiz.rs.served.size}／${quiz.rs.pool.length}`;
+  $('quiz-combo').hidden = quiz.combo < 2;
+  $('quiz-combo').textContent = `連對 ×${quiz.combo}`;
+  $('quiz-tag').innerHTML = `<span class="zone-chip z-${e.zone}">${e.zone}</span>${e.cat}${e.subcat ? '・' + e.subcat : ''}` +
+    (e.origin === '真題' ? `　<span>【${e.year} 年${e.exam || ''}真題】</span>` : '') +
+    (isMulti ? '　<strong>（複選題）</strong>' : '');
+  $('quiz-question').textContent = e.question;
+  $('quiz-feedback').hidden = true;
+  $('btn-submit-multi').hidden = !isMulti;
+  const box = $('quiz-options');
+  box.innerHTML = '';
+  e.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn';
+    b.dataset.opt = opt;
+    b.innerHTML = `<span class="kbd">${i + 1}</span><span>${escapeHtml(opt)}</span>`;
+    b.addEventListener('click', () => (isMulti ? toggleMulti(b, opt) : submitAnswer([opt])));
+    box.appendChild(b);
+  });
+}
+
+function toggleMulti(btn, opt) {
+  if (quiz.multiPicks.has(opt)) { quiz.multiPicks.delete(opt); btn.dataset.picked = ''; }
+  else { quiz.multiPicks.add(opt); btn.dataset.picked = '1'; }
+}
+
+function submitAnswer(picked) {
+  const e = quiz.byId.get(quiz.currentId);
+  if (!e || !$('quiz-feedback').hidden) return;
+  const answers = Array.isArray(e.answer) ? e.answer : [e.answer];
+  const correct = picked.length === answers.length && answers.every((a) => picked.includes(a));
+
+  document.querySelectorAll('.opt-btn').forEach((b) => {
+    b.disabled = true;
+    if (answers.includes(b.dataset.opt)) b.classList.add('correct');
+    else if (picked.includes(b.dataset.opt)) b.classList.add('wrong');
+  });
+
+  quiz.combo = correct ? quiz.combo + 1 : 0;
+  quiz.answered += 1;
+  recordRound(quiz.rs, e.id, correct);
+
+  const { events } = onPracticeAnswer(ctx, e.id, correct);
+  renderEvents(events);
+  renderHud();
+
+  const v = $('quiz-verdict');
+  v.textContent = correct ? '答對了！' : `不對喔，正解：${answers.join('、')}`;
+  v.className = `verdict ${correct ? 'ok' : 'bad'}`;
+  $('quiz-explain').textContent = e.explain || '';
+  const cit = $('quiz-citation');
+  cit.hidden = !e.citation;
+  cit.textContent = e.citation ? `出處：${e.citation}` : '';
+  const off = $('quiz-official');
+  off.hidden = !(e.origin === '真題' && typeof e.pass === 'number');
+  if (!off.hidden) off.textContent = `官方通過率 ${(e.pass * 100).toFixed(0)}%——${e.pass < 0.5 ? '全國考生都覺得難，答對很了不起' : '基本題，務必拿下'}`;
+  $('quiz-feedback').hidden = false;
+  $('btn-next').focus();
+  announce(correct ? '答對' : '答錯');
+
+  if (shouldCheckpoint(quiz.answered)) {
+    $('checkpoint-text').textContent = `你已經連續練了 ${quiz.answered} 題，今日共 ${ctx.meta.daily.todayAnswered} 題。要不要起來動一動？`;
+    $('checkpoint-overlay').hidden = false;
+  }
+}
+
+function exitPractice() {
+  quiz = null;
+  $('practice-zones').hidden = false;
+  $('quiz-panel').hidden = true;
+  renderHome();
+  showScreen('screen-home');
+}
+
+/* ---------- kernel events → toast ---------- */
+function renderEvents(events) {
+  for (const ev of events) {
+    switch (ev.type) {
+      case 'pearlForged': toast(`✨ 煉成${ev.payload.gradeName}！這一題你真的會了`); break;
+      case 'pearlDusted': toast('🌫️ 字珠蒙塵了——再答對 2 次擦亮它'); break;
+      case 'pearlPolished': toast('🫧 字珠擦亮，重放光芒！'); break;
+      case 'gradeUp': toast(`💎 升階：${ev.payload.gradeName}！`); break;
+      case 'rankUp': toast(`📜 境界提升——【${ev.payload.name}】${ev.payload.blessing}`); break;
+      case 'petUnlocked': toast(`${ev.payload.icon} 四靈現身：${ev.payload.name}！`); break;
+      case 'petLevelUp': toast(`${ev.payload.icon} ${ev.payload.name} 升到 Lv.${ev.payload.level}`); break;
+      case 'pearls': if (ev.payload.capped) toast('今日墨珠已達上限，明天再來賺'); break;
+      default: break;
+    }
+  }
+}
+
+let toastTimer = new Map();
+function toast(msg) {
+  const zone = $('toast-zone');
+  if (zone.children.length > 3) zone.firstChild.remove();
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  zone.appendChild(t);
+  setTimeout(() => t.remove(), 3200);
+}
+
+/* ---------- 文心圖鑑 ---------- */
+let concepts = null;
+async function renderCodex(tab = '修辭') {
+  document.querySelectorAll('.tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+  const body = $('codex-body');
+  if (tab === '珠') {
+    const col = getCollection(ctx.meta);
+    body.innerHTML = `<div class="pearl-stats">${GRADES.map((g, i) =>
+      `<div class="pearl-cell"><b>${col.counts[i]}</b>${g}</div>`).join('')}</div>` +
+      (col.dustyCount ? `<p>目前有 ${col.dustyCount} 顆珠蒙塵——去弱點複習擦亮它們！</p>` : '<p>答對到滿盒就能煉珠；錯過再煉成的珠更珍貴。</p>');
+    return;
+  }
+  if (concepts === null) {
+    try {
+      const r = await fetch('data/concepts.json');
+      concepts = r.ok ? await r.json() : [];
+    } catch { concepts = []; }
+  }
+  if (!concepts.length) {
+    body.innerHTML = '<p>圖鑑建置中，敬請期待。</p>';
+    return;
+  }
+  const list = concepts.filter((c) => c.zone === tab);
+  body.innerHTML = list.map((c) => {
+    const bank = fullBank.filter((e) => e.zone === c.zone && e.cat === c.cat);
+    const s = getMasteryStats(ctx.meta, bank);
+    const lit = s.known >= 5;
+    return `<article class="concept-card ${lit ? `lit-${c.zone}` : 'dim'}">
+      <div class="concept-head"><h3>${c.cat}</h3><span class="concept-level">${c.level}起</span>
+        <span class="concept-progress">${lit ? '已點亮' : ''} 精通 ${s.known}／${s.total || '—'}</span></div>
+      <p class="concept-def">${escapeHtml(c.definition)}</p>
+      <p class="concept-tips">💡 ${escapeHtml(c.tips)}</p>
+      ${(c.examples || []).map((x) => `<div class="concept-ex">
+        <span class="badge ${x.genre === '韻文' ? 'yun' : 'sanwen'}">${x.genre === '韻文' ? '韻' : '文'}</span>${escapeHtml(x.text)}
+        <cite>${x.citation ? escapeHtml(x.citation) : '自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
+      </div>`).join('')}
+    </article>`;
+  }).join('');
+}
+
+/* ---------- 弱點複習 ---------- */
+function renderWeak() {
+  const rows = getWeaknessSummary(ctx.meta).slice(0, 12);
+  $('weak-list').innerHTML = rows.length
+    ? rows.map((r) => `<div class="weak-row"><span>${r.zone}・${r.cat}｜答對率 ${(r.accuracy * 100).toFixed(0)}%（${r.correct}／${r.total}）</span>
+        <div class="bar"><i style="width:${Math.max(4, r.accuracy * 100)}%"></i></div></div>`).join('')
+    : '<p class="weak-empty">還沒有累積作答紀錄——先去練功，弱點雷達就會亮起來。</p>';
+  $('btn-weak-train').disabled = getMostWrong(ctx.meta, fullBank, 15).length === 0;
+}
+
+function startWeakTraining() {
+  const worst = getMostWrong(ctx.meta, fullBank, 15);
+  if (!worst.length) return;
+  startPractice(null, worst.map((w) => w.id));
+}
+
+/* ---------- 文心四靈 ---------- */
+function renderPets() {
+  $('pets-grid').innerHTML = PETS.map((p) => {
+    const unlocked = isUnlocked(ctx.meta, p);
+    const lv = petLevel(ctx.meta, p);
+    const mastery = categoryMastery(ctx.meta, p.category);
+    const nextAt = unlocked ? Math.min(MAX_LEVEL, lv + 1) * LEVEL_STEP : p.unlockAt;
+    const pct = nextAt ? Math.min(100, (mastery / nextAt) * 100) : 100;
+    const isActive = ctx.meta.pet.active === p.id;
+    return `<div class="pet-card ${unlocked ? '' : 'locked'} ${isActive ? 'active-pet' : ''}" data-pet="${p.id}"
+      role="button" tabindex="${unlocked ? 0 : -1}" aria-label="${p.name}">
+      <div class="pet-icon">${unlocked ? p.icon : '❓'}</div>
+      <div class="pet-name">${unlocked ? p.name : '？？？'}</div>
+      <div class="pet-level">${unlocked ? `Lv.${lv}｜${p.category}` : `${p.category}精通 ${Math.floor(mastery)}／${p.unlockAt} 解鎖`}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <p class="pet-line">${unlocked ? p.lines[bondStage(ctx.meta, p)].replace(/^[^：]+：/, '') : p.intro}</p>
+      ${isActive ? '<small>👑 隨行中（對戰加成）</small>' : ''}
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.pet-card:not(.locked)').forEach((card) => {
+    card.addEventListener('click', () => {
+      ctx.meta.pet.active = card.dataset.pet;
+      saveMeta(ctx.meta);
+      renderPets();
+      toast(`已選定隨行四靈`);
+    });
+  });
+}
+
+/* ---------- 工具 ---------- */
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* ---------- 事件綁定 ---------- */
+$('btn-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+document.querySelectorAll('.level-btn').forEach((b) => b.addEventListener('click', () => switchLevel(b.dataset.level)));
+$('btn-practice').addEventListener('click', () => { $('practice-zones').hidden = false; $('quiz-panel').hidden = true; showScreen('screen-practice'); });
+$('btn-codex').addEventListener('click', () => { showScreen('screen-codex'); renderCodex('修辭'); });
+$('btn-weak').addEventListener('click', () => { renderWeak(); showScreen('screen-weak'); });
+$('btn-pets').addEventListener('click', () => { renderPets(); showScreen('screen-pets'); });
+document.querySelectorAll('.zone-card').forEach((b) => b.addEventListener('click', () => startPractice(b.dataset.bank)));
+$('btn-quiz-exit').addEventListener('click', exitPractice);
+$('btn-next').addEventListener('click', nextQuestion);
+$('btn-submit-multi').addEventListener('click', () => {
+  if (quiz.multiPicks.size < 2) { toast('複選題至少要選兩個答案'); return; }
+  submitAnswer([...quiz.multiPicks]);
+});
+document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => renderCodex(b.dataset.tab)));
+$('btn-weak-train').addEventListener('click', startWeakTraining);
+$('btn-continue').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; });
+$('btn-rest').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; exitPractice(); });
+
+document.addEventListener('keydown', (ev) => {
+  if (!quiz || $('quiz-panel').hidden) return;
+  if (ev.key >= '1' && ev.key <= '5') {
+    const btns = document.querySelectorAll('.opt-btn');
+    const b = btns[Number(ev.key) - 1];
+    if (b && !b.disabled) b.click();
+  } else if (ev.key === 'Enter' && !$('quiz-feedback').hidden) {
+    nextQuestion();
+  }
+});
+
+boot();
