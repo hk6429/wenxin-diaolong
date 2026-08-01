@@ -14,6 +14,8 @@ import {
   selectChapter,
   chooseChapterVow,
   chooseScenePath,
+  startChapterReplay,
+  finishChapterReplay,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -95,6 +97,28 @@ test('開卷立誓與每幕選擇只記錄一次，且兩章互不覆蓋', () =>
   assert.equal(chooseChapterVow(meta, 'keep-seeking', 'warring-quyuan'), true);
   assert.equal(getChapterProgress(meta, CHAPTER_ID).vowId, 'life-and-learning');
   assert.equal(getChapterProgress(meta, CHAPTER_ID).sceneChoices['modern-prologue'], 'follow-butterfly');
+});
+
+test('重遊莊子會清空本輪故事選擇，但保留獎勵、穩固狀態與屈原解鎖', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  chooseChapterVow(meta, 'life-and-learning', CHAPTER_ID);
+  chooseScenePath(meta, 'modern-prologue', 'follow-butterfly', CHAPTER_ID);
+  markChapterFound(meta, new Date('2026-08-01T00:00:00+08:00'), CHAPTER_ID);
+  const beforeRewards = [...getChapterProgress(meta, CHAPTER_ID).rewards];
+  assert.equal(startChapterReplay(meta, CHAPTER_ID), true);
+  const replay = getChapterProgress(meta, CHAPTER_ID);
+  assert.equal(replay.replayActive, true);
+  assert.equal(replay.sceneIndex, 0);
+  assert.equal(replay.vowId, '');
+  assert.deepEqual(replay.sceneChoices, {});
+  assert.equal(replay.chapterStatus, 'found');
+  assert.deepEqual(replay.rewards, beforeRewards);
+  assert.equal(isChapterUnlocked(meta, 'warring-quyuan'), true);
+  assert.equal(startChapterReplay(meta, CHAPTER_ID), false, '重遊中不可重複開始');
+  assert.equal(finishChapterReplay(meta, CHAPTER_ID), true);
+  assert.equal(getChapterProgress(meta, CHAPTER_ID).replayActive, false);
+  assert.equal(getChapterProgress(meta, CHAPTER_ID).chapterStatus, 'found');
 });
 
 test('屈原第二章需完成莊子主線才解鎖，兩章進度互不覆蓋', () => {

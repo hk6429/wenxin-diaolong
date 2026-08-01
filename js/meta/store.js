@@ -66,6 +66,7 @@ export function defaultMeta() {
       questResults: {},
       vowId: '',
       sceneChoices: {},
+      replayActive: false,
       rewards: [],
       chapters: {},
     },

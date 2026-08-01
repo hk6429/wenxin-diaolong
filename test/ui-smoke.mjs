@@ -98,6 +98,15 @@ await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.
 const adventureSaved = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure);
 if (adventureSaved.chapterStatus !== 'found' || !adventureSaved.echoDueAt) fail('章回尋回狀態未正確保存');
 if (adventureSaved.rewards?.length !== 3) fail('章回三項獎勵未正確保存');
+if (await page.locator('#btn-replay-chapter').count() !== 1) fail('完成莊子後沒有重新遊歷入口');
+const beforeReplayMeta = await page.evaluate(() => localStorage.getItem('wxdl_meta'));
+await page.click('#btn-replay-chapter');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('開卷立誓'));
+const replaySaved = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure);
+if (!replaySaved.chapters['preqin-zhuangzi'].replayActive) fail('重新遊歷沒有啟動');
+if (replaySaved.chapters['preqin-zhuangzi'].chapterStatus !== 'found' || replaySaved.rewards?.length !== 3) fail('重遊錯誤清除了尋回狀態或獎勵');
+if (await page.locator('[data-adventure-chapter="warring-quyuan"]').isDisabled()) fail('重遊莊子不應重新鎖住屈原');
+await page.evaluate((raw) => localStorage.setItem('wxdl_meta', raw), beforeReplayMeta);
 await page.reload();
 await page.waitForSelector('#btn-adventure');
 await page.click('#btn-adventure');

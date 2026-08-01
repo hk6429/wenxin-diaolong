@@ -7,6 +7,8 @@ import {
   selectChapter,
   chooseChapterVow,
   chooseScenePath,
+  startChapterReplay,
+  finishChapterReplay,
   completeScene,
   markChapterFound,
   isEchoDue,
@@ -58,6 +60,7 @@ function sourceLine(chapter, scene) {
 }
 
 function progressLabel(definition, progress) {
+  if (progress.replayActive) return `第${definition.number}章・重遊 ${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
   if (progress.chapterStatus === 'stable') return `${definition.pageName}・已穩固`;
   if (progress.chapterStatus === 'found') return `${definition.pageName}・已尋回`;
   return `第${definition.number}章・${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
@@ -82,7 +85,7 @@ function renderChapterNav(meta, root) {
     const unlocked = isChapterUnlocked(meta, definition.id);
     const active = definition.id === root.currentChapterId;
     const progress = getChapterProgress(meta, definition.id);
-    const stateLabel = !unlocked ? '尚未解鎖' : progress.chapterStatus === 'stable' ? '已穩固' : progress.chapterStatus === 'found' ? '已尋回' : progress.sceneIndex ? '旅途中' : '可挑戰';
+    const stateLabel = !unlocked ? '尚未解鎖' : progress.replayActive ? '重遊中' : progress.chapterStatus === 'stable' ? '已穩固' : progress.chapterStatus === 'found' ? '已尋回' : progress.sceneIndex ? '旅途中' : '可挑戰';
     return `<button class="adventure-chapter-tab${active ? ' active' : ''}" data-adventure-chapter="${definition.id}" ${unlocked ? '' : 'disabled'} aria-pressed="${active}">
       <small>第${definition.number}章・${definition.era}</small><b>${definition.figure}</b><span>${stateLabel}</span>
     </button>`;
@@ -130,11 +133,17 @@ function renderFound(root, definition, progress) {
         ? `<button id="btn-echo" class="primary-btn">接受三題「${definition.echoTitle}」</button>`
         : `<p class="adventure-wait">${dueText} 後再回來完成三題短驗收；主線旅程可以繼續。</p>`}
     ${nextDefinition ? `<button id="btn-next-chapter" class="primary-btn">前往第${nextDefinition.number}章・遇見${nextDefinition.figure}</button>` : ''}
+    <button id="btn-replay-chapter" class="ghost-btn">重新遊歷本章</button>
     <button id="btn-adventure-home" class="ghost-btn">收卷回首頁</button>`;
   $('btn-adventure-home').addEventListener('click', goHome);
   $('btn-echo')?.addEventListener('click', startEcho);
   $('btn-next-chapter')?.addEventListener('click', () => {
     if (!selectChapter(deps.getCtx().meta, nextDefinition.id)) return;
+    saveMeta(deps.getCtx().meta);
+    renderAdventure();
+  });
+  $('btn-replay-chapter').addEventListener('click', () => {
+    if (!startChapterReplay(deps.getCtx().meta, definition.id)) return;
     saveMeta(deps.getCtx().meta);
     renderAdventure();
   });
@@ -145,7 +154,7 @@ async function renderAdventure() {
   $('adventure-progress').textContent = progressLabel(definition, progress);
   renderControls(root);
   renderChapterNav(meta, root);
-  if (progress.chapterStatus !== 'locked') {
+  if (progress.chapterStatus !== 'locked' && !progress.replayActive) {
     renderFound(root, definition, progress);
     return;
   }
@@ -183,8 +192,9 @@ async function renderAdventure() {
 }
 
 function advanceScene(scene, isFinal) {
-  const { meta, definition } = currentContext();
-  if (isFinal) markChapterFound(meta, new Date(), definition.id);
+  const { meta, definition, progress } = currentContext();
+  if (isFinal && progress.replayActive) finishChapterReplay(meta, definition.id);
+  else if (isFinal) markChapterFound(meta, new Date(), definition.id);
   else completeScene(meta, scene.id, definition.id);
   saveMeta(meta);
   renderAdventure();

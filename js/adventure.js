@@ -44,6 +44,7 @@ function normalizeProgress(progress, definition) {
   value.questResults = value.questResults && typeof value.questResults === 'object' ? value.questResults : {};
   value.vowId = typeof value.vowId === 'string' ? value.vowId : '';
   value.sceneChoices = value.sceneChoices && typeof value.sceneChoices === 'object' ? value.sceneChoices : {};
+  value.replayActive = value.replayActive === true;
   value.rewards = Array.isArray(value.rewards) ? [...new Set(value.rewards)] : [];
   return value;
 }
@@ -120,6 +121,29 @@ export function chooseScenePath(meta, sceneId, choiceId, chapterId = null) {
   const progress = state.chapters[id];
   if (!sceneId || !choiceId || progress.sceneChoices[sceneId]) return false;
   progress.sceneChoices[sceneId] = choiceId;
+  syncLegacyAliases(state);
+  return true;
+}
+
+export function startChapterReplay(meta, chapterId = null) {
+  const state = ensureAdventure(meta);
+  const id = chapterId || state.currentChapterId;
+  const progress = state.chapters[id];
+  if (progress.chapterStatus === 'locked' || progress.replayActive) return false;
+  state.currentChapterId = id;
+  progress.replayActive = true;
+  progress.sceneIndex = 0;
+  progress.vowId = '';
+  progress.sceneChoices = {};
+  syncLegacyAliases(state);
+  return true;
+}
+
+export function finishChapterReplay(meta, chapterId = null) {
+  const state = ensureAdventure(meta);
+  const progress = state.chapters[chapterId || state.currentChapterId];
+  if (!progress.replayActive) return false;
+  progress.replayActive = false;
   syncLegacyAliases(state);
   return true;
 }

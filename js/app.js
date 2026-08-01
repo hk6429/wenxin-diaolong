@@ -81,7 +81,7 @@ function renderHome() {
   let definition = chapterDefinition(adventure.currentChapterId);
   let progress = getChapterProgress(ctx.meta, definition.id);
   const nextDefinition = CHAPTERS.find((item) => item.order === definition.order + 1);
-  if (progress.chapterStatus !== 'locked' && nextDefinition && getChapterProgress(ctx.meta, nextDefinition.id).chapterStatus === 'locked') {
+  if (!progress.replayActive && progress.chapterStatus !== 'locked' && nextDefinition && getChapterProgress(ctx.meta, nextDefinition.id).chapterStatus === 'locked') {
     selectChapter(ctx.meta, nextDefinition.id);
     saveMeta(ctx.meta);
     definition = nextDefinition;
@@ -89,7 +89,11 @@ function renderHome() {
   }
   const heroImg = document.querySelector('.adventure-hero-art img');
   if (heroImg) heroImg.src = `assets/img/${definition.art}.webp`;
-  if (progress.chapterStatus === 'stable') {
+  if (progress.replayActive) {
+    $('adventure-hero-kicker').textContent = `第${definition.number}章・重遊 ${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
+    $('adventure-hero-title').textContent = `再次遇見${definition.figure}`;
+    $('adventure-hero-cta').textContent = '繼續重遊 →';
+  } else if (progress.chapterStatus === 'stable') {
     $('adventure-hero-kicker').textContent = `第${definition.number}章・已穩固`;
     $('adventure-hero-title').textContent = `${definition.pageName}重新發光`;
     $('adventure-hero-cta').textContent = '回守卷閣看看 →';
