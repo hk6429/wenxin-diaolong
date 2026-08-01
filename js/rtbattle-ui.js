@@ -42,7 +42,7 @@ async function startComputerBattle() {
     oppSnap: { nick: '墨靈書生', petName: '玄龜', lv: aiLv },
     oppState: { dmg: 0, round: 0, combo: 0, correct: 0, done: 0 },
     computerScript: buildComputerScript(computerSeed, level, COMPUTER_ROUNDS),
-    oppHb: Date.now(), pollTimer: null, ended: false,
+    oppHb: Date.now(), pollTimer: null, turnTimer: null, ended: false,
   };
   $('rt-lobby').hidden = true;
   $('rt-arena').hidden = false;
@@ -94,7 +94,7 @@ async function lobbyAction(kind) {
     questions: null, qi: 0,
     myDmg: 0, myCorrect: 0, combo: 0, bestCombo: 0, done: false,
     oppSnap: kind === 'join' ? res.opp : null, oppState: null, oppHb: Date.now(),
-    pollTimer: null, ended: false,
+    pollTimer: null, turnTimer: null, ended: false,
   };
   let entries;
   try { entries = await loadBank('mixed'); } catch { entries = []; }
@@ -176,8 +176,9 @@ function renderRtQuestion() {
           <div class="duel-side rt-fighter rt-fighter-b"><span>${escapeHtml(rt.oppSnap?.nick || '對手')}</span><small class="rt-loadout">${escapeHtml(rt.oppSnap?.petName || '墨靈')}・境界 ${rt.oppSnap?.lv || 1}</small><div class="rt-statline"><b>文氣 <em id="rt-hp-b"></em></b><small id="rt-combo-b">連擊 0</small></div><div class="bar hp-b"><i></i></div><div class="rt-skills"><b>${rt.mode === 'computer' ? '墨靈招式' : '對手招式'}</b><span>觀文・答對造成 ${rt.mode === 'computer' ? '8' : '10'} 點</span><span>破句・三連後造成 ${rt.mode === 'computer' ? '12' : '15'} 點</span></div></div>
         </div>
         <div class="rt-terrain"><b>戰場・書院山門</b><span>同題交鋒</span><span>文氣歸零者敗</span></div>
-        <div class="rt-battle-rules"><span>每回合雙方各行動一次</span><span>答錯斷連擊・三連發動強招</span><span>${rt.questions.length} 回合後以文氣判勝負</span></div>
+        <div class="rt-battle-rules"><span>你先出招・墨靈後應招</span><span>答錯斷連擊・三連發動強招</span><span>${rt.questions.length} 回合後以文氣判勝負</span></div>
       </div>
+      <p id="rt-action-log" class="rt-action-log" aria-live="polite">輪到你出招</p>
       <p id="rt-progress" class="home-today"></p>
       <article class="quiz-card rt-quiz-card">
         <p class="quiz-tag" id="rt-tag"></p>
@@ -209,6 +210,7 @@ function answerRt(q, picked) {
     if (answers.includes(b.dataset.opt)) b.classList.add('correct');
     else if (b.dataset.opt === picked) b.classList.add('wrong');
   });
+  const damageBefore = rt.myDmg;
   if (correct) {
     rt.combo += 1;
     rt.bestCombo = Math.max(rt.bestCombo, rt.combo);
@@ -218,17 +220,37 @@ function answerRt(q, picked) {
     rt.combo = 0;
   }
   rt.qi += 1;
-  if (rt.mode === 'computer') {
-    rt.oppState = applyComputerTurn(rt.oppState, !!rt.computerScript[rt.qi - 1]);
-    rt.oppState.done = rt.qi >= rt.questions.length ? 1 : 0;
-  }
   const kctx = deps.getCtx();
   const { events } = onBattleAnswer(kctx, q.id, correct);
   deps.renderEvents(events);
   deps.renderHud();
-  push();
   renderRtHp();
-  if (!checkEnd()) setTimeout(renderRtQuestion, 1200);
+  if (rt.mode === 'computer') {
+    const dealt = rt.myDmg - damageBefore;
+    $('rt-action-log').textContent = correct
+      ? `你的「${rt.combo >= COMBO_AT ? '連珠' : '識義'}」命中，墨靈文氣 −${dealt}；墨靈正在應招……`
+      : '你的判斷未中，連擊中斷；墨靈正在應招……';
+    if (oppHp() <= 0) { checkEnd(); return; }
+    const currentBattle = rt;
+    rt.turnTimer = setTimeout(() => resolveComputerTurn(currentBattle), 900);
+    return;
+  }
+  push();
+  if (!checkEnd()) rt.turnTimer = setTimeout(renderRtQuestion, 1200);
+}
+
+function resolveComputerTurn(currentBattle) {
+  if (!rt || rt !== currentBattle || rt.ended) return;
+  const damageBefore = rt.oppState?.dmg || 0;
+  const computerCorrect = !!rt.computerScript[rt.qi - 1];
+  rt.oppState = applyComputerTurn(rt.oppState, computerCorrect);
+  rt.oppState.done = rt.qi >= rt.questions.length ? 1 : 0;
+  renderRtHp();
+  const dealt = rt.oppState.dmg - damageBefore;
+  $('rt-action-log').textContent = computerCorrect
+    ? `墨靈以「${rt.oppState.combo >= 3 ? '破句' : '觀文'}」反擊，你的文氣 −${dealt}`
+    : '墨靈判讀失誤，反擊落空；你的文氣不變';
+  if (!checkEnd()) rt.turnTimer = setTimeout(renderRtQuestion, 900);
 }
 
 function checkEnd(force = false) {
@@ -268,6 +290,7 @@ function checkEnd(force = false) {
 
 function teardown() {
   if (rt?.pollTimer) clearTimeout(rt.pollTimer);
+  if (rt?.turnTimer) clearTimeout(rt.turnTimer);
   rt = null;
 }
 

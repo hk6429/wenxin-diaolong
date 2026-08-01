@@ -438,12 +438,13 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .rt-skills { display: grid; gap: 3px; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(240,212,135,.24); font-size: .62rem; }
 .rt-skills b { color: #f4d778; font-size: .66rem; }
 .rt-skills span { color: rgba(255,255,255,.82); }
-.rt-terrain { position: absolute; z-index: 3; left: 50%; bottom: 74px; transform: translateX(-50%); width: 120px; display: grid; gap: 2px; padding: 8px; border: 1px solid rgba(240,212,135,.48); border-radius: 8px; background: rgba(31,26,20,.86); color: #f3dfaa; text-align: center; font-size: .56rem; }
+.rt-terrain { position: absolute; z-index: 3; left: 50%; top: 88px; transform: translateX(-50%); width: 120px; display: grid; gap: 2px; padding: 8px; border: 1px solid rgba(240,212,135,.48); border-radius: 8px; background: rgba(31,26,20,.86); color: #f3dfaa; text-align: center; font-size: .56rem; }
 .rt-terrain b { color: #f7d56d; font-size: .65rem; }
 .rt-battle-visual .bar { background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.18); }
 .rt-battle-visual .duel-vs { align-self: end; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(36,27,18,.86); color: #f8d768; border: 1px solid #d8b85d; font-family: serif; font-size: 1.45rem; }
 .rt-battle-visual .duel-vs small { display: block; margin-top: -7px; color: #fff; font: 600 .5rem system-ui; }
 .rt-battle-rules { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; min-height: 34px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 18px; padding: 6px 12px; background: rgba(28,22,17,.84); color: #f3dfaa; font-size: .66rem; }
+.rt-action-log { min-height: 34px; margin: 0; padding: 8px 12px; border-left: 4px solid var(--gold); border-radius: 8px; background: color-mix(in srgb, var(--card) 88%, var(--gold)); color: var(--ink); font-size: .82rem; font-weight: 800; }
 .rt-quiz-card { margin-top: 0; border-top: 4px solid var(--gold); }
 .rt-verdict-seal { width: 72px; height: 72px; margin: 0 auto 8px; display: grid; place-items: center; border: 3px double var(--gold); border-radius: 50%; color: var(--cinnabar); font: 900 1.35rem serif; transform: rotate(-4deg); }
 
