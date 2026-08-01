@@ -134,7 +134,7 @@ test('文法與格律核心講義不得再縮成短卡', () => {
     詞性: ['實詞六類', '虛詞四類', '數量詞', '前綴', '中綴', '後綴', '結構助詞', '時貌助詞', '語氣助詞'],
     句型: ['並列句', '承接句', '轉折句', '因果句', '條件句', '選擇句', '假設句', '遞進句', '目的句', '敘事句', '有無句', '表態句', '判斷句', '述語核心'],
     對聯: ['字數', '詞性', '句式', '合掌', '上聯末字仄'],
-    平仄: ['平起不入韻', '平起入韻', '仄起不入韻', '仄起入韻', '孤平', '拗救'],
+    平仄: ['平起不入韻', '平起入韻', '仄起不入韻', '仄起入韻', '一三不論', '一三五不論', '孤平', '三仄尾', '拗救'],
   };
   for (const [cat, terms] of Object.entries(required)) {
     const card = byCat.get(cat);
@@ -143,6 +143,41 @@ test('文法與格律核心講義不得再縮成短卡', () => {
     const text = JSON.stringify(card);
     for (const term of terms) assert.ok(text.includes(term), `${cat} 講義缺「${term}」`);
     assert.ok(Array.isArray(card.sources) && card.sources.length, `${cat} 講義缺資料來源`);
+  }
+});
+
+test('國中平仄須顯示五言七言八種基準格式，高中保留進階避忌', () => {
+  const card = read('concepts.json').find((item) => item.cat === '平仄');
+  assert.equal(card.level, '國中', '平仄基礎不應等到高中才顯示');
+  assert.equal(card.metricalTables?.length, 2, '須有五言、七言兩組可見格式表');
+  const expected = {
+    五言絕句四式: {
+      平起不入韻: ['平平平仄仄', '仄仄仄平平', '仄仄平平仄', '平平仄仄平'],
+      平起入韻: ['平平仄仄平', '仄仄仄平平', '仄仄平平仄', '平平仄仄平'],
+      仄起不入韻: ['仄仄平平仄', '平平仄仄平', '平平平仄仄', '仄仄仄平平'],
+      仄起入韻: ['仄仄仄平平', '平平仄仄平', '平平平仄仄', '仄仄仄平平'],
+    },
+    七言絕句四式: {
+      平起不入韻: ['平平仄仄平平仄', '仄仄平平仄仄平', '仄仄平平平仄仄', '平平仄仄仄平平'],
+      平起入韻: ['平平仄仄仄平平', '仄仄平平仄仄平', '仄仄平平平仄仄', '平平仄仄仄平平'],
+      仄起不入韻: ['仄仄平平平仄仄', '平平仄仄仄平平', '平平仄仄平平仄', '仄仄平平仄仄平'],
+      仄起入韻: ['仄仄平平仄仄平', '平平仄仄仄平平', '平平仄仄平平仄', '仄仄平平仄仄平'],
+    },
+  };
+  for (const table of card.metricalTables) {
+    assert.equal(table.level, '國中', `${table.title} 應在國中基礎顯示`);
+    assert.equal(table.rows.length, 4, `${table.title} 不足四式`);
+    for (const row of table.rows) {
+      assert.deepEqual(row.lines, expected[table.title][row.name], `${table.title}/${row.name} 格式錯誤`);
+      assert.deepEqual(row.rhymeLines, row.name.includes('不入韻') ? [2, 4] : [1, 2, 4], `${table.title}/${row.name} 韻腳標示錯誤`);
+    }
+  }
+  assert.ok(card.sections.filter((section) => section.level === '國中').length >= 6, '國中平仄解構步驟不足');
+  assert.ok(card.sections.some((section) => section.level === '高中' && section.title.includes('三仄尾')), '高中缺三仄尾與例外說明');
+
+  const questions = read('prosody-junior.json').filter((question) => question.cat === '平仄');
+  for (const subcat of ['五言格式', '七言格式', '起式判斷', '首句入韻', '格律口訣', '格律避忌']) {
+    assert.ok(questions.some((question) => question.subcat === subcat), `國中平仄缺 ${subcat} 練習`);
   }
 });
 

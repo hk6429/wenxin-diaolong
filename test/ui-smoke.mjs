@@ -188,6 +188,26 @@ if ((await posCard.locator('.reading-progress-text').textContent())?.includes('0
 if (!(await posCard.locator('.concept-step[open] .step-number').textContent())?.includes('2')) fail('讀完後未自動開啟下一步');
 const savedReading = await page.evaluate(() => JSON.parse(localStorage.getItem('wenxin-reading-progress-v1') || '{}'));
 if (!savedReading['文法:詞性']?.includes(0)) fail('閱讀位置未寫入瀏覽器');
+await page.click('.tab[data-tab="格律"]');
+await page.click('[data-concept-level="國中"]');
+const toneCard = page.locator('.concept-card[data-concept-cat="平仄"]');
+if (await toneCard.count() !== 1) fail('國中格律未顯示平仄卡');
+const metricalFamilies = await toneCard.locator('.metrical-family h4').allTextContents();
+if (!metricalFamilies.some((text) => text.includes('五言絕句四式'))) fail('缺五言絕句四式表');
+if (!metricalFamilies.some((text) => text.includes('七言絕句四式'))) fail('缺七言絕句四式表');
+if (await toneCard.locator('.metrical-table').count() !== 8) fail('平仄格式卡不是八式');
+for (const table of await toneCard.locator('.metrical-table').all()) {
+  if (await table.locator('.metrical-lines li').count() !== 4) fail('平仄格式未拆成四句');
+}
+const rhymeIn = toneCard.locator('.metrical-table[data-metrical-mode="平起入韻"]').first();
+const rhymeOut = toneCard.locator('.metrical-table[data-metrical-mode="平起不入韻"]').first();
+if (await rhymeIn.locator('.rhyme-mark').count() !== 3) fail('首句入韻式未標示一、二、四句');
+if (await rhymeOut.locator('.rhyme-mark').count() !== 2) fail('首句不入韻式未標示二、四句');
+const juniorToneStepTitles = await toneCard.locator('.concept-step > summary').allTextContents();
+if (juniorToneStepTitles.some((title) => title.includes('三仄尾'))) fail('國中篩選不應提前顯示高中三仄尾步驟');
+await page.click('[data-concept-level="高中"]');
+const seniorToneStepTitles = await toneCard.locator('.concept-step > summary').allTextContents();
+if (!seniorToneStepTitles.some((title) => title.includes('三仄尾'))) fail('高中平仄講義缺三仄尾');
 await page.click('.tab[data-tab="珠"]');
 await page.waitForTimeout(200);
 

@@ -312,7 +312,7 @@ async function renderCodex(tab = '修辭') {
   }
   if (concepts === null) {
     try {
-      const r = await fetch('data/concepts.json?v=20260801-reading-path');
+      const r = await fetch('data/concepts.json?v=20260801-prosody-tables');
       concepts = r.ok ? await r.json() : [];
     } catch { concepts = []; }
   }
@@ -333,6 +333,7 @@ async function renderCodex(tab = '修辭') {
       <p class="concept-def">${escapeHtml(c.definition)}</p>
       <p class="concept-tips">💡 ${escapeHtml(c.tips)}</p>
       ${renderSubtypeMap(c)}
+      ${renderMetricalTables(c)}
       ${(c.examples || []).map((x) => `<div class="concept-ex">
         <span class="badge ${x.genre === '韻文' ? 'yun' : 'sanwen'}">${x.genre === '韻文' ? '韻' : '文'}</span>${escapeHtml(x.text)}
         <cite>${x.citation ? escapeHtml(x.citation) : '本站自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
@@ -372,6 +373,24 @@ function renderSubtypeMap(c) {
       <div><b>${escapeHtml(subtype.name)}</b><span>${escapeHtml(subtype.level)}</span></div>
       <p>${escapeHtml(subtype.definition)}</p>
     </article>`).join('')}</div>
+  </section>`;
+}
+
+function renderMetricalTables(c) {
+  if (!Array.isArray(c.metricalTables) || !c.metricalTables.length) return '';
+  const visible = c.metricalTables.filter((table) => codexLevel === '全部'
+    || SCHOOL_LEVEL_ORDER[table.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
+  if (!visible.length) return '';
+  return `<section class="metrical-tables" aria-label="五言與七言絕句平仄格式表">
+    <div class="metrical-head"><strong>基礎平仄表</strong><span>先判首句第二字，再看首句是否押韻</span></div>
+    ${visible.map((table) => `<section class="metrical-family">
+      <h4>${escapeHtml(table.title)}<span>${escapeHtml(table.level)}基礎</span></h4>
+      <div class="metrical-grid">${table.rows.map((row) => `<article class="metrical-table" data-metrical-mode="${escapeHtml(row.name)}">
+        <div class="metrical-mode"><b>${escapeHtml(row.name)}</b><span>${row.rhymeLines.includes(1) ? '首句入韻' : '首句不入韻'}</span></div>
+        <ol class="metrical-lines">${row.lines.map((line, index) => `<li><span class="line-label">第 ${index + 1} 句</span><code>${escapeHtml(line)}</code>${row.rhymeLines.includes(index + 1) ? '<em class="rhyme-mark">韻</em>' : ''}</li>`).join('')}</ol>
+      </article>`).join('')}</div>
+    </section>`).join('')}
+    <p class="metrical-note">「平起／仄起」看首句第二字；「入韻／不入韻」看首句末字是否與第二、四句同韻。表中標「韻」的是押韻句。</p>
   </section>`;
 }
 

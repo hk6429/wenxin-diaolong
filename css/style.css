@@ -236,6 +236,25 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .subtype-item b { color: var(--indigo); font-size: .82rem; }
 .subtype-item span { padding: 0 5px; border: 1px solid currentColor; border-radius: 999px; color: var(--cinnabar); font-size: .65rem; }
 .subtype-item p { margin: 4px 0 0; color: var(--ink-soft); font-size: .75rem; line-height: 1.45; }
+.metrical-tables { margin: 12px 0; padding: 12px; border: 1px solid color-mix(in srgb, var(--yl) 35%, transparent); border-radius: 12px; background: color-mix(in srgb, var(--paper) 88%, var(--yl)); }
+.metrical-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+.metrical-head strong { color: var(--indigo); font-size: 1rem; }
+.metrical-head span { color: var(--ink-soft); font-size: .75rem; text-align: right; }
+.metrical-family + .metrical-family { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(92, 83, 70, .3); }
+.metrical-family h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--cinnabar); font-size: .92rem; }
+.metrical-family h4 span { padding: 1px 6px; border: 1px solid currentColor; border-radius: 999px; font-size: .65rem; font-weight: normal; }
+.metrical-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.metrical-table { overflow: hidden; border: 1px solid rgba(92, 83, 70, .2); border-radius: 9px; background: var(--card); }
+.metrical-mode { display: flex; justify-content: space-between; gap: 6px; padding: 7px 9px; background: color-mix(in srgb, var(--paper-deep) 68%, transparent); font-size: .78rem; }
+.metrical-mode b { color: var(--indigo); }
+.metrical-mode span { color: var(--ink-soft); font-size: .68rem; }
+.metrical-lines { margin: 0; padding: 7px 9px; list-style: none; counter-reset: none; }
+.metrical-lines li { display: grid; grid-template-columns: 3.6em 1fr auto; align-items: center; gap: 6px; min-height: 27px; }
+.metrical-lines li + li { border-top: 1px dotted rgba(92, 83, 70, .16); }
+.metrical-lines .line-label { color: var(--ink-soft); font-size: .68rem; }
+.metrical-lines code { color: var(--ink); font-size: clamp(.76rem, 2.4vw, .9rem); letter-spacing: .08em; white-space: nowrap; }
+.rhyme-mark { min-width: 1.7em; padding: 1px 4px; border-radius: 999px; background: var(--yl); color: #fff; font-size: .62rem; font-style: normal; text-align: center; }
+.metrical-note { margin: 10px 0 0; color: var(--ink-soft); font-size: .76rem; line-height: 1.5; }
 .concept-ex { background: var(--paper); border-radius: 8px; padding: 8px 10px; margin-top: 6px; font-size: .88rem; }
 .concept-ex .badge {
   font-size: .7rem; padding: 0 6px; border-radius: 4px; color: #fff; margin-right: 6px;
@@ -338,6 +357,9 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 
 @media (max-width: 420px) {
   .entry-grid, .zone-grid, .pets-grid { grid-template-columns: 1fr 1fr; }
+  .metrical-grid { grid-template-columns: 1fr; }
+  .metrical-head { align-items: flex-start; flex-direction: column; }
+  .metrical-head span { text-align: left; }
   .brand-text strong { font-size: 1.05rem; }
   .hud-item { font-size: .78rem; }
 }
