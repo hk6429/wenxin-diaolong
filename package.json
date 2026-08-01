@@ -1,0 +1,15 @@
+{
+  "name": "wenxin-diaolong",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract:exam": "node scripts/extract-exam.mjs",
+    "merge": "node scripts/merge.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "smoke": "node test/smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.61.1"
+  }
+}

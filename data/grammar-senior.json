@@ -1,0 +1,134 @@
+[
+ {
+  "id": "gr-s-9900",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "gr-s-9901",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "gr-s-9902",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ },
+ {
+  "id": "gr-s-9903",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "gr-s-9904",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "gr-s-9905",
+  "level": "高中",
+  "zone": "文法",
+  "cat": "文言虛詞",
+  "subcat": "",
+  "qformat": "gr-particle",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "助詞",
+   "介詞",
+   "代詞",
+   "連詞"
+  ],
+  "answer": "助詞",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ }
+]

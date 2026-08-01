@@ -1,0 +1,134 @@
+[
+ {
+  "id": "gr-j-9900",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "gr-j-9901",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "gr-j-9902",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ },
+ {
+  "id": "gr-j-9903",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "gr-j-9904",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "gr-j-9905",
+  "level": "國中",
+  "zone": "文法",
+  "cat": "詞語結構",
+  "subcat": "",
+  "qformat": "gr-structure",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "並列",
+   "偏正",
+   "主謂",
+   "動賓"
+  ],
+  "answer": "並列",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ }
+]

@@ -1,0 +1,134 @@
+[
+ {
+  "id": "yl-j-9900",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "易"
+ },
+ {
+  "id": "yl-j-9901",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "中"
+ },
+ {
+  "id": "yl-j-9902",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "難"
+ },
+ {
+  "id": "yl-j-9903",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "易"
+ },
+ {
+  "id": "yl-j-9904",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "中"
+ },
+ {
+  "id": "yl-j-9905",
+  "level": "國中",
+  "zone": "格律",
+  "cat": "對仗",
+  "subcat": "",
+  "qformat": "yl-couplet",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "對仗工整",
+   "詞性不對",
+   "平仄不合",
+   "字數不等"
+  ],
+  "answer": "對仗工整",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "難"
+ }
+]

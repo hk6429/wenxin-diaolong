@@ -1,0 +1,134 @@
+[
+ {
+  "id": "rh-j-9900",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "rh-j-9901",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "rh-j-9902",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ },
+ {
+  "id": "rh-j-9903",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "rh-j-9904",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "rh-j-9905",
+  "level": "國中",
+  "zone": "修辭",
+  "cat": "借代",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "借代",
+   "映襯",
+   "雙關",
+   "層遞"
+  ],
+  "answer": "借代",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ }
+]

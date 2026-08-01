@@ -1,0 +1,134 @@
+[
+ {
+  "id": "yl-e-9900",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "易"
+ },
+ {
+  "id": "yl-e-9901",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "中"
+ },
+ {
+  "id": "yl-e-9902",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "難"
+ },
+ {
+  "id": "yl-e-9903",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "易"
+ },
+ {
+  "id": "yl-e-9904",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "中"
+ },
+ {
+  "id": "yl-e-9905",
+  "level": "國小",
+  "zone": "格律",
+  "cat": "押韻",
+  "subcat": "",
+  "qformat": "yl-rhyme",
+  "genre": "韻文",
+  "textForm": "古典詩",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "花",
+   "天",
+   "山",
+   "石"
+  ],
+  "answer": "花",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "佔位〈測試〉",
+  "difficulty": "難"
+ }
+]

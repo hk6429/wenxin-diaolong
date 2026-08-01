@@ -1,0 +1,134 @@
+[
+ {
+  "id": "rh-s-9900",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 1〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "rh-s-9901",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 2〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "rh-s-9902",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 3〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ },
+ {
+  "id": "rh-s-9903",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 4〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "易"
+ },
+ {
+  "id": "rh-s-9904",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 5〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "中"
+ },
+ {
+  "id": "rh-s-9905",
+  "level": "高中",
+  "zone": "修辭",
+  "cat": "互文",
+  "subcat": "",
+  "qformat": "rh-identify",
+  "genre": "非韻文",
+  "textForm": "一般語句",
+  "question": "〔佔位測試題 6〕正式題庫 merge 後會整檔覆蓋本檔。此題正確答案固定為第一個概念。",
+  "options": [
+   "互文",
+   "示現",
+   "錯綜",
+   "藏詞"
+  ],
+  "answer": "互文",
+  "explain": "佔位說明：本題僅供 UI 開發測試使用，merge 正式資料後不會存在。",
+  "origin": "自編",
+  "citation": "",
+  "difficulty": "難"
+ }
+]
