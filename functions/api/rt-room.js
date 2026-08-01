@@ -14,10 +14,10 @@ import { kvFor } from './_kv.js';
 const TTL = 600; // 房間 10 分鐘
 const CH_TTL = 7 * 86400; // 挑戰書 7 天
 const SEASON_TTL = 100 * 86400; // 賽季榜 100 天（跨季可回顧上季榜）
-const keyOf = (code) => `rt:room:${code}`;
+const keyOf = (code) => `wx:rt:room:${code}`; // wx: 前綴：與 zizizhuji 共用 D1，靠前綴隔離
 const hbKeyOf = (code, role) => `${keyOf(code)}:${role}:hb`;
-const chKey = (code) => `rt:ch:${code}`;
-const seasonKeyOf = (k) => `rt:season:${k}`;
+const chKey = (code) => `wx:rt:ch:${code}`;
+const seasonKeyOf = (k) => `wx:rt:season:${k}`;
 const currentSeasonKey = () => new Date().toISOString().slice(0, 7); // 伺服器自算，不信任 client
 const okChCode = (c) => typeof c === 'string' && /^[A-Z0-9]{6}$/.test(String(c).trim().toUpperCase());
 const genChCode = () => {
@@ -58,7 +58,7 @@ const CORS = (request) => ({
 // 輕量限流：每 IP 每 60 秒 cap 次寫入，超過回 429
 async function rateLimited(kv, request, scope, cap = 30) {
   const ip = String(request.headers.get('cf-connecting-ip') || '').split(',')[0].trim() || 'unknown';
-  const k = `rt:rl:${scope}:${ip}`;
+  const k = `wx:rt:rl:${scope}:${ip}`;
   const n = await kv.incr(k, 60);
   return n > cap;
 }

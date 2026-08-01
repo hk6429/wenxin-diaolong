@@ -8,5 +8,6 @@ compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "wenxin_db"
-database_name = "wenxin-diaolong-db"
-database_id = "TBD-at-deploy"
+# D1 帳號額度已滿：共用 zizizhuji-db，key 一律 wx: 前綴隔離（見 rt-room.js）
+database_name = "zizizhuji-db"
+database_id = "f5a3c53e-ea32-4e39-8f03-31ea8005d971"
