@@ -1,0 +1,40 @@
+# 文心雕龍・文法修辭練功站
+
+繁體中文文法與修辭線上練功站：對象國小到高中，例句涵蓋韻文（詩詞曲／新詩／童謠）
+與非韻文（文言文／白話散文／應用文），全遊戲化——閃卡圖鑑、Leitner 間隔複習、
+弱點特訓、PvE 歷代文心大師對戰、PvP 即時對戰、文心四靈養成。
+
+- 線上：<https://wenxin-diaolong.vercel.app>（鏡像：`.pages.dev` / `.netlify.app`）
+- 純前端無框架、無建置步驟；資料是靜態 JSON，改 `data/*.json` 即更新內容。
+
+## 三分區
+
+| 分區 | 內容 |
+|---|---|
+| 修辭 | 24 修辭格（國小8＋國中10＋高中6），逐格韻文／非韻文例句雙覆蓋 |
+| 文法 | 詞性、詞語結構、句型、語病、文言虛詞／句式、詞類活用、標點 |
+| 格律 | 押韻、對仗、平仄、詩體判別、詞曲常識、對聯 |
+
+學段：國小／國中／高中／實戰（實戰＝基測會考學測指考真題，答案照官方卡，附官方通過率）。
+
+## 開發
+
+```bash
+python3 -m http.server 8000     # 本機預覽
+npm test                        # schema + 資料完整性 + 純邏輯不變式
+npm run smoke                   # Playwright 端到端煙霧測試
+npm run merge                   # data/shards/*.json → 正式題庫（去重＋重編號＋驗證）
+npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guowen）
+```
+
+資料規格與誠信鐵律見 `docs/SPEC.md`。設計不變式（寵物等級 ≤ 真實精通量等）鎖在
+`test/pet.test.mjs`，改公式前先讀它。
+
+## 架構
+
+- `js/schema.js`＋`js/quiz-loader.js`＋`js/bank.js`：資料層（分級分檔、載入即驗證）
+- `js/meta/kernel.js`：養成機制唯一整合接縫（練習／對戰掛鉤 → events 陣列）
+- `js/meta/pet.js`：文心四靈（等級＝該區精通題數÷20，答錯過的題加權 1.5）
+- `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
+- `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；
+  鏡像平台透過 `js/meta/api.js` 打回權威平台 `wenxin-diaolong.pages.dev`

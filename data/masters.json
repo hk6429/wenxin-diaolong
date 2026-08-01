@@ -1,0 +1,82 @@
+[
+  {
+    "id": "asong", "name": "蒙學童子・阿誦", "icon": "👦", "bankKey": "mixed",
+    "specialty": "啟蒙綜合", "unlockZone": "混合", "unlockAt": 0, "atk": 6, "hp": 80,
+    "intro": "書院裡最愛背書的小童，什麼都會一點點。",
+    "taunt": "師父說，先贏過我，才有資格拜山！",
+    "winLine": "咦？你比我還熟耶……我要回去多背三遍！",
+    "loseLine": "嘿嘿，我可是每天晨讀一個時辰的！"
+  },
+  {
+    "id": "jixiaolan", "name": "對聯才子・紀曉嵐", "icon": "🖌️", "bankKey": "prosody",
+    "specialty": "對聯機鋒", "unlockZone": "格律", "unlockAt": 5, "atk": 8, "hp": 100,
+    "intro": "出口成對、機鋒犀利的清代第一才子。",
+    "taunt": "我出上聯，你可對得出下聯？",
+    "winLine": "妙哉！此聯對得比我還工整。",
+    "loseLine": "哈哈，回去把詞性平仄練熟再來！"
+  },
+  {
+    "id": "libai", "name": "詩仙・李白", "icon": "🌙", "bankKey": "rhetoric",
+    "specialty": "誇飾豪情", "unlockZone": "修辭", "unlockAt": 10, "atk": 11, "hp": 100,
+    "intro": "白髮三千丈的浪漫主義宗師，誇飾用得比誰都狂。",
+    "taunt": "君不見黃河之水天上來！你可知這是何等筆法？",
+    "winLine": "痛快！且與我共飲三百杯！",
+    "loseLine": "蜀道難，修辭之道亦難——再練練吧。"
+  },
+  {
+    "id": "dufu", "name": "詩聖・杜甫", "icon": "📜", "bankKey": "prosody",
+    "specialty": "律詩對仗", "unlockZone": "格律", "unlockAt": 15, "atk": 13, "hp": 110,
+    "intro": "為人性僻耽佳句，語不驚人死不休的格律宗師。",
+    "taunt": "兩個黃鸝鳴翠柳——下句的對仗，你看得出門道嗎？",
+    "winLine": "後生可畏，此局老夫心服。",
+    "loseLine": "晚節漸於詩律細，你還差些火候。"
+  },
+  {
+    "id": "hanyu", "name": "文起八代・韓愈", "icon": "⛰️", "bankKey": "grammar",
+    "specialty": "古文句法", "unlockZone": "文法", "unlockAt": 15, "atk": 15, "hp": 110,
+    "intro": "文起八代之衰，古文運動的領袖，最重句法根基。",
+    "taunt": "師者，所以傳道受業解惑也——此句何式？答不出便退下！",
+    "winLine": "業精於勤！你的根基，我認可了。",
+    "loseLine": "不塞不流，不止不行。回去把句式練通再來。"
+  },
+  {
+    "id": "liqingzhao", "name": "詞宗・李清照", "icon": "🍂", "bankKey": "prosody",
+    "specialty": "詞曲音律", "unlockZone": "格律", "unlockAt": 25, "atk": 17, "hp": 115,
+    "intro": "詞別是一家——對音律要求最嚴的婉約詞宗。",
+    "taunt": "詞牌之別、小令長調，你分得清楚嗎？",
+    "winLine": "此局爽利，勝過黃花瘦。",
+    "loseLine": "尋尋覓覓，你還在門外尋路呢。"
+  },
+  {
+    "id": "sushi", "name": "東坡居士・蘇軾", "icon": "🌊", "bankKey": "rhetoric",
+    "specialty": "譬喻雙關", "unlockZone": "修辭", "unlockAt": 30, "atk": 19, "hp": 120,
+    "intro": "嬉笑怒罵皆成文章，譬喻與雙關信手拈來。",
+    "taunt": "人生如逆旅，我亦是行人——這一喻，你參得透嗎？",
+    "winLine": "腹有詩書氣自華，說的就是你了。",
+    "loseLine": "回首向來蕭瑟處——你的破綻，都在方才的題裡。"
+  },
+  {
+    "id": "ouyangxiu", "name": "醉翁・歐陽脩", "icon": "🍶", "bankKey": "grammar",
+    "specialty": "煉句改文", "unlockZone": "文法", "unlockAt": 30, "atk": 21, "hp": 120,
+    "intro": "傳說他改〈醉翁亭記〉開頭，數十字刪成「環滁皆山也」五字。",
+    "taunt": "文章不厭百回改——這句話的毛病，你挑得出來嗎？",
+    "winLine": "醉翁之意不在酒，在乎你這等後起之秀也。",
+    "loseLine": "刪繁就簡三秋樹。你的語感，還得再磨。"
+  },
+  {
+    "id": "zhuangzi", "name": "逍遙真人・莊周", "icon": "🦋", "bankKey": "rhetoric",
+    "specialty": "寓言奇喻", "unlockZone": "修辭", "unlockAt": 45, "atk": 24, "hp": 130,
+    "intro": "北冥有魚，其名為鯤——先秦第一奇喻大師。",
+    "taunt": "不知周之夢為蝴蝶與？蝴蝶之夢為周與？先答對再說。",
+    "winLine": "相視而笑，莫逆於心——你我可為友矣。",
+    "loseLine": "夏蟲不可以語冰。回去再修個幾年吧。"
+  },
+  {
+    "id": "liuxie", "name": "文心宗主・劉勰", "icon": "🐲", "bankKey": "mixed",
+    "specialty": "文心雕龍・全藝", "unlockZone": "混合", "unlockAt": 90, "atk": 28, "hp": 150,
+    "intro": "《文心雕龍》作者，五十篇論盡為文之道——本站最終試煉。",
+    "taunt": "夫綴文者情動而辭發——三藝齊備者，方能過我此關。",
+    "winLine": "登山則情滿於山，觀海則意溢於海。文心已傳，此站有主。",
+    "loseLine": "操千曲而後曉聲，觀千劍而後識器。千題之功，尚欠火候。"
+  }
+]
