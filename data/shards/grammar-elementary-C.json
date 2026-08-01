@@ -1,0 +1,164 @@
+[
+  {
+    "id": "gr-e-0201", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "並列句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「妹妹一邊摺衣服，一邊聽音樂。」屬於哪一種關聯複句？",
+    "options": ["並列句", "因果句", "轉折句", "承接句"], "answer": "並列句",
+    "explain": "「一邊……一邊……」連接同時進行、地位平等的兩件事，是並列句。句中沒有原因結果、語意翻轉或先後步驟。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0202", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "並列句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "下列哪一句是並列句？",
+    "options": ["天空既晴朗又涼爽。", "因為下雨，所以延期。", "先洗手，再吃飯。", "雖然很累，但是他沒有放棄。"], "answer": "天空既晴朗又涼爽。",
+    "explain": "「既……又……」平等列出晴朗與涼爽兩種特點，是並列關係。其餘依序為因果、承接與轉折。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0203", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "並列句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「這間教室＿＿明亮，＿＿安靜。」哪組關聯詞最適合？",
+    "options": ["既……又……", "因為……所以……", "如果……就……", "雖然……但是……"], "answer": "既……又……",
+    "explain": "明亮與安靜是教室同時具有、地位平等的兩項特點，應用「既……又……」組成並列句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0204", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "承接句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「我先打開地圖，再決定行走的方向。」屬於哪一種關聯複句？",
+    "options": ["承接句", "選擇句", "遞進句", "條件句"], "answer": "承接句",
+    "explain": "打開地圖在前，決定方向在後，「先……再……」依動作順序連接兩個分句，是承接句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0205", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "承接句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「鐘聲響了，同學們＿＿收好球具，＿＿走回教室。」哪組詞最適合？",
+    "options": ["於是……接著……", "不但……而且……", "因為……所以……", "與其……不如……"], "answer": "於是……接著……",
+    "explain": "收好球具後才走回教室，兩個動作有清楚先後順序，用「於是……接著……」最能表達承接。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0206", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "承接句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "下列哪一句最重視事情發生的先後順序？",
+    "options": ["洗好蔬菜後，接著把它們切成小塊。", "房間既明亮又寬敞。", "即使失敗，我也願意再試。", "為了準時，我提早出門。"], "answer": "洗好蔬菜後，接著把它們切成小塊。",
+    "explain": "先洗蔬菜、後切小塊，兩個動作不能任意交換，具有時間先後，是承接句。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0207", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "因果句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「因為昨晚下過雨，所以步道還有些溼滑。」屬於哪一種關聯複句？",
+    "options": ["因果句", "假設句", "並列句", "選擇句"], "answer": "因果句",
+    "explain": "昨晚下雨是原因，步道溼滑是結果，「因為……所以……」清楚連接前因後果。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0208", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "因果句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「小樹的葉子垂了下來，因為好幾天沒有澆水。」哪一項是原因？",
+    "options": ["好幾天沒有澆水", "葉子垂了下來", "小樹長出新芽", "今天陽光很好"], "answer": "好幾天沒有澆水",
+    "explain": "句子先說結果「葉子垂下」，再用「因為」補充原因「好幾天沒有澆水」。因果句不一定先因後果。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0209", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "因果句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「公車臨時改道，＿＿我們比平常晚到十分鐘。」應填哪個詞？",
+    "options": ["因此", "但是", "如果", "不但"], "answer": "因此",
+    "explain": "公車改道造成晚到，「因此」用來承接結果，前後是因果關係。其他詞分別表示轉折、假設與遞進。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0210", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "轉折句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「雖然天空飄著細雨，但是園遊會仍然很熱鬧。」屬於哪一種關聯複句？",
+    "options": ["轉折句", "目的句", "承接句", "並列句"], "answer": "轉折句",
+    "explain": "下雨原本可能使活動冷清，結果園遊會仍很熱鬧，後句和預期相反，是轉折句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0211", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "轉折句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「這條路看起來很近，走起來＿＿比想像中遠。」應填哪個詞？",
+    "options": ["卻", "所以", "接著", "而且"], "answer": "卻",
+    "explain": "看起來近和實際很遠形成反差，「卻」表示轉折。其餘詞分別表示因果、承接與遞進或並列。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0212", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "轉折句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "下列哪一句的後半句和前半句預期相反？",
+    "options": ["天氣很冷，他卻只穿一件薄外套。", "天氣很冷，所以他穿上外套。", "他先穿外套，再戴帽子。", "他既戴帽子又圍圍巾。"], "answer": "天氣很冷，他卻只穿一件薄外套。",
+    "explain": "天冷照理應穿厚衣，後句卻只穿薄外套，結果與預期相反，是轉折關係。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0213", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "遞進句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「這本書不但圖畫有趣，而且每章都藏著科學謎題。」屬於哪一種關聯複句？",
+    "options": ["遞進句", "承接句", "選擇句", "假設句"], "answer": "遞進句",
+    "explain": "後句從圖畫有趣再進一步說到內容有科學謎題，程度與範圍加深，是遞進句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0214", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "遞進句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「他＿＿記得同學的名字，＿＿記得每個人需要的幫助。」哪組詞最適合？",
+    "options": ["不只……還……", "因為……所以……", "如果……就……", "先……再……"], "answer": "不只……還……",
+    "explain": "後句比記得名字更進一步，寫到記得個別需要，用「不只……還……」構成遞進句。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0215", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "遞進句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "哪一句不是單純並列，而是後項更進一層？",
+    "options": ["她不但會彈琴，而且能自己作曲。", "她一邊彈琴，一邊唱歌。", "她先彈琴，再唱歌。", "她想彈琴，還是唱歌？"], "answer": "她不但會彈琴，而且能自己作曲。",
+    "explain": "會自己作曲比會彈琴更進一步，屬遞進。其餘分別是並列、承接與選擇。", "origin": "自編", "citation": "", "difficulty": "難"
+  },
+  {
+    "id": "gr-e-0216", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "選擇句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「週末你想去爬山，還是留在家裡做模型？」屬於哪一種關聯複句？",
+    "options": ["選擇句", "因果句", "轉折句", "條件句"], "answer": "選擇句",
+    "explain": "句子列出爬山與做模型兩種可能，詢問要選哪一項，是選擇句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0217", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "選擇句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「＿＿一直擔心犯錯，＿＿先動手試一次。」哪組詞最適合？",
+    "options": ["與其……不如……", "雖然……但是……", "只有……才……", "因為……所以……"], "answer": "與其……不如……",
+    "explain": "句子在擔心與動手嘗試之間作取捨，認為後者較好，應用「與其……不如……」。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0218", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "選擇句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「我寧可早起十分鐘，也不匆匆忙忙吃早餐。」主要表達什麼關係？",
+    "options": ["在兩種做法中表明偏好", "說明事情發生的原因", "排列動作的先後", "提出結果成立的條件"], "answer": "在兩種做法中表明偏好",
+    "explain": "「寧可……也不……」明確選擇早起，拒絕匆忙吃早餐，是帶有偏好的選擇句。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0219", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "假設句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「如果明天放晴，我們就到河堤觀察候鳥。」屬於哪一種關聯複句？",
+    "options": ["假設句", "因果句", "並列句", "目的句"], "answer": "假設句",
+    "explain": "明天是否放晴尚未確定，句子先提出想像中的情況，再說可能的行動，是假設句。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0220", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "假設句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「＿＿每個人每天少用一個塑膠袋，垃圾＿＿能減少許多。」哪組詞最適合？",
+    "options": ["假如……就……", "因為……所以……", "雖然……但是……", "一邊……一邊……"], "answer": "假如……就……",
+    "explain": "句子提出尚未完全實現的想像情況，再推測可能結果，應用「假如……就……」表示假設。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0221", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "假設句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "下列哪一句把前件事當成尚未確定的可能？",
+    "options": ["如果風變小，我們就放風箏。", "因為風變小，所以我們放風箏。", "風變小了，於是我們放風箏。", "為了放風箏，我們來到草地。"], "answer": "如果風變小，我們就放風箏。",
+    "explain": "「如果」表示風是否變小尚未確定，是假設；其餘分別把事情當成原因、承接結果或行動目的。", "origin": "自編", "citation": "", "difficulty": "難"
+  },
+  {
+    "id": "gr-e-0222", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "條件句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「只有輸入正確密碼，才能打開這個資料夾。」屬於哪一種關聯複句？",
+    "options": ["條件句", "遞進句", "轉折句", "承接句"], "answer": "條件句",
+    "explain": "正確密碼是打開資料夾不可缺少的條件，「只有……才……」表示必要條件。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0223", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "條件句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「＿＿每天細心照顧，窗邊的小苗＿＿會慢慢長高。」哪組詞最適合？",
+    "options": ["只要……就……", "與其……不如……", "不但……而且……", "雖然……但是……"], "answer": "只要……就……",
+    "explain": "細心照顧是足以帶來成長結果的條件，用「只要……就……」最合適。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0224", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "條件句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「無論比賽結果如何，我們都要向對手道謝。」主要表達什麼？",
+    "options": ["不論條件怎麼變，結果都成立", "後句和前句預期相反", "兩件事按照時間發生", "在兩種做法中選一種"], "answer": "不論條件怎麼變，結果都成立",
+    "explain": "「無論……都……」表示所有可能條件下都要道謝，是周遍性的條件句。", "origin": "自編", "citation": "", "difficulty": "難"
+  },
+  {
+    "id": "gr-e-0225", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "目的句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「我們提早整理資料，以便明天能從容上臺報告。」屬於哪一種關聯複句？",
+    "options": ["目的句", "因果句", "並列句", "轉折句"], "answer": "目的句",
+    "explain": "提早整理資料是行動，明天從容報告是希望達成的目標，「以便」表示目的。", "origin": "自編", "citation": "", "difficulty": "易"
+  },
+  {
+    "id": "gr-e-0226", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "目的句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "「出門前把水壺裝滿，＿＿走到半路口渴。」應填哪個詞？",
+    "options": ["免得", "所以", "而且", "接著"], "answer": "免得",
+    "explain": "裝滿水壺是為了避免半路口渴，「免得」引出想避免的結果，表示目的。", "origin": "自編", "citation": "", "difficulty": "中"
+  },
+  {
+    "id": "gr-e-0227", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "目的句", "qformat": "gr-pattern", "genre": "非韻文", "textForm": "一般語句",
+    "question": "哪一句回答的是「做這件事想達成什麼」，不是「為什麼會發生」？",
+    "options": ["為了看清黑板，他坐到前排。", "因為看不清黑板，所以他換座位。", "他先收書包，再換座位。", "雖然換了座位，他仍看不清楚。"], "answer": "為了看清黑板，他坐到前排。",
+    "explain": "「為了看清黑板」說明坐到前排的目標，是目的句；第二句才是原因造成結果的因果句。", "origin": "自編", "citation": "", "difficulty": "難"
+  }
+]

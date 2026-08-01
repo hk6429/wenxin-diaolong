@@ -132,7 +132,7 @@ test('文法與格律核心講義不得再縮成短卡', () => {
   const byCat = new Map(arr.map((c) => [c.cat, c]));
   const required = {
     詞性: ['實詞六類', '虛詞四類', '數量詞', '前綴', '中綴', '後綴', '結構助詞', '時貌助詞', '語氣助詞'],
-    句型: ['敘事句', '有無句', '表態句', '判斷句', '述語核心'],
+    句型: ['並列句', '承接句', '轉折句', '因果句', '條件句', '選擇句', '假設句', '遞進句', '目的句', '敘事句', '有無句', '表態句', '判斷句', '述語核心'],
     對聯: ['字數', '詞性', '句式', '合掌', '上聯末字仄'],
     平仄: ['平起不入韻', '平起入韻', '仄起不入韻', '仄起入韻', '孤平', '拗救'],
   };
@@ -166,6 +166,22 @@ test('國中詞性重點題型皆有足量練習', () => {
   for (const [subcat, minimum] of Object.entries(minimums)) {
     const count = questions.filter((question) => question.subcat === subcat).length;
     assert.ok(count >= minimum, `${subcat} 題數 ${count}，至少須有 ${minimum} 題`);
+  }
+});
+
+test('國小關聯複句必須完整覆蓋九類並與國中四句型分層', () => {
+  const cards = read('concepts.json');
+  const card = cards.find((item) => item.cat === '句型');
+  const relations = ['並列句', '承接句', '轉折句', '因果句', '條件句', '選擇句', '假設句', '遞進句', '目的句'];
+  assert.equal(card.level, '國小', '句型卡不應等到國中才出現');
+  assert.deepEqual(card.subtypes.map((item) => item.name), relations, '國小關聯複句分類不完整');
+  assert.ok(card.subtypes.every((item) => item.level === '國小'), '關聯複句不應被錯放到國中才顯示');
+  assert.ok(card.sections.filter((section) => section.level === '國小').length >= 12, '國小複句解構步驟不足');
+  assert.ok(card.sections.some((section) => section.level === '國中' && section.title.includes('敘事句')), '國中四大句型未保留分層');
+
+  const questions = read('grammar-elementary.json').filter((question) => question.cat === '句型');
+  for (const relation of relations) {
+    assert.ok(questions.filter((question) => question.subcat === relation).length >= 3, `國小 ${relation} 題目不足 3 題`);
   }
 });
 

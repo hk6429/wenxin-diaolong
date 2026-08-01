@@ -35,7 +35,7 @@ await page.goto(`http://127.0.0.1:${port}/`);
 await page.waitForTimeout(600);
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
 const levelGuide = await page.textContent('#level-guide');
-if (!levelGuide?.includes('國小') || !levelGuide.includes('500 題')) fail('首頁未說明國小專屬題庫與題數');
+if (!levelGuide?.includes('國小') || !levelGuide.includes('527 題')) fail('首頁未說明國小專屬題庫與題數');
 
 // 古代冒險：序章→智慧/全文注音→蝶夢五題委託→北冥風口
 await page.click('#btn-adventure');
@@ -163,6 +163,15 @@ for (const term of ['鑲字', '嵌字', '增字', '配字']) {
 if (inlaySubtypes.some((term) => term.includes('雙關'))) fail('雙關被錯列為鑲嵌子類');
 await page.click('.tab[data-tab="文法"]');
 await page.evaluate(() => localStorage.removeItem('wenxin-reading-progress-v1'));
+await page.click('[data-concept-level="國小"]');
+const sentenceCard = page.locator('.concept-card[data-concept-cat="句型"]');
+const elementarySentenceSubtypes = await sentenceCard.locator('.subtype-item b').allTextContents();
+for (const term of ['並列句', '承接句', '轉折句', '因果句', '條件句', '選擇句', '假設句', '遞進句', '目的句']) {
+  if (!elementarySentenceSubtypes.includes(term)) fail(`國小關聯複句缺 ${term}`);
+}
+if (!(await sentenceCard.locator('.concept-deep > summary').textContent())?.includes('12 步')) fail('國小句型未顯示十二步關聯複句講義');
+if ((await sentenceCard.textContent())?.includes('第一型：敘事句')) fail('國小篩選混入國中四大句型步驟');
+await page.click('[data-concept-level="高中"]');
 const posCard = page.locator('.concept-card[data-concept-cat="詞性"]');
 await posCard.locator('.concept-deep > summary').click();
 const posLecture = await posCard.textContent();
