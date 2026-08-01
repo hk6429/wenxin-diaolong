@@ -10,6 +10,7 @@ export const BANK_SOURCES = {
     prosody: [L('prosody-elementary')],
     mixed: [L('rhetoric-elementary'), L('grammar-elementary'), L('prosody-elementary')],
     lunyu: [L('lunyu-elementary')],
+    shiji: [L('shiji-elementary')],
   },
   國中: {
     rhetoric: [L('rhetoric-junior')],
@@ -17,6 +18,7 @@ export const BANK_SOURCES = {
     prosody: [L('prosody-junior')],
     mixed: [L('rhetoric-junior'), L('grammar-junior'), L('prosody-junior')],
     lunyu: [L('lunyu-junior')],
+    shiji: [L('shiji-junior')],
   },
   高中: {
     rhetoric: [L('rhetoric-senior')],
@@ -24,6 +26,7 @@ export const BANK_SOURCES = {
     prosody: [L('prosody-senior')],
     mixed: [L('rhetoric-senior'), L('grammar-senior'), L('prosody-senior')],
     lunyu: [L('lunyu-senior')],
+    shiji: [L('shiji-senior')],
   },
   實戰: {
     rhetoric: [L('exam-rhetoric')],

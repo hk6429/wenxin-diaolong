@@ -32,11 +32,13 @@ const CHAPTER_COVER_ART = {
   'preqin-zhuangzi': 'adventure-zhuangzi-butterfly.webp',
   'warring-quyuan': 'adventure-quyuan-fragrant.webp',
   'dream-confucius': 'adventure-confucius-dream.webp',
+  'han-simaqian': 'adventure-simaqian-archive.webp',
 };
 const CHAPTER_FRIEND_LINES = {
   'preqin-zhuangzi': '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。',
   'warring-quyuan': '屈原已成為你的第二位文友，香草流蘇也收入守卷閣。',
   'dream-confucius': '孔子已成為你的第三位文友，竹簡書籤也從夢中落入守卷閣。',
+  'han-simaqian': '司馬遷已成為你的第四位文友，紀傳竹簡也收入守卷閣。',
 };
 let deps;
 let chapterMap = null;

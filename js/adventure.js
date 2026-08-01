@@ -37,6 +37,21 @@ export const CHAPTERS = Object.freeze([
       },
     },
   },
+  {
+    id: 'han-simaqian', order: 4, number: '四', era: '漢代・太史書房', figure: '司馬遷', file: 'simaqian',
+    title: '漢代・司馬遷〈太史書魂〉', heroTitle: '走入漢代，遇見司馬遷',
+    pageName: '史筆之頁', echoTitle: '太史回聲', art: 'simaqian',
+    sceneIds: ['han-prologue', 'father-vow', 'five-paths', 'hongmen-night', 'historian-scale', 'simaqian-trial', 'archive-return-simaqian'],
+    rewards: ['historian-page', 'bamboo-annals-bookmark', 'friend-simaqian'],
+    echoQuest: {
+      bankKey: 'shiji', count: 3,
+      catsByLevel: {
+        '國小': ['詞性', '句型', '設問'],
+        '國中': ['文言虛詞', '文言句式', '引用'],
+        '高中': ['文言虛詞', '文言句式', '詞類活用'],
+      },
+    },
+  },
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。

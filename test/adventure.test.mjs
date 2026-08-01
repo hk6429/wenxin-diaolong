@@ -139,7 +139,7 @@ test('屈原第二章需完成莊子主線才解鎖，兩章進度互不覆蓋',
   assert.equal(getChapterProgress(meta, CHAPTER_ID).chapterStatus, 'found');
 });
 
-test('孔子外篇需完成屈原主線才解鎖，三章進度互不覆蓋', () => {
+test('孔子外篇需完成屈原主線才解鎖，各章進度互不覆蓋', () => {
   const meta = {};
   ensureAdventure(meta);
   markChapterFound(meta, new Date('2026-08-01T00:00:00+08:00'), CHAPTER_ID);
@@ -152,6 +152,23 @@ test('孔子外篇需完成屈原主線才解鎖，三章進度互不覆蓋', ()
   assert.equal(getChapterProgress(meta, 'dream-confucius').sceneIndex, 1);
   assert.equal(getChapterProgress(meta, CHAPTER_ID).chapterStatus, 'found');
   assert.equal(getChapterProgress(meta, 'warring-quyuan').chapterStatus, 'found');
+});
+
+test('司馬遷第四章需完成孔子外篇才解鎖，四章進度互不覆蓋', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  markChapterFound(meta, new Date('2026-08-01T00:00:00+08:00'), CHAPTER_ID);
+  markChapterFound(meta, new Date('2026-08-02T00:00:00+08:00'), 'warring-quyuan');
+  assert.equal(isChapterUnlocked(meta, 'han-simaqian'), false);
+  assert.equal(selectChapter(meta, 'dream-confucius'), true);
+  markChapterFound(meta, new Date('2026-08-03T00:00:00+08:00'), 'dream-confucius');
+  assert.equal(isChapterUnlocked(meta, 'han-simaqian'), true);
+  assert.equal(selectChapter(meta, 'han-simaqian'), true);
+  assert.equal(completeScene(meta, 'han-prologue', 'han-simaqian'), true);
+  assert.equal(getChapterProgress(meta, 'han-simaqian').sceneIndex, 1);
+  for (const chapterId of [CHAPTER_ID, 'warring-quyuan', 'dream-confucius']) {
+    assert.equal(getChapterProgress(meta, chapterId).chapterStatus, 'found');
+  }
 });
 
 test('屈原第二章具備七幕、三學段、公版來源與四組可執行委託', () => {
@@ -219,6 +236,45 @@ test('孔子外篇每個學段、每一項委託都只從論語題庫選足五�
       const quest = resolveQuest(scene.quest, level);
       assert.equal(quest.bankKey, 'lunyu');
       assert.equal(selectQuestEntries(entries, quest).length, 5, `${level} ${scene.id} 論語題目不足`);
+    }
+  }
+});
+
+test('司馬遷篇具備七幕、三學段、史記專屬題庫與司馬遷對戰', () => {
+  const definition = CHAPTERS.find((item) => item.id === 'han-simaqian');
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/simaqian.json'), 'utf8'));
+  const result = validateChapter(chapter);
+  assert.deepEqual(result.errors, []);
+  assert.equal(chapter.scenes.length, 7);
+  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
+  assert.equal(chapter.scenes.filter((scene) => scene.quest?.count === 5).length, 4);
+  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => scene.quest.bankKey === 'shiji'));
+  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'simaqian-trial').visual.mode, 'duel');
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'simaqian-trial').visual.opponent, '司馬遷');
+  assert.equal(chapter.storyFrame.vows.length, 3);
+  assert.equal(new Set(chapter.storyFrame.vows.map((vow) => vow.quote)).size, 3);
+  assert.ok(chapter.sources.filter((source) => source.kind === 'primary').every((source) => source.url?.startsWith('https://zh.wikisource.org/')));
+});
+
+test('史記專屬題庫三學段各十五題，全部通過驗證並標示公版篇名', () => {
+  for (const suffix of ['elementary', 'junior', 'senior']) {
+    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/shiji-${suffix}.json`), 'utf8'));
+    assert.equal(entries.length, 15);
+    assert.ok(entries.every((entry) => validateEntry(entry).valid));
+    assert.ok(entries.every((entry) => entry.origin === '自編' && entry.citation.startsWith('《史記・')));
+    assert.equal(new Set(entries.map((entry) => entry.question)).size, entries.length);
+  }
+});
+
+test('司馬遷篇每個學段、每一項委託都只從史記題庫選足五題', () => {
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/simaqian.json'), 'utf8'));
+  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
+    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/shiji-${suffix}.json`), 'utf8'));
+    for (const scene of chapter.scenes.filter((item) => item.quest)) {
+      const quest = resolveQuest(scene.quest, level);
+      assert.equal(quest.bankKey, 'shiji');
+      assert.equal(selectQuestEntries(entries, quest).length, 5, `${level} ${scene.id} 史記題目不足`);
     }
   }
 });
