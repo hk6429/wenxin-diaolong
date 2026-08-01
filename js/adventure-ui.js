@@ -151,7 +151,7 @@ function renderFound(root, definition, progress) {
 
 async function renderAdventure() {
   const { meta, root, definition, progress, chapter } = currentContext();
-  $('adventure-progress').textContent = progressLabel(definition, progress);
+  $('adventure-progress').textContent = `${deps.getPlayerName()}・${progressLabel(definition, progress)}`;
   renderControls(root);
   renderChapterNav(meta, root);
   if (progress.chapterStatus !== 'locked' && !progress.replayActive) {

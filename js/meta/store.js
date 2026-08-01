@@ -33,7 +33,7 @@ function backend() {
 export function defaultMeta() {
   return {
     v: SCHEMA_VERSION,
-    profile: { name: '', createdAt: '' },
+    profile: { name: '', createdAt: '', updatedAt: '' },
     // Leitner 盒位 {id: box}；collection 見 js/meta/collection.js（文心珠圖鑑）
     leitner: {},
     collection: {},

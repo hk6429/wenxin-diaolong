@@ -33,11 +33,22 @@ const fail = (msg) => { console.error('FAIL:', msg); process.exitCode = 1; };
 
 await page.goto(`http://127.0.0.1:${port}/`);
 await page.waitForTimeout(600);
+await page.waitForSelector('#profile-overlay:not([hidden])');
+if (!(await page.textContent('#profile-title'))?.includes('冒險者姓名')) fail('首次進站沒有要求設定冒險者姓名');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/profile-onboarding.png`, fullPage: true });
+await page.fill('#profile-name', '測試文士');
+await page.click('#profile-form button[type="submit"]');
+await page.waitForSelector('#profile-overlay[hidden]', { state: 'attached' });
+if (!(await page.textContent('#btn-profile'))?.includes('測試文士')) fail('冒險者姓名沒有顯示在頁首');
+if ((await page.textContent('#journey-total')) !== '0') fail('新玩家累積答題應從 0 開始');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/journey-dashboard.png`, fullPage: true });
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
 const levelGuide = await page.textContent('#level-guide');
 if (!levelGuide?.includes('國小') || !levelGuide.includes('527 題')) fail('首頁未說明國小專屬題庫與題數');
 if (await page.locator('.entry-card .entry-art').count() !== 6) fail('六個首頁入口未全部改用配圖');
 if (await page.locator('.entry-card .entry-icon').count() !== 0) fail('首頁入口仍殘留 emoji icon');
+if (await page.locator('img[src*="visitor-badge.laobi.icu"]').count() !== 0) fail('舊訪客 badge 未移除');
+if (await page.locator('script[data-site="wenxin-diaolong"]').count() !== 1) fail('右下角共用學習工具未接入');
 const failedEntryArt = await page.locator('.entry-card .entry-art').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
 if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 
@@ -104,7 +115,7 @@ for (let i = 0; i < 5; i += 1) {
   await page.click('#quiz-options .opt-btn');
   await page.waitForSelector('#quiz-feedback:not([hidden])');
   await page.click('#btn-next');
-  if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+  if (i < 3) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
 }
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('守卷閣歸來'));
 await page.click('[data-scene-choice]');

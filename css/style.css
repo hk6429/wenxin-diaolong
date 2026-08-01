@@ -66,6 +66,7 @@ button { font-family: inherit; color: inherit; cursor: pointer; }
   background: var(--card); border: 1px solid rgba(168, 132, 44, .4);
   border-radius: 999px; padding: 3px 12px; font-size: .85rem; box-shadow: var(--shadow);
 }
+.profile-pill { color: var(--cinnabar); font-weight: 800; }
 
 main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .screen h2 { letter-spacing: .1em; border-left: 5px solid var(--gold); padding-left: 10px; }
@@ -89,6 +90,18 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .level-guide p { margin: 2px 0; }
 .level-guide .level-counts { color: var(--ink-soft); }
 .home-today { color: var(--ink-soft); margin: 0 0 12px; font-size: .92rem; }
+.journey-dashboard { margin: 0 0 16px; padding: 15px; border: 1px solid rgba(168,132,44,.42); border-radius: 16px; background: linear-gradient(135deg,color-mix(in srgb,var(--card) 94%,var(--gold)),var(--card)); box-shadow: var(--shadow); }
+.journey-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.journey-head small { color: var(--gold); font-size: .66rem; font-weight: 900; letter-spacing: .16em; }
+.journey-dashboard .journey-head h2 { margin: 1px 0 0; padding: 0; border: 0; font-size: 1.18rem; letter-spacing: .08em; }
+.journey-head > strong { color: var(--cinnabar); font-size: 1.45rem; font-variant-numeric: tabular-nums; }
+.journey-track { height: 9px; margin: 10px 0 7px; overflow: hidden; border-radius: 99px; background: var(--paper-deep); }
+.journey-track i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--indigo),var(--cinnabar),var(--gold)); transition: width .45s ease; }
+.journey-location { margin: 0 0 12px; color: var(--ink-soft); font-size: .8rem; }
+.journey-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; }
+.journey-metrics > div { display: grid; place-items: center; min-height: 62px; padding: 7px 4px; border-radius: 10px; background: color-mix(in srgb,var(--paper) 86%,var(--indigo)); text-align: center; }
+.journey-metrics b { color: var(--indigo); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.journey-metrics span { color: var(--ink-soft); font-size: .67rem; }
 .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .entry-card {
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
@@ -387,6 +400,15 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 }
 .overlay-card { background: var(--card); border-radius: var(--radius); padding: 20px; max-width: 340px; box-shadow: var(--shadow); }
 .overlay-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px; }
+.profile-overlay { z-index: 2147483600; background: radial-gradient(circle at 50% 20%,rgba(168,132,44,.28),rgba(19,15,12,.82)); }
+.profile-card { width: min(420px,calc(100vw - 28px)); max-width: 420px; border: 1px solid rgba(168,132,44,.58); }
+.profile-card > small { color: var(--gold); font-weight: 900; letter-spacing: .16em; }
+.profile-card h2 { margin: 6px 0 8px; }
+.profile-card p { color: var(--ink-soft); }
+.profile-card label { display: block; margin: 15px 0 5px; font-weight: 800; }
+.profile-card input { width: 100%; min-height: 48px; padding: 9px 12px; border: 1.5px solid rgba(92,83,70,.38); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-size: 1.05rem; }
+.profile-card input:focus { outline: 3px solid color-mix(in srgb,var(--gold) 35%,transparent); border-color: var(--gold); }
+.profile-card .profile-error { margin: 5px 0 0; color: var(--bad); font-size: .8rem; }
 
 @media (max-width: 420px) {
   .entry-grid, .zone-grid, .pets-grid { grid-template-columns: 1fr 1fr; }
@@ -515,5 +537,6 @@ ruby{ruby-align:center}rt{font-size:.48em;color:var(--cinnabar);font-family:syst
 @media(prefers-color-scheme:dark){.adventure-stage{background:radial-gradient(circle at 80% 5%,rgba(217,106,82,.15),transparent 30%),linear-gradient(145deg,rgba(38,33,25,.98),rgba(29,26,22,.96))}.adventure-wait{background:rgba(201,169,78,.1)}.story-scene{background:rgba(28,25,21,.72)}.story-fact{background:rgba(201,169,78,.08)}}
 @media(prefers-reduced-motion:reduce){.adventure-hero,.adventure-character img{transition:none;transform:none!important}}
 @media(max-width:560px){.adventure-hero{padding:14px;gap:10px;min-height:120px}.adventure-hero-art{flex-basis:86px;height:86px}.adventure-stage{min-height:430px;padding:26px 20px}.adventure-character{width:42%;margin-left:10px}.mini-switch{width:100%;justify-content:center}.mini-switch button{flex:1;padding-inline:4px;font-size:.86rem}.story-vows{grid-template-columns:1fr}.story-scene{clear:both;padding:13px 14px}.story-choice{min-height:50px}}
+@media(max-width:560px){.journey-metrics{grid-template-columns:repeat(2,1fr)}.journey-metrics>div{min-height:54px}.profile-pill{order:3}.hud{justify-content:flex-end}}
 @media(max-width:560px){.entry-card{min-height:176px}.entry-art{height:96px}.entry-title{margin:8px 10px 0;font-size:.95rem}.entry-desc{margin:0 10px 10px;font-size:.7rem}.rt-lobby-hero{min-height:230px}.rt-lobby-panel{margin:-18px 8px 0;padding:13px}.rt-mode-card{align-items:stretch;flex-direction:column}.rt-mode-card .primary-btn{width:100%}.rt-battle-visual{min-height:430px}.rt-battle-visual .duel-hp-row{inset:auto 8px 56px;gap:5px}.rt-fighter{width:43%;padding:7px}.rt-skills{font-size:.52rem}.rt-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.rt-battle-rules{gap:4px 8px}.rt-round-banner{top:8px;min-width:180px}.rt-result{min-height:430px}.rt-result-content{inset:auto 10px 10px;grid-template-columns:auto 1fr;gap:10px}.rt-result-content .primary-btn{grid-column:1/-1;width:100%}.rt-result-content .rt-verdict-seal{width:58px;height:58px}.rt-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;width:100%}.rt-actions #btn-rt-create,.rt-actions .rt-or{grid-column:1/-1}.rt-actions #btn-rt-create{width:100%}.rt-actions .rt-or{text-align:center}.rt-actions .rt-field{display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;margin:0}.rt-actions .rt-field input{width:100%;min-width:0}.rt-actions #btn-rt-join{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){.rt-hit.show,.rt-fighter.hit{animation:none}.rt-hit.show{opacity:1}}

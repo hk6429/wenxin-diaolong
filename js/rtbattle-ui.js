@@ -52,6 +52,7 @@ async function startComputerBattle() {
 
 export function openRtScreen() {
   teardown();
+  $('rt-nick').value = deps.getPlayerName?.() || '';
   $('rt-lobby').hidden = false;
   $('rt-arena').hidden = true;
   $('rt-status').textContent = '';
@@ -60,7 +61,7 @@ export function openRtScreen() {
 
 function mySnap() {
   const meta = deps.getCtx().meta;
-  const nick = ($('rt-nick').value || '').trim() || '無名文士';
+  const nick = ($('rt-nick').value || '').trim() || deps.getPlayerName?.() || '無名文士';
   const pet = PETS.find((p) => p.id === meta.pet?.active);
   return {
     nick: nick.slice(0, 12),

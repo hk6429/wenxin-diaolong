@@ -16,6 +16,7 @@
     <span class="brand-text"><strong>文心雕龍</strong><small>文法修辭練功站</small></span>
   </button>
   <div id="hud" class="hud" aria-live="off">
+    <button class="hud-item profile-pill" id="btn-profile" type="button" title="修改冒險者姓名">文士・尚未命名</button>
     <span class="hud-item" id="hud-pearls" title="墨珠">🪷 0</span>
     <span class="hud-item" id="hud-rank" title="文氣境界">蒙童</span>
     <span class="hud-item" id="hud-streak" title="連續天數">🔥 0</span>
@@ -33,6 +34,20 @@
     </div>
     <aside id="level-guide" class="level-guide" aria-live="polite"></aside>
     <p id="home-today" class="home-today"></p>
+    <section class="journey-dashboard" aria-labelledby="journey-title">
+      <div class="journey-head">
+        <div><small>MY JOURNEY</small><h2 id="journey-title">我的文心旅程</h2></div>
+        <strong id="journey-percent">0%</strong>
+      </div>
+      <div class="journey-track" aria-label="章回總進度"><i id="journey-bar"></i></div>
+      <p id="journey-location" class="journey-location"></p>
+      <div class="journey-metrics">
+        <div><b id="journey-today">0</b><span>今日答題</span></div>
+        <div><b id="journey-total">0</b><span>累積答題</span></div>
+        <div><b id="journey-accuracy">0%</b><span>累積正確率</span></div>
+        <div><b id="journey-mastered">0</b><span>煉成文心珠</span></div>
+      </div>
+    </section>
     <button class="adventure-hero" id="btn-adventure">
       <span class="adventure-hero-art" aria-hidden="true"><img src="assets/img/zhuangzi.webp" alt="" onerror="this.parentElement.textContent='🦋'"></span>
       <span><small id="adventure-hero-kicker">第一章・先秦</small><strong id="adventure-hero-title">穿越蝶夢，遇見莊子</strong><em id="adventure-hero-cta">開始冒險 →</em></span>
@@ -119,7 +134,7 @@
           </div>
           <div id="quiz-duel-hud" class="quiz-duel-hud" hidden>
             <div class="quiz-fighter quiz-fighter-player">
-              <b>無名文士</b><span>文氣 <em id="quiz-player-hp">100</em></span>
+              <b id="quiz-player-name">無名文士</b><span>文氣 <em id="quiz-player-hp">100</em></span>
               <div class="quiz-hp-track"><i id="quiz-player-hp-bar"></i></div>
             </div>
             <div class="quiz-duel-mark">文<small>VS</small></div>
@@ -232,6 +247,20 @@
 </main>
 
 <div id="toast-zone" class="toast-zone" aria-live="polite"></div>
+<div id="profile-overlay" class="overlay profile-overlay" hidden>
+  <form id="profile-form" class="overlay-card profile-card" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+    <small>踏入文心世界前</small>
+    <h2 id="profile-title">請留下你的冒險者姓名</h2>
+    <p>莊子、屈原與歷代文人都會用這個名字稱呼你；進度也會記在這位冒險者名下。</p>
+    <label for="profile-name">冒險者姓名</label>
+    <input id="profile-name" name="name" maxlength="12" autocomplete="nickname" placeholder="例如：小文、子晴、墨客阿哲" required>
+    <p id="profile-error" class="profile-error" role="alert" hidden>請輸入 1～12 個字的姓名。</p>
+    <div class="overlay-actions">
+      <button id="btn-profile-cancel" class="ghost-btn" type="button">保留原名</button>
+      <button class="primary-btn" type="submit">提筆啟程</button>
+    </div>
+  </form>
+</div>
 <div id="checkpoint-overlay" class="overlay" hidden>
   <div class="overlay-card" role="dialog" aria-modal="true" aria-label="休息提醒">
     <p id="checkpoint-text"></p>
@@ -242,9 +271,9 @@
   </div>
 </div>
 
-<img src="https://visitor-badge.laobi.icu/badge?page_id=hk6429.wenxin-diaolong" alt="訪客人數" loading="lazy" style="position:fixed;right:14px;bottom:14px;z-index:2147483000;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.35);">
 <script>window.goatcounter = {path: p => location.host + p}</script>
 <script data-goatcounter="https://hk6429.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="https://self-learning-orbit.pages.dev/platform-counter.js?v=20260802-wenxin" data-site="wenxin-diaolong" defer></script>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>

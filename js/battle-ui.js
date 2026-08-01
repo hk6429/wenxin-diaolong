@@ -99,7 +99,7 @@ async function startBattle(master) {
   };
   $('duel-stage').innerHTML = `
     <div class="duel-hp-row">
-      <div class="duel-side"><span>你</span><div class="bar hp-a"><i></i></div><b id="hp-a-num"></b></div>
+      <div class="duel-side"><span>${escapeHtml(deps.getPlayerName?.() || '你')}</span><div class="bar hp-a"><i></i></div><b id="hp-a-num"></b></div>
       <div class="duel-vs">⚔️</div>
       <div class="duel-side"><span>${master.icon} ${master.name.split('・').pop()}</span><div class="bar hp-b"><i></i></div><b id="hp-b-num"></b></div>
     </div>

@@ -11,6 +11,7 @@ import { nextQuestionId } from './leitner.js';
 import { createRoundState, nextInRound, recordRound, advanceRound } from './practice-round.js';
 import { shuffle } from './shuffle.js';
 import { shouldCheckpoint } from './session-checkpoint.js';
+import { learningSummary, normalizePlayerName, playerName, setPlayerName } from './profile.js';
 
 // 作答結果已透過 toast-zone（aria-live=polite）播報，這裡不需另設播報器
 function announce(_msg) {}
@@ -49,6 +50,7 @@ async function boot() {
   ctx = initSession(fullBank);
   renderHud();
   renderHome();
+  if (!normalizePlayerName(ctx.meta.profile?.name)) openProfileEditor(true);
 }
 
 async function switchLevel(level) {
@@ -66,6 +68,7 @@ function showScreen(id) {
 /* ---------- HUD 與首頁 ---------- */
 function renderHud() {
   const meta = ctx.meta;
+  $('btn-profile').textContent = `文士・${playerName(meta)}`;
   $('hud-pearls').textContent = `🪷 ${getBalance(meta)}`;
   $('hud-rank').textContent = getProgress(meta).rankName;
   $('hud-streak').textContent = `🔥 ${meta.daily.streak || 0}`;
@@ -111,8 +114,18 @@ function renderHome() {
     $('adventure-hero-cta').textContent = '開始冒險 →';
   }
   $('home-today').textContent = d.todayAnswered > 0
-    ? `今日已練 ${d.todayAnswered} 題，答對 ${d.todayCorrect} 題——${d.todayCorrect / d.todayAnswered >= 0.8 ? '文氣充沛！' : '穩穩累積中。'}`
-    : '今天還沒開張，來練幾題暖暖筆鋒吧。';
+    ? `${playerName(ctx.meta)}今日已練 ${d.todayAnswered} 題，答對 ${d.todayCorrect} 題——${d.todayCorrect / d.todayAnswered >= 0.8 ? '文氣充沛！' : '穩穩累積中。'}`
+    : `${playerName(ctx.meta)}，今天還沒開張，來練幾題暖暖筆鋒吧。`;
+  const summary = learningSummary(ctx.meta, CHAPTERS);
+  $('journey-percent').textContent = `${summary.adventurePercent}%`;
+  $('journey-bar').style.width = `${summary.adventurePercent}%`;
+  $('journey-location').textContent = progress.chapterStatus === 'found' || progress.chapterStatus === 'stable'
+    ? `${definition.title}：${definition.pageName}${progress.chapterStatus === 'stable' ? '已穩固' : '已尋回'}`
+    : `${definition.title}：第 ${progress.sceneIndex + 1}／${definition.sceneIds.length} 幕`;
+  $('journey-today').textContent = summary.todayAnswered;
+  $('journey-total').textContent = summary.answered;
+  $('journey-accuracy').textContent = `${summary.accuracy}%`;
+  $('journey-mastered').textContent = summary.mastered;
   const zones = [
     ['修辭', 'var(--rh)'], ['文法', 'var(--gr)'], ['格律', 'var(--yl)'],
   ];
@@ -239,11 +252,27 @@ function renderQuizVisual() {
     ? (quiz.visual.log || `你與${quiz.visual.opponent}各自蓄勢，本回合只會有一方受創。`)
     : (quiz.visual.log || '觀察畫面與文字線索，再作出判斷。');
   if (!quiz.duel) return;
+  $('quiz-player-name').textContent = playerName(ctx.meta);
   $('quiz-opponent-name').textContent = quiz.visual.opponent;
   $('quiz-player-hp').textContent = quiz.duel.playerHp;
   $('quiz-opponent-hp').textContent = quiz.duel.opponentHp;
   $('quiz-player-hp-bar').style.width = `${quiz.duel.playerHp}%`;
   $('quiz-opponent-hp-bar').style.width = `${quiz.duel.opponentHp}%`;
+}
+
+function openProfileEditor(required = false) {
+  const overlay = $('profile-overlay');
+  overlay.dataset.required = required ? '1' : '0';
+  $('btn-profile-cancel').hidden = required;
+  $('profile-error').hidden = true;
+  $('profile-name').value = required ? '' : playerName(ctx.meta);
+  overlay.hidden = false;
+  requestAnimationFrame(() => $('profile-name').focus());
+}
+
+function closeProfileEditor() {
+  if ($('profile-overlay').dataset.required === '1') return;
+  $('profile-overlay').hidden = true;
 }
 
 function resolveDuelAnswer(correct) {
@@ -610,6 +639,21 @@ function escapeHtml(s) {
 
 /* ---------- 事件綁定 ---------- */
 $('btn-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+$('btn-profile').addEventListener('click', () => openProfileEditor(false));
+$('btn-profile-cancel').addEventListener('click', closeProfileEditor);
+$('profile-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (!setPlayerName(ctx.meta, $('profile-name').value)) {
+    $('profile-error').hidden = false;
+    return;
+  }
+  saveMeta(ctx.meta);
+  $('profile-overlay').hidden = true;
+  $('rt-nick').value = playerName(ctx.meta);
+  renderHud();
+  renderHome();
+  toast(`${playerName(ctx.meta)}，文心卷已記住你的名字。`);
+});
 document.querySelectorAll('.level-btn').forEach((b) => b.addEventListener('click', () => switchLevel(b.dataset.level)));
 $('btn-practice').addEventListener('click', () => { $('practice-zones').hidden = false; $('quiz-panel').hidden = true; showScreen('screen-practice'); });
 $('btn-codex').addEventListener('click', () => {
@@ -638,7 +682,7 @@ $('btn-rest').addEventListener('click', () => { $('checkpoint-overlay').hidden =
 
 $('btn-battle').addEventListener('click', openBattleScreen);
 $('btn-rt').addEventListener('click', openRtScreen);
-const battleDeps = { getCtx: () => ctx, toast, renderEvents, renderHud, showScreen };
+const battleDeps = { getCtx: () => ctx, getPlayerName: () => playerName(ctx.meta), toast, renderEvents, renderHud, showScreen };
 initBattleUI(battleDeps);
 initRtUI(battleDeps);
 
@@ -650,6 +694,7 @@ const adventureDeps = {
   showScreen,
   renderHome,
   toast,
+  getPlayerName: () => playerName(ctx.meta),
 };
 initAdventureUI(adventureDeps);
 $('btn-adventure').addEventListener('click', openAdventureScreen);
