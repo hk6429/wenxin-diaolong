@@ -2,7 +2,7 @@
 
 繁體中文文法與修辭線上練功站：對象國小到高中，例句涵蓋韻文（詩詞曲／新詩／童謠）
 與非韻文（文言文／白話散文／應用文），全遊戲化——閃卡圖鑑、Leitner 間隔複習、
-弱點特訓、PvE 歷代文心大師對戰、PvP 即時對戰、文心四靈養成。
+弱點特訓、古代穿越冒險、PvE 歷代文心大師對戰、PvP 即時對戰、文心四靈養成。
 
 - 線上：<https://wenxin-diaolong.vercel.app>（鏡像：`.pages.dev` / `.netlify.app`）
 - 純前端無框架、無建置步驟；資料是靜態 JSON，改 `data/*.json` 即更新內容。
@@ -14,6 +14,15 @@
 | 修辭 | 24 修辭格（國小8＋國中10＋高中6），逐格韻文／非韻文例句雙覆蓋 |
 | 文法 | 詞性、詞語結構、句型、語病、文言虛詞／句式、詞類活用、標點 |
 | 格律 | 押韻、對仗、平仄、詩體判別、詞曲常識、對聯 |
+
+## 古代穿越冒險
+
+第一章「先秦・莊子〈蝶夢逍遙〉」已可完整遊玩：現代殘卷、蝶夢之門、北冥風口、
+庖丁迷陣、濠梁水畔、莊周論藝與守卷閣歸來。國小、國中、高中共用世界，依學段
+切換文字與正式題庫類別；提供智慧注音、較完整注音與關閉注音。章回完成後尋回
+「觀物之頁」，七日後以三題「蝶夢回聲」驗收是否穩固。
+
+冒險作答仍走既有 kernel、Leitner、文心珠與四靈進度，不建立第二套學習紀錄。
 
 學段：國小／國中／高中／實戰（實戰＝基測會考學測指考真題，答案照官方卡，附官方通過率）。
 
@@ -35,6 +44,9 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `js/schema.js`＋`js/quiz-loader.js`＋`js/bank.js`：資料層（分級分檔、載入即驗證）
 - `js/meta/kernel.js`：養成機制唯一整合接縫（練習／對戰掛鉤 → events 陣列）
 - `js/meta/pet.js`：文心四靈（等級＝該區精通題數÷20，答錯過的題加權 1.5）
+- `js/adventure.js`＋`js/adventure-ui.js`：章回進度、七日驗收與冒險 UI
+- `js/story-content.js`＋`js/zhuyin.js`：三學段內容選版與注音安全渲染
+- `data/adventure/zhuangzi.json`：莊子七幕、來源分層、任務與注音資料
 - `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
 - `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；
   鏡像平台透過 `js/meta/api.js` 打回權威平台 `wenxin-diaolong.pages.dev`

@@ -35,6 +35,83 @@ await page.goto(`http://127.0.0.1:${port}/`);
 await page.waitForTimeout(600);
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
 
+// 古代冒險：序章→智慧/全文注音→蝶夢五題委託→北冥風口
+await page.click('#btn-adventure');
+await page.waitForSelector('#adventure-stage h2');
+if (!(await page.textContent('#adventure-stage'))?.includes('殘卷飛蝶')) fail('莊子序章未顯示');
+await page.click('[data-story-level="國中"]');
+await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('教室翻開'));
+await page.click('[data-story-level="高中"]');
+await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('來歷不明'));
+await page.click('[data-story-level="國小"]');
+await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('你翻開一本'));
+await page.click('[data-zhuyin="full"]');
+if ((await page.$$('#adventure-stage ruby')).length === 0) fail('全文注音模式沒有 ruby 標記');
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('蝶夢之門'));
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+for (let i = 0; i < 5; i += 1) {
+  await page.click('#quiz-options .opt-btn');
+  await page.waitForSelector('#quiz-feedback:not([hidden])');
+  await page.click('#btn-next');
+  if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+}
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('北冥風口'));
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('庖丁迷陣'));
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('濠梁水畔'));
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('莊周論藝'));
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+for (let i = 0; i < 5; i += 1) {
+  await page.click('#quiz-options .opt-btn');
+  await page.waitForSelector('#quiz-feedback:not([hidden])');
+  await page.click('#btn-next');
+  if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+}
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('守卷閣歸來'));
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('觀物之頁'));
+const adventureSaved = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure);
+if (adventureSaved.chapterStatus !== 'found' || !adventureSaved.echoDueAt) fail('章回尋回狀態未正確保存');
+if (adventureSaved.rewards?.length !== 3) fail('章回三項獎勵未正確保存');
+await page.reload();
+await page.waitForSelector('#btn-adventure');
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('觀物之頁'));
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.echoDueAt = '2000-01-01T00:00:00.000Z';
+  meta.adventure.zhuyinMode = 'off';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForSelector('#btn-echo');
+await page.click('#btn-echo');
+const elementaryRhetoric = JSON.parse(await readFile(join(ROOT, 'data/rhetoric-elementary.json'), 'utf8'));
+const answerByQuestion = new Map(elementaryRhetoric.map((entry) => [entry.question, entry.answer]));
+for (let i = 0; i < 3; i += 1) {
+  await page.waitForSelector('#quiz-options .opt-btn');
+  const question = await page.textContent('#quiz-question');
+  const answer = answerByQuestion.get(question);
+  if (!answer) fail('蝶夢回聲找不到正式答案');
+  await page.evaluate((expected) => {
+    [...document.querySelectorAll('#quiz-options .opt-btn')].find((button) => button.dataset.opt === expected)?.click();
+  }, answer);
+  await page.waitForSelector('#quiz-feedback:not([hidden])');
+  await page.click('#btn-next');
+  if (i < 2) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+}
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('已穩固'));
+const stableStatus = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure.chapterStatus);
+if (stableStatus !== 'stable') fail('蝶夢回聲通過後未穩固');
+await page.click('#btn-adventure-back');
+await page.waitForFunction(() => document.querySelector('#adventure-hero-kicker')?.textContent.includes('已穩固'));
+
 // 練功：修辭區答一題
 await page.click('#btn-practice');
 await page.click('.zone-card.zone-rh');

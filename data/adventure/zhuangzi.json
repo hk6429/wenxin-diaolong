@@ -1,0 +1,109 @@
+{
+  "id": "preqin-zhuangzi",
+  "title": "先秦・莊子〈蝶夢逍遙〉",
+  "version": 1,
+  "sources": [
+    { "id": "zhuangzi-xiaoyaoyou", "kind": "primary", "label": "《莊子・逍遙遊》" },
+    { "id": "zhuangzi-qiwulun", "kind": "primary", "label": "《莊子・齊物論》莊周夢蝶寓言" },
+    { "id": "zhuangzi-yangshengzhu", "kind": "primary", "label": "《莊子・養生主》庖丁解牛寓言" },
+    { "id": "zhuangzi-qiushui", "kind": "primary", "label": "《莊子・秋水》濠梁對話" },
+    { "id": "game-fiction", "kind": "fiction", "label": "無字潮、定形之網與穿越對話均為遊戲創作" }
+  ],
+  "annotations": [
+    { "text": "莊周", "bopomofo": ["ㄓㄨㄤ", "ㄓㄡ"] },
+    { "text": "先秦", "bopomofo": ["ㄒㄧㄢ", "ㄑㄧㄣˊ"] },
+    { "text": "逍遙", "bopomofo": ["ㄒㄧㄠ", "ㄧㄠˊ"] },
+    { "text": "殘卷", "bopomofo": ["ㄘㄢˊ", "ㄐㄩㄢˋ"] },
+    { "text": "墨蝶", "bopomofo": ["ㄇㄛˋ", "ㄉㄧㄝˊ"] },
+    { "text": "譬喻", "bopomofo": ["ㄆㄧˋ", "ㄩˋ"] },
+    { "text": "轉化", "bopomofo": ["ㄓㄨㄢˇ", "ㄏㄨㄚˋ"] },
+    { "text": "誇飾", "bopomofo": ["ㄎㄨㄚ", "ㄕˋ"] },
+    { "text": "北冥", "bopomofo": ["ㄅㄟˇ", "ㄇㄧㄥˊ"] },
+    { "text": "鯤鵬", "bopomofo": ["ㄎㄨㄣ", "ㄆㄥˊ"] },
+    { "text": "庖丁", "bopomofo": ["ㄆㄠˊ", "ㄉㄧㄥ"] },
+    { "text": "濠梁", "bopomofo": ["ㄏㄠˊ", "ㄌㄧㄤˊ"] },
+    { "text": "寓言", "bopomofo": ["ㄩˋ", "ㄧㄢˊ"] },
+    { "text": "雕龍", "bopomofo": ["ㄉㄧㄠ", "ㄌㄨㄥˊ"] },
+    { "text": "夢蝶", "bopomofo": ["ㄇㄥˋ", "ㄉㄧㄝˊ"], "fullOnly": true },
+    { "text": "文心卷", "bopomofo": ["ㄨㄣˊ", "ㄒㄧㄣ", "ㄐㄩㄢˋ"], "fullOnly": true },
+    { "text": "定形之網", "bopomofo": ["ㄉㄧㄥˋ", "ㄒㄧㄥˊ", "ㄓ", "ㄨㄤˇ"], "fullOnly": true },
+    { "text": "修辭", "bopomofo": ["ㄒㄧㄡ", "ㄘˊ"], "fullOnly": true },
+    { "text": "聲律", "bopomofo": ["ㄕㄥ", "ㄌㄩˋ"], "fullOnly": true },
+    { "text": "章法", "bopomofo": ["ㄓㄤ", "ㄈㄚˇ"], "fullOnly": true },
+    { "text": "觀物之頁", "bopomofo": ["ㄍㄨㄢ", "ㄨˋ", "ㄓ", "ㄧㄝˋ"], "fullOnly": true }
+  ],
+  "scenes": [
+    {
+      "id": "modern-prologue", "title": "現代・殘卷飛蝶", "contentKind": "fiction", "sourceIds": ["game-fiction"],
+      "body": {
+        "國小": "你翻開一本殘卷，一隻墨蝶忽然飛了出來。跟著牠，去找回失落的文字吧！",
+        "國中": "你在教室翻開一冊殘卷，墨蝶破頁而出。卷中世界正失去比喻、聲律與章法。",
+        "高中": "一冊來歷不明的殘卷在桌上展開。墨蝶穿頁而出，邀你進入正在失語的文心世界。"
+      }
+    },
+    {
+      "id": "butterfly-gate", "title": "蝶夢之門", "contentKind": "fiction", "sourceIds": ["zhuangzi-qiwulun", "game-fiction"],
+      "body": {
+        "國小": "墨蝶被定形之網困住了。分清譬喻、轉化和真實敘述，才能打開蝶夢之門。",
+        "國中": "定形之網把每句話鎖成唯一模樣。辨清修辭線索，替墨蝶找回變化的可能。",
+        "高中": "蝶夢之門拒絕所有超出字面的理解。請以文本線索區分修辭轉化與事實陳述。"
+      },
+      "quest": {
+        "id": "butterfly-quest", "bankKey": "rhetoric", "count": 5,
+        "catsByLevel": {
+          "國小": ["譬喻", "轉化", "誇飾", "設問"],
+          "國中": ["借代", "映襯", "雙關", "引用", "轉品"],
+          "高中": ["譬喻", "轉化", "誇飾", "設問", "引用"]
+        }
+      }
+    },
+    {
+      "id": "north-sea", "title": "北冥風口", "contentKind": "reference", "sourceIds": ["zhuangzi-xiaoyaoyou", "game-fiction"],
+      "body": {
+        "國小": "北冥的大魚想乘風而起。莊周問你：很大的想像，也能幫我們看見新的世界嗎？",
+        "國中": "鯤鵬的巨大形象改變了觀看尺度。判斷誇飾時，要同時說出文字線索與表達效果。",
+        "高中": "鯤鵬意象擴張了尺度與視野。詮釋可以不只一種，但每一種都必須回到文本證據。"
+      }
+    },
+    {
+      "id": "cook-maze", "title": "庖丁迷陣", "contentKind": "reference", "sourceIds": ["zhuangzi-yangshengzhu", "game-fiction"],
+      "body": {
+        "國小": "庖丁不急著亂砍，而是先看清楚事物的紋理。找出句子的線索，再決定答案。",
+        "國中": "迷陣不怕快刀，只怕看不出結構。先辨認關鍵詞與句子關係，再作答。",
+        "高中": "庖丁寓言在此轉化為閱讀策略：先辨結構與脈絡，再提出有根據的判斷。"
+      }
+    },
+    {
+      "id": "hao-river", "title": "濠梁水畔", "contentKind": "reference", "sourceIds": ["zhuangzi-qiushui", "game-fiction"],
+      "body": {
+        "國小": "同一條魚，兩個人可能有不同看法。你能找出他們各自的理由嗎？",
+        "國中": "莊周與惠施從不同立場談魚之樂。分清說法、理由與文本證據。",
+        "高中": "濠梁對話把認知立場推到前景。比較雙方論證，不把多元詮釋誤解為沒有判準。"
+      }
+    },
+    {
+      "id": "zhuangzi-trial", "title": "莊周論藝", "contentKind": "fiction", "sourceIds": ["game-fiction"],
+      "body": {
+        "國小": "莊周笑著放出五道蝶影。看清每句話的變化，就能讓文字重新自由。",
+        "國中": "莊周以五道蝶影測試你能否從線索辨認修辭、觀點與寓意。",
+        "高中": "最後的論藝不問背誦，而問你能否以文本證據支持修辭判讀與合理詮釋。"
+      },
+      "quest": {
+        "id": "zhuangzi-trial", "bankKey": "rhetoric", "count": 5,
+        "catsByLevel": {
+          "國小": ["譬喻", "轉化", "誇飾", "設問"],
+          "國中": ["借代", "映襯", "雙關", "引用", "轉品"],
+          "高中": ["譬喻", "轉化", "誇飾", "設問", "引用"]
+        }
+      }
+    },
+    {
+      "id": "archive-return", "title": "守卷閣歸來", "contentKind": "fiction", "sourceIds": ["game-fiction"],
+      "body": {
+        "國小": "第一張觀物之頁回來了！雕龍決定陪你繼續旅行，莊周也成了你的文友。",
+        "國中": "觀物之頁重新發光。雕龍加入旅程，莊周留下第一封文友尺牘。",
+        "高中": "觀物之頁完成尋回，但尚待時間驗證。七日後，蝶夢回聲將檢驗理解是否穩固。"
+      }
+    }
+  ]
+}

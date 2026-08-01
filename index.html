@@ -32,6 +32,10 @@
       <button class="level-btn" data-level="實戰">實戰</button>
     </div>
     <p id="home-today" class="home-today"></p>
+    <button class="adventure-hero" id="btn-adventure">
+      <span class="adventure-hero-art" aria-hidden="true"><img src="assets/img/zhuangzi.webp" alt="" onerror="this.parentElement.textContent='🦋'"></span>
+      <span><small id="adventure-hero-kicker">第一章・先秦</small><strong id="adventure-hero-title">穿越蝶夢，遇見莊子</strong><em id="adventure-hero-cta">開始冒險 →</em></span>
+    </button>
     <nav class="entry-grid" aria-label="主功能">
       <button class="entry-card entry-practice" id="btn-practice">
         <span class="entry-icon" aria-hidden="true">⚔️</span>
@@ -65,6 +69,23 @@
       </button>
     </nav>
     <div class="home-progress" id="home-progress"></div>
+  </section>
+
+  <!-- 古代穿越冒險 -->
+  <section id="screen-adventure" class="screen" hidden aria-label="古代穿越冒險">
+    <div class="quiz-top adventure-top">
+      <button id="btn-adventure-back" class="ghost-btn">← 回首頁</button>
+      <span id="adventure-progress"></span>
+    </div>
+    <div class="adventure-controls" aria-label="閱讀設定">
+      <div id="adventure-levels" class="mini-switch" role="group" aria-label="冒險學段">
+        <button data-story-level="國小">國小</button><button data-story-level="國中">國中</button><button data-story-level="高中">高中</button>
+      </div>
+      <div id="zhuyin-modes" class="mini-switch" role="group" aria-label="注音模式">
+        <button data-zhuyin="smart">智慧注音</button><button data-zhuyin="full">全文注音</button><button data-zhuyin="off">關閉注音</button>
+      </div>
+    </div>
+    <article id="adventure-stage" class="adventure-stage" aria-live="polite"></article>
   </section>
 
   <!-- 練功 -->

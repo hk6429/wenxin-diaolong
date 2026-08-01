@@ -17,9 +17,12 @@ function announce(_msg) {}
 
 import { initBattleUI, openBattleScreen } from './battle-ui.js';
 import { initRtUI, openRtScreen } from './rtbattle-ui.js';
+import { initAdventureUI, openAdventureScreen } from './adventure-ui.js';
+import { renderZhuyin } from './zhuyin.js';
+import { ensureAdventure, isEchoDue } from './adventure.js';
 
 const $ = (id) => document.getElementById(id);
-const SCREENS = ['screen-home', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets', 'screen-battle', 'screen-rt'];
+const SCREENS = ['screen-home', 'screen-adventure', 'screen-practice', 'screen-codex', 'screen-weak', 'screen-pets', 'screen-battle', 'screen-rt'];
 
 let ctx = null;          // kernel session ctx（依目前學制的 mixed 全庫）
 let fullBank = [];       // 目前學制 mixed 全部題目
@@ -63,6 +66,20 @@ function renderHome() {
     b.classList.toggle('active', b.dataset.level === getLevel());
   });
   const d = ctx.meta.daily;
+  const adventure = ensureAdventure(ctx.meta);
+  if (adventure.chapterStatus === 'stable') {
+    $('adventure-hero-kicker').textContent = '第一章・已穩固';
+    $('adventure-hero-title').textContent = '觀物之頁重新發光';
+    $('adventure-hero-cta').textContent = '回守卷閣看看 →';
+  } else if (adventure.chapterStatus === 'found') {
+    $('adventure-hero-kicker').textContent = isEchoDue(ctx.meta) ? '蝶夢回聲・可以驗收' : '第一章・已尋回';
+    $('adventure-hero-title').textContent = isEchoDue(ctx.meta) ? '七日後的三題挑戰到了' : '觀物之頁等待時間沉澱';
+    $('adventure-hero-cta').textContent = isEchoDue(ctx.meta) ? '接受回聲挑戰 →' : '查看旅程 →';
+  } else if (adventure.sceneIndex > 0) {
+    $('adventure-hero-kicker').textContent = `第一章・${adventure.sceneIndex + 1}／7`;
+    $('adventure-hero-title').textContent = '繼續〈蝶夢逍遙〉';
+    $('adventure-hero-cta').textContent = '從書籤繼續 →';
+  }
   $('home-today').textContent = d.todayAnswered > 0
     ? `今日已練 ${d.todayAnswered} 題，答對 ${d.todayCorrect} 題——${d.todayCorrect / d.todayAnswered >= 0.8 ? '文氣充沛！' : '穩穩累積中。'}`
     : '今天還沒開張，來練幾題暖暖筆鋒吧。';
@@ -79,7 +96,7 @@ function renderHome() {
 }
 
 /* ---------- 練習流程 ---------- */
-async function startPractice(bankKey, fixedIds = null) {
+async function startPractice(bankKey, fixedIds = null, options = {}) {
   let entries;
   try {
     entries = fixedIds
@@ -97,7 +114,15 @@ async function startPractice(bankKey, fixedIds = null) {
     currentId: null,
     combo: 0,
     answered: 0,
+    correct: 0,
     multiPicks: new Set(),
+    target: options.limit ? Math.min(options.limit, entries.length) : null,
+    onComplete: typeof options.onComplete === 'function' ? options.onComplete : null,
+    onExit: typeof options.onExit === 'function' ? options.onExit : null,
+    title: options.title || '',
+    annotations: options.annotations || [],
+    zhuyinMode: options.zhuyinMode || 'off',
+    completePending: false,
   };
   $('practice-zones').hidden = true;
   $('quiz-panel').hidden = false;
@@ -110,6 +135,10 @@ function pickNext(candidates) {
 }
 
 function nextQuestion() {
+  if (quiz?.completePending) {
+    finishPractice();
+    return;
+  }
   let id = nextInRound(quiz.rs, pickNext);
   if (id === null) {
     const adv = advanceRound(quiz.rs, quiz.entries.map((e) => e.id), shuffle);
@@ -123,13 +152,18 @@ function nextQuestion() {
 
 function renderQuestion(e) {
   const isMulti = e.qformat === 'exam-mc-multi';
-  $('quiz-progress').textContent = `第 ${quiz.rs.round} 輪・${quiz.rs.served.size}／${quiz.rs.pool.length}`;
+  $('btn-next').textContent = '下一題（Enter）';
+  $('quiz-progress').textContent = quiz.target
+    ? `${quiz.title ? quiz.title + '・' : ''}${quiz.answered + 1}／${quiz.target}`
+    : `第 ${quiz.rs.round} 輪・${quiz.rs.served.size}／${quiz.rs.pool.length}`;
   $('quiz-combo').hidden = quiz.combo < 2;
   $('quiz-combo').textContent = `連對 ×${quiz.combo}`;
   $('quiz-tag').innerHTML = `<span class="zone-chip z-${e.zone}">${e.zone}</span>${e.cat}${e.subcat ? '・' + e.subcat : ''}` +
     (e.origin === '真題' ? `　<span>【${e.year} 年${e.exam || ''}真題】</span>` : '') +
     (isMulti ? '　<strong>（複選題）</strong>' : '');
-  $('quiz-question').textContent = e.question;
+  $('quiz-question').innerHTML = renderZhuyin(e.question, quiz.annotations, quiz.zhuyinMode, {
+    suppress: /音|讀音|注音/.test(e.cat || '') || /音|讀音|注音/.test(e.question || ''),
+  });
   $('quiz-feedback').hidden = true;
   $('btn-submit-multi').hidden = !isMulti;
   const box = $('quiz-options');
@@ -138,7 +172,7 @@ function renderQuestion(e) {
     const b = document.createElement('button');
     b.className = 'opt-btn';
     b.dataset.opt = opt;
-    b.innerHTML = `<span class="kbd">${i + 1}</span><span>${escapeHtml(opt)}</span>`;
+    b.innerHTML = `<span class="kbd">${i + 1}</span><span>${renderZhuyin(opt, quiz.annotations, quiz.zhuyinMode)}</span>`;
     b.addEventListener('click', () => (isMulti ? toggleMulti(b, opt) : submitAnswer([opt])));
     box.appendChild(b);
   });
@@ -163,6 +197,7 @@ function submitAnswer(picked) {
 
   quiz.combo = correct ? quiz.combo + 1 : 0;
   quiz.answered += 1;
+  if (correct) quiz.correct += 1;
   recordRound(quiz.rs, e.id, correct);
 
   const { events } = onPracticeAnswer(ctx, e.id, correct);
@@ -180,6 +215,12 @@ function submitAnswer(picked) {
   off.hidden = !(e.origin === '真題' && typeof e.pass === 'number');
   if (!off.hidden) off.textContent = `官方通過率 ${(e.pass * 100).toFixed(0)}%——${e.pass < 0.5 ? '全國考生都覺得難，答對很了不起' : '基本題，務必拿下'}`;
   $('quiz-feedback').hidden = false;
+  if (quiz.target && quiz.answered >= quiz.target) {
+    quiz.completePending = true;
+    $('btn-next').textContent = '完成本節（Enter）';
+  } else {
+    $('btn-next').textContent = '下一題（Enter）';
+  }
   $('btn-next').focus();
   announce(correct ? '答對' : '答錯');
 
@@ -190,11 +231,22 @@ function submitAnswer(picked) {
 }
 
 function exitPractice() {
+  const onExit = quiz?.onExit;
   quiz = null;
   $('practice-zones').hidden = false;
   $('quiz-panel').hidden = true;
-  renderHome();
-  showScreen('screen-home');
+  if (onExit) onExit();
+  else { renderHome(); showScreen('screen-home'); }
+}
+
+function finishPractice() {
+  const current = quiz;
+  quiz = null;
+  $('practice-zones').hidden = false;
+  $('quiz-panel').hidden = true;
+  const summary = { answered: current.answered, correct: current.correct, target: current.target };
+  if (current.onComplete) current.onComplete(summary);
+  else { renderHome(); showScreen('screen-home'); }
 }
 
 /* ---------- kernel events → toast ---------- */
@@ -341,6 +393,18 @@ $('btn-rt').addEventListener('click', openRtScreen);
 const battleDeps = { getCtx: () => ctx, toast, renderEvents, renderHud, showScreen };
 initBattleUI(battleDeps);
 initRtUI(battleDeps);
+
+const adventureDeps = {
+  getCtx: () => ctx,
+  getLevel,
+  switchLevel,
+  startPractice,
+  showScreen,
+  renderHome,
+  toast,
+};
+initAdventureUI(adventureDeps);
+$('btn-adventure').addEventListener('click', openAdventureScreen);
 
 document.addEventListener('keydown', (ev) => {
   if (!quiz || $('quiz-panel').hidden) return;

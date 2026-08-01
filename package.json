@@ -7,7 +7,7 @@
     "extract:exam": "node scripts/extract-exam.mjs",
     "merge": "node scripts/merge.mjs",
     "test": "node --test \"test/**/*.test.mjs\"",
-    "smoke": "node test/smoke.mjs"
+    "smoke": "node test/ui-smoke.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.61.1"

@@ -1,9 +1,10 @@
 // store — 單一 namespace `wxdl_meta` 的載入/儲存/版本遷移。
 // 所有機制模組唯一的持久化出入口；全包 try/catch，隱私模式不炸。
 // 測試可用 setStorageBackend() 注入 mock storage。
+import { CHAPTER_ID } from '../adventure.js';
 
 export const META_KEY = 'wxdl_meta';
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 function createMemoryStorage() {
   const map = new Map();
@@ -54,6 +55,16 @@ export function defaultMeta() {
     // 文心四靈（Phase 4）：等級不存檔、由 collection 推算，這裡只存陪伴狀態
     pet: { seen: {}, active: null, ownedEquip: [], equipped: {}, unlockedAt: {} },
     pvp: { nick: '', wins: 0, losses: 0 },
+    adventure: {
+      chapterId: CHAPTER_ID,
+      sceneIndex: 0,
+      chapterStatus: 'locked',
+      echoDueAt: '',
+      level: '國小',
+      zhuyinMode: 'smart',
+      questResults: {},
+      rewards: [],
+    },
   };
 }
 
