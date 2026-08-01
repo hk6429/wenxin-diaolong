@@ -227,6 +227,15 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .concept-progress { margin-left: auto; font-size: .8rem; color: var(--ink-soft); }
 .concept-def { margin: 6px 0; font-size: .92rem; }
 .concept-tips { font-size: .85rem; color: var(--gold); margin: 4px 0; }
+.subtype-map { margin: 9px 0; padding: 9px; border-radius: 9px; background: var(--paper); }
+.subtype-map-head { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 7px; font-size: .8rem; }
+.subtype-map-head span { color: var(--ink-soft); }
+.subtype-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.subtype-item { padding: 8px; border: 1px solid rgba(92, 83, 70, .18); border-radius: 8px; background: var(--card); }
+.subtype-item > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.subtype-item b { color: var(--indigo); font-size: .82rem; }
+.subtype-item span { padding: 0 5px; border: 1px solid currentColor; border-radius: 999px; color: var(--cinnabar); font-size: .65rem; }
+.subtype-item p { margin: 4px 0 0; color: var(--ink-soft); font-size: .75rem; line-height: 1.45; }
 .concept-ex { background: var(--paper); border-radius: 8px; padding: 8px 10px; margin-top: 6px; font-size: .88rem; }
 .concept-ex .badge {
   font-size: .7rem; padding: 0 6px; border-radius: 4px; color: #fff; margin-right: 6px;
@@ -278,6 +287,7 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   .outline-head { display: block; }
   .outline-head span { display: block; margin-top: 2px; }
   .outline-stages { grid-template-columns: 1fr; }
+  .subtype-grid { grid-template-columns: 1fr; }
   .concept-step > summary { grid-template-columns: auto 1fr; }
   .step-level { grid-column: 2; justify-self: start; }
   .concept-step.completed > summary { grid-template-columns: auto 1fr auto; }

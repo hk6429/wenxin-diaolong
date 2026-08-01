@@ -332,6 +332,7 @@ async function renderCodex(tab = '修辭') {
         <span class="concept-progress">${lit ? '已點亮' : ''} 精通 ${s.known}／${s.total || '—'}</span></div>
       <p class="concept-def">${escapeHtml(c.definition)}</p>
       <p class="concept-tips">💡 ${escapeHtml(c.tips)}</p>
+      ${renderSubtypeMap(c)}
       ${(c.examples || []).map((x) => `<div class="concept-ex">
         <span class="badge ${x.genre === '韻文' ? 'yun' : 'sanwen'}">${x.genre === '韻文' ? '韻' : '文'}</span>${escapeHtml(x.text)}
         <cite>${x.citation ? escapeHtml(x.citation) : '自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
@@ -347,7 +348,7 @@ function renderLearningOutline(tab) {
   const stages = [
     { level: '國小', title: '先看懂大方向', detail: '8 種基礎修辭：譬喻、轉化、誇飾、排比、設問、類疊、摹寫、感嘆；先從生活語句找明顯線索。' },
     { level: '國中', title: '拆結構、分細類', detail: '保留國小基礎，再加入 10 種進階修辭；核心大類向下細分，例如譬喻分成明喻、暗喻、略喻、借喻。' },
-    { level: '高中', title: '讀文言、辨複合效果', detail: '再加入互文、示現、錯綜、藏詞、飛白、移覺，並處理多種修辭並用、文言省略與表達效果。' },
+    { level: '高中', title: '讀文言、辨複合效果', detail: '再加入互文、示現、錯綜、鑲嵌、藏詞、飛白、移覺，並處理多種修辭並用、文言省略與表達效果。' },
   ];
   return `<aside class="learning-outline" aria-label="修辭分級大綱">
     <div class="outline-head"><strong>修辭分級大綱</strong><span>從辨認大類，走到結構分析與文本效果</span></div>
@@ -358,6 +359,20 @@ function renderLearningOutline(tab) {
       </section>`;
     }).join('')}</div>
   </aside>`;
+}
+
+function renderSubtypeMap(c) {
+  if (!Array.isArray(c.subtypes) || !c.subtypes.length) return '';
+  const visible = c.subtypes.filter((subtype) => codexLevel === '全部'
+    || SCHOOL_LEVEL_ORDER[subtype.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
+  if (!visible.length) return '';
+  return `<section class="subtype-map" aria-label="${escapeHtml(c.cat)}細分類">
+    <div class="subtype-map-head"><strong>本階段細分類</strong><span>${visible.length} 類</span></div>
+    <div class="subtype-grid">${visible.map((subtype) => `<article class="subtype-item">
+      <div><b>${escapeHtml(subtype.name)}</b><span>${escapeHtml(subtype.level)}</span></div>
+      <p>${escapeHtml(subtype.definition)}</p>
+    </article>`).join('')}</div>
+  </section>`;
 }
 
 function renderDeepSections(c) {

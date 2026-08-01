@@ -143,7 +143,24 @@ const metaphorLecture = await metaphorCard.textContent();
 for (const term of ['喻體', '喻詞', '喻依', '明喻', '暗喻', '略喻', '借喻']) {
   if (!metaphorLecture?.includes(term)) fail(`國中譬喻講義缺 ${term}`);
 }
+const transformCard = page.locator('.concept-card[data-concept-cat="轉化"]');
+const transformSubtypes = await transformCard.locator('.subtype-item b').allTextContents();
+for (const term of ['擬人法', '擬物法', '形象化']) {
+  if (!transformSubtypes.includes(term)) fail(`國中轉化細分類缺 ${term}`);
+}
+if (!(await transformCard.locator('.concept-deep > summary').textContent())?.includes('6 步')) fail('國中轉化未顯示分級六步講義');
+const punCard = page.locator('.concept-card[data-concept-cat="雙關"]');
+const punSubtypes = await punCard.locator('.subtype-item b').allTextContents();
+for (const term of ['字音雙關', '詞義雙關', '語意雙關']) {
+  if (!punSubtypes.includes(term)) fail(`國中雙關細分類缺 ${term}`);
+}
 await page.click('[data-concept-level="高中"]');
+const inlayCard = page.locator('.concept-card[data-concept-cat="鑲嵌"]');
+const inlaySubtypes = await inlayCard.locator('.subtype-item b').allTextContents();
+for (const term of ['鑲字', '嵌字', '增字', '配字']) {
+  if (!inlaySubtypes.includes(term)) fail(`高中鑲嵌細分類缺 ${term}`);
+}
+if (inlaySubtypes.some((term) => term.includes('雙關'))) fail('雙關被錯列為鑲嵌子類');
 await page.click('.tab[data-tab="文法"]');
 await page.evaluate(() => localStorage.removeItem('wenxin-reading-progress-v1'));
 const posCard = page.locator('.concept-card[data-concept-cat="詞性"]');

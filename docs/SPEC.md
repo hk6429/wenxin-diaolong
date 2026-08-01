@@ -147,6 +147,9 @@ shard 派工規則：每個 subagent 只准寫 `data/shards/` 下屬於自己的
   "zone": "修辭", "cat": "譬喻", "level": "國小",
   "definition": "用另一件相似的事物來比方說明……",
   "tips": "口訣或辨識要領",
+  "subtypes": [
+    {"name": "細分類名稱", "level": "國中", "definition": "只在指定學段以上顯示的定義"}
+  ],
   "sections": [
     {"title": "深入主題", "level": "國中", "body": "完整說明", "points": ["辨析一", "辨析二"]},
     {"title": "格式表", "level": "高中", "patterns": [{"name": "類型", "form": "結構公式"}]}
@@ -160,4 +163,4 @@ shard 派工規則：每個 subagent 只准寫 `data/shards/` 下屬於自己的
 ```
 
 每個 cat×最低出現學段一筆；examples 至少 1 韻文 + 1 非韻文（格律區豁免），引文誠信鐵律同上。
-卡片的 `level` 是本站建議的「首次系統學習階段」，不是教育部指定的唯一年級；圖鑑選擇國中或高中時採累積顯示，基礎概念不會從高學段消失。需要完整講授的核心概念可加 `sections` 與 `sources`；每個 section 必須另標 `level`，介面才會依學段過濾解構步驟。`body`、`points`、`patterns` 皆為可選欄位。閱讀完成紀錄以 section 原始索引存入瀏覽器 `localStorage`，篩選學段後百分比只計算當下可見步驟。
+卡片的 `level` 是本站建議的「首次系統學習階段」，不是教育部指定的唯一年級；圖鑑選擇國中或高中時採累積顯示，基礎概念不會從高學段消失。`subtypes` 用於把大類下的細分類延後到適當學段顯示，每筆必須另標 `level`。需要完整講授的核心概念可加 `sections` 與 `sources`；每個 section 也必須另標 `level`，介面才會依學段過濾解構步驟。`body`、`points`、`patterns` 皆為可選欄位。閱讀完成紀錄以 section 原始索引存入瀏覽器 `localStorage`，篩選學段後百分比只計算當下可見步驟。

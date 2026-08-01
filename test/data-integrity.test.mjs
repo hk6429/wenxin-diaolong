@@ -188,3 +188,34 @@ test('國中譬喻必須完整覆蓋四種類型與分級講義', () => {
   assert.ok(questions.some((question) => question.genre === '韻文'), '國中譬喻缺韻文題');
   assert.ok(questions.some((question) => question.genre === '非韻文'), '國中譬喻缺非韻文題');
 });
+
+test('修辭細分類必須依學段深化，不得混成同一層', () => {
+  const concepts = read('concepts.json');
+  const byCat = new Map(concepts.map((item) => [item.cat, item]));
+  const expected = {
+    轉化: ['擬人法', '擬物法', '形象化'],
+    雙關: ['字音雙關', '詞義雙關', '語意雙關'],
+    鑲嵌: ['鑲字', '嵌字', '增字', '配字'],
+  };
+  for (const [cat, names] of Object.entries(expected)) {
+    const card = byCat.get(cat);
+    assert.ok(card, `缺 ${cat} 概念卡`);
+    assert.deepEqual(card.subtypes.map((item) => item.name), names, `${cat} 細分類不完整`);
+    assert.ok(card.subtypes.every((item) => ['國小', '國中', '高中'].includes(item.level)), `${cat} 細分類學段錯誤`);
+  }
+  assert.ok(byCat.get('轉化').subtypes.every((item) => item.level === '國中'), '轉化三類不應提前混入國小');
+  assert.ok(byCat.get('雙關').subtypes.every((item) => item.level === '國中'), '雙關三類應屬國中深化');
+  assert.ok(byCat.get('鑲嵌').subtypes.every((item) => item.level === '高中'), '鑲嵌四類應屬高中深化');
+  assert.ok(!byCat.get('鑲嵌').subtypes.some((item) => item.name.includes('雙關')), '雙關不是鑲嵌子類');
+
+  const junior = read('rhetoric-junior.json');
+  for (const subcat of ['擬人', '擬物', '形象化']) {
+    assert.ok(junior.filter((question) => question.cat === '轉化' && question.subcat === subcat).length >= 4, `國中轉化缺 ${subcat} 題`);
+  }
+  assert.ok(junior.filter((question) => question.cat === '雙關' && question.subcat === '語意雙關').length >= 4, '國中缺語意雙關題');
+
+  const senior = read('rhetoric-senior.json');
+  for (const subcat of ['鑲字', '嵌字']) {
+    assert.ok(senior.filter((question) => question.cat === '鑲嵌' && question.subcat === subcat).length >= 4, `高中鑲嵌缺 ${subcat} 題`);
+  }
+});
