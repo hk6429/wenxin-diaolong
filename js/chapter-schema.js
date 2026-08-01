@@ -37,6 +37,7 @@ export function validateChapter(chapter) {
     }
     if (scene.quest) {
       if (!Number.isInteger(scene.quest.count) || scene.quest.count < 1) errors.push(`${scene.id} 任務題數錯誤`);
+      if (!scene.visual?.art || !['quest', 'duel'].includes(scene.visual?.mode)) errors.push(`${scene.id} 任務缺少合法關卡配圖`);
       const hasCats = Array.isArray(scene.quest.cats) && scene.quest.cats.length;
       const hasLevelCats = LEVELS.every((level) => Array.isArray(scene.quest.catsByLevel?.[level]) && scene.quest.catsByLevel[level].length);
       if (!hasCats && !hasLevelCats) errors.push(`${scene.id} 任務類別必填`);

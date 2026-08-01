@@ -110,6 +110,26 @@
         <span id="quiz-combo" class="combo" hidden></span>
       </div>
       <article class="quiz-card">
+        <section id="quiz-story-visual" class="quiz-story-visual" hidden aria-label="冒險關卡畫面">
+          <img id="quiz-story-image" src="" alt="">
+          <div class="quiz-story-shade"></div>
+          <div class="quiz-story-heading">
+            <small id="quiz-story-kicker">文心試煉</small>
+            <strong id="quiz-story-title"></strong>
+          </div>
+          <div id="quiz-duel-hud" class="quiz-duel-hud" hidden>
+            <div class="quiz-fighter quiz-fighter-player">
+              <b>無名文士</b><span>文氣 <em id="quiz-player-hp">100</em></span>
+              <div class="quiz-hp-track"><i id="quiz-player-hp-bar"></i></div>
+            </div>
+            <div class="quiz-duel-mark">文<small>VS</small></div>
+            <div class="quiz-fighter quiz-fighter-opponent">
+              <b id="quiz-opponent-name"></b><span>文氣 <em id="quiz-opponent-hp">100</em></span>
+              <div class="quiz-hp-track"><i id="quiz-opponent-hp-bar"></i></div>
+            </div>
+          </div>
+          <p id="quiz-battle-log" class="quiz-battle-log"></p>
+        </section>
         <p class="quiz-tag" id="quiz-tag"></p>
         <div class="quiz-question" id="quiz-question"></div>
         <div class="quiz-options" id="quiz-options" role="group" aria-label="選項"></div>

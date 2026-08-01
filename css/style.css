@@ -149,6 +149,31 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
   padding: 16px; border: 1px solid rgba(168, 132, 44, .3);
 }
+.quiz-story-visual {
+  position: relative; min-height: clamp(230px, 45vw, 390px); margin: -16px -16px 16px;
+  overflow: hidden; border-radius: var(--radius) var(--radius) 0 0; background: #172327;
+  color: #fff8df; isolation: isolate;
+}
+.quiz-story-visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.quiz-story-shade { position: absolute; inset: 0; background: linear-gradient(180deg,rgba(8,13,16,.1) 25%,rgba(7,12,15,.84) 100%); }
+.quiz-story-heading { position: absolute; z-index: 1; top: 12px; left: 50%; transform: translateX(-50%); min-width: 190px; padding: 7px 18px; border: 1px solid rgba(244,215,120,.65); border-radius: 8px; background: rgba(25,22,17,.78); text-align: center; box-shadow: 0 7px 20px rgba(0,0,0,.3); }
+.quiz-story-heading small,.quiz-story-heading strong { display: block; }
+.quiz-story-heading small { color: #f4d778; font-size: .7rem; letter-spacing: .12em; }
+.quiz-story-heading strong { margin-top: 2px; font-family: "Noto Serif TC","Songti TC","PMingLiU",serif; font-size: 1.15rem; }
+.quiz-duel-hud { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 42px; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: end; gap: 12px; }
+.quiz-fighter { padding: 10px 12px; border: 1px solid rgba(244,215,120,.52); border-radius: 10px; background: rgba(20,49,64,.86); box-shadow: 0 6px 18px rgba(0,0,0,.3); backdrop-filter: blur(7px); }
+.quiz-fighter-opponent { background: rgba(100,41,29,.86); text-align: right; }
+.quiz-fighter b,.quiz-fighter span { display: flex; justify-content: space-between; gap: 8px; }
+.quiz-fighter b { font-family: "Noto Serif TC","Songti TC","PMingLiU",serif; font-size: 1.05rem; }
+.quiz-fighter span { margin-top: 3px; color: #f5dfa2; font-size: .74rem; }
+.quiz-fighter em { font-style: normal; }
+.quiz-hp-track { height: 8px; margin-top: 5px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 99px; background: rgba(0,0,0,.48); }
+.quiz-hp-track i { display: block; width: 100%; height: 100%; background: #58ae80; transition: width .45s ease; }
+.quiz-fighter-opponent .quiz-hp-track i { margin-left: auto; background: #df5c43; }
+.quiz-duel-mark { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #e2bd5f; border-radius: 50%; background: rgba(30,24,17,.88); color: #f7d86c; font: 900 1.35rem serif; }
+.quiz-duel-mark small { display: block; margin-top: -10px; color: #fff; font: 600 .5rem system-ui; }
+.quiz-battle-log { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; min-height: 34px; margin: 0; padding: 8px 12px; background: rgba(22,19,15,.88); color: #f1dda5; text-align: center; font-size: .72rem; font-weight: 800; }
+.quiz-story-visual:not(.is-duel) .quiz-battle-log { text-align: left; }
 .quiz-tag { margin: 0 0 8px; font-size: .78rem; color: var(--ink-soft); letter-spacing: .1em; }
 .quiz-tag .zone-chip { padding: 2px 8px; border-radius: 999px; color: #fff; margin-right: 6px; }
 .zone-chip.z-修辭 { background: var(--rh); }
@@ -183,6 +208,14 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .explain { font-size: .95rem; white-space: pre-wrap; }
 .citation { color: var(--ink-soft); font-size: .85rem; }
 .official { color: var(--gold); font-size: .85rem; }
+@media(max-width:560px) {
+  .quiz-story-visual { min-height: 285px; }
+  .quiz-duel-hud { left: 8px; right: 8px; bottom: 50px; gap: 6px; }
+  .quiz-fighter { padding: 8px; }
+  .quiz-fighter b { font-size: .86rem; }
+  .quiz-duel-mark { width: 38px; height: 38px; font-size: 1rem; }
+  .quiz-story-heading { top: 8px; padding: 5px 12px; }
+}
 
 /* 圖鑑 */
 .tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }

@@ -80,6 +80,11 @@
         "國中": "定形之網把每句話鎖成唯一模樣。辨清修辭線索，替墨蝶找回變化的可能。",
         "高中": "蝶夢之門拒絕所有超出字面的理解。請以文本線索區分修辭轉化與事實陳述。"
       },
+      "visual": {
+        "mode": "quest", "art": "adventure-zhuangzi-butterfly.webp",
+        "alt": "莊子在蝶夢之門前陪學生迎接墨蝶修辭試煉",
+        "log": "墨蝶困在定形之網中；辨清文字變化，才能替牠鬆開一層束縛。"
+      },
       "quest": {
         "id": "butterfly-quest", "bankKey": "rhetoric", "count": 5,
         "catsByLevel": {
@@ -163,6 +168,11 @@
         "國小": "莊周笑著放出五道蝶影。看清每句話的變化，就能讓文字重新自由。",
         "國中": "莊周以五道蝶影測試你能否從線索辨認修辭、觀點與寓意。",
         "高中": "最後的論藝不問背誦，而問你能否以文本證據支持修辭判讀與合理詮釋。"
+      },
+      "visual": {
+        "mode": "duel", "art": "adventure-zhuangzi-duel.webp", "opponent": "莊子",
+        "alt": "學生在墨蝶與山水之間和莊子展開文心對決",
+        "log": "莊子以『萬物齊一』起手；答對由莊子受創，答錯才由你承受反擊。"
       },
       "quest": {
         "id": "zhuangzi-trial", "bankKey": "rhetoric", "count": 5,

@@ -216,6 +216,12 @@ async function startQuest(scene) {
     title: scene.title,
     annotations: chapter.annotations,
     zhuyinMode: root.zhuyinMode,
+    visual: scene.visual ? {
+      ...scene.visual,
+      title: scene.title,
+      opponent: scene.visual.opponent || definition.figure,
+      image: `assets/img/${scene.visual.art}`,
+    } : null,
     onExit: openAdventureScreen,
     onComplete: (summary) => {
       const meta = deps.getCtx().meta;

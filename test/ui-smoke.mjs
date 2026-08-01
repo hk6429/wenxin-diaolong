@@ -66,6 +66,11 @@ await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForSelector('#quiz-options .opt-btn');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-zhuangzi-butterfly.webp')) fail('蝶夢之門沒有顯示專屬插畫');
+await page.waitForFunction(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0);
+if (!(await page.evaluate(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0))) fail('蝶夢之門配圖載入失敗');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/butterfly-quest.png`, fullPage: true });
 for (let i = 0; i < 5; i += 1) {
   await page.click('#quiz-options .opt-btn');
   await page.waitForSelector('#quiz-feedback:not([hidden])');
@@ -85,7 +90,17 @@ await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForSelector('#quiz-options .opt-btn');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-zhuangzi-duel.webp')) fail('莊子試煉沒有切換對戰配圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '莊子') fail('莊子試煉的對手不是莊子');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/zhuangzi-duel.png`, fullPage: true });
+const hpBefore = await page.evaluate(() => [Number(document.querySelector('#quiz-player-hp').textContent), Number(document.querySelector('#quiz-opponent-hp').textContent)]);
+await page.click('#quiz-options .opt-btn');
+await page.waitForSelector('#quiz-feedback:not([hidden])');
+const hpAfter = await page.evaluate(() => [Number(document.querySelector('#quiz-player-hp').textContent), Number(document.querySelector('#quiz-opponent-hp').textContent)]);
+if ((hpBefore[0] !== hpAfter[0]) === (hpBefore[1] !== hpAfter[1])) fail('莊子對戰每回合必須只有一方扣血');
+await page.click('#btn-next');
 for (let i = 0; i < 5; i += 1) {
+  if (i === 4) break;
   await page.click('#quiz-options .opt-btn');
   await page.waitForSelector('#quiz-feedback:not([hidden])');
   await page.click('#btn-next');
@@ -115,6 +130,16 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
 if (await page.locator('.adventure-chapter-tab').count() !== 2) fail('冒險沒有顯示莊子、屈原兩章');
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原香草之徑沒有顯示專屬插畫');
+await page.waitForFunction(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/quyuan-fragrant.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
 await page.click('[data-adventure-chapter="preqin-zhuangzi"]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('觀物之頁'));
 await page.evaluate(() => {

@@ -161,6 +161,8 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
     title: options.title || '',
     annotations: options.annotations || [],
     zhuyinMode: options.zhuyinMode || 'off',
+    visual: options.visual || null,
+    duel: options.visual?.mode === 'duel' ? { playerHp: 100, opponentHp: 100 } : null,
     completePending: false,
   };
   $('practice-zones').hidden = true;
@@ -191,6 +193,7 @@ function nextQuestion() {
 
 function renderQuestion(e) {
   const isMulti = e.qformat === 'exam-mc-multi';
+  renderQuizVisual();
   $('btn-next').textContent = '下一題（Enter）';
   $('quiz-progress').textContent = quiz.target
     ? `${quiz.title ? quiz.title + '・' : ''}${quiz.answered + 1}／${quiz.target}`
@@ -217,6 +220,44 @@ function renderQuestion(e) {
   });
 }
 
+function renderQuizVisual() {
+  const visual = $('quiz-story-visual');
+  if (!quiz?.visual) {
+    visual.hidden = true;
+    return;
+  }
+  visual.hidden = false;
+  visual.classList.toggle('is-duel', quiz.visual.mode === 'duel');
+  $('quiz-story-image').src = quiz.visual.image;
+  $('quiz-story-image').alt = quiz.visual.alt || `${quiz.visual.title || quiz.title}關卡插畫`;
+  $('quiz-story-kicker').textContent = quiz.visual.mode === 'duel'
+    ? `${quiz.visual.opponent}應戰・第 ${quiz.answered + 1} 回合`
+    : `故事關卡・第 ${quiz.answered + 1} 問`;
+  $('quiz-story-title').textContent = quiz.visual.title || quiz.title;
+  $('quiz-duel-hud').hidden = quiz.visual.mode !== 'duel';
+  $('quiz-battle-log').textContent = quiz.visual.mode === 'duel'
+    ? (quiz.visual.log || `你與${quiz.visual.opponent}各自蓄勢，本回合只會有一方受創。`)
+    : (quiz.visual.log || '觀察畫面與文字線索，再作出判斷。');
+  if (!quiz.duel) return;
+  $('quiz-opponent-name').textContent = quiz.visual.opponent;
+  $('quiz-player-hp').textContent = quiz.duel.playerHp;
+  $('quiz-opponent-hp').textContent = quiz.duel.opponentHp;
+  $('quiz-player-hp-bar').style.width = `${quiz.duel.playerHp}%`;
+  $('quiz-opponent-hp-bar').style.width = `${quiz.duel.opponentHp}%`;
+}
+
+function resolveDuelAnswer(correct) {
+  if (!quiz.duel) return;
+  if (correct) {
+    quiz.duel.opponentHp = Math.max(0, quiz.duel.opponentHp - 20);
+    quiz.visual.log = `你以文本證據破招，${quiz.visual.opponent}文氣 −20；你的文氣不變。`;
+  } else {
+    quiz.duel.playerHp = Math.max(0, quiz.duel.playerHp - 16);
+    quiz.visual.log = `${quiz.visual.opponent}抓住判讀破綻反擊，你的文氣 −16；對手文氣不變。`;
+  }
+  renderQuizVisual();
+}
+
 function toggleMulti(btn, opt) {
   if (quiz.multiPicks.has(opt)) { quiz.multiPicks.delete(opt); btn.dataset.picked = ''; }
   else { quiz.multiPicks.add(opt); btn.dataset.picked = '1'; }
@@ -238,6 +279,7 @@ function submitAnswer(picked) {
   quiz.answered += 1;
   if (correct) quiz.correct += 1;
   recordRound(quiz.rs, e.id, correct);
+  resolveDuelAnswer(correct);
 
   const { events } = onPracticeAnswer(ctx, e.id, correct);
   renderEvents(events);

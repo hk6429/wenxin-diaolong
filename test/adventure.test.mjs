@@ -79,6 +79,9 @@ test('莊子首章具備七幕、三學段、來源分層與可執行任務', ()
   assert.equal(chapter.scenes.length, 7);
   assert.deepEqual(chapter.scenes.map((scene) => scene.id), SCENE_IDS);
   assert.ok(chapter.scenes.some((scene) => scene.quest?.count === 5));
+  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'zhuangzi-trial').visual.mode, 'duel');
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'zhuangzi-trial').visual.opponent, '莊子');
   assert.equal(chapter.storyFrame.vows.length, 3);
   assert.ok(chapter.scenes.every((scene) => scene.choices.length === 3 && scene.factNote));
   assert.ok(chapter.sources.every((source) => ['primary', 'reference', 'fiction'].includes(source.kind)));
@@ -143,6 +146,9 @@ test('屈原第二章具備七幕、三學段、公版來源與四組可執行�
   assert.equal(chapter.scenes.length, 7);
   assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
   assert.equal(chapter.scenes.filter((scene) => scene.quest?.count === 5).length, 4);
+  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'quyuan-trial').visual.mode, 'duel');
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'quyuan-trial').visual.opponent, '屈原');
   assert.equal(chapter.storyFrame.vows.length, 3);
   assert.ok(chapter.scenes.every((scene) => Object.keys(scene.story).length === 3 && scene.choices.length === 3 && scene.factNote));
   assert.ok(chapter.sources.filter((source) => source.kind === 'primary').every((source) => source.url?.startsWith('https://zh.wikisource.org/')));
