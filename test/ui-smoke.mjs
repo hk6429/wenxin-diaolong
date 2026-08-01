@@ -34,11 +34,14 @@ const fail = (msg) => { console.error('FAIL:', msg); process.exitCode = 1; };
 await page.goto(`http://127.0.0.1:${port}/`);
 await page.waitForTimeout(600);
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
+const levelGuide = await page.textContent('#level-guide');
+if (!levelGuide?.includes('國小') || !levelGuide.includes('500 題')) fail('首頁未說明國小專屬題庫與題數');
 
 // 古代冒險：序章→智慧/全文注音→蝶夢五題委託→北冥風口
 await page.click('#btn-adventure');
 await page.waitForSelector('#adventure-stage h2');
 if (!(await page.textContent('#adventure-stage'))?.includes('殘卷飛蝶')) fail('莊子序章未顯示');
+if (!(await page.textContent('#adventure-level-note'))?.includes('五題挑戰會一起更換')) fail('冒險學段差異未說明');
 await page.click('[data-story-level="國中"]');
 await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('教室翻開'));
 await page.click('[data-story-level="高中"]');
@@ -130,6 +133,15 @@ await page.click('#btn-codex');
 await page.waitForTimeout(400);
 const codex = await page.textContent('#codex-body');
 if (!codex?.includes('譬喻') && !codex?.includes('建置中')) fail('圖鑑內容異常: ' + codex?.slice(0, 60));
+if (!(await page.locator('[data-concept-level="國小"]').getAttribute('class'))?.includes('active')) fail('圖鑑未跟隨首頁學段');
+await page.click('[data-concept-level="高中"]');
+await page.click('.tab[data-tab="文法"]');
+const posCard = page.locator('.concept-card', { hasText: '詞性' }).first();
+await posCard.locator('summary').click();
+const posLecture = await posCard.textContent();
+for (const term of ['實詞六類', '虛詞四類', '中綴', '時貌助詞']) {
+  if (!posLecture?.includes(term)) fail(`詞性完整講義缺 ${term}`);
+}
 await page.click('.tab[data-tab="珠"]');
 await page.waitForTimeout(200);
 

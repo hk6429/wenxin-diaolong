@@ -27,6 +27,15 @@ const SCREENS = ['screen-home', 'screen-adventure', 'screen-practice', 'screen-c
 let ctx = null;          // kernel session ctx（依目前學制的 mixed 全庫）
 let fullBank = [];       // 目前學制 mixed 全部題目
 let quiz = null;         // 進行中的練習 {entries, byId, rs, currentId, combo, answered, multiPicks}
+let codexLevel = '全部';
+
+const LEVEL_PROFILES = {
+  國小: { audience: '國小學生', focus: '基礎辨識、生活語句與具體例子', note: '使用國小專屬題庫，從常見修辭、基本詞性、標點、押韻與對聯開始。' },
+  國中: { audience: '國中學生', focus: '會考核心分類、四大句型與跨句辨析', note: '使用國中專屬題庫，加入十種進階修辭、完整詞性、詞語結構、語病、詩體與對仗。' },
+  高中: { audience: '高中學生', focus: '文言語法、細緻辨析與近體詩格律', note: '使用高中專屬題庫，深化實虛詞、文言句式、詞類活用、平仄、詞曲與綜合修辭。' },
+  實戰: { audience: '準備大型考試的學生', focus: '歷屆考題原貌與官方答案', note: '只載入基測、會考、學測、指考等實戰題庫；不是更難的隨機題，也不是裝飾按鈕。' },
+};
+const SCHOOL_LEVEL_ORDER = { 國小: 1, 國中: 2, 高中: 3 };
 
 /* ---------- 初始化與學制 ---------- */
 async function boot() {
@@ -65,6 +74,7 @@ function renderHome() {
   document.querySelectorAll('.level-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.level === getLevel());
   });
+  renderLevelGuides();
   const d = ctx.meta.daily;
   const adventure = ensureAdventure(ctx.meta);
   if (adventure.chapterStatus === 'stable') {
@@ -93,6 +103,15 @@ function renderHome() {
     return `<div class="zone-progress"><span>${zone}：已煉成 ${s.known}／${s.total} 題（精熟 ${s.mastered}）</span>
       <div class="bar"><i style="width:${pct}%;background:${color}"></i></div></div>`;
   }).join('');
+}
+
+function renderLevelGuides() {
+  const level = getLevel();
+  const profile = LEVEL_PROFILES[level];
+  const counts = ['修辭', '文法', '格律'].map((zone) => `${zone} ${fullBank.filter((e) => e.zone === zone).length} 題`).join('・');
+  $('level-guide').innerHTML = `<p><strong>目前是「${level}」專屬題庫</strong>｜適合 ${profile.audience}</p>
+    <p>${profile.note}</p><p class="level-counts">本學段共 ${fullBank.length} 題：${counts}</p>`;
+  $('practice-level-guide').innerHTML = `<strong>現在練的是「${level}」題庫</strong>｜${profile.focus}。切回首頁即可更換學段。`;
 }
 
 /* ---------- 練習流程 ---------- */
@@ -282,6 +301,7 @@ let concepts = null;
 async function renderCodex(tab = '修辭') {
   document.querySelectorAll('.tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
   const body = $('codex-body');
+  $('codex-level-tools').hidden = tab === '珠';
   if (tab === '珠') {
     const col = getCollection(ctx.meta);
     body.innerHTML = `<div class="pearl-stats">${GRADES.map((g, i) =>
@@ -291,7 +311,7 @@ async function renderCodex(tab = '修辭') {
   }
   if (concepts === null) {
     try {
-      const r = await fetch('data/concepts.json');
+      const r = await fetch('data/concepts.json?v=20260801-content-depth');
       concepts = r.ok ? await r.json() : [];
     } catch { concepts = []; }
   }
@@ -299,13 +319,15 @@ async function renderCodex(tab = '修辭') {
     body.innerHTML = '<p>圖鑑建置中，敬請期待。</p>';
     return;
   }
-  const list = concepts.filter((c) => c.zone === tab);
-  body.innerHTML = list.map((c) => {
+  document.querySelectorAll('[data-concept-level]').forEach((b) => b.classList.toggle('active', b.dataset.conceptLevel === codexLevel));
+  const zoneConcepts = concepts.filter((c) => c.zone === tab);
+  const list = zoneConcepts.filter((c) => codexLevel === '全部' || SCHOOL_LEVEL_ORDER[c.level] <= SCHOOL_LEVEL_ORDER[codexLevel]);
+  body.innerHTML = `<p class="codex-summary">${tab}共有 ${zoneConcepts.length} 個主題；目前顯示 ${codexLevel === '全部' ? '全部學段' : `${codexLevel}適用（含前階段基礎）`}的 ${list.length} 個。</p>` + list.map((c) => {
     const bank = fullBank.filter((e) => e.zone === c.zone && e.cat === c.cat);
     const s = getMasteryStats(ctx.meta, bank);
     const lit = s.known >= 5;
     return `<article class="concept-card ${lit ? `lit-${c.zone}` : 'dim'}">
-      <div class="concept-head"><h3>${c.cat}</h3><span class="concept-level">${c.level}起</span>
+      <div class="concept-head"><h3>${c.cat}</h3><span class="concept-level">本站建議：${c.level}起</span>
         <span class="concept-progress">${lit ? '已點亮' : ''} 精通 ${s.known}／${s.total || '—'}</span></div>
       <p class="concept-def">${escapeHtml(c.definition)}</p>
       <p class="concept-tips">💡 ${escapeHtml(c.tips)}</p>
@@ -313,8 +335,24 @@ async function renderCodex(tab = '修辭') {
         <span class="badge ${x.genre === '韻文' ? 'yun' : 'sanwen'}">${x.genre === '韻文' ? '韻' : '文'}</span>${escapeHtml(x.text)}
         <cite>${x.citation ? escapeHtml(x.citation) : '自編例句'}${x.note ? '｜' + escapeHtml(x.note) : ''}</cite>
       </div>`).join('')}
+      ${renderDeepSections(c)}
     </article>`;
   }).join('');
+}
+
+function renderDeepSections(c) {
+  if (!Array.isArray(c.sections) || !c.sections.length) return '';
+  const sources = (c.sources || []).map((s) => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title)}</a>`).join('、');
+  return `<details class="concept-deep">
+    <summary>展開完整講義（${c.sections.length} 節）</summary>
+    ${c.sections.map((section) => `<section class="concept-section">
+      <h4>${escapeHtml(section.title)}</h4>
+      ${section.body ? `<p>${escapeHtml(section.body)}</p>` : ''}
+      ${Array.isArray(section.points) ? `<ul>${section.points.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}</ul>` : ''}
+      ${Array.isArray(section.patterns) ? `<div class="pattern-grid">${section.patterns.map((p) => `<div class="pattern-row"><code>${escapeHtml(p.name)}</code><span>${escapeHtml(p.form)}</span></div>`).join('')}</div>` : ''}
+    </section>`).join('')}
+    ${sources ? `<p class="concept-sources">資料參考：${sources}</p>` : ''}
+  </details>`;
 }
 
 /* ---------- 弱點複習 ---------- */
@@ -373,7 +411,11 @@ function escapeHtml(s) {
 $('btn-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
 document.querySelectorAll('.level-btn').forEach((b) => b.addEventListener('click', () => switchLevel(b.dataset.level)));
 $('btn-practice').addEventListener('click', () => { $('practice-zones').hidden = false; $('quiz-panel').hidden = true; showScreen('screen-practice'); });
-$('btn-codex').addEventListener('click', () => { showScreen('screen-codex'); renderCodex('修辭'); });
+$('btn-codex').addEventListener('click', () => {
+  codexLevel = SCHOOL_LEVEL_ORDER[getLevel()] ? getLevel() : '全部';
+  showScreen('screen-codex');
+  renderCodex('修辭');
+});
 $('btn-weak').addEventListener('click', () => { renderWeak(); showScreen('screen-weak'); });
 $('btn-pets').addEventListener('click', () => { renderPets(); showScreen('screen-pets'); });
 document.querySelectorAll('.zone-card').forEach((b) => b.addEventListener('click', () => startPractice(b.dataset.bank)));
@@ -384,6 +426,11 @@ $('btn-submit-multi').addEventListener('click', () => {
   submitAnswer([...quiz.multiPicks]);
 });
 document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => renderCodex(b.dataset.tab)));
+document.querySelectorAll('[data-concept-level]').forEach((b) => b.addEventListener('click', () => {
+  codexLevel = b.dataset.conceptLevel;
+  const activeTab = document.querySelector('.tab.active')?.dataset.tab || '修辭';
+  renderCodex(activeTab);
+}));
 $('btn-weak-train').addEventListener('click', startWeakTraining);
 $('btn-continue').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; });
 $('btn-rest').addEventListener('click', () => { $('checkpoint-overlay').hidden = true; exitPractice(); });

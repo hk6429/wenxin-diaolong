@@ -71,7 +71,7 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .screen h2 { letter-spacing: .1em; border-left: 5px solid var(--gold); padding-left: 10px; }
 
 /* 首頁 */
-.level-bar { display: flex; gap: 8px; margin: 6px 0 14px; }
+.level-bar { display: flex; gap: 8px; margin: 6px 0 8px; }
 .level-btn {
   flex: 1; min-height: 44px; border: 1.5px solid rgba(92, 83, 70, .4);
   border-radius: 10px; background: var(--card); font-size: 1rem; letter-spacing: .15em;
@@ -80,6 +80,14 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   background: var(--ink); color: var(--paper); border-color: var(--ink);
   box-shadow: inset 0 0 0 1.5px var(--gold);
 }
+.level-guide {
+  background: color-mix(in srgb, var(--card) 88%, var(--gold));
+  border: 1px solid rgba(168, 132, 44, .45); border-radius: 12px;
+  padding: 10px 12px; margin-bottom: 12px; font-size: .88rem;
+}
+.level-guide strong { color: var(--cinnabar); }
+.level-guide p { margin: 2px 0; }
+.level-guide .level-counts { color: var(--ink-soft); }
 .home-today { color: var(--ink-soft); margin: 0 0 12px; font-size: .92rem; }
 .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .entry-card {
@@ -108,6 +116,17 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .zone-progress .bar > i { display: block; height: 100%; border-radius: 4px; }
 
 /* 練功 */
+.practice-level-guide {
+  background: var(--card); border-left: 4px solid var(--gold); border-radius: 8px;
+  padding: 9px 11px; margin: -4px 0 12px; font-size: .88rem; color: var(--ink-soft);
+}
+.practice-level-guide strong { color: var(--ink); }
+.adventure-level-note {
+  margin: 8px 0 12px; padding: 8px 10px; border-radius: 8px;
+  background: color-mix(in srgb, var(--card) 90%, var(--indigo));
+  color: var(--ink-soft); font-size: .84rem;
+}
+.adventure-level-note strong { color: var(--cinnabar); }
 .zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .zone-card {
   min-height: 92px; border-radius: var(--radius); font-size: 1.15rem; letter-spacing: .18em;
@@ -172,6 +191,18 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   border: 1px solid rgba(92, 83, 70, .35); background: var(--card);
 }
 .tab.active { background: var(--ink); color: var(--paper); }
+.codex-level-tools {
+  background: var(--card); border: 1px solid rgba(92, 83, 70, .25);
+  border-radius: 12px; padding: 10px 12px; margin-bottom: 12px;
+}
+.codex-level-tools p { margin: 0 0 8px; font-size: .84rem; color: var(--ink-soft); }
+.concept-level-filter { display: flex; gap: 6px; flex-wrap: wrap; }
+.concept-level-filter button {
+  min-height: 36px; padding: 3px 14px; border-radius: 999px;
+  border: 1px solid rgba(92, 83, 70, .35); background: var(--paper);
+}
+.concept-level-filter button.active { background: var(--cinnabar); color: #fff; border-color: var(--cinnabar); }
+.codex-summary { color: var(--ink-soft); font-size: .86rem; margin: 0 0 10px; }
 .concept-card {
   background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
   padding: 14px; margin-bottom: 12px; border-left: 5px solid var(--ink-soft);
@@ -193,6 +224,20 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .badge.yun { background: var(--yl); }
 .badge.sanwen { background: var(--gr); }
 .concept-ex cite { display: block; color: var(--ink-soft); font-style: normal; font-size: .78rem; margin-top: 2px; }
+.concept-deep {
+  margin-top: 10px; border-top: 1px dashed rgba(92, 83, 70, .35); padding-top: 8px;
+}
+.concept-deep > summary { cursor: pointer; font-weight: bold; color: var(--cinnabar); }
+.concept-section { margin-top: 12px; padding: 10px 11px; background: var(--paper); border-radius: 9px; }
+.concept-section h4 { margin: 0 0 5px; font-size: .98rem; color: var(--indigo); }
+.concept-section p { margin: 4px 0; font-size: .88rem; }
+.concept-section ul { margin: 5px 0 0; padding-left: 1.35em; font-size: .87rem; }
+.concept-section li + li { margin-top: 4px; }
+.pattern-grid { display: grid; gap: 5px; margin-top: 7px; }
+.pattern-row { display: grid; grid-template-columns: minmax(7em, .7fr) 1.3fr; gap: 8px; font-size: .82rem; }
+.pattern-row code { white-space: normal; color: var(--cinnabar); font-family: inherit; font-weight: bold; }
+.concept-sources { margin-top: 10px; font-size: .78rem; color: var(--ink-soft); }
+.concept-sources a { color: var(--indigo); }
 .pearl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
 .pearl-cell {
   background: var(--card); border-radius: 10px; text-align: center; padding: 10px 4px; box-shadow: var(--shadow);

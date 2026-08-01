@@ -126,3 +126,31 @@ test('concepts.json 圖鑑', () => {
     assert.ok(!SIMPLIFIED.test(JSON.stringify(c)), `${c.cat} 含簡體字`);
   }
 });
+
+test('文法與格律核心講義不得再縮成短卡', () => {
+  const arr = read('concepts.json');
+  const byCat = new Map(arr.map((c) => [c.cat, c]));
+  const required = {
+    詞性: ['實詞六類', '虛詞四類', '數量詞', '前綴', '中綴', '後綴', '結構助詞', '時貌助詞', '語氣助詞'],
+    句型: ['敘事句', '有無句', '表態句', '判斷句', '述語核心'],
+    對聯: ['字數', '詞性', '句式', '合掌', '上聯末字仄'],
+    平仄: ['平起不入韻', '平起入韻', '仄起不入韻', '仄起入韻', '孤平', '拗救'],
+  };
+  for (const [cat, terms] of Object.entries(required)) {
+    const card = byCat.get(cat);
+    assert.ok(card, `缺 ${cat} 概念卡`);
+    assert.ok(Array.isArray(card.sections) && card.sections.length >= 5, `${cat} 深入講義不足 5 節`);
+    const text = JSON.stringify(card);
+    for (const term of terms) assert.ok(text.includes(term), `${cat} 講義缺「${term}」`);
+    assert.ok(Array.isArray(card.sources) && card.sources.length, `${cat} 講義缺資料來源`);
+  }
+});
+
+test('國中詞性重點題型皆有足量練習', () => {
+  const questions = read('grammar-junior.json');
+  const minimums = { 數量詞: 6, 助詞分類: 6, 前綴: 2, 中綴: 2, 後綴: 2, 一詞多性: 6 };
+  for (const [subcat, minimum] of Object.entries(minimums)) {
+    const count = questions.filter((question) => question.subcat === subcat).length;
+    assert.ok(count >= minimum, `${subcat} 題數 ${count}，至少須有 ${minimum} 題`);
+  }
+});

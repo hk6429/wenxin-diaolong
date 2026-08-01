@@ -15,6 +15,11 @@ import { shuffle } from './shuffle.js';
 
 const $ = (id) => document.getElementById(id);
 const LEVELS = ['國小', '國中', '高中'];
+const LEVEL_NOTES = {
+  國小: '文字較短、提供注音，委託只抽國小專屬題庫。',
+  國中: '增加概念辨析與四大句型，委託只抽國中專屬題庫。',
+  高中: '加入文言語法與深入格律，委託只抽高中專屬題庫。',
+};
 let deps;
 let chapter;
 
@@ -53,6 +58,7 @@ function renderControls(state) {
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
+  $('adventure-level-note').innerHTML = `<strong>目前冒險：${state.level}版</strong>｜${LEVEL_NOTES[state.level]}切換後，故事文字與五題挑戰會一起更換，不只是按鈕外觀。`;
 }
 
 function renderFound(state) {

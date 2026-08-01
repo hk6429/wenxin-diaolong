@@ -31,6 +31,7 @@
       <button class="level-btn" data-level="高中">高中</button>
       <button class="level-btn" data-level="實戰">實戰</button>
     </div>
+    <aside id="level-guide" class="level-guide" aria-live="polite"></aside>
     <p id="home-today" class="home-today"></p>
     <button class="adventure-hero" id="btn-adventure">
       <span class="adventure-hero-art" aria-hidden="true"><img src="assets/img/zhuangzi.webp" alt="" onerror="this.parentElement.textContent='🦋'"></span>
@@ -85,6 +86,7 @@
         <button data-zhuyin="smart">智慧注音</button><button data-zhuyin="full">全文注音</button><button data-zhuyin="off">關閉注音</button>
       </div>
     </div>
+    <p id="adventure-level-note" class="adventure-level-note" aria-live="polite"></p>
     <article id="adventure-stage" class="adventure-stage" aria-live="polite"></article>
   </section>
 
@@ -92,6 +94,7 @@
   <section id="screen-practice" class="screen" hidden aria-label="練功">
     <div id="practice-zones" class="zone-pick">
       <h2>選擇練功分區</h2>
+      <div id="practice-level-guide" class="practice-level-guide"></div>
       <div class="zone-grid">
         <button class="zone-card zone-rh" data-bank="rhetoric"><span aria-hidden="true">🖌️</span>修辭</button>
         <button class="zone-card zone-gr" data-bank="grammar"><span aria-hidden="true">🏛️</span>文法</button>
@@ -128,6 +131,15 @@
       <button class="tab" role="tab" data-tab="文法">文法</button>
       <button class="tab" role="tab" data-tab="格律">格律</button>
       <button class="tab" role="tab" data-tab="珠">文心珠</button>
+    </div>
+    <div id="codex-level-tools" class="codex-level-tools">
+      <p><strong>依適合學段篩選（累積顯示）</strong>：國中會包含國小基礎，高中會包含前面學段。這是本站教學建議分級，不是教育部規定的唯一年級；首頁學段按鈕則會真正更換整套練功題庫。</p>
+      <div class="concept-level-filter" role="group" aria-label="圖鑑學段篩選">
+        <button data-concept-level="全部">全部</button>
+        <button data-concept-level="國小">國小</button>
+        <button data-concept-level="國中">國中</button>
+        <button data-concept-level="高中">高中</button>
+      </div>
     </div>
     <div id="codex-body"></div>
   </section>

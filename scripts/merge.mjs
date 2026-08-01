@@ -8,9 +8,9 @@ import { validateEntry } from '../js/schema.js';
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const SHARD_DIR = path.join(ROOT, 'data', 'shards');
 
-// shard 檔名（去掉 -A/-B 尾碼）→ 正式檔名
+// shard 檔名（去掉單一大寫英文字尾碼）→ 正式檔名
 function targetOf(name) {
-  return name.replace(/\.json$/, '').replace(/-[AB]$/, '');
+  return name.replace(/\.json$/, '').replace(/-[A-Z]$/, '');
 }
 const LEVEL_CODE = { 國小: 'e', 國中: 'j', 高中: 's', 實戰: 'x' };
 const PREFIX_OF_ZONE = { 修辭: 'rh', 文法: 'gr', 格律: 'yl' };

@@ -147,6 +147,11 @@ shard 派工規則：每個 subagent 只准寫 `data/shards/` 下屬於自己的
   "zone": "修辭", "cat": "譬喻", "level": "國小",
   "definition": "用另一件相似的事物來比方說明……",
   "tips": "口訣或辨識要領",
+  "sections": [
+    {"title": "深入主題", "body": "完整說明", "points": ["辨析一", "辨析二"]},
+    {"title": "格式表", "patterns": [{"name": "類型", "form": "結構公式"}]}
+  ],
+  "sources": [{"title": "資料來源", "url": "https://example.edu.tw/"}],
   "examples": [
     {"text": "問君能有幾多愁？恰似一江春水向東流。", "genre": "韻文", "textForm": "詞", "citation": "李煜〈虞美人〉", "note": "以春水喻愁之綿長"},
     {"text": "他的心像一座冰山。", "genre": "非韻文", "textForm": "一般語句", "citation": "", "note": "明喻：本體（心）、喻詞（像）、喻體（冰山）齊備"}
@@ -155,3 +160,4 @@ shard 派工規則：每個 subagent 只准寫 `data/shards/` 下屬於自己的
 ```
 
 每個 cat×最低出現學段一筆；examples 至少 1 韻文 + 1 非韻文（格律區豁免），引文誠信鐵律同上。
+`level` 是本站建議的「首次系統學習階段」，不是教育部指定的唯一年級；圖鑑選擇國中或高中時採累積顯示，基礎概念不會從高學段消失。需要完整講授的核心概念可加 `sections` 與 `sources`；`body`、`points`、`patterns` 皆為可選欄位。
