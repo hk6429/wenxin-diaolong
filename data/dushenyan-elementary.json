@@ -1,0 +1,52 @@
+[
+  {
+    "id": "gr-e-5001", "level": "國小", "zone": "文法", "cat": "詞性", "subcat": "動詞", "qformat": "gr-pos", "genre": "韻文", "textForm": "古典詩",
+    "question": "『梅柳渡江春』中，哪一個字最能讓春意像正在移動？", "options": ["渡", "梅", "柳", "江"], "answer": "渡",
+    "explain": "『渡』原是越過水面的動作，詩中用來寫梅柳彷彿把春意帶過江，使畫面產生動態。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "易", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "rh-e-5002", "level": "國小", "zone": "修辭", "cat": "摹寫", "subcat": "視覺摹寫", "qformat": "rh-pick", "genre": "韻文", "textForm": "古典詩",
+    "question": "哪一句同時寫到明亮陽光與綠色水草？", "options": ["晴光轉綠蘋", "獨有宦遊人", "忽聞歌古調", "歸思欲霑巾"], "answer": "晴光轉綠蘋",
+    "explain": "『晴光』是明亮的陽光，『綠蘋』是轉綠的水生植物，合起來形成鮮明的早春視覺畫面。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "易", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "gr-e-5003", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "情節順序", "qformat": "gr-pattern", "genre": "韻文", "textForm": "古典詩",
+    "question": "這首詩的內容順序，哪一項最正確？", "options": ["宦遊驚春、描寫春景、聞詩思鄉", "聞詩思鄉、描寫秋景、返家團聚", "先寫戰爭、再寫宴會、最後遠行", "只寫黃鳥，沒有心情變化"], "answer": "宦遊驚春、描寫春景、聞詩思鄉",
+    "explain": "首聯寫宦遊人驚覺物候更新，中間四句鋪寫春景，尾聯則因聞古調而湧起歸思。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "易", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "rh-e-5004", "level": "國小", "zone": "修辭", "cat": "轉化", "subcat": "擬人", "qformat": "rh-identify", "genre": "韻文", "textForm": "古典詩",
+    "question": "『淑氣催黃鳥』把溫暖氣息寫得像會做什麼？", "options": ["催促黃鳥鳴叫", "把黃鳥藏起來", "讓江水停止", "替詩人回家"], "answer": "催促黃鳥鳴叫",
+    "explain": "詩句把無形的暖氣寫成能『催』黃鳥的力量，是把自然現象寫得像具有人的行動能力。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "中", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "gr-e-5005", "level": "國小", "zone": "文法", "cat": "詞性", "subcat": "副詞", "qformat": "gr-pos", "genre": "韻文", "textForm": "古典詩",
+    "question": "『忽聞歌古調』的『忽』最接近哪個意思？", "options": ["忽然", "慢慢", "從來", "一定"], "answer": "忽然",
+    "explain": "『忽』表示突然，寫詩人正看春景時忽然聞得古調，也帶出後面思鄉心情的轉折。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "易", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "yl-e-5006", "level": "國小", "zone": "格律", "cat": "詩體判別", "subcat": "五言律詩", "qformat": "yl-form", "genre": "韻文", "textForm": "古典詩",
+    "question": "〈和晉陵陸丞早春遊望〉共有八句，每句五字，通行分類是哪一種詩體？", "options": ["五言律詩", "七言絕句", "五言絕句", "散曲"], "answer": "五言律詩",
+    "explain": "全詩八句、每句五字，通行詩體分類為五言律詩；此判斷依篇章形式，不靠現代國語聲調推測平仄。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "易", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "gr-e-5007", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "因果理解", "qformat": "gr-pattern", "genre": "韻文", "textForm": "古典詩",
+    "question": "詩人最後為什麼『欲霑巾』？", "options": ["聞到古調，喚起宦遊在外的歸思", "被黃鳥啄傷了眼睛", "江水突然淹過道路", "不喜歡梅花與柳樹"], "answer": "聞到古調，喚起宦遊在外的歸思",
+    "explain": "尾聯把『忽聞歌古調』與『歸思欲霑巾』直接連在一起，說明聞詩觸動思鄉之情。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "中", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "rh-e-5008", "level": "國小", "zone": "修辭", "cat": "摹寫", "subcat": "視聽摹寫", "qformat": "rh-pick", "genre": "韻文", "textForm": "古典詩",
+    "question": "哪一組最能同時代表詩中的視覺與聽覺線索？", "options": ["綠蘋與黃鳥", "宦遊與歸思", "古調與霑巾", "江春與物候"], "answer": "綠蘋與黃鳥",
+    "explain": "綠蘋提供水面轉綠的視覺，黃鳥讓人聯想到春鳥鳴聲，兩者共同豐富早春感官經驗。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "中", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "yl-e-5009", "level": "國小", "zone": "格律", "cat": "詩體判別", "subcat": "句數字數", "qformat": "yl-form", "genre": "韻文", "textForm": "古典詩",
+    "question": "判斷這首詩是五言律詩時，哪一項是可以直接從文字數出的證據？", "options": ["全詩八句，每句五字", "現代國語每字聲調完全相同", "所有句子都沒有動詞", "全詩只有一種景物"], "answer": "全詩八句，每句五字",
+    "explain": "八句、每句五字是可直接核對的形式證據；古代平仄不能只用現代國語聲調硬判。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "中", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  },
+  {
+    "id": "gr-e-5010", "level": "國小", "zone": "文法", "cat": "句型", "subcat": "主旨理解", "qformat": "gr-pattern", "genre": "韻文", "textForm": "古典詩",
+    "question": "這首詩最完整的內容理解是哪一項？", "options": ["描寫江南早春，也抒發宦遊人的思鄉情感", "只介紹四種植物的名稱", "只稱讚春天，完全沒有人的感受", "勸大家離開故鄉去做官"], "answer": "描寫江南早春，也抒發宦遊人的思鄉情感",
+    "explain": "中間兩聯細寫早春物候，首聯點出宦遊身分，尾聯明說歸思，景與情必須合讀。", "origin": "自編", "citation": "通行題署：杜審言〈和晉陵陸丞早春遊望〉", "difficulty": "中", "author": "杜審言", "work": "和晉陵陸丞早春遊望", "attributionNote": "作者歸屬有異說；本站依通行說法收杜審言。"
+  }
+]

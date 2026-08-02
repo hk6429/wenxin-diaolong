@@ -156,7 +156,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險沒有顯示莊子至諸葛亮八章');
+if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險沒有顯示莊子至雙樓二十一章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -212,7 +212,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
-if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險沒有顯示曹丕、曹植與諸葛亮入口');
+if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險沒有顯示曹丕至雙樓入口');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
@@ -265,7 +265,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見司馬遷'));
-if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險章回數不是八章');
+if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險章回數不是二十一章');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-simaqian-archive.webp')) fail('司馬遷篇沒有漢宮書房滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-cover.png`, fullPage: true });
@@ -382,6 +382,265 @@ for (const item of laterChapters) {
   await page.click('#btn-quiz-exit');
   await page.click('#btn-adventure-back');
 }
+
+// 魏晉・嵇康：完成諸葛亮後解鎖，五項委託只抽〈與山巨源絕交書〉
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['shuhan-zhugeliang'].chapterStatus = 'found';
+  meta.adventure.currentChapterId = 'weijin-jikang';
+  meta.adventure.chapterId = 'weijin-jikang';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見嵇康'));
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-jikang-bamboo.webp')) fail('嵇康篇沒有竹林滿版封面');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/jikang-cover.png`, fullPage: true });
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-jikang'].vowId = 'keep-nature';
+  meta.adventure.chapters['weijin-jikang'].sceneIndex = 1;
+  meta.adventure.sceneIndex = 1;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('薦書之門'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-jikang-letter.webp')) fail('嵇康作品關沒有寫信情境圖');
+const jikangElementary = JSON.parse(await readFile(join(ROOT, 'data/jikang-elementary.json'), 'utf8'));
+const jikangQuestions = new Set(jikangElementary.map((entry) => entry.question));
+if (!jikangQuestions.has(await page.textContent('#quiz-question'))) fail('嵇康篇混入非絕交書專屬題庫');
+await page.click('#btn-quiz-exit');
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-jikang'].sceneIndex = 5;
+  meta.adventure.sceneIndex = 5;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('廣陵絕響'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-jikang-duel.webp')) fail('嵇康篇沒有琴筆對戰圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '嵇康') fail('嵇康篇最終對手不是嵇康');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/jikang-duel.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
+await page.click('#btn-adventure-back');
+
+// 魏晉・世說新語：完成嵇康後解鎖，群像故事與劉義慶品藻對戰
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-jikang'].chapterStatus = 'found';
+  meta.adventure.currentChapterId = 'weijin-shishuo';
+  meta.adventure.chapterId = 'weijin-shishuo';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見劉義慶'));
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-shishuo-gathering.webp')) fail('世說篇沒有人物群像滿版封面');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/shishuo-cover.png`, fullPage: true });
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-shishuo'].vowId = 'judge-actions';
+  meta.adventure.chapters['weijin-shishuo'].sceneIndex = 2;
+  meta.adventure.sceneIndex = 2;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('言語之門'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-shishuo-stories.webp')) fail('世說篇題目沒有四則人物故事圖');
+const shishuoElementary = JSON.parse(await readFile(join(ROOT, 'data/shishuo-elementary.json'), 'utf8'));
+const shishuoQuestions = new Set(shishuoElementary.map((entry) => entry.question));
+if (!shishuoQuestions.has(await page.textContent('#quiz-question'))) fail('世說篇混入非世說專屬題庫');
+await page.click('#btn-quiz-exit');
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-shishuo'].sceneIndex = 5;
+  meta.adventure.sceneIndex = 5;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('臨川品藻'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-shishuo-duel.webp')) fail('世說篇沒有品藻對戰圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '劉義慶') fail('世說篇最終對手不是劉義慶');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/shishuo-duel.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
+await page.click('#btn-adventure-back');
+
+// 東晉・陶淵明：核心九幕、三篇專屬作品題與靖節問心對戰
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-shishuo'].chapterStatus = 'found';
+  meta.adventure.currentChapterId = 'weijin-taoyuanming';
+  meta.adventure.chapterId = 'weijin-taoyuanming';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見陶淵明'));
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-taoyuanming-field.webp')) fail('陶淵明篇沒有南山田園滿版封面');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/taoyuanming-cover.png`, fullPage: true });
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-taoyuanming'].vowId = 'seek-source';
+  meta.adventure.chapters['weijin-taoyuanming'].sceneIndex = 1;
+  meta.adventure.sceneIndex = 1;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('桃林初遇'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-options .opt-btn');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-taoyuanming-peach.webp')) fail('陶淵明篇題目沒有桃花源情境圖');
+const taoElementary = JSON.parse(await readFile(join(ROOT, 'data/taoyuanming-elementary.json'), 'utf8'));
+const peachQuestions = new Set(taoElementary.filter((entry) => entry.work === '桃花源記').map((entry) => entry.question));
+if (!peachQuestions.has(await page.textContent('#quiz-question'))) fail('桃花源關卡混入陶淵明其他作品');
+await page.click('#btn-quiz-exit');
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['weijin-taoyuanming'].sceneIndex = 7;
+  meta.adventure.sceneIndex = 7;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('靖節問心'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-taoyuanming-duel.webp')) fail('陶淵明篇沒有靖節問心對戰圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '陶淵明') fail('陶淵明篇最終對手不是陶淵明');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/taoyuanming-duel.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
+await page.click('#btn-adventure-back');
+
+async function smokeWorkChapter(config) {
+  await page.evaluate(({ previousId, chapterId }) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    meta.adventure.chapters[previousId].chapterStatus = 'found';
+    meta.adventure.currentChapterId = chapterId;
+    meta.adventure.chapterId = chapterId;
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+  }, config);
+  await page.reload();
+  await page.click('#btn-adventure');
+  await page.waitForFunction((text) => document.querySelector('#adventure-stage h2')?.textContent.includes(text), config.heroText);
+  if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes(config.cover)) fail(`${config.label}沒有滿版封面`);
+  await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+  await page.evaluate(({ chapterId, vowId, questIndex }) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    meta.adventure.chapters[chapterId].vowId = vowId;
+    meta.adventure.chapters[chapterId].sceneIndex = questIndex;
+    meta.adventure.sceneIndex = questIndex;
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+  }, config);
+  await page.reload();
+  await page.click('#btn-adventure');
+  await page.waitForFunction((text) => document.querySelector('#adventure-stage h2')?.textContent.includes(text), config.questTitle);
+  await page.click('[data-scene-choice]');
+  await page.click('#btn-scene-next');
+  await page.waitForSelector('#quiz-options .opt-btn');
+  if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes(config.sceneArt)) fail(`${config.label}題目沒有情境圖`);
+  const bank = JSON.parse(await readFile(join(ROOT, `data/${config.bank}-elementary.json`), 'utf8'));
+  if (!new Set(bank.map((entry) => entry.question)).has(await page.textContent('#quiz-question'))) fail(`${config.label}混入非本人作品題庫`);
+  await page.click('#btn-quiz-exit');
+  await page.evaluate(({ chapterId, duelIndex }) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    meta.adventure.chapters[chapterId].sceneIndex = duelIndex;
+    meta.adventure.sceneIndex = duelIndex;
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+  }, config);
+  await page.reload();
+  await page.click('#btn-adventure');
+  await page.waitForFunction((text) => document.querySelector('#adventure-stage h2')?.textContent.includes(text), config.duelTitle);
+  await page.click('[data-scene-choice]');
+  await page.click('#btn-scene-next');
+  await page.waitForSelector('#quiz-story-visual:not([hidden])');
+  if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes(config.duelArt)) fail(`${config.label}沒有專屬對戰圖`);
+  if ((await page.textContent('#quiz-opponent-name')) !== config.opponent) fail(`${config.label}最終對手不是${config.opponent}`);
+  await page.click('#btn-quiz-exit');
+  await page.click('#btn-adventure-back');
+}
+
+await smokeWorkChapter({
+  previousId: 'weijin-taoyuanming', chapterId: 'liusong-xielingyun', heroText: '遇見謝靈運', label: '謝靈運篇',
+  cover: 'xielingyun-cover.webp', vowId: 'notice-spring', questIndex: 2, questTitle: '褰窗登樓',
+  sceneArt: 'xielingyun-cover.webp', bank: 'xielingyun', duelIndex: 5, duelTitle: '池樓試煉',
+  duelArt: 'xielingyun-duel.webp', opponent: '謝靈運',
+});
+await smokeWorkChapter({
+  previousId: 'liusong-xielingyun', chapterId: 'weijin-wangxizhi', heroText: '遇見王羲之', label: '王羲之篇',
+  cover: 'adventure-wangxizhi-cover.webp', vowId: 'see-wide', questIndex: 1, questTitle: '群賢畢至',
+  sceneArt: 'adventure-wangxizhi-cover.webp', bank: 'wangxizhi', duelIndex: 5, duelTitle: '蘭亭墨辯',
+  duelArt: 'adventure-wangxizhi-duel.webp', opponent: '王羲之',
+});
+await smokeWorkChapter({
+  previousId: 'weijin-wangxizhi', chapterId: 'early-tang-wangbo', heroText: '遇見王勃', label: '王勃篇',
+  cover: 'adventure-wangbo-pavilion.webp', vowId: 'see-one-color', questIndex: 1, questTitle: '星分翼軫',
+  sceneArt: 'adventure-wangbo-pavilion.webp', bank: 'wangbo', duelIndex: 5, duelTitle: '子安臨席',
+  duelArt: 'adventure-wangbo-duel.webp', opponent: '王勃',
+});
+await smokeWorkChapter({
+  previousId: 'early-tang-wangbo', chapterId: 'early-tang-luobinwang', heroText: '遇見駱賓王', label: '駱賓王篇',
+  cover: 'adventure-luobinwang-camp.webp', vowId: 'hear-position', questIndex: 1, questTitle: '指控卷軸',
+  sceneArt: 'adventure-luobinwang-scroll.webp', bank: 'luobinwang', duelIndex: 5, duelTitle: '檄卷對決',
+  duelArt: 'adventure-luobinwang-duel.webp', opponent: '駱賓王',
+});
+await smokeWorkChapter({
+  previousId: 'early-tang-luobinwang', chapterId: 'early-tang-dushenyan', heroText: '遇見杜審言', label: '杜審言篇',
+  cover: 'adventure-dushenyan-spring.webp', vowId: 'notice-change', questIndex: 1, questTitle: '宦遊人',
+  sceneArt: 'adventure-dushenyan-spring.webp', bank: 'dushenyan', duelIndex: 5, duelTitle: '物候詩陣',
+  duelArt: 'adventure-dushenyan-duel.webp', opponent: '杜審言',
+});
+await smokeWorkChapter({
+  previousId: 'early-tang-dushenyan', chapterId: 'high-tang-libai', heroText: '遇見李白', label: '李白篇',
+  cover: 'adventure-libai-moon.webp', vowId: 'face-hard-road', questIndex: 1, questTitle: '蠶叢鳥道',
+  sceneArt: 'adventure-libai-realms.webp', bank: 'libai', duelIndex: 7, duelTitle: '太白問天',
+  duelArt: 'adventure-libai-duel.webp', opponent: '李白',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-libai', chapterId: 'high-tang-dufu', heroText: '遇見杜甫', label: '杜甫篇',
+  cover: 'adventure-dufu-cottage.webp', vowId: 'cherish-letter', questIndex: 2, questTitle: '花鳥家書',
+  sceneArt: 'adventure-dufu-witness.webp', bank: 'dufu', duelIndex: 7, duelTitle: '少陵對讀',
+  duelArt: 'adventure-dufu-duel.webp', opponent: '杜甫',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-dufu', chapterId: 'high-tang-wangmeng', heroText: '遇見王維與孟浩然', label: '王孟篇',
+  cover: 'adventure-wangmeng-cover.webp', vowId: 'hear-stillness', questIndex: 1, questTitle: '空山新雨',
+  sceneArt: 'adventure-wangmeng-cover.webp', bank: 'wangmeng', duelIndex: 6, duelTitle: '王孟雙璧',
+  duelArt: 'adventure-wangmeng-duel.webp', opponent: '王維・孟浩然',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-wangmeng', chapterId: 'high-tang-frontier', heroText: '遇見高適、王昌齡與岑參', label: '邊塞三家篇',
+  cover: 'adventure-frontier-cover.webp', vowId: 'three-views', questIndex: 1, questTitle: '燕歌出塞',
+  sceneArt: 'adventure-frontier-cover.webp', bank: 'frontier', duelIndex: 7, duelTitle: '三家邊聲',
+  duelArt: 'adventure-frontier-duel.webp', opponent: '高適・王昌齡・岑參',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-frontier', chapterId: 'high-tang-twin-towers', heroText: '遇見王之渙與崔顥', label: '雙樓篇',
+  cover: 'adventure-twintowers-cover.webp', vowId: 'two-routes', questIndex: 2, questTitle: '千里之目',
+  sceneArt: 'adventure-twintowers-cover.webp', bank: 'twintowers', duelIndex: 6, duelTitle: '雙樓對望',
+  duelArt: 'adventure-twintowers-duel.webp', opponent: '王之渙・崔顥',
+});
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');

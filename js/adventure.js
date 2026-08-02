@@ -94,6 +94,162 @@ export const CHAPTERS = Object.freeze([
       '國小': ['詞性', '句型', '類疊', '設問'], '國中': ['借代', '映襯', '文言虛詞', '文言句式'], '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯'],
     } },
   },
+  {
+    id: 'weijin-jikang', order: 9, number: '九', era: '魏晉・竹林', figure: '嵇康', file: 'jikang',
+    title: '魏晉・嵇康〈竹林絕響〉', heroTitle: '走入竹林，遇見嵇康',
+    pageName: '竹林之頁', echoTitle: '琴聲回音', art: 'jikang',
+    sceneIds: ['bamboo-prologue', 'recommendation-scroll', 'seven-unbearables', 'two-impossibles', 'alley-wish', 'jikang-trial', 'archive-return-jikang'],
+    rewards: ['bamboo-page', 'qin-string-token', 'friend-jikang'],
+    echoQuest: { bankKey: 'jikang', count: 3, authors: ['嵇康'], catsByLevel: {
+      '國小': ['詞性', '句型', '摹寫', '設問'],
+      '國中': ['句型', '文言虛詞', '文言句式', '映襯', '引用'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯', '引用'],
+    } },
+  },
+  {
+    id: 'weijin-shishuo', order: 10, number: '十', era: '魏晉南北朝・人物卷', figure: '劉義慶', file: 'shishuo',
+    title: '魏晉・劉義慶《世說新語》〈人物清談〉', heroTitle: '展開人物卷，遇見劉義慶',
+    pageName: '品藻之頁', echoTitle: '世說回音', art: 'shishuo',
+    sceneIds: ['shishuo-prologue', 'cut-mat', 'willow-snow', 'yuanfang-door', 'snow-boat', 'shishuo-trial', 'archive-return-shishuo'],
+    rewards: ['character-page', 'willow-snow-token', 'friend-liuyiqing'],
+    echoQuest: { bankKey: 'shishuo', count: 3, authors: ['劉義慶'], catsByLevel: {
+      '國小': ['詞性', '句型', '摹寫', '譬喻'],
+      '國中': ['句型', '文言虛詞', '文言句式', '映襯', '譬喻'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯', '譬喻'],
+    } },
+  },
+  {
+    id: 'weijin-taoyuanming', order: 11, number: '十一', era: '東晉・田園', figure: '陶淵明', file: 'taoyuanming',
+    title: '東晉・陶淵明〈桃源歸田〉', heroTitle: '循著菊香，遇見陶淵明',
+    pageName: '歸田之頁', echoTitle: '南山回音', art: 'taoyuanming',
+    sceneIds: ['field-prologue', 'peach-forest', 'peach-village', 'lost-path', 'return-home', 'garden-field', 'nanshan-heart', 'taoyuanming-trial', 'archive-return-taoyuanming'],
+    rewards: ['homecoming-page', 'chrysanthemum-token', 'friend-taoyuanming'],
+    echoQuest: { bankKey: 'taoyuanming', count: 3, authors: ['陶淵明'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '設問'],
+      '國中': ['文言虛詞', '文言句式', '設問', '映襯', '詩體判別'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '設問', '映襯', '詩體判別', '意象'],
+    } },
+  },
+  {
+    id: 'liusong-xielingyun', order: 12, number: '十二', era: '劉宋・池樓', figure: '謝靈運', file: 'xielingyun',
+    title: '劉宋・謝靈運〈池草清暉〉', heroTitle: '登上池樓，遇見謝靈運',
+    pageName: '池草之頁', echoTitle: '清暉回音', art: 'xielingyun',
+    sceneIds: ['spring-feather', 'sickroom', 'tower-window', 'spring-grass', 'lake-return', 'xielingyun-trial', 'archive-return-xielingyun'],
+    rewards: ['spring-grass-page', 'clear-radiance-token', 'friend-xielingyun'],
+    echoQuest: { bankKey: 'xielingyun', count: 3, authors: ['謝靈運'], catsByLevel: {
+      '國小': ['詞性', '句型', '摹寫'],
+      '國中': ['句型', '文言句式', '映襯', '摹寫', '引用', '頂真'],
+      '高中': ['文言句式', '映襯', '摹寫', '引用', '頂真', '詩體判別'],
+    } },
+  },
+  {
+    id: 'weijin-wangxizhi', order: 13, number: '十三', era: '東晉・蘭亭', figure: '王羲之', file: 'wangxizhi',
+    title: '東晉・王羲之〈蘭亭集序〉', heroTitle: '循著曲水，遇見王羲之',
+    pageName: '蘭亭之頁', echoTitle: '曲水回音', art: 'wangxizhi',
+    sceneIds: ['lanting-prologue', 'gathering-at-lanting', 'joyful-view', 'feeling-changes', 'life-and-writing', 'wangxizhi-trial', 'archive-return-wangxizhi'],
+    rewards: ['lanting-page', 'flowing-cup-token', 'friend-wangxizhi'],
+    echoQuest: { bankKey: 'wangxizhi', count: 3, authors: ['王羲之'], works: ['蘭亭集序'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '排比'],
+      '國中': ['句型', '文言虛詞', '文言句式', '映襯', '排比'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯', '排比'],
+    } },
+  },
+  {
+    id: 'early-tang-wangbo', order: 14, number: '十四', era: '初唐・洪都', figure: '王勃', file: 'wangbo',
+    title: '初唐・王勃〈滕閣長天〉', heroTitle: '登上滕閣，遇見王勃',
+    pageName: '長天之頁', echoTitle: '滕閣回音', art: 'wangbo',
+    sceneIds: ['tengwang-prologue', 'stars-and-guests', 'autumn-pavilion', 'sky-water', 'fortune-crossroads', 'wangbo-trial', 'archive-return-wangbo'],
+    rewards: ['long-sky-page', 'wild-goose-token', 'friend-wangbo'],
+    echoQuest: { bankKey: 'wangbo', count: 3, authors: ['王勃'], works: ['滕王閣序'], catsByLevel: {
+      '國小': ['詞性', '句型', '摹寫', '排比', '設問', '感嘆', '轉化', '譬喻'],
+      '國中': ['句型', '文言虛詞', '文言句式', '映襯', '引用', '排比', '摹寫'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯', '引用', '排比', '摹寫'],
+    } },
+  },
+  {
+    id: 'early-tang-luobinwang', order: 15, number: '十五', era: '初唐・江都', figure: '駱賓王', file: 'luobinwang',
+    title: '初唐・駱賓王〈檄卷風雷〉', heroTitle: '走入江都，遇見駱賓王',
+    pageName: '辨檄之頁', echoTitle: '檄卷回音', art: 'luobinwang',
+    sceneIds: ['luobinwang-prologue', 'accusation-scroll', 'stolen-throne', 'jiangdu-army', 'realm-appeal', 'luobinwang-trial', 'archive-return-luobinwang'],
+    rewards: ['rhetoric-audit-page', 'evidence-scale-token', 'friend-luobinwang'],
+    echoQuest: { bankKey: 'luobinwang', count: 3, authors: ['駱賓王'], works: ['徐敬業討武曌檄'], catsByLevel: {
+      '國小': ['句型', '詞性', '排比', '摹寫', '設問', '誇飾'],
+      '國中': ['句型', '文言虛詞', '文言句式', '排比', '映襯', '引用', '設問', '誇飾'],
+      '高中': ['句型', '文言虛詞', '文言句式', '排比', '映襯', '引用', '設問', '誇飾'],
+    } },
+  },
+  {
+    id: 'early-tang-dushenyan', order: 16, number: '十六', era: '初唐・江南', figure: '杜審言', file: 'dushenyan',
+    title: '初唐・杜審言〈早春遊望〉', heroTitle: '走入江南早春，遇見杜審言',
+    pageName: '早春之頁', echoTitle: '江南回音', art: 'dushenyan',
+    sceneIds: ['dushenyan-prologue', 'traveler-spring', 'cloud-plum-river', 'yellow-bird-green-duckweed', 'old-song-home-thought', 'dushenyan-trial', 'archive-return-dushenyan'],
+    rewards: ['early-spring-page', 'oriole-token', 'friend-dushenyan'],
+    echoQuest: { bankKey: 'dushenyan', count: 3, authors: ['杜審言'], works: ['和晉陵陸丞早春遊望'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '轉化', '詩體判別'],
+      '國中': ['句型', '摹寫', '轉化', '映襯', '對仗', '詩體判別'],
+      '高中': ['句型', '轉化', '映襯', '對仗', '詞類活用', '詩體判別'],
+    } },
+  },
+  {
+    id: 'high-tang-libai', order: 17, number: '十七', era: '盛唐・天外詩境', figure: '李白', file: 'libai',
+    title: '盛唐・李白〈天外詩境〉', heroTitle: '踏入三境，遇見李白',
+    pageName: '青蓮之頁', echoTitle: '太白回音', art: 'libai',
+    sceneIds: ['libo-prologue', 'shu-road-origins', 'shu-road-thunder', 'tianmu-moonflight', 'tianmu-heaven-gate', 'wine-river', 'wine-feast', 'libo-trial', 'archive-return-libo'],
+    rewards: ['green-lotus-page', 'moon-river-token', 'friend-libai'],
+    echoQuest: { bankKey: 'libai', count: 3, authors: ['李白'], catsByLevel: {
+      '國小': ['句型', '詞性', '譬喻', '轉化', '誇飾', '感嘆', '類疊', '摹寫'],
+      '國中': ['句型', '文言虛詞', '引用', '映襯', '設問', '轉化', '誇飾', '感嘆', '類疊', '摹寫'],
+      '高中': ['文言虛詞', '文言句式', '詞類活用', '引用', '映襯', '誇飾', '感嘆', '摹寫'],
+    } },
+  },
+  {
+    id: 'high-tang-dufu', order: 18, number: '十八', era: '盛唐・人間詩證', figure: '杜甫', file: 'dufu',
+    title: '盛唐・杜甫〈人間詩證〉', heroTitle: '走進詩史，遇見杜甫',
+    pageName: '少陵之頁', echoTitle: '人間回音', art: 'dufu',
+    sceneIds: ['dufu-prologue', 'spring-capital', 'letters-worth-gold', 'stone-village-night', 'old-woman-voice', 'autumn-high-platform', 'endless-river', 'dufu-trial', 'archive-return-dufu'],
+    rewards: ['shaoling-page', 'home-letter-token', 'friend-dufu'],
+    echoQuest: { bankKey: 'dufu', count: 3, authors: ['杜甫'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '詩體判別', '誇飾', '類疊'],
+      '國中': ['句型', '文言句式', '摹寫', '映襯', '詩體判別', '誇飾', '類疊'],
+      '高中': ['句型', '文言句式', '摹寫', '映襯', '詩體判別', '誇飾', '類疊'],
+    } },
+  },
+  {
+    id: 'high-tang-wangmeng', order: 19, number: '十九', era: '盛唐・山水田園', figure: '王維・孟浩然', file: 'wangmeng',
+    title: '盛唐・王維與孟浩然〈空山故莊〉', heroTitle: '走入雙重詩境，遇見王維與孟浩然',
+    pageName: '王孟之頁', echoTitle: '空山故莊回音', art: 'wangmeng',
+    sceneIds: ['wangmeng-prologue', 'empty-mountain-after-rain', 'moon-spring-bamboo-lotus', 'old-friend-chicken-millet', 'field-garden-mulberry-hemp', 'two-landscapes-mirror', 'wangmeng-trial', 'archive-return-wangmeng'],
+    rewards: ['wangmeng-page', 'moon-chrysanthemum-token', 'friend-wangmeng'],
+    echoQuest: { bankKey: 'wangmeng', count: 4, authors: ['王維', '孟浩然'], works: ['山居秋暝', '過故人莊'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '詩體判別'],
+      '國中': ['句型', '詞性', '文言句式', '映襯', '對仗', '詩體判別'],
+      '高中': ['句型', '文言句式', '摹寫', '映襯', '對仗', '詩體判別'],
+    } },
+  },
+  {
+    id: 'high-tang-frontier', order: 20, number: '二十', era: '盛唐・邊塞詩', figure: '高適・王昌齡・岑參', file: 'frontier',
+    title: '盛唐・邊塞三家〈風雪未歸〉', heroTitle: '走入邊塞三重詩境，遇見高適、王昌齡與岑參',
+    pageName: '邊聲之頁', echoTitle: '風雪未歸回音', art: 'frontier',
+    sceneIds: ['frontier-prologue', 'yan-song-departure', 'yan-song-cost', 'moon-pass', 'unreturned-road', 'snow-bloom', 'wheel-tower-farewell', 'frontier-trial', 'archive-return-frontier'],
+    rewards: ['frontier-page', 'snow-moon-token', 'friend-frontier'],
+    echoQuest: { bankKey: 'frontier', count: 6, authors: ['高適', '王昌齡', '岑參'], works: ['燕歌行並序', '出塞其一', '白雪歌送武判官歸京'], catsByLevel: {
+      '國小': ['句型', '詞性', '譬喻', '摹寫', '感嘆'],
+      '國中': ['句型', '譬喻', '映襯', '文言虛詞', '詩體判別'],
+      '高中': ['文言句式', '文言虛詞', '映襯', '互文', '詩體判別'],
+    } },
+  },
+  {
+    id: 'high-tang-twin-towers', order: 21, number: '二十一', era: '盛唐・登樓詩', figure: '王之渙・崔顥', file: 'twintowers',
+    title: '盛唐・王之渙與崔顥〈雙樓望遠〉', heroTitle: '登上雙樓，遇見王之渙與崔顥',
+    pageName: '雙樓之頁', echoTitle: '雙樓望遠回音', art: 'twintowers',
+    sceneIds: ['twin-towers-prologue', 'stork-tower-horizon', 'one-more-storey', 'yellow-crane-legend', 'hanyang-trees', 'sunset-homeland', 'twin-towers-trial', 'archive-return-twin-towers'],
+    rewards: ['twin-towers-page', 'crane-sunset-token', 'friend-twin-towers'],
+    echoQuest: { bankKey: 'twintowers', count: 6, authors: ['王之渙', '崔顥'], works: ['登鸛雀樓', '黃鶴樓'], catsByLevel: {
+      '國小': ['句型', '詞性', '摹寫', '詩體判別'],
+      '國中': ['句型', '文言虛詞', '對仗', '設問', '詩體判別'],
+      '高中': ['文言句式', '文言虛詞', '對仗', '設問', '詩體判別'],
+    } },
+  },
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。
@@ -262,10 +418,14 @@ export function stabilizeChapter(meta, now = new Date(), chapterId = null) {
 
 export function selectQuestEntries(entries, quest) {
   const allowed = new Set(quest?.cats || []);
+  const authors = new Set(quest?.authors || []);
+  const works = new Set(quest?.works || []);
   const count = Math.max(1, Number(quest?.count) || 1);
   const seen = new Set();
   return (entries || []).filter((entry) => {
-    if (!entry?.id || seen.has(entry.id) || !allowed.has(entry.cat)) return false;
+    if (!entry?.id || seen.has(entry.id) || (allowed.size && !allowed.has(entry.cat))) return false;
+    if (authors.size && !authors.has(entry.author)) return false;
+    if (works.size && !works.has(entry.work)) return false;
     seen.add(entry.id);
     return true;
   }).slice(0, count);
