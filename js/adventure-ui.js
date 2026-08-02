@@ -20,6 +20,7 @@ import { renderZhuyin } from './zhuyin.js';
 import { saveMeta } from './meta/store.js';
 import { loadBank } from './bank.js';
 import { shuffle } from './shuffle.js';
+import { buildAdventureViewModel } from './gamification/adventure.js';
 
 const $ = (id) => document.getElementById(id);
 const LEVELS = ['國小', '國中', '高中'];
@@ -153,7 +154,8 @@ function renderControls(root) {
 }
 
 function renderChapterNav(meta, root) {
-  $('adventure-chapters').innerHTML = CHAPTERS.map((definition) => {
+  const chapterNav = $('adventure-chapters');
+  chapterNav.innerHTML = CHAPTERS.map((definition) => {
     const unlocked = isChapterUnlocked(meta, definition.id);
     const active = definition.id === root.currentChapterId;
     const progress = getChapterProgress(meta, definition.id);
@@ -162,11 +164,41 @@ function renderChapterNav(meta, root) {
       <small>第${definition.number}章・${definition.era}</small><b>${definition.figure}</b><span>${stateLabel}</span>
     </button>`;
   }).join('');
+  const activeButton = chapterNav.querySelector('.adventure-chapter-tab.active');
+  if (activeButton) chapterNav.scrollTop = Math.max(0, activeButton.offsetTop - chapterNav.offsetTop - 8);
   document.querySelectorAll('[data-adventure-chapter]').forEach((button) => button.addEventListener('click', () => {
     if (!selectChapter(deps.getCtx().meta, button.dataset.adventureChapter)) return;
     saveMeta(deps.getCtx().meta);
     renderAdventure();
   }));
+}
+
+function renderAdventureGamePanel(meta, root, definition, chapter) {
+  const view = buildAdventureViewModel({
+    definitions: CHAPTERS,
+    chapters: chapterMap,
+    adventure: root,
+    activeChapterId: definition.id,
+    level: root.level,
+    now: new Date(),
+  });
+  const trail = view.sceneTrail.items.map((item) => `<i class="${item.state}" title="第 ${item.position} 幕・${item.title}"></i>`).join('');
+  const vow = view.vowAnchor.selected?.quote || '尚未立誓';
+  const nextLabels = view.nextStep.options.map((item) => ({ echo: '七日回聲', chapter: '下一章', replay: '重遊', scene: '繼續本幕', vow: '選擇立誓' }[item.type] || item.type)).join('・') || '自由閱讀';
+  $('adventure-game-panel').innerHTML = `<div class="adventure-game-summary">
+      <span data-adventure-feature="A01"><small>章回圖譜</small><b>${view.chapterAtlas.totals.unlocked}／${view.chapterAtlas.totals.chapters} 已開放</b></span>
+      <span data-adventure-feature="A08"><small>文友錄</small><b>${view.relationshipLedger.earnedCount} 位同行</b></span>
+      <span data-adventure-feature="A02"><small>本章進度</small><b>${view.chapterHeader.scenePosition}／${view.chapterHeader.sceneCount} 幕</b></span>
+      <span data-adventure-feature="A10"><small>下一步</small><b>${nextLabels}</b></span>
+    </div>
+    <div class="adventure-scene-trail" data-adventure-feature="A03" aria-label="章回幕次軌跡">${trail}</div>
+    <details><summary>打開本章行囊</summary><div class="adventure-journal-grid">
+      <p data-adventure-feature="A04"><b>開卷立誓</b><span>「${vow}」</span></p>
+      <p data-adventure-feature="A05"><b>路徑手記</b><span>已留下 ${view.choiceJournal.selectedCount} 次選擇，不評分、不比較。</span></p>
+      <p data-adventure-feature="A06"><b>史實鏡片</b><span>${view.evidenceLens.sources.length} 項來源・${view.evidenceLens.riskNotes.length} 項版本或史實提醒</span></p>
+      <p data-adventure-feature="A07"><b>章末對手</b><span>${view.duelBeat.opponent || definition.figure}・${view.duelBeat.state}</span></p>
+      <p data-adventure-feature="A09"><b>重遊自主權</b><span>保留獎勵與成績；另有 ${view.replayAgency.alternatePathsAvailable} 條未走路徑。</span></p>
+    </div></details>`;
 }
 
 function renderVow(root, definition, chapter) {
@@ -223,6 +255,7 @@ async function renderAdventure() {
   $('adventure-progress').textContent = `${deps.getPlayerName()}・${progressLabel(definition, progress)}`;
   renderControls(root);
   renderChapterNav(meta, root);
+  renderAdventureGamePanel(meta, root, definition, chapter);
   if (progress.chapterStatus !== 'locked' && !progress.replayActive) {
     renderFound(root, definition, progress);
     return;

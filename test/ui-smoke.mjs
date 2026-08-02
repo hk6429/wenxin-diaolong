@@ -44,6 +44,16 @@ if (!(await page.textContent('#btn-profile'))?.includes('測試文士')) fail('�
 if ((await page.textContent('#journey-total')) !== '0') fail('新玩家累積答題應從 0 開始');
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/journey-dashboard.png`, fullPage: true });
 if (!(await page.textContent('#home-today'))?.trim()) fail('home-today 空白');
+const interfaceIds = await page.locator('[data-interface-id]').evaluateAll((nodes) => [...new Set(nodes.map((node) => node.dataset.interfaceId))]);
+if (interfaceIds.length !== 10) fail(`操作介面專家的十項方案只有 ${interfaceIds.length} 項進入首頁`);
+const retentionIds = await page.locator('[data-retention-id]').evaluateAll((nodes) => [...new Set(nodes.map((node) => node.dataset.retentionId))]);
+if (retentionIds.length !== 10) fail(`健康留存專家的十項方案只有 ${retentionIds.length} 項進入首頁`);
+await page.click('[data-session-size="10"]');
+if (!(await page.getAttribute('[data-session-size="10"]', 'class'))?.includes('active')) fail('十題短回合無法選取');
+await page.click('[data-session-size="5"]');
+await page.click('[data-game-action="calm"]');
+if (!(await page.getAttribute('html', 'class'))?.includes('calm-mode')) fail('靜心模式沒有停用動畫');
+await page.click('[data-game-action="calm"]');
 const levelGuide = await page.textContent('#level-guide');
 if (!levelGuide?.includes('國小') || !levelGuide.includes('527 題')) fail('首頁未說明國小專屬題庫與題數');
 if (await page.locator('.entry-card .entry-art').count() !== 6) fail('六個首頁入口未全部改用配圖');
@@ -56,6 +66,21 @@ if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 // 古代冒險：開卷立誓→章回選擇→智慧/全文注音→五題委託
 await page.click('#btn-adventure');
 await page.waitForSelector('#adventure-stage h2');
+const adventureFeatureIds = await page.locator('[data-adventure-feature]').evaluateAll((nodes) => [...new Set(nodes.map((node) => node.dataset.adventureFeature))]);
+if (adventureFeatureIds.length !== 10) fail(`冒險專家的十項方案只有 ${adventureFeatureIds.length} 項進入章回`);
+const adventureLayout = await page.evaluate(() => {
+  const panel = document.querySelector('#adventure-game-panel');
+  const nav = document.querySelector('#adventure-chapters');
+  const stage = document.querySelector('#adventure-stage');
+  return {
+    panelBeforeAtlas: panel.getBoundingClientRect().top < nav.getBoundingClientRect().top,
+    atlasBeforeStory: nav.getBoundingClientRect().top < stage.getBoundingClientRect().top,
+    atlasViewport: nav.clientHeight,
+    atlasScrollable: nav.scrollHeight > nav.clientHeight,
+  };
+});
+if (!adventureLayout.panelBeforeAtlas || !adventureLayout.atlasBeforeStory) fail('本章狀態、章回圖譜與故事正文的順序錯誤');
+if (adventureLayout.atlasViewport > 270 || !adventureLayout.atlasScrollable) fail('五十七章圖譜沒有收進可捲動區域');
 if (!(await page.textContent('#adventure-stage'))?.includes('開卷立誓')) fail('莊子篇沒有《文豪笑傳》式開卷立誓');
 if (await page.locator('.adventure-cover').count() !== 1) fail('莊子篇沒有滿版章回封面');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-zhuangzi-butterfly.webp')) fail('莊子篇滿版封面未使用章回主視覺');
@@ -705,6 +730,9 @@ const qText = await page.textContent('#quiz-question');
 if (!qText?.trim()) fail('題幹空白');
 await page.click('#quiz-options .opt-btn');
 await page.waitForSelector('#quiz-feedback:not([hidden])');
+const feedbackIds = await page.locator('[data-feedback-id]').evaluateAll((nodes) => [...new Set(nodes.map((node) => node.dataset.feedbackId))]);
+if (feedbackIds.length !== 10) fail(`回饋專家的十項方案只有 ${feedbackIds.length} 項進入答題回饋`);
+if (await page.locator('.session-health span').count() !== 2) fail('作答後沒有休息提醒與收卷摘要');
 if (!(await page.textContent('#quiz-verdict'))?.trim()) fail('verdict 空白');
 await page.click('#btn-next');
 await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });

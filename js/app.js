@@ -12,6 +12,10 @@ import { createRoundState, nextInRound, recordRound, advanceRound } from './prac
 import { shuffle } from './shuffle.js';
 import { shouldCheckpoint } from './session-checkpoint.js';
 import { learningSummary, normalizePlayerName, playerName, setPlayerName } from './profile.js';
+import { buildInterfaceView } from './gamification/interface.js';
+import { buildFeedbackViewModel } from './gamification/feedback.js';
+import { buildRetentionViewModel } from './gamification/retention.js';
+import { gamificationPreferences, initGamificationUI, renderGamificationHub } from './gamification-ui.js';
 
 // 作答結果已透過 toast-zone（aria-live=polite）播報，這裡不需另設播報器
 function announce(_msg) {}
@@ -126,6 +130,21 @@ function renderHome() {
   $('journey-total').textContent = summary.answered;
   $('journey-accuracy').textContent = `${summary.accuracy}%`;
   $('journey-mastered').textContent = summary.mastered;
+  const interfaceView = buildInterfaceView({
+    meta: ctx.meta,
+    bank: fullBank,
+    adventure: progress,
+    chapter: definition,
+    level: getLevel(),
+  });
+  const retention = buildRetentionViewModel(ctx.meta, {
+    now: new Date(),
+    bank: fullBank,
+    sessionAnswered: 0,
+    sessionCorrect: 0,
+    dailyLimit: gamificationPreferences().dailyLimit,
+  });
+  renderGamificationHub({ ...interfaceView, retention });
   const zones = [
     ['修辭', 'var(--rh)'], ['文法', 'var(--gr)'], ['格律', 'var(--yl)'],
   ];
@@ -179,6 +198,7 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
     visual: options.visual || null,
     duel: options.visual?.mode === 'duel' ? { playerHp: 100, opponentHp: 100 } : null,
     completePending: false,
+    recentAttempts: [],
   };
   $('practice-zones').hidden = true;
   $('quiz-panel').hidden = false;
@@ -313,7 +333,20 @@ function submitAnswer(picked) {
   recordRound(quiz.rs, e.id, correct);
   resolveDuelAnswer(correct);
 
+  const beforeBox = ctx.meta.leitner?.[e.id];
   const { events } = onPracticeAnswer(ctx, e.id, correct);
+  quiz.recentAttempts.push({ id: e.id, cat: e.cat, correct });
+  const recentAttempts = quiz.recentAttempts.filter((attempt) => attempt.cat === e.cat).slice(-6);
+  const coach = buildFeedbackViewModel({
+    entry: e,
+    picked,
+    correct,
+    meta: ctx.meta,
+    beforeBox,
+    afterBox: ctx.meta.leitner?.[e.id],
+    recentAttempts,
+    session: { answered: quiz.answered, target: quiz.target },
+  });
   renderEvents(events);
   renderHud();
 
@@ -327,6 +360,13 @@ function submitAnswer(picked) {
   const off = $('quiz-official');
   off.hidden = !(e.origin === '真題' && typeof e.pass === 'number');
   if (!off.hidden) off.textContent = `官方通過率 ${(e.pass * 100).toFixed(0)}%——${e.pass < 0.5 ? '全國考生都覺得難，答對很了不起' : '基本題，務必拿下'}`;
+  const retention = buildRetentionViewModel(ctx.meta, {
+    bank: fullBank,
+    sessionAnswered: quiz.answered,
+    sessionCorrect: quiz.correct,
+    dailyLimit: gamificationPreferences().dailyLimit,
+  });
+  renderQuizCoach(coach, retention);
   $('quiz-feedback').hidden = false;
   if (quiz.target && quiz.answered >= quiz.target) {
     quiz.completePending = true;
@@ -341,6 +381,18 @@ function submitAnswer(picked) {
     $('checkpoint-text').textContent = `你已經連續練了 ${quiz.answered} 題，今日共 ${ctx.meta.daily.todayAnswered} 題。要不要起來動一動？`;
     $('checkpoint-overlay').hidden = false;
   }
+}
+
+function renderQuizCoach(view, retention) {
+  const root = $('quiz-coach');
+  if (!view || !root) return;
+  const primary = ['F04', 'F06', 'F09'].map((id) => view.features[id]);
+  root.innerHTML = `<div class="quiz-coach-primary">${primary.map((item) => `<div><b>${escapeHtml(item.title)}</b><span>${escapeHtml(item.message)}</span></div>`).join('')}</div>
+    <div class="session-health"><span>${escapeHtml(retention.R03.message)}</span><span>${escapeHtml(retention.R10.message)}</span></div>
+    <details><summary>查看完整精熟回饋</summary><div class="quiz-coach-grid">${view.featureOrder.map((id) => {
+      const item = view.features[id];
+      return `<article data-feedback-id="${id}"><small>${id}</small><b>${escapeHtml(item.title)}</b><p>${escapeHtml(item.message)}</p><em>${escapeHtml(item.action)}</em></article>`;
+    }).join('')}</div></details>`;
 }
 
 function exitPractice() {
@@ -701,6 +753,15 @@ const adventureDeps = {
 };
 initAdventureUI(adventureDeps);
 $('btn-adventure').addEventListener('click', openAdventureScreen);
+initGamificationUI({
+  adventure: openAdventureScreen,
+  weak: () => { renderWeak(); showScreen('screen-weak'); },
+  practice: (zone, limit) => {
+    const bankKey = { 修辭: 'rhetoric', 文法: 'grammar', 格律: 'prosody' }[zone] || 'mixed';
+    startPractice(bankKey, null, { limit, title: `${zone}短回合` });
+  },
+  refresh: renderHome,
+});
 
 document.addEventListener('keydown', (ev) => {
   if (!quiz || $('quiz-panel').hidden) return;
