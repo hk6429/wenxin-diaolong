@@ -197,6 +197,7 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `scripts/level-design.mjs`＋`scripts/strengthen-adventure-levels.mjs`：五十七章共用的學段能力模型與題庫產生器
 - `assets/img/adventure-{key}-{cover,scene,duel}.webp`：各章滿版封面、作品關卡與本人對戰圖
 - `assets/img/zone-{rhetoric,grammar,prosody,mixed}.webp`：四個練功分區的原創生圖卡片
+- `assets/img/site-background-v1.webp`：全站固定式水墨文學宇宙背景；中央留白供閱讀、兩側承接沉浸場景
 - `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
 - `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；
   鏡像平台透過 `js/meta/api.js` 打回權威平台 `wenxin-diaolong.pages.dev`

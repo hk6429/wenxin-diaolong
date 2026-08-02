@@ -62,6 +62,15 @@ if (await page.locator('img[src*="visitor-badge.laobi.icu"]').count() !== 0) fai
 if (await page.locator('script[data-site="wenxin-diaolong"]').count() !== 1) fail('右下角共用學習工具未接入');
 const failedEntryArt = await page.locator('.entry-card .entry-art').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
 if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
+const siteBackground = await page.evaluate(async () => {
+  const backgroundImage = getComputedStyle(document.body, '::before').backgroundImage;
+  const image = new Image();
+  image.src = 'assets/img/site-background-v1.webp';
+  await image.decode();
+  return { backgroundImage, width: image.naturalWidth, height: image.naturalHeight };
+});
+if (!siteBackground.backgroundImage.includes('site-background-v1.webp')) fail('全版沉浸背景沒有套用到網站');
+if (siteBackground.width !== 1536 || siteBackground.height !== 1024) fail('全版沉浸背景尺寸或檔案載入異常');
 
 // 六個首頁入口都要有清楚可見的返回首頁按鈕，不要求學生猜「站名可以按」。
 for (const [entryId, screenId, backId] of [

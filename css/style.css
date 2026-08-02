@@ -38,15 +38,41 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; padding: 0; }
+html { background: var(--paper); }
 body {
-  background:
-    radial-gradient(1200px 500px at 85% -10%, rgba(168, 132, 44, .10), transparent 60%),
-    radial-gradient(900px 420px at -10% 110%, rgba(179, 64, 42, .08), transparent 55%),
-    var(--paper);
+  position: relative;
+  isolation: isolate;
+  background: transparent;
   color: var(--ink);
   font-family: "Noto Serif TC", "Songti TC", "PMingLiU", "Microsoft JhengHei", serif;
   line-height: 1.6;
   min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(245,239,226,.58),rgba(245,239,226,.72)),
+    radial-gradient(ellipse at center,rgba(255,253,247,.32),rgba(245,239,226,.08) 58%,rgba(35,48,48,.12)),
+    url("../assets/img/site-background-v1.webp");
+  background-position: center,center,center top;
+  background-size: auto,auto,cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background-image:
+      linear-gradient(rgba(20,17,14,.72),rgba(20,17,14,.82)),
+      radial-gradient(ellipse at center,rgba(20,17,14,.08),rgba(9,13,14,.3)),
+      url("../assets/img/site-background-v1.webp");
+  }
+}
+@media (max-width: 560px) {
+  body::before { background-position: center,center,30% center; background-size: auto,auto,auto 100vh; }
 }
 button { font-family: inherit; color: inherit; cursor: pointer; }
 .skip-link { position: absolute; left: -999px; top: 0; background: var(--card); padding: .5em 1em; z-index: 99; }
