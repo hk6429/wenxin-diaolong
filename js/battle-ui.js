@@ -98,18 +98,26 @@ async function startBattle(master) {
     timer: null,
   };
   $('duel-stage').innerHTML = `
-    <div class="duel-hp-row">
-      <div class="duel-side"><span>${escapeHtml(deps.getPlayerName?.() || '你')}</span><div class="bar hp-a"><i></i></div><b id="hp-a-num"></b></div>
-      <div class="duel-vs">⚔️</div>
-      <div class="duel-side"><span>${master.icon} ${master.name.split('・').pop()}</span><div class="bar hp-b"><i></i></div><b id="hp-b-num"></b></div>
+    <section class="master-battle-board">
+    <div class="master-battle-visual">
+      <img src="assets/img/rt-computer-arena.webp" alt="${escapeHtml(deps.getPlayerName?.() || '你')}與${escapeHtml(master.name.split('・').pop())}在書院山門以文會武" onerror="this.src='assets/img/home-duel.webp'">
+      <div class="master-round-banner"><small>文心試煉・${escapeHtml(master.specialty)}</small><b id="duel-round">第 1 回合</b><span id="duel-phase">輪到你出招</span></div>
+      <div class="duel-hp-row" id="master-hp-row">
+        <div class="duel-side master-fighter master-fighter-a"><span>${escapeHtml(deps.getPlayerName?.() || '你')}</span><small class="rt-loadout">文心門生・境界試煉</small><div class="rt-statline"><b>文氣 <em id="hp-a-num"></em></b><small id="duel-combo" class="master-combo" hidden></small></div><div class="bar hp-a"><i></i></div><div class="rt-skills"><b>你的招式</b><span>識義・答對造成 10 點</span><span>連珠・三連後造成 15 點</span></div></div>
+        <div class="duel-vs"><span>文</span><small>VS</small></div>
+        <div class="duel-side master-fighter master-fighter-b"><img class="master-fighter-avatar" src="assets/img/${master.id}.webp" alt="" onerror="this.hidden=true"><span>${escapeHtml(master.name.split('・').pop())}</span><small class="rt-loadout">${escapeHtml(master.specialty)}・大師應戰</small><div class="rt-statline"><b>文氣 <em id="hp-b-num"></em></b><small>反擊 ${master.atk} 點</small></div><div class="bar hp-b"><i></i></div><div class="rt-skills"><b>大師招式</b><span>破綻・答錯立即反擊</span><span>守關・文氣歸零方落敗</span></div></div>
+      </div>
+      <div class="master-battle-rules"><span>你先出招・大師後應招</span><span>答錯受反擊・三連發動強招</span><span>文氣歸零即分勝負</span></div>
     </div>
-    <p id="duel-combo" class="combo" hidden></p>
-    <article class="quiz-card">
+    <p id="duel-action-log" class="rt-action-log player-turn" aria-live="polite">輪到你出招</p>
+    <p id="duel-progress" class="home-today"></p>
+    <article class="quiz-card rt-quiz-card">
       <p class="quiz-tag" id="duel-tag"></p>
       <div class="quiz-question" id="duel-question"></div>
       <div class="quiz-options" id="duel-options" role="group" aria-label="選項"></div>
       <p class="duel-feedback" id="duel-feedback" hidden></p>
-    </article>`;
+    </article>
+    </section>`;
   renderHp();
   nextDuelQuestion();
 }
@@ -133,6 +141,13 @@ function nextDuelQuestion() {
   if (battle.qi >= battle.queue.length) battle.qi = 0; // 題庫循環
   const e = battle.queue[battle.qi++];
   battle.current = e;
+  if ($('duel-round')) $('duel-round').textContent = `第 ${battle.qi} 回合`;
+  if ($('duel-phase')) $('duel-phase').textContent = '輪到你出招';
+  if ($('duel-progress')) $('duel-progress').textContent = `已出招 ${battle.qi} 次・最佳連擊 ${battle.bestCombo}`;
+  if ($('duel-action-log')) {
+    $('duel-action-log').className = 'rt-action-log player-turn';
+    $('duel-action-log').textContent = '輪到你出招';
+  }
   $('duel-tag').innerHTML = `<span class="zone-chip z-${e.zone}">${e.zone}</span>${e.cat}`;
   $('duel-question').textContent = e.question;
   $('duel-feedback').hidden = true;
@@ -161,6 +176,7 @@ function answerDuel(picked) {
   });
 
   // 玩家出招
+  const beforeHpB = battle.state.hpB;
   const r = applyAnswerEx(battle.state, 'A', correct, battle.bctx);
   battle.state = r.state; battle.bctx = r.ctx;
   for (const ev of r.events) { const label = evLabel(ev); if (label) deps.toast(label); }
@@ -179,8 +195,16 @@ function answerDuel(picked) {
     const dmg = masterStrike(battle.master, battle.state.hpA);
     battle.state = { ...battle.state, hpA: Math.max(0, battle.state.hpA - dmg) };
     fb.textContent = `正解：${answers.join('、')}　${battle.master.icon} 大師出招，你受了 ${dmg} 點傷！`;
+    if ($('duel-action-log')) {
+      $('duel-action-log').className = 'rt-action-log computer-turn';
+      $('duel-action-log').textContent = `${battle.master.name.split('・').pop()}看破破綻，反擊 ${dmg} 點文氣`;
+    }
+    if ($('duel-phase')) $('duel-phase').textContent = '大師反擊';
   } else {
-    fb.textContent = '好招！';
+    const dmg = Math.max(0, Math.round(beforeHpB - battle.state.hpB));
+    fb.textContent = `好招！你削減了大師 ${dmg} 點文氣。`;
+    if ($('duel-action-log')) $('duel-action-log').textContent = `招式命中，削減 ${dmg} 點文氣`;
+    if ($('duel-phase')) $('duel-phase').textContent = '招式命中';
   }
   fb.hidden = false;
   renderHp();

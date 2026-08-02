@@ -115,6 +115,9 @@
 切換為文心對戰，五十七章都由該章文人本人應戰。答對只扣對手文氣，答錯
 只扣玩家文氣，雙方不會在同一題同時受傷。
 
+練功區的修辭、文法、格律與綜合入口均使用原創生圖卡片；文心大師試煉則與電腦
+過招共用沉浸式戰場語言，將人物對峙、雙方文氣、回合、招式與戰報整合在主視覺內。
+
 已完成的章回提供「重新遊歷本章」：會重新選擇開卷立誓並清空本輪三選一故事路線，
 但保留原有收藏獎勵、七日回聲與後續章節解鎖，不必刪除整站進度。
 
@@ -186,6 +189,7 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `data/{key}-{elementary,junior,senior}.json`：三十二位文人的三級作品專屬題庫
 - `scripts/level-design.mjs`＋`scripts/strengthen-adventure-levels.mjs`：五十七章共用的學段能力模型與題庫產生器
 - `assets/img/adventure-{key}-{cover,scene,duel}.webp`：各章滿版封面、作品關卡與本人對戰圖
+- `assets/img/zone-{rhetoric,grammar,prosody,mixed}.webp`：四個練功分區的原創生圖卡片
 - `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
 - `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；
   鏡像平台透過 `js/meta/api.js` 打回權威平台 `wenxin-diaolong.pages.dev`

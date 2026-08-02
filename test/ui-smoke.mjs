@@ -695,6 +695,10 @@ for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 26)) {
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');
+if (await page.locator('.zone-card > img').count() !== 4) fail('四個練功分區未全部改用生圖卡片');
+if (await page.locator('.zone-card [aria-hidden="true"]').count()) fail('練功分區仍殘留 emoji icon');
+const failedZoneArt = await page.locator('.zone-card > img').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
+if (failedZoneArt) fail(`練功分區有 ${failedZoneArt} 張生圖載入失敗`);
 await page.click('.zone-card.zone-rh');
 await page.waitForSelector('#quiz-options .opt-btn');
 const qText = await page.textContent('#quiz-question');
@@ -814,6 +818,10 @@ if (unlockedMasters.length !== 1) fail(`新玩家可挑戰大師數 ${unlockedMa
 await unlockedMasters[0].click();
 await page.click('#btn-duel-start');
 await page.waitForSelector('#duel-options .opt-btn');
+if (await page.locator('.master-battle-visual > img').count() !== 1) fail('文心大師對戰缺少沉浸式戰場主視覺');
+if (!(await page.locator('.master-round-banner').textContent())?.includes('第 1 回合')) fail('文心大師對戰缺少回合資訊');
+if (await page.locator('.master-fighter').count() !== 2) fail('文心大師對戰不是雙方對峙版面');
+if (!(await page.locator('.master-battle-rules').textContent())?.includes('三連')) fail('文心大師對戰缺少招式規則');
 await page.click('#duel-options .opt-btn');
 await page.waitForSelector('#duel-feedback:not([hidden])');
 const hpB = await page.textContent('#hp-b-num');

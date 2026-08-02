@@ -144,11 +144,18 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .adventure-level-note strong { color: var(--cinnabar); }
 .zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .zone-card {
-  min-height: 92px; border-radius: var(--radius); font-size: 1.15rem; letter-spacing: .18em;
-  background: var(--card); border: 1px solid rgba(92, 83, 70, .25); box-shadow: var(--shadow);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  position: relative; min-height: 172px; overflow: hidden; isolation: isolate;
+  border: 1px solid rgba(240,212,135,.42); border-radius: 16px;
+  background: #202321; color: #fff8e8; cursor: pointer;
+  box-shadow: 0 12px 26px rgba(48,34,22,.18); text-align: left;
 }
-.zone-card span { font-size: 1.5rem; }
+.zone-card > img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.zone-card::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg,rgba(10,14,14,.04) 22%,rgba(11,14,14,.88) 100%); }
+.zone-card > span { position: absolute; inset: auto 16px 13px; display: grid; gap: 2px; text-shadow: 0 2px 10px rgba(0,0,0,.88); }
+.zone-card b { font-family: "Noto Serif TC","Songti TC","PMingLiU",serif; font-size: 1.35rem; letter-spacing: .08em; }
+.zone-card small { color: rgba(255,248,232,.8); font-size: .7rem; font-weight: 700; letter-spacing: .05em; }
+.zone-card:hover > img { transform: scale(1.04); }
+.zone-card:focus-visible { outline: 3px solid color-mix(in srgb,var(--gold) 70%,white); outline-offset: 3px; }
 .zone-rh { border-bottom: 4px solid var(--rh); }
 .zone-gr { border-bottom: 4px solid var(--gr); }
 .zone-yl { border-bottom: 4px solid var(--yl); }
@@ -415,6 +422,10 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 
 @media (max-width: 420px) {
   .entry-grid, .zone-grid, .pets-grid { grid-template-columns: 1fr 1fr; }
+  .zone-card { min-height: 140px; }
+  .zone-card > span { inset: auto 10px 10px; }
+  .zone-card b { font-size: 1.08rem; }
+  .zone-card small { font-size: .58rem; }
   .metrical-grid { grid-template-columns: 1fr; }
   .metrical-head { align-items: flex-start; flex-direction: column; }
   .metrical-head span { text-align: left; }
@@ -449,6 +460,25 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .duel-side .hp-b > i { background: linear-gradient(90deg, var(--cinnabar), #d98a76); }
 .duel-vs { font-size: 1.3rem; }
 .duel-feedback { font-weight: 700; margin-top: 8px; }
+.master-battle-board { display: grid; gap: 12px; }
+.master-battle-visual { position: relative; min-height: 500px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(168,132,44,.55); box-shadow: 0 18px 42px rgba(43,29,18,.22); background: #171b1c; }
+.master-battle-visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.master-battle-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(18,20,24,.54),transparent 34%,transparent 62%,rgba(20,16,12,.72)); pointer-events: none; }
+.master-round-banner { position: absolute; z-index: 3; left: 50%; top: 14px; transform: translateX(-50%); min-width: 220px; padding: 6px 18px 8px; border: 1px solid rgba(240,212,135,.7); border-radius: 6px; background: rgba(35,27,20,.88); color: #fff1c4; text-align: center; box-shadow: 0 5px 18px rgba(0,0,0,.25); }
+.master-round-banner small { display: block; color: #d8b85d; font-size: .65rem; letter-spacing: .2em; }
+.master-round-banner b { display: block; margin-top: 1px; font-size: 1.05rem; }
+.master-round-banner span { display: block; margin-top: 2px; color: rgba(255,255,255,.8); font-size: .58rem; letter-spacing: .08em; }
+.master-fighter { position: relative; box-sizing: border-box; width: min(40%,250px); padding: 11px 13px; border: 1px solid rgba(240,212,135,.5); border-radius: 10px; color: #fff; backdrop-filter: blur(8px); box-shadow: 0 5px 16px rgba(0,0,0,.28); }
+.master-fighter-a { background: rgba(24,55,73,.82); }
+.master-fighter-b { background: rgba(99,38,28,.82); text-align: right; }
+.master-fighter > span { font-weight: 900; font-size: 1rem; }
+.master-battle-visual .duel-hp-row { position: absolute; z-index: 3; inset: auto 16px 62px; margin: 0; align-items: end; }
+.master-battle-visual .bar { background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.18); }
+.master-battle-visual .duel-vs { align-self: end; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(36,27,18,.86); color: #f8d768; border: 1px solid #d8b85d; font-family: serif; font-size: 1.45rem; }
+.master-battle-visual .duel-vs small { display: block; margin-top: -7px; color: #fff; font: 600 .5rem system-ui; }
+.master-battle-rules { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; min-height: 34px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 18px; padding: 6px 12px; background: rgba(28,22,17,.84); color: #f3dfaa; font-size: .66rem; }
+.master-fighter-avatar { position: absolute; right: 10px; top: -44px; width: 58px; height: 58px; border: 2px solid rgba(240,212,135,.7); border-radius: 50%; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,.38); }
+.master-combo { color: #f4d778 !important; }
 .rt-field { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0; }
 .rt-field input {
   font: inherit; padding: 8px 10px; border: 1px solid var(--paper-deep); border-radius: 8px;
@@ -543,4 +573,5 @@ ruby{ruby-align:center}rt{font-size:.48em;color:var(--cinnabar);font-family:syst
 @media(max-width:560px){.adventure-hero{padding:14px;gap:10px;min-height:120px}.adventure-hero-art{flex-basis:86px;height:86px}.adventure-stage{min-height:430px;padding:26px 20px}.adventure-stage-cinematic{padding:0}.adventure-cover{min-height:440px}.adventure-cover>img{object-position:68% center}.adventure-cover-warring-quyuan>img{object-position:62% center}.adventure-cover::after{background:linear-gradient(0deg,rgba(8,14,15,.96) 0%,rgba(10,18,19,.68) 52%,rgba(10,18,19,.06) 78%)}.adventure-cover-copy{width:100%;padding:30px 24px}.adventure-cover-copy h2{font-size:clamp(2rem,11vw,3rem)}.adventure-stage-body{padding:24px 20px}.mini-switch{width:100%;justify-content:center}.mini-switch button{flex:1;padding-inline:4px;font-size:.86rem}.story-vows{grid-template-columns:1fr}.story-scene{clear:both;padding:13px 14px}.story-choice{min-height:50px}}
 @media(max-width:560px){.journey-metrics{grid-template-columns:repeat(2,1fr)}.journey-metrics>div{min-height:54px}.profile-pill{order:3}.hud{justify-content:flex-end}}
 @media(max-width:560px){.entry-card{min-height:176px}.entry-art{height:96px}.entry-title{margin:8px 10px 0;font-size:.95rem}.entry-desc{margin:0 10px 10px;font-size:.7rem}.rt-lobby-hero{min-height:230px}.rt-lobby-panel{margin:-18px 8px 0;padding:13px}.rt-mode-card{align-items:stretch;flex-direction:column}.rt-mode-card .primary-btn{width:100%}.rt-battle-visual{min-height:430px}.rt-battle-visual .duel-hp-row{inset:auto 8px 56px;gap:5px}.rt-fighter{width:43%;padding:7px}.rt-skills{font-size:.52rem}.rt-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.rt-battle-rules{gap:4px 8px}.rt-round-banner{top:8px;min-width:180px}.rt-result{min-height:430px}.rt-result-content{inset:auto 10px 10px;grid-template-columns:auto 1fr;gap:10px}.rt-result-content .primary-btn{grid-column:1/-1;width:100%}.rt-result-content .rt-verdict-seal{width:58px;height:58px}.rt-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch;width:100%}.rt-actions #btn-rt-create,.rt-actions .rt-or{grid-column:1/-1}.rt-actions #btn-rt-create{width:100%}.rt-actions .rt-or{text-align:center}.rt-actions .rt-field{display:grid;grid-template-columns:auto minmax(0,1fr);min-width:0;margin:0}.rt-actions .rt-field input{width:100%;min-width:0}.rt-actions #btn-rt-join{white-space:nowrap}}
+@media(max-width:560px){.master-battle-visual{min-height:430px}.master-battle-visual .duel-hp-row{inset:auto 8px 56px;gap:5px}.master-fighter{width:43%;padding:7px}.master-battle-visual .duel-vs{width:40px;height:40px;font-size:1.1rem}.master-fighter-avatar{width:44px;height:44px;top:-34px}.master-battle-rules{gap:4px 8px}.master-round-banner{top:8px;min-width:180px}}
 @media(prefers-reduced-motion:reduce){.rt-hit.show,.rt-fighter.hit{animation:none}.rt-hit.show{opacity:1}}
