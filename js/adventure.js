@@ -1,5 +1,22 @@
 import { EXTENDED_CHAPTERS } from './adventure-chapters.js';
 
+const READING_CATS_BY_LEVEL = Object.freeze({
+  '國小': Object.freeze(['明示訊息', '事件順序', '字詞理解', '簡單推論', '文體辨識']),
+  '國中': Object.freeze(['句意詮釋', '段落結構', '修辭作用', '推論統整', '觀點辨析']),
+  '高中': Object.freeze(['證據評鑑', '章法分析', '多元詮釋', '思想辨析', '版本文體']),
+});
+
+function withReadingEcho(chapter) {
+  return {
+    ...chapter,
+    echoQuest: {
+      ...chapter.echoQuest,
+      catsByLevel: READING_CATS_BY_LEVEL,
+      cats: undefined,
+    },
+  };
+}
+
 export const CHAPTERS = Object.freeze([
   {
     id: 'preqin-zhuangzi', order: 1, number: '一', era: '先秦', figure: '莊子', file: 'zhuangzi',
@@ -7,7 +24,12 @@ export const CHAPTERS = Object.freeze([
     pageName: '觀物之頁', echoTitle: '蝶夢回聲', art: 'zhuangzi',
     sceneIds: ['modern-prologue', 'butterfly-gate', 'north-sea', 'cook-maze', 'hao-river', 'zhuangzi-trial', 'archive-return'],
     rewards: ['observation-page', 'dream-butterfly-bookmark', 'friend-zhuangzi'],
-    echoQuest: { bankKey: 'rhetoric', cats: ['譬喻', '轉化', '誇飾', '設問'], count: 3 },
+    echoQuest: { bankKey: 'zhuangzi', authors: ['莊子'], works: ['齊物論', '逍遙遊', '養生主', '秋水'], count: 3,
+      catsByLevel: {
+        '國小': ['明示訊息', '事件順序', '字詞理解', '簡單推論', '文體辨識'],
+        '國中': ['句意詮釋', '段落結構', '修辭作用', '推論統整', '觀點辨析'],
+        '高中': ['證據評鑑', '章法分析', '多元詮釋', '思想辨析', '版本文體'],
+      } },
   },
   {
     id: 'warring-quyuan', order: 2, number: '二', era: '戰國楚地', figure: '屈原', file: 'quyuan',
@@ -16,11 +38,11 @@ export const CHAPTERS = Object.freeze([
     sceneIds: ['chu-prologue', 'fragrant-path', 'river-dialogue', 'nine-song-wind', 'loyalty-gate', 'quyuan-trial', 'archive-return-quyuan'],
     rewards: ['seeking-page', 'fragrant-herb-tassel', 'friend-quyuan'],
     echoQuest: {
-      bankKey: 'mixed', count: 3,
+      bankKey: 'quyuan', authors: ['屈原'], works: ['離騷', '漁父', '九歌'], count: 3,
       catsByLevel: {
-        '國小': ['譬喻', '轉化', '詞性', '押韻'],
-        '國中': ['引用', '映襯', '句型', '詩體判別'],
-        '高中': ['引用', '映襯', '文言句式', '詩體判別'],
+        '國小': ['明示訊息', '事件順序', '字詞理解', '簡單推論', '文體辨識'],
+        '國中': ['句意詮釋', '段落結構', '修辭作用', '推論統整', '觀點辨析'],
+        '高中': ['證據評鑑', '章法分析', '多元詮釋', '思想辨析', '版本文體'],
       },
     },
   },
@@ -253,7 +275,7 @@ export const CHAPTERS = Object.freeze([
     } },
   },
   ...EXTENDED_CHAPTERS,
-]);
+].map(withReadingEcho));
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。
 export const CHAPTER_ID = CHAPTERS[0].id;

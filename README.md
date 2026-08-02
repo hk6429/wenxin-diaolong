@@ -126,6 +126,11 @@
 
 冒險作答仍走既有 kernel、Leitner、文心珠與四靈進度，不建立第二套學習紀錄。
 
+五十三章現在全部使用人物作品專屬的三級閱讀題庫：國小聚焦明示訊息、事件順序、
+字詞理解與簡單推論；國中進入句意、段落、修辭作用與觀點統整；高中再處理證據範圍、
+章法、多元詮釋、思想與版本文體。三個學段的題幹、正答論證、干擾選項與能力標籤皆
+實質不同，不以同一題更換難度文字。全站目前共有 3,695 道靜態題目。
+
 首次進站會設定冒險者姓名，並同步用於五十三章人物對戰、章回進度、文心大師試煉與
 文友過招。首頁「我的文心旅程」顯示章回百分比、目前位置、今日與累積答題、累積
 正確率及文心珠數；姓名可從頁首隨時修改。
@@ -168,6 +173,7 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `js/adventure.js`＋`js/adventure-ui.js`：多章解鎖、各章進度、七日驗收與冒險 UI
 - `js/story-content.js`＋`js/zhuyin.js`：三學段內容選版與注音安全渲染
 - `data/adventure/zhuangzi.json`：莊子七幕、來源分層、任務與注音資料
+- `data/{zhuangzi,quyuan}-*.json`：莊子、屈原三級作品專屬閱讀題庫
 - `data/adventure/quyuan.json`：屈原七幕、公版原典來源、分級任務與注音資料
 - `data/adventure/confucius.json`：孔子外篇七幕、《論語》來源、夢境故事與分級任務
 - `data/lunyu-*.json`：《論語》國小／國中／高中專屬題庫，各 15 題
@@ -184,6 +190,7 @@ npm run extract:exam            # 重抽真題（來源：cap-guowen / gsat-guow
 - `data/{jikang,shishuo,taoyuanming,xielingyun,wangxizhi,wangbo,luobinwang,dushenyan,libai,dufu,wangmeng,frontier,twintowers}-*.json`：各章國小／國中／高中作品專屬題庫
 - `data/adventure/` 內第二十二至五十三章對應 key：三十二章的獨立故事、來源與作品任務
 - `data/{key}-{elementary,junior,senior}.json`：三十二位文人的三級作品專屬題庫
+- `scripts/level-design.mjs`＋`scripts/strengthen-adventure-levels.mjs`：五十三章共用的學段能力模型與題庫產生器
 - `assets/img/adventure-{key}-{cover,scene,duel}.webp`：各章滿版封面、作品關卡與本人對戰圖
 - `js/meta/masters.js`＋`data/masters.json`：PvE 大師名單（解鎖＝真實精通量門檻）
 - `functions/api/`：Cloudflare Pages Functions＋D1（Redis 相容 shim），僅 PvP／排行榜用；

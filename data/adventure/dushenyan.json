@@ -8,9 +8,21 @@
     "tagline": "滕王閣的秋水忽然映出江南早春。你沿晨光渡江，梅柳、黃鳥與綠蘋一一甦醒，宦遊人的歸思卻在最明亮的景色裡悄然浮現。",
     "epithet": "杜審言・必簡・用八句早春景寫出宦遊歸思的初唐詩人",
     "vows": [
-      { "id": "notice-change", "quote": "偏驚物候新", "insight": "細小的季節變化，也能照見人的處境。" },
-      { "id": "make-spring-move", "quote": "梅柳渡江春", "insight": "精準動詞能讓景色在文字裡流動。" },
-      { "id": "hear-home", "quote": "歸思欲霑巾", "insight": "眼前越美，有時越會喚醒對遠方的思念。" }
+      {
+        "id": "notice-change",
+        "quote": "偏驚物候新",
+        "insight": "細小的季節變化，也能照見人的處境。"
+      },
+      {
+        "id": "make-spring-move",
+        "quote": "梅柳渡江春",
+        "insight": "精準動詞能讓景色在文字裡流動。"
+      },
+      {
+        "id": "hear-home",
+        "quote": "歸思欲霑巾",
+        "insight": "眼前越美，有時越會喚醒對遠方的思念。"
+      }
     ]
   },
   "sources": [
@@ -33,18 +45,52 @@
     }
   ],
   "annotations": [
-    { "text": "杜審言", "bopomofo": ["ㄉㄨˋ", "ㄕㄣˇ", "ㄧㄢˊ"] },
-    { "text": "宦遊", "bopomofo": ["ㄏㄨㄢˋ", "ㄧㄡˊ"] },
-    { "text": "物候", "bopomofo": ["ㄨˋ", "ㄏㄡˋ"] },
-    { "text": "綠蘋", "bopomofo": ["ㄌㄩˋ", "ㄆㄧㄣˊ"] },
-    { "text": "霑巾", "bopomofo": ["ㄓㄢ", "ㄐㄧㄣ"] }
+    {
+      "text": "杜審言",
+      "bopomofo": [
+        "ㄉㄨˋ",
+        "ㄕㄣˇ",
+        "ㄧㄢˊ"
+      ]
+    },
+    {
+      "text": "宦遊",
+      "bopomofo": [
+        "ㄏㄨㄢˋ",
+        "ㄧㄡˊ"
+      ]
+    },
+    {
+      "text": "物候",
+      "bopomofo": [
+        "ㄨˋ",
+        "ㄏㄡˋ"
+      ]
+    },
+    {
+      "text": "綠蘋",
+      "bopomofo": [
+        "ㄌㄩˋ",
+        "ㄆㄧㄣˊ"
+      ]
+    },
+    {
+      "text": "霑巾",
+      "bopomofo": [
+        "ㄓㄢ",
+        "ㄐㄧㄣ"
+      ]
+    }
   ],
   "scenes": [
     {
       "id": "dushenyan-prologue",
       "title": "江南春信・一首有兩處題名的詩",
       "contentKind": "fiction",
-      "sourceIds": ["poem", "fiction"],
+      "sourceIds": [
+        "poem",
+        "fiction"
+      ],
       "story": {
         "國小": "你打開春信，八句詩化成晨光、梅柳、黃鳥和水草。杜審言請你先看景色怎麼變，再找出他最後為什麼想家。",
         "國中": "這是一首應和他人〈早春遊望〉的五言律詩，從宦遊感受起筆，以江南物候展開，最後回到聞詩而生的歸思。",
@@ -57,16 +103,32 @@
       },
       "factNote": "此詩作者歸屬有異說：《全唐詩》同時收入杜審言卷與韋應物卷，《千家詩》題為杜審言；本站依通行說法收杜審言。守卷閣春信為本站原創。",
       "choices": [
-        { "id": "memorize-only", "label": "只背八句，不追蹤景與情", "response": "春色停成八行字，還沒有在你眼前流動。" },
-        { "id": "read-movement", "label": "沿物候變化追到宦遊歸思", "response": "晨光渡江，四個寫景動詞依序亮起。" },
-        { "id": "ignore-note", "label": "把作者歸屬異說藏起來", "response": "卷邊浮出兩個《全唐詩》卷次；可靠閱讀要如實標示異說。" }
+        {
+          "id": "memorize-only",
+          "label": "只背八句，不追蹤景與情",
+          "response": "春色停成八行字，還沒有在你眼前流動。"
+        },
+        {
+          "id": "read-movement",
+          "label": "沿物候變化追到宦遊歸思",
+          "response": "晨光渡江，四個寫景動詞依序亮起。"
+        },
+        {
+          "id": "ignore-note",
+          "label": "把作者歸屬異說藏起來",
+          "response": "卷邊浮出兩個《全唐詩》卷次；可靠閱讀要如實標示異說。"
+        }
       ]
     },
     {
       "id": "traveler-spring",
       "title": "宦遊人・偏驚物候新",
       "contentKind": "primary",
-      "sourceIds": ["poem", "appreciation", "fiction"],
+      "sourceIds": [
+        "poem",
+        "appreciation",
+        "fiction"
+      ],
       "story": {
         "國小": "春天年年都來，離鄉在外的人卻特別注意季節換新，因為新景色容易讓他想起家鄉。",
         "國中": "『獨』『偏』把視線先放在宦遊人，『驚』不是害怕，而是對物候變化特別敏感。",
@@ -79,18 +141,60 @@
       },
       "factNote": "『宦遊人』指離鄉任職或奔走仕途的人；『驚』在此偏向驚覺、敏感。作者歸屬有異說，本站依通行說法收杜審言。",
       "choices": [
-        { "id": "fear", "label": "把『驚』只解成受到驚嚇", "response": "春信沒有危險；此處更接近對物候更新的驚覺。" },
-        { "id": "viewpoint", "label": "先確定宦遊人的觀看位置", "response": "異鄉與故鄉在晨霧兩端同時顯現。" },
-        { "id": "weather-only", "label": "只把首聯當成氣象報告", "response": "『宦遊』『獨』『偏』都在提醒你：景物已帶著人的感受。" }
+        {
+          "id": "fear",
+          "label": "把『驚』只解成受到驚嚇",
+          "response": "春信沒有危險；此處更接近對物候更新的驚覺。"
+        },
+        {
+          "id": "viewpoint",
+          "label": "先確定宦遊人的觀看位置",
+          "response": "異鄉與故鄉在晨霧兩端同時顯現。"
+        },
+        {
+          "id": "weather-only",
+          "label": "只把首聯當成氣象報告",
+          "response": "『宦遊』『獨』『偏』都在提醒你：景物已帶著人的感受。"
+        }
       ],
-      "visual": { "mode": "quest", "art": "adventure-dushenyan-spring.webp", "alt": "宦遊詩人在梅柳與黃鳥間眺望江南早春", "log": "春信初醒；從宦遊視角辨認物候之新。" },
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-dushenyan-spring.webp",
+        "alt": "宦遊詩人在梅柳與黃鳥間眺望江南早春",
+        "log": "春信初醒；從宦遊視角辨認物候之新。"
+      },
       "quest": {
-        "id": "traveler-spring-quest", "bankKey": "dushenyan", "count": 5,
-        "authors": ["杜審言"], "works": ["和晉陵陸丞早春遊望"],
+        "id": "traveler-spring-quest",
+        "bankKey": "dushenyan",
+        "count": 5,
+        "authors": [
+          "杜審言"
+        ],
+        "works": [
+          "和晉陵陸丞早春遊望"
+        ],
         "catsByLevel": {
-          "國小": ["詞性", "句型", "摹寫", "轉化", "詩體判別"],
-          "國中": ["句型", "文言虛詞", "文言句式", "轉化", "映襯", "對仗", "詩體判別"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用", "轉化", "映襯", "對仗", "詩體判別"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
@@ -98,7 +202,11 @@
       "id": "cloud-plum-river",
       "title": "雲霞出海・梅柳渡江",
       "contentKind": "primary",
-      "sourceIds": ["poem", "appreciation", "fiction"],
+      "sourceIds": [
+        "poem",
+        "appreciation",
+        "fiction"
+      ],
       "story": {
         "國小": "清晨，雲霞彷彿從海上帶來曙光；梅花與柳樹像把春天渡過江來，整幅景色正在移動。",
         "國中": "『出』『渡』把曙光與春意寫成有方向的動態；雲霞對梅柳，海曙對江春，構成整齊而開闊的一聯。",
@@ -111,18 +219,60 @@
       },
       "factNote": "維基文庫原文作『雲霞出海曙，梅柳渡江春』。作者歸屬有異說，本站依通行說法收杜審言。",
       "choices": [
-        { "id": "nouns-only", "label": "只列出雲霞、梅柳，不看動詞", "response": "景物都在，春天卻尚未開始移動。" },
-        { "id": "verbs-pairs", "label": "同時比較『出』『渡』與上下句對應", "response": "晨光越海，春意渡江，畫面向兩側展開。" },
-        { "id": "literal-boat", "label": "說梅樹與柳樹真的搭船過江", "response": "『渡江春』是詩意寫法，重點是江南春意的到來。" }
+        {
+          "id": "nouns-only",
+          "label": "只列出雲霞、梅柳，不看動詞",
+          "response": "景物都在，春天卻尚未開始移動。"
+        },
+        {
+          "id": "verbs-pairs",
+          "label": "同時比較『出』『渡』與上下句對應",
+          "response": "晨光越海，春意渡江，畫面向兩側展開。"
+        },
+        {
+          "id": "literal-boat",
+          "label": "說梅樹與柳樹真的搭船過江",
+          "response": "『渡江春』是詩意寫法，重點是江南春意的到來。"
+        }
       ],
-      "visual": { "mode": "quest", "art": "adventure-dushenyan-river.webp", "alt": "海上曙光照向江南梅柳與早春水鄉", "log": "雲霞出海，梅柳渡江；以動詞推動春色。" },
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-dushenyan-river.webp",
+        "alt": "海上曙光照向江南梅柳與早春水鄉",
+        "log": "雲霞出海，梅柳渡江；以動詞推動春色。"
+      },
       "quest": {
-        "id": "cloud-plum-river-quest", "bankKey": "dushenyan", "count": 5,
-        "authors": ["杜審言"], "works": ["和晉陵陸丞早春遊望"],
+        "id": "cloud-plum-river-quest",
+        "bankKey": "dushenyan",
+        "count": 5,
+        "authors": [
+          "杜審言"
+        ],
+        "works": [
+          "和晉陵陸丞早春遊望"
+        ],
         "catsByLevel": {
-          "國小": ["詞性", "句型", "摹寫", "轉化", "詩體判別"],
-          "國中": ["句型", "文言虛詞", "文言句式", "轉化", "映襯", "對仗", "詩體判別"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用", "轉化", "映襯", "對仗", "詩體判別"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
@@ -130,7 +280,11 @@
       "id": "yellow-bird-green-duckweed",
       "title": "淑氣催鳥・晴光轉蘋",
       "contentKind": "primary",
-      "sourceIds": ["poem", "appreciation", "fiction"],
+      "sourceIds": [
+        "poem",
+        "appreciation",
+        "fiction"
+      ],
       "story": {
         "國小": "溫暖氣息像在催促黃鳥鳴叫，明亮陽光使水上的蘋草轉綠。春天不只被看見，也像能被聽見。",
         "國中": "『催』『轉』讓氣候、光線與動植物互相作用；黃鳥加入聲音，綠蘋補上水面近景。",
@@ -143,18 +297,60 @@
       },
       "factNote": "『蘋』指水生植物，原典作『綠蘋』；『黃鳥』常解作黃鸝一類春鳥。作者歸屬有異說，本站依通行說法收杜審言。",
       "choices": [
-        { "id": "color-only", "label": "只找黃色與綠色", "response": "色彩很亮，但『催』『轉』與鳥鳴還未被讀出。" },
-        { "id": "senses", "label": "連結暖氣、晴光、鳥聲與水草", "response": "黃鳥飛起，綠蘋在晴光下層層展開。" },
-        { "id": "modern-tone", "label": "只憑現代國語聲調硬判古代平仄", "response": "古今音系不同；本關先以文體結構、對仗與可靠韻書知識閱讀。" }
+        {
+          "id": "color-only",
+          "label": "只找黃色與綠色",
+          "response": "色彩很亮，但『催』『轉』與鳥鳴還未被讀出。"
+        },
+        {
+          "id": "senses",
+          "label": "連結暖氣、晴光、鳥聲與水草",
+          "response": "黃鳥飛起，綠蘋在晴光下層層展開。"
+        },
+        {
+          "id": "modern-tone",
+          "label": "只憑現代國語聲調硬判古代平仄",
+          "response": "古今音系不同；本關先以文體結構、對仗與可靠韻書知識閱讀。"
+        }
       ],
-      "visual": { "mode": "quest", "art": "adventure-dushenyan-river.webp", "alt": "黃鳥飛過新柳，晴光照亮江面綠蘋", "log": "暖氣催鳥，晴光轉蘋；視聽線索共同報春。" },
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-dushenyan-river.webp",
+        "alt": "黃鳥飛過新柳，晴光照亮江面綠蘋",
+        "log": "暖氣催鳥，晴光轉蘋；視聽線索共同報春。"
+      },
       "quest": {
-        "id": "yellow-bird-green-duckweed-quest", "bankKey": "dushenyan", "count": 5,
-        "authors": ["杜審言"], "works": ["和晉陵陸丞早春遊望"],
+        "id": "yellow-bird-green-duckweed-quest",
+        "bankKey": "dushenyan",
+        "count": 5,
+        "authors": [
+          "杜審言"
+        ],
+        "works": [
+          "和晉陵陸丞早春遊望"
+        ],
         "catsByLevel": {
-          "國小": ["詞性", "句型", "摹寫", "轉化", "詩體判別"],
-          "國中": ["句型", "文言虛詞", "文言句式", "轉化", "映襯", "對仗", "詩體判別"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用", "轉化", "映襯", "對仗", "詩體判別"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
@@ -162,7 +358,11 @@
       "id": "old-song-home-thought",
       "title": "忽聞古調・歸思霑巾",
       "contentKind": "primary",
-      "sourceIds": ["poem", "appreciation", "fiction"],
+      "sourceIds": [
+        "poem",
+        "appreciation",
+        "fiction"
+      ],
       "story": {
         "國小": "正看著美麗春景，詩人忽然聽聞對方那首古雅的詩，思鄉之情一下湧上來，幾乎流淚。",
         "國中": "『忽』製造情緒轉折，『古調』回扣唱和對象，『歸思』則讓前面的宦遊身分在結尾得到回應。",
@@ -175,18 +375,60 @@
       },
       "factNote": "題目中的『和』指唱和，尾聯『古調』通常解作對方原唱；原唱今不見於本章。作者歸屬有異說，本站依通行說法收杜審言。",
       "choices": [
-        { "id": "random-sad", "label": "說詩人毫無原因突然悲傷", "response": "『宦遊』『古調』『歸思』已經留下完整線索。" },
-        { "id": "link-ends", "label": "用首聯身分與尾聯歸思解釋轉折", "response": "春景仍亮，異鄉人的淚意卻在古調中浮現。" },
-        { "id": "reject-beauty", "label": "因為思鄉，就說中間春景不美", "response": "美景與歸思能同時成立，甚至因對照而更深。" }
+        {
+          "id": "random-sad",
+          "label": "說詩人毫無原因突然悲傷",
+          "response": "『宦遊』『古調』『歸思』已經留下完整線索。"
+        },
+        {
+          "id": "link-ends",
+          "label": "用首聯身分與尾聯歸思解釋轉折",
+          "response": "春景仍亮，異鄉人的淚意卻在古調中浮現。"
+        },
+        {
+          "id": "reject-beauty",
+          "label": "因為思鄉，就說中間春景不美",
+          "response": "美景與歸思能同時成立，甚至因對照而更深。"
+        }
       ],
-      "visual": { "mode": "quest", "art": "adventure-dushenyan-spring.webp", "alt": "宦遊詩人聽聞古調，在明麗江南春景中思念故鄉", "log": "古調忽至；春光由眼前景轉為歸鄉念。" },
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-dushenyan-spring.webp",
+        "alt": "宦遊詩人聽聞古調，在明麗江南春景中思念故鄉",
+        "log": "古調忽至；春光由眼前景轉為歸鄉念。"
+      },
       "quest": {
-        "id": "old-song-home-thought-quest", "bankKey": "dushenyan", "count": 5,
-        "authors": ["杜審言"], "works": ["和晉陵陸丞早春遊望"],
+        "id": "old-song-home-thought-quest",
+        "bankKey": "dushenyan",
+        "count": 5,
+        "authors": [
+          "杜審言"
+        ],
+        "works": [
+          "和晉陵陸丞早春遊望"
+        ],
         "catsByLevel": {
-          "國小": ["詞性", "句型", "摹寫", "轉化", "詩體判別"],
-          "國中": ["句型", "文言虛詞", "文言句式", "轉化", "映襯", "對仗", "詩體判別"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用", "轉化", "映襯", "對仗", "詩體判別"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
@@ -194,7 +436,11 @@
       "id": "dushenyan-trial",
       "title": "物候詩陣・八句如何藏住歸途",
       "contentKind": "primary",
-      "sourceIds": ["poem", "appreciation", "fiction"],
+      "sourceIds": [
+        "poem",
+        "appreciation",
+        "fiction"
+      ],
       "story": {
         "國小": "杜審言展開四幅圖：宦遊人、雲霞梅柳、黃鳥綠蘋、古調淚巾。你要把它們排回八句詩的心情路線。",
         "國中": "決戰要求你辨認動詞、轉化、對仗與首尾照應，但不以今日國語聲調直接代替古代格律判斷。",
@@ -207,18 +453,62 @@
       },
       "factNote": "本幕對戰為本站原創；題目與解析依公版原詩自編。作者歸屬有異說，本站依通行說法收杜審言；不以現代國語聲調硬判古代平仄。",
       "choices": [
-        { "id": "tone-guess", "label": "只用現代讀音猜整首古代平仄", "response": "物候詩陣拒絕無音韻依據的推斷。" },
-        { "id": "evidence", "label": "用詩體、對仗、動詞與篇章證據作答", "response": "四幅春景同時展開，物候對決開始。" },
-        { "id": "one-author-certain", "label": "把作者異說說成從未存在", "response": "兩卷《全唐詩》的線索重新浮現；本站採通行歸屬，但不隱去異說。" }
+        {
+          "id": "tone-guess",
+          "label": "只用現代讀音猜整首古代平仄",
+          "response": "物候詩陣拒絕無音韻依據的推斷。"
+        },
+        {
+          "id": "evidence",
+          "label": "用詩體、對仗、動詞與篇章證據作答",
+          "response": "四幅春景同時展開，物候對決開始。"
+        },
+        {
+          "id": "one-author-certain",
+          "label": "把作者異說說成從未存在",
+          "response": "兩卷《全唐詩》的線索重新浮現；本站採通行歸屬，但不隱去異說。"
+        }
       ],
-      "visual": { "mode": "duel", "art": "adventure-dushenyan-duel.webp", "alt": "冒險者與杜審言在雲霞梅柳、黃鳥綠蘋四幅詩境間對決", "opponent": "杜審言", "realm": "江南・物候詩陣", "log": "八句化為四幅春景；以可靠證據連回宦遊歸思。" },
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-dushenyan-duel.webp",
+        "alt": "冒險者與杜審言在雲霞梅柳、黃鳥綠蘋四幅詩境間對決",
+        "opponent": "杜審言",
+        "realm": "江南・物候詩陣",
+        "log": "八句化為四幅春景；以可靠證據連回宦遊歸思。"
+      },
       "quest": {
-        "id": "dushenyan-duel", "bankKey": "dushenyan", "count": 5,
-        "authors": ["杜審言"], "works": ["和晉陵陸丞早春遊望"],
+        "id": "dushenyan-duel",
+        "bankKey": "dushenyan",
+        "count": 5,
+        "authors": [
+          "杜審言"
+        ],
+        "works": [
+          "和晉陵陸丞早春遊望"
+        ],
         "catsByLevel": {
-          "國小": ["詞性", "句型", "摹寫", "轉化", "詩體判別"],
-          "國中": ["句型", "文言虛詞", "文言句式", "轉化", "映襯", "對仗", "詩體判別"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用", "轉化", "映襯", "對仗", "詩體判別"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
@@ -226,7 +516,10 @@
       "id": "archive-return-dushenyan",
       "title": "守卷閣歸來・在新景裡認出故鄉",
       "contentKind": "fiction",
-      "sourceIds": ["fiction", "poem"],
+      "sourceIds": [
+        "fiction",
+        "poem"
+      ],
       "story": {
         "國小": "你收好早春之頁，明白詩人不是只在介紹風景；他也把離鄉人的心情藏進每一個春天變化。",
         "國中": "早春之頁留下三條讀法：先確定觀看者、再追蹤景物動詞、最後檢查情感如何首尾照應。",
@@ -239,9 +532,21 @@
       },
       "factNote": "守卷閣與早春之頁為本站原創。此詩作者歸屬有異說，本站依通行說法收杜審言；聲律說明不以現代國語聲調硬判古代平仄。",
       "choices": [
-        { "id": "keep-page", "label": "收下早春之頁，繼續初唐旅程", "response": "梅柳的嫩色留在頁角，江上晨光仍向前流。" },
-        { "id": "review", "label": "先整理人、景、情三層結構", "response": "宦遊人、物候新與歸思依序落在卷上。" },
-        { "id": "source-note", "label": "把作者異說與聲律界線寫進筆記", "response": "可靠閱讀的邊界被清楚保存。" }
+        {
+          "id": "keep-page",
+          "label": "收下早春之頁，繼續初唐旅程",
+          "response": "梅柳的嫩色留在頁角，江上晨光仍向前流。"
+        },
+        {
+          "id": "review",
+          "label": "先整理人、景、情三層結構",
+          "response": "宦遊人、物候新與歸思依序落在卷上。"
+        },
+        {
+          "id": "source-note",
+          "label": "把作者異說與聲律界線寫進筆記",
+          "response": "可靠閱讀的邊界被清楚保存。"
+        }
       ]
     }
   ]

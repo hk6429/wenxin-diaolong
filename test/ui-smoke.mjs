@@ -182,8 +182,8 @@ await page.click('#btn-adventure');
 await page.click('[data-adventure-chapter="preqin-zhuangzi"]');
 await page.waitForSelector('#btn-echo');
 await page.click('#btn-echo');
-const elementaryRhetoric = JSON.parse(await readFile(join(ROOT, 'data/rhetoric-elementary.json'), 'utf8'));
-const answerByQuestion = new Map(elementaryRhetoric.map((entry) => [entry.question, entry.answer]));
+const elementaryZhuangzi = JSON.parse(await readFile(join(ROOT, 'data/zhuangzi-elementary.json'), 'utf8'));
+const answerByQuestion = new Map(elementaryZhuangzi.map((entry) => [entry.question, entry.answer]));
 for (let i = 0; i < 3; i += 1) {
   await page.waitForSelector('#quiz-options .opt-btn');
   const question = await page.textContent('#quiz-question');

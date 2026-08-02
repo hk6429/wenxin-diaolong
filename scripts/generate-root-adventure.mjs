@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { buildLevelFields } from './level-design.mjs';
 
 const LEVELS = [
   { label: '國小', suffix: 'elementary', code: 'e', difficulty: '易' },
@@ -264,12 +265,7 @@ function entryFor(spec, segment, fact, factIndex, segmentIndex, level) {
   const prefix = zone === '文法' ? 'gr' : zone === '格律' ? 'yl' : 'rh';
   const qformat = zone === '文法' ? (cat === '詞性' ? 'gr-pos' : cat === '文言虛詞' ? 'gr-particle' : 'gr-pattern') : zone === '格律' ? 'yl-form' : 'rh-pick';
   const number = spec.start + segmentIndex * 10 + factIndex;
-  const distractors = [
-    '只要把它當成裝飾性景物，不必連回人物與情節',
-    '可以直接視為完整史實，不需要辨認文體或版本',
-    '作品只提供唯一口號，所有人物與段落都沒有差異',
-  ];
-  return {
+  const entry = {
     id: `${prefix}-${level.code}-${number}`,
     level: level.label,
     zone,
@@ -279,7 +275,7 @@ function entryFor(spec, segment, fact, factIndex, segmentIndex, level) {
     genre: ['琵琶行', '長恨歌', '賣炭翁'].includes(segment.work) ? '韻文' : '非韻文',
     textForm: ['琵琶行', '長恨歌', '賣炭翁'].includes(segment.work) ? '古典詩' : ['三國演義', '水滸傳', '西遊記', '聊齋志異', '紅樓夢'].includes(segment.work) ? '小說' : '文言文',
     question: promptByLevel[level.label](aspectNames[factIndex], segment.work),
-    options: [fact, ...distractors],
+    options: [fact, '暫存選項一', '暫存選項二', '暫存選項三'],
     answer: fact,
     explain: `${fact} ${level.label === '國小' ? '先抓住人物、事件與景物的直接關係。' : level.label === '國中' ? '判讀時要以語句、段落位置與前後轉折作證。' : '進階閱讀還要區分文學安排、合理推論、底本異文與可查證史實。'}`,
     origin: '自編',
@@ -288,6 +284,10 @@ function entryFor(spec, segment, fact, factIndex, segmentIndex, level) {
     author: spec.author,
     work: segment.work,
     ...(spec.key === 'wuchengen' ? { attributionStatus: '《西遊記》通行署吳承恩，作者與成書過程仍有研究討論' } : {}),
+  };
+  return {
+    ...entry,
+    ...buildLevelFields(entry, level.label, factIndex + segmentIndex * 5, fact),
   };
 }
 

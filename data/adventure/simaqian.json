@@ -6,34 +6,146 @@
     "tagline": "孔子的夢門才剛關上，一條由竹簡鋪成的歷史長河便把你送進漢代；司馬遷正在燈下追問，人物究竟該如何被後世記住。",
     "epithet": "司馬遷・太史公・替失敗者與無名者也留下一席的史家",
     "vows": [
-      { "id": "record-deeds", "quote": "我欲載之空言，不如見之於行事之深切著明也", "insight": "不只說道理，也從人物實際行動尋找證據。" },
-      { "id": "complete-history", "quote": "原始察終，見盛觀衰", "insight": "從事情的開端追到結果，看懂盛衰如何發生。" },
-      { "id": "judge-with-evidence", "quote": "述往事，思來者", "insight": "記錄過去，不是為了停在過去，而是讓後來的人繼續思考。" }
+      {
+        "id": "record-deeds",
+        "quote": "我欲載之空言，不如見之於行事之深切著明也",
+        "insight": "不只說道理，也從人物實際行動尋找證據。"
+      },
+      {
+        "id": "complete-history",
+        "quote": "原始察終，見盛觀衰",
+        "insight": "從事情的開端追到結果，看懂盛衰如何發生。"
+      },
+      {
+        "id": "judge-with-evidence",
+        "quote": "述往事，思來者",
+        "insight": "記錄過去，不是為了停在過去，而是讓後來的人繼續思考。"
+      }
     ]
   },
   "sources": [
-    { "id": "shiji-primary", "kind": "primary", "label": "《史記》全書（公版原典）", "url": "https://zh.wikisource.org/zh-hant/史記" },
-    { "id": "taishigong-preface", "kind": "primary", "label": "《史記・太史公自序》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/史記/卷130" },
-    { "id": "xiangyu-annals", "kind": "primary", "label": "《史記・項羽本紀》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/史記/卷007" },
-    { "id": "linxiangru-biography", "kind": "primary", "label": "《史記・廉頗藺相如列傳》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/史記/卷081" },
-    { "id": "li-general-biography", "kind": "primary", "label": "《史記・李將軍列傳》（公版原典）", "url": "https://zh.wikisource.org/zh-hant/史記/卷109" },
-    { "id": "simaqian-game-fiction", "kind": "fiction", "label": "竹簡長河、史筆天平與穿越對話均為本站原創" }
+    {
+      "id": "shiji-primary",
+      "kind": "primary",
+      "label": "《史記》全書（公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/史記"
+    },
+    {
+      "id": "taishigong-preface",
+      "kind": "primary",
+      "label": "《史記・太史公自序》（公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/史記/卷130"
+    },
+    {
+      "id": "xiangyu-annals",
+      "kind": "primary",
+      "label": "《史記・項羽本紀》（公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/史記/卷007"
+    },
+    {
+      "id": "linxiangru-biography",
+      "kind": "primary",
+      "label": "《史記・廉頗藺相如列傳》（公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/史記/卷081"
+    },
+    {
+      "id": "li-general-biography",
+      "kind": "primary",
+      "label": "《史記・李將軍列傳》（公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/史記/卷109"
+    },
+    {
+      "id": "simaqian-game-fiction",
+      "kind": "fiction",
+      "label": "竹簡長河、史筆天平與穿越對話均為本站原創"
+    }
   ],
   "annotations": [
-    { "text": "司馬遷", "bopomofo": ["ㄙ", "ㄇㄚˇ", "ㄑㄧㄢ"] },
-    { "text": "史記", "bopomofo": ["ㄕˇ", "ㄐㄧˋ"] },
-    { "text": "太史公", "bopomofo": ["ㄊㄞˋ", "ㄕˇ", "ㄍㄨㄥ"] },
-    { "text": "本紀", "bopomofo": ["ㄅㄣˇ", "ㄐㄧˋ"] },
-    { "text": "世家", "bopomofo": ["ㄕˋ", "ㄐㄧㄚ"] },
-    { "text": "列傳", "bopomofo": ["ㄌㄧㄝˋ", "ㄓㄨㄢˋ"] },
-    { "text": "鴻門宴", "bopomofo": ["ㄏㄨㄥˊ", "ㄇㄣˊ", "ㄧㄢˋ"] },
-    { "text": "項羽", "bopomofo": ["ㄒㄧㄤˋ", "ㄩˇ"] },
-    { "text": "劉邦", "bopomofo": ["ㄌㄧㄡˊ", "ㄅㄤ"] },
-    { "text": "史筆之頁", "bopomofo": ["ㄕˇ", "ㄅㄧˇ", "ㄓ", "ㄧㄝˋ"], "fullOnly": true }
+    {
+      "text": "司馬遷",
+      "bopomofo": [
+        "ㄙ",
+        "ㄇㄚˇ",
+        "ㄑㄧㄢ"
+      ]
+    },
+    {
+      "text": "史記",
+      "bopomofo": [
+        "ㄕˇ",
+        "ㄐㄧˋ"
+      ]
+    },
+    {
+      "text": "太史公",
+      "bopomofo": [
+        "ㄊㄞˋ",
+        "ㄕˇ",
+        "ㄍㄨㄥ"
+      ]
+    },
+    {
+      "text": "本紀",
+      "bopomofo": [
+        "ㄅㄣˇ",
+        "ㄐㄧˋ"
+      ]
+    },
+    {
+      "text": "世家",
+      "bopomofo": [
+        "ㄕˋ",
+        "ㄐㄧㄚ"
+      ]
+    },
+    {
+      "text": "列傳",
+      "bopomofo": [
+        "ㄌㄧㄝˋ",
+        "ㄓㄨㄢˋ"
+      ]
+    },
+    {
+      "text": "鴻門宴",
+      "bopomofo": [
+        "ㄏㄨㄥˊ",
+        "ㄇㄣˊ",
+        "ㄧㄢˋ"
+      ]
+    },
+    {
+      "text": "項羽",
+      "bopomofo": [
+        "ㄒㄧㄤˋ",
+        "ㄩˇ"
+      ]
+    },
+    {
+      "text": "劉邦",
+      "bopomofo": [
+        "ㄌㄧㄡˊ",
+        "ㄅㄤ"
+      ]
+    },
+    {
+      "text": "史筆之頁",
+      "bopomofo": [
+        "ㄕˇ",
+        "ㄅㄧˇ",
+        "ㄓ",
+        "ㄧㄝˋ"
+      ],
+      "fullOnly": true
+    }
   ],
   "scenes": [
     {
-      "id": "han-prologue", "title": "竹簡長河・漢宮夜航", "contentKind": "fiction", "sourceIds": ["simaqian-game-fiction"],
+      "id": "han-prologue",
+      "title": "竹簡長河・漢宮夜航",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "你從孔子的夢裡醒來，腳下卻不是教室，而是一條發光的竹簡河。河邊坐著一位熬夜寫書的人。他抬頭問：『你剛才看見的是故事，還是歷史？』",
         "國中": "夢門後方不是清晨，而是漢代太史書房。竹簡像河流穿過長夜，司馬遷正把帝王、將相、遊俠與平民的行動一一排入卷中。他要你先分辨：精彩故事如何成為有證據的歷史敘事。",
@@ -41,9 +153,21 @@
       },
       "factNote": "《史記》由西漢司馬遷撰寫；竹簡長河與你從孔子夢境轉入漢代的情節為本站原創。",
       "choices": [
-        { "id": "collect-hero", "label": "只記最成功、最厲害的人", "response": "司馬遷把筆停在半空：『若只留下勝者，許多改變歷史的人便消失了。』" },
-        { "id": "ask-evidence", "label": "先問每件事有哪些資料可以互相查證", "response": "竹簡河亮起一條穩定航道。故事仍可精彩，但判斷必須有根。" },
-        { "id": "copy-everything", "label": "看到什麼就全部照抄，不必選擇", "response": "書房瞬間被竹簡淹沒。司馬遷提醒：史家連如何編排資料，也在作判斷。" }
+        {
+          "id": "collect-hero",
+          "label": "只記最成功、最厲害的人",
+          "response": "司馬遷把筆停在半空：『若只留下勝者，許多改變歷史的人便消失了。』"
+        },
+        {
+          "id": "ask-evidence",
+          "label": "先問每件事有哪些資料可以互相查證",
+          "response": "竹簡河亮起一條穩定航道。故事仍可精彩，但判斷必須有根。"
+        },
+        {
+          "id": "copy-everything",
+          "label": "看到什麼就全部照抄，不必選擇",
+          "response": "書房瞬間被竹簡淹沒。司馬遷提醒：史家連如何編排資料，也在作判斷。"
+        }
       ],
       "body": {
         "國小": "司馬遷請你找回散落的史筆之頁。你會從人物做了什麼、說了什麼開始，讀懂《史記》的故事。",
@@ -52,7 +176,13 @@
       }
     },
     {
-      "id": "father-vow", "title": "龍門遺命・接過未完之書", "contentKind": "reference", "sourceIds": ["taishigong-preface", "simaqian-game-fiction"],
+      "id": "father-vow",
+      "title": "龍門遺命・接過未完之書",
+      "contentKind": "reference",
+      "sourceIds": [
+        "taishigong-preface",
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "司馬遷帶你看見一卷父親留下的竹簡。父親希望家族的史官工作不要中斷，他便接著整理古今人物。這不是一晚能寫完的作業，而是一生的約定。",
         "國中": "《太史公自序》記下司馬談臨終對司馬遷的囑託。司馬遷承接父志，蒐集、整理並論次史事；私人承諾因此和保存歷史記憶連在一起。",
@@ -60,9 +190,21 @@
       },
       "factNote": "《太史公自序》記載司馬談臨終囑託司馬遷繼承太史之業；本幕夜讀遺簡的對話為原創。",
       "choices": [
-        { "id": "promise-fast", "label": "答應三天內把所有歷史寫完", "response": "司馬遷苦笑：『速度不能代替查證。史書不是越快越好。』" },
-        { "id": "continue-carefully", "label": "接下責任，也保留查證與修正的時間", "response": "遺簡上的墨色重新凝聚。承諾不是逞強，而是願意長久完成。" },
-        { "id": "ask-purpose", "label": "追問：為什麼後人需要知道這些往事", "response": "司馬遷點頭：『若不能讓來者思考，記錄便只剩年代堆疊。』" }
+        {
+          "id": "promise-fast",
+          "label": "答應三天內把所有歷史寫完",
+          "response": "司馬遷苦笑：『速度不能代替查證。史書不是越快越好。』"
+        },
+        {
+          "id": "continue-carefully",
+          "label": "接下責任，也保留查證與修正的時間",
+          "response": "遺簡上的墨色重新凝聚。承諾不是逞強，而是願意長久完成。"
+        },
+        {
+          "id": "ask-purpose",
+          "label": "追問：為什麼後人需要知道這些往事",
+          "response": "司馬遷點頭：『若不能讓來者思考，記錄便只剩年代堆疊。』"
+        }
       ],
       "body": {
         "國小": "史書需要有人一卷一卷接著完成。司馬遷不只記年份，也想讓人物的選擇被後人看見。",
@@ -71,7 +213,13 @@
       }
     },
     {
-      "id": "five-paths", "title": "五體迷宮・誰該走哪一卷", "contentKind": "reference", "sourceIds": ["taishigong-preface", "simaqian-game-fiction"],
+      "id": "five-paths",
+      "title": "五體迷宮・誰該走哪一卷",
+      "contentKind": "reference",
+      "sourceIds": [
+        "taishigong-preface",
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "五條竹簡路同時亮起。司馬遷說：有的路記帝王，有的排時間，有的談制度，有的記諸侯，有的寫各種人物。若把每個人都塞進同一卷，歷史就會迷路。",
         "國中": "《史記》不是依年代一路平鋪，而以本紀、表、書、世家、列傳交錯組織。五條路分別處理核心政權、時間關係、制度專題、重要世系與人物傳記。",
@@ -79,9 +227,21 @@
       },
       "factNote": "《史記》全書以十二本紀、十表、八書、三十世家、七十列傳構成一百三十篇，體例說明見《太史公自序》。",
       "choices": [
-        { "id": "sort-by-length", "label": "依竹簡長短分類", "response": "五條道路愈排愈亂。篇幅長短不是《史記》體例的核心。" },
-        { "id": "sort-by-function", "label": "先看每種體例要解決哪一種閱讀問題", "response": "五條路各自顯出用途；你開始看見《史記》不是資料堆，而是一套結構。" },
-        { "id": "use-one-path", "label": "全部改成同一條年代順序", "response": "人物與制度擠成長隊。司馬遷說：『時間重要，但歷史不只有一條觀看方向。』" }
+        {
+          "id": "sort-by-length",
+          "label": "依竹簡長短分類",
+          "response": "五條道路愈排愈亂。篇幅長短不是《史記》體例的核心。"
+        },
+        {
+          "id": "sort-by-function",
+          "label": "先看每種體例要解決哪一種閱讀問題",
+          "response": "五條路各自顯出用途；你開始看見《史記》不是資料堆，而是一套結構。"
+        },
+        {
+          "id": "use-one-path",
+          "label": "全部改成同一條年代順序",
+          "response": "人物與制度擠成長隊。司馬遷說：『時間重要，但歷史不只有一條觀看方向。』"
+        }
       ],
       "body": {
         "國小": "分清楚人物、動作與句子的意思，幫每卷竹簡找到合適位置。",
@@ -89,17 +249,48 @@
         "高中": "結合自序中的篇目說明，分析紀傳體如何利用不同體例建立時間、制度與人物之間的關聯。"
       },
       "visual": {
-        "mode": "quest", "art": "adventure-simaqian-fivepaths.webp",
+        "mode": "quest",
+        "art": "adventure-simaqian-fivepaths.webp",
         "alt": "司馬遷在漢代太史書房引導學生整理史記五種體例",
         "log": "五條史路正在交錯；答對《史記》題目，才能讓人物與事件回到正確卷冊。"
       },
       "quest": {
-        "id": "five-paths-quest", "bankKey": "shiji", "count": 5,
-        "catsByLevel": { "國小": ["詞性"], "國中": ["文言虛詞"], "高中": ["文言虛詞"] }
+        "id": "five-paths-quest",
+        "bankKey": "shiji",
+        "count": 5,
+        "catsByLevel": {
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
+        }
       }
     },
     {
-      "id": "hongmen-night", "title": "鴻門夜宴・一句話藏幾把刀", "contentKind": "reference", "sourceIds": ["xiangyu-annals", "simaqian-game-fiction"],
+      "id": "hongmen-night",
+      "title": "鴻門夜宴・一句話藏幾把刀",
+      "contentKind": "reference",
+      "sourceIds": [
+        "xiangyu-annals",
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "宴席上的每個人都在說話，但有人問問題、有人勸告、有人暗中保護劉邦。司馬遷要你找出誰做了什麼，才不會被熱鬧場面騙走。",
         "國中": "鴻門宴的危機透過對話、座次與連續動作推進。『大王來何操』『客何為者』等倒裝問句，不只是考語法，也讓人物的緊張與試探直接出現在語言裡。",
@@ -107,9 +298,21 @@
       },
       "factNote": "鴻門宴情節見《史記・項羽本紀》；人物對話與主要事件依公版原典，畫面任務包裝為本站原創。",
       "choices": [
-        { "id": "watch-swords", "label": "只看誰拿著武器", "response": "你看見了表面危險，卻錯過勸說、猶豫與情報如何改變局勢。" },
-        { "id": "trace-actions", "label": "逐句標出說話者、動作者與目的", "response": "宴席變成清楚的行動網；每句話後面的判斷開始浮現。" },
-        { "id": "trust-title", "label": "只按人物身分判斷誰一定正確", "response": "司馬遷問：『若頭銜能代替行動，我又何必寫下這場宴席？』" }
+        {
+          "id": "watch-swords",
+          "label": "只看誰拿著武器",
+          "response": "你看見了表面危險，卻錯過勸說、猶豫與情報如何改變局勢。"
+        },
+        {
+          "id": "trace-actions",
+          "label": "逐句標出說話者、動作者與目的",
+          "response": "宴席變成清楚的行動網；每句話後面的判斷開始浮現。"
+        },
+        {
+          "id": "trust-title",
+          "label": "只按人物身分判斷誰一定正確",
+          "response": "司馬遷問：『若頭銜能代替行動，我又何必寫下這場宴席？』"
+        }
       ],
       "body": {
         "國小": "讀懂鴻門宴中的問句與人物動作，找出是誰在保護、勸告或準備攻擊。",
@@ -117,17 +320,49 @@
         "高中": "分析倒裝、詞類活用與動作鏈如何推進敘事，並說明司馬遷如何藉場面描寫刻畫人物性格。"
       },
       "visual": {
-        "mode": "quest", "art": "adventure-simaqian-fivepaths.webp",
+        "mode": "quest",
+        "art": "adventure-simaqian-fivepaths.webp",
         "alt": "司馬遷與學生從竹簡幻影中重建鴻門宴人物行動",
         "log": "鴻門夜宴真假交錯；讀懂每一句話的主客與語氣，才能找到安全出口。"
       },
       "quest": {
-        "id": "hongmen-quest", "bankKey": "shiji", "count": 5,
-        "catsByLevel": { "國小": ["句型"], "國中": ["文言句式"], "高中": ["文言句式"] }
+        "id": "hongmen-quest",
+        "bankKey": "shiji",
+        "count": 5,
+        "catsByLevel": {
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
+        }
       }
     },
     {
-      "id": "historian-scale", "title": "史筆天平・成敗不是唯一答案", "contentKind": "reference", "sourceIds": ["linxiangru-biography", "li-general-biography", "simaqian-game-fiction"],
+      "id": "historian-scale",
+      "title": "史筆天平・成敗不是唯一答案",
+      "contentKind": "reference",
+      "sourceIds": [
+        "linxiangru-biography",
+        "li-general-biography",
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "天平一邊放著勝利，一邊放著品格。廉頗願意負荊請罪，李廣不善說漂亮話卻得到士卒信任。司馬遷說：『人物不能只用一次輸贏來評分。』",
         "國中": "藺相如避讓廉頗，不是膽怯，而是先考量國家；李廣寡言，卻讓人自然敬重。《史記》常把行動、對話與他人反應並置，讓人物評價從事件中長出來。",
@@ -135,9 +370,21 @@
       },
       "factNote": "廉頗負荊請罪見《廉頗藺相如列傳》；『桃李不言，下自成蹊』見《李將軍列傳》的太史公評語。",
       "choices": [
-        { "id": "judge-result", "label": "只用最後成敗決定人物價值", "response": "天平立刻傾斜。司馬遷提醒：歷史結果重要，人物如何選擇也重要。" },
-        { "id": "compare-evidence", "label": "比較行動、處境、他人反應與史家評語", "response": "天平恢復平衡。你沒有放棄判斷，而是讓判斷多幾層證據。" },
-        { "id": "praise-everyone", "label": "為了公平，每個人都只寫優點", "response": "人物全變成相同的影子。公平不是刪除缺點，而是避免只憑偏見下筆。" }
+        {
+          "id": "judge-result",
+          "label": "只用最後成敗決定人物價值",
+          "response": "天平立刻傾斜。司馬遷提醒：歷史結果重要，人物如何選擇也重要。"
+        },
+        {
+          "id": "compare-evidence",
+          "label": "比較行動、處境、他人反應與史家評語",
+          "response": "天平恢復平衡。你沒有放棄判斷，而是讓判斷多幾層證據。"
+        },
+        {
+          "id": "praise-everyone",
+          "label": "為了公平，每個人都只寫優點",
+          "response": "人物全變成相同的影子。公平不是刪除缺點，而是避免只憑偏見下筆。"
+        }
       ],
       "body": {
         "國小": "把《史記》名句放回人物故事，看看一句評語是從哪些行動得來。",
@@ -145,17 +392,50 @@
         "高中": "從人物互見、事件選材與太史公曰，分析《史記》如何在敘事與論贊之間建立複合評價。"
       },
       "visual": {
-        "mode": "quest", "art": "adventure-simaqian-fivepaths.webp",
+        "mode": "quest",
+        "art": "adventure-simaqian-fivepaths.webp",
         "alt": "司馬遷與學生以史筆天平比較史記人物的行動與處境",
         "log": "史筆天平不能只放成敗；找到名句背後的事件證據，人物才會重新顯影。"
       },
       "quest": {
-        "id": "historian-scale-quest", "bankKey": "shiji", "count": 5,
-        "catsByLevel": { "國小": ["設問"], "國中": ["引用"], "高中": ["詞類活用"] }
+        "id": "historian-scale-quest",
+        "bankKey": "shiji",
+        "count": 5,
+        "catsByLevel": {
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
+        }
       }
     },
     {
-      "id": "simaqian-trial", "title": "太史問筆・你敢怎麼寫", "contentKind": "reference", "sourceIds": ["shiji-primary", "taishigong-preface", "xiangyu-annals", "simaqian-game-fiction"],
+      "id": "simaqian-trial",
+      "title": "太史問筆・你敢怎麼寫",
+      "contentKind": "reference",
+      "sourceIds": [
+        "shiji-primary",
+        "taishigong-preface",
+        "xiangyu-annals",
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "史筆之頁就在桌上，司馬遷卻先放下五卷題目：『記住名字還不夠。你能從句子看出誰做事、誰說話、誰正在改變局勢嗎？』",
         "國中": "最後五問要求你把虛詞、倒裝與引用放回人物處境。司馬遷要看的不是背誦速度，而是你能否用原文線索說明人物判斷。",
@@ -163,9 +443,21 @@
       },
       "factNote": "本關所有題幹均取材自《史記》公版篇章，選項與解析為本站自編；與司馬遷對決為原創遊戲情境。",
       "choices": [
-        { "id": "write-winner", "label": "歷史只要替勝利者留下最漂亮的版本", "response": "司馬遷的筆沒有落下：『那麼項羽為何能有本紀，失敗者又由誰理解？』" },
-        { "id": "write-evidence", "label": "依材料寫出行動、處境與矛盾，再提出判斷", "response": "竹簡擂臺展開。司馬遷說：『史筆不是沒有立場，而是讓立場經得起追問。』" },
-        { "id": "write-neutral", "label": "完全不作選擇，把所有資料原樣堆上去", "response": "卷冊堆成高牆。選材與排序無法消失；真正要做的是讓判斷透明。" }
+        {
+          "id": "write-winner",
+          "label": "歷史只要替勝利者留下最漂亮的版本",
+          "response": "司馬遷的筆沒有落下：『那麼項羽為何能有本紀，失敗者又由誰理解？』"
+        },
+        {
+          "id": "write-evidence",
+          "label": "依材料寫出行動、處境與矛盾，再提出判斷",
+          "response": "竹簡擂臺展開。司馬遷說：『史筆不是沒有立場，而是讓立場經得起追問。』"
+        },
+        {
+          "id": "write-neutral",
+          "label": "完全不作選擇，把所有資料原樣堆上去",
+          "response": "卷冊堆成高牆。選材與排序無法消失；真正要做的是讓判斷透明。"
+        }
       ],
       "body": {
         "國小": "五題都來自《史記》人物與語句。答對時，你會讓一段模糊的歷史重新變清楚。",
@@ -173,21 +465,48 @@
         "高中": "最後對決整合《史記》的古今詞義、倒裝、被動、詞類活用與敘事判斷，拒絕脫離語境的機械翻譯。"
       },
       "visual": {
-        "mode": "duel", "art": "adventure-simaqian-duel.webp", "opponent": "司馬遷",
+        "mode": "duel",
+        "art": "adventure-simaqian-duel.webp",
+        "opponent": "司馬遷",
         "alt": "學生在漢代竹簡史筆擂臺與司馬遷展開史記閱讀對決",
         "log": "司馬遷以『見之於行事』起筆；答對由司馬遷受創，答錯才由你承受史筆追問。"
       },
       "quest": {
-        "id": "simaqian-trial", "bankKey": "shiji", "count": 5,
+        "id": "simaqian-trial",
+        "bankKey": "shiji",
+        "count": 5,
         "catsByLevel": {
-          "國小": ["詞性", "句型", "設問"],
-          "國中": ["文言虛詞", "文言句式", "引用"],
-          "高中": ["文言虛詞", "文言句式", "詞類活用"]
+          "國小": [
+            "明示訊息",
+            "事件順序",
+            "字詞理解",
+            "簡單推論",
+            "文體辨識"
+          ],
+          "國中": [
+            "句意詮釋",
+            "段落結構",
+            "修辭作用",
+            "推論統整",
+            "觀點辨析"
+          ],
+          "高中": [
+            "證據評鑑",
+            "章法分析",
+            "多元詮釋",
+            "思想辨析",
+            "版本文體"
+          ]
         }
       }
     },
     {
-      "id": "archive-return-simaqian", "title": "守卷閣・史筆歸位", "contentKind": "fiction", "sourceIds": ["simaqian-game-fiction"],
+      "id": "archive-return-simaqian",
+      "title": "守卷閣・史筆歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "simaqian-game-fiction"
+      ],
       "story": {
         "國小": "史筆之頁飛回守卷閣，司馬遷送你一枚紀傳竹簡。你問上面為什麼沒有英雄畫像，他回答：『因為下一個被認真記住的人，還沒有出場。』",
         "國中": "五條史路重新匯入卷中。司馬遷留下紀傳竹簡，提醒你讀歷史時既要追問來源，也要觀察作者如何安排人物與事件。",
@@ -195,9 +514,21 @@
       },
       "factNote": "守卷閣、紀傳竹簡與七日太史回聲為本站原創；《史記》原典應依各篇章持續查讀。",
       "choices": [
-        { "id": "keep-annals", "label": "把紀傳竹簡收入行囊", "response": "竹簡化成史筆印記：下次讀人物時，你會先問事件證據與敘事位置。" },
-        { "id": "write-two-sides", "label": "為一位人物各寫一項成就與限制", "response": "史筆之頁亮起雙層墨色。複雜並不等於無法判斷，而是判斷要更完整。" },
-        { "id": "leave-question", "label": "在卷末留下仍想查證的歷史問題", "response": "問題被收入下一格書架。好的歷史閱讀，不必假裝每件事都已經結束。" }
+        {
+          "id": "keep-annals",
+          "label": "把紀傳竹簡收入行囊",
+          "response": "竹簡化成史筆印記：下次讀人物時，你會先問事件證據與敘事位置。"
+        },
+        {
+          "id": "write-two-sides",
+          "label": "為一位人物各寫一項成就與限制",
+          "response": "史筆之頁亮起雙層墨色。複雜並不等於無法判斷，而是判斷要更完整。"
+        },
+        {
+          "id": "leave-question",
+          "label": "在卷末留下仍想查證的歷史問題",
+          "response": "問題被收入下一格書架。好的歷史閱讀，不必假裝每件事都已經結束。"
+        }
       ],
       "body": {
         "國小": "你找回史筆之頁。它提醒你：讀人物故事時，要看清楚誰做了什麼，再想想可以怎麼評價。",

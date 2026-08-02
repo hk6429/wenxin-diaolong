@@ -216,6 +216,7 @@ function renderQuestion(e) {
   $('quiz-combo').hidden = quiz.combo < 2;
   $('quiz-combo').textContent = `連對 ×${quiz.combo}`;
   $('quiz-tag').innerHTML = `<span class="zone-chip z-${e.zone}">${e.zone}</span>${e.cat}${e.subcat ? '・' + e.subcat : ''}` +
+    (e.learningFocus ? `　<span>【${e.level}・${e.learningFocus}】</span>` : '') +
     (e.origin === '真題' ? `　<span>【${e.year} 年${e.exam || ''}真題】</span>` : '') +
     (isMulti ? '　<strong>（複選題）</strong>' : '');
   $('quiz-question').innerHTML = renderZhuyin(e.question, quiz.annotations, quiz.zhuyinMode, {

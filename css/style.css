@@ -10,6 +10,7 @@
   --rh: #b3402a;   /* 修辭＝朱紅 */
   --gr: #3d5a6c;   /* 文法＝黛青 */
   --yl: #8a6d1f;   /* 格律＝金褐 */
+  --rd: #6f4d82;   /* 閱讀＝紫墨 */
   --ok: #3c7a4e;
   --bad: #a93226;
   --card: #fffdf7;
@@ -27,6 +28,7 @@
     --rh: #d96a52;
     --gr: #7ba3b8;
     --yl: #c9a94e;
+    --rd: #b58ac8;
     --cinnabar: #d96a52;
     --gold: #c9a94e;
     --ok: #6cb383;
@@ -192,6 +194,7 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .zone-chip.z-修辭 { background: var(--rh); }
 .zone-chip.z-文法 { background: var(--gr); }
 .zone-chip.z-格律 { background: var(--yl); }
+.zone-chip.z-閱讀 { background: var(--rd); }
 .quiz-question { font-size: 1.05rem; white-space: pre-wrap; margin-bottom: 14px; }
 .quiz-options { display: grid; gap: 10px; }
 .opt-btn {

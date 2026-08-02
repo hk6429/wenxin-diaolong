@@ -190,15 +190,12 @@ test('屈原第二章具備七幕、三學段、公版來源與四組可執行�
 test('每個學段的屈原委託都能從正式題庫選足五題', () => {
   const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/quyuan.json'), 'utf8'));
   for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
-    const banks = {
-      rhetoric: JSON.parse(fs.readFileSync(path.join(ROOT, `data/rhetoric-${suffix}.json`), 'utf8')),
-      grammar: JSON.parse(fs.readFileSync(path.join(ROOT, `data/grammar-${suffix}.json`), 'utf8')),
-      prosody: JSON.parse(fs.readFileSync(path.join(ROOT, `data/prosody-${suffix}.json`), 'utf8')),
-    };
-    banks.mixed = [...banks.rhetoric, ...banks.grammar, ...banks.prosody];
+    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/quyuan-${suffix}.json`), 'utf8'));
     for (const scene of chapter.scenes.filter((item) => item.quest)) {
       const quest = resolveQuest(scene.quest, level);
-      assert.equal(selectQuestEntries(banks[quest.bankKey], quest).length, 5, `${level} ${scene.id} 題目不足`);
+      const selected = selectQuestEntries(entries, quest);
+      assert.equal(selected.length, 5, `${level} ${scene.id} 題目不足`);
+      assert.ok(selected.every((entry) => entry.author === '屈原'));
     }
   }
 });
@@ -838,9 +835,11 @@ test('每個學段的莊子委託都能從正式題庫選足五題', () => {
   const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/zhuangzi.json'), 'utf8'));
   const questScene = chapter.scenes.find((scene) => scene.id === 'butterfly-gate');
   for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
-    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/rhetoric-${suffix}.json`), 'utf8'));
+    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/zhuangzi-${suffix}.json`), 'utf8'));
     const quest = resolveQuest(questScene.quest, level);
-    assert.equal(selectQuestEntries(entries, quest).length, 5, `${level}題目不足`);
+    const selected = selectQuestEntries(entries, quest);
+    assert.equal(selected.length, 5, `${level}題目不足`);
+    assert.ok(selected.every((entry) => entry.author === '莊子'));
   }
 });
 

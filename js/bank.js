@@ -4,6 +4,7 @@ import { loadQuizBank } from './quiz-loader.js';
 const L = (name) => ({ path: `data/${name}.json` });
 
 const NEW_ADVENTURE_KEYS = [
+  'zhuangzi', 'quyuan',
   'hanyu', 'liuzongyuan', 'baijuyi', 'liuyuxi', 'dumu', 'lishangyin', 'liyu',
   'ouyangxiu', 'wanganshi', 'suxun', 'sushi', 'suzhe', 'zenggong', 'fanzhongyan',
   'liuyong', 'huangtingjian', 'qinguan', 'yanshu',

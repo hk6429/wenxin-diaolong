@@ -1,6 +1,6 @@
 // 文心雕龍題目 schema 驗證器（純函式，Node 與瀏覽器共用）。規格見 docs/SPEC.md。
 export const LEVELS = new Set(['國小', '國中', '高中', '實戰']);
-export const ZONES = { rh: '修辭', gr: '文法', yl: '格律' };
+export const ZONES = { rh: '修辭', gr: '文法', yl: '格律', rd: '閱讀' };
 
 const EXAM_MC = 'exam-mc';
 const EXAM_MC_MULTI = 'exam-mc-multi';
@@ -10,6 +10,7 @@ export const ZONE_FORMATS = {
   修辭: new Set(['rh-identify', 'rh-pick', 'rh-odd', EXAM_MC, EXAM_MC_MULTI]),
   文法: new Set(['gr-pos', 'gr-structure', 'gr-pattern', 'gr-fix', 'gr-particle', EXAM_MC, EXAM_MC_MULTI]),
   格律: new Set(['yl-rhyme', 'yl-couplet', 'yl-tone', 'yl-form', EXAM_MC, EXAM_MC_MULTI]),
+  閱讀: new Set(['rd-pick', EXAM_MC, EXAM_MC_MULTI]),
 };
 
 export const ZONE_CATS = {
@@ -18,6 +19,11 @@ export const ZONE_CATS = {
     '互文', '示現', '錯綜', '鑲嵌', '藏詞', '飛白', '移覺']),
   文法: new Set(['詞性', '詞語結構', '句型', '語病', '文言虛詞', '文言句式', '詞類活用', '標點符號']),
   格律: new Set(['押韻', '對仗', '平仄', '詩體判別', '詞曲常識', '對聯']),
+  閱讀: new Set([
+    '明示訊息', '事件順序', '字詞理解', '簡單推論', '文體辨識',
+    '句意詮釋', '段落結構', '修辭作用', '推論統整', '觀點辨析',
+    '證據評鑑', '章法分析', '多元詮釋', '思想辨析', '版本文體',
+  ]),
 };
 
 // 修辭格首次出現學段（高學段可考低學段的格，反之不可）
@@ -41,7 +47,7 @@ export function zoneOfId(id) {
 
 export function validateEntry(entry) {
   const errors = [];
-  if (!entry.id || !/^(rh|gr|yl)-[ejsx]-\d{3,5}$/.test(entry.id)) errors.push('id 格式須為 {rh|gr|yl}-{e|j|s|x}-數字');
+  if (!entry.id || !/^(rh|gr|yl|rd)-[ejsx]-\d{3,5}$/.test(entry.id)) errors.push('id 格式須為 {rh|gr|yl|rd}-{e|j|s|x}-數字');
   if (!LEVELS.has(entry.level)) errors.push('level 須為 國小/國中/高中/實戰');
   if (entry.id && entry.level) {
     const code = entry.id.split('-')[1];
@@ -49,7 +55,7 @@ export function validateEntry(entry) {
     if (expect && expect !== entry.level) errors.push('id 學段碼與 level 不一致');
   }
   const zone = zoneOfId(entry.id);
-  if (!zone || entry.zone !== zone) errors.push('zone 必須與 id 前綴一致（rh↔修辭、gr↔文法、yl↔格律）');
+  if (!zone || entry.zone !== zone) errors.push('zone 必須與 id 前綴一致（rh↔修辭、gr↔文法、yl↔格律、rd↔閱讀）');
   // 實戰真題官方未細標修辭格/文法點時，允許 cat=綜合
   const catOk = ZONE_CATS[zone]?.has(entry.cat) || (entry.level === '實戰' && entry.cat === '綜合');
   if (zone && !catOk) errors.push(`cat「${entry.cat}」不在 ${zone} 區控制詞表內`);
