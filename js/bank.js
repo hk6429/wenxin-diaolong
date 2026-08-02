@@ -12,6 +12,9 @@ export const BANK_SOURCES = {
     lunyu: [L('lunyu-elementary')],
     shiji: [L('shiji-elementary')],
     duange: [L('duange-elementary')],
+    dianlun: [L('dianlun-elementary')],
+    caozhi: [L('caozhi-elementary')],
+    chushibiao: [L('chushibiao-elementary')],
   },
   國中: {
     rhetoric: [L('rhetoric-junior')],
@@ -21,6 +24,9 @@ export const BANK_SOURCES = {
     lunyu: [L('lunyu-junior')],
     shiji: [L('shiji-junior')],
     duange: [L('duange-junior')],
+    dianlun: [L('dianlun-junior')],
+    caozhi: [L('caozhi-junior')],
+    chushibiao: [L('chushibiao-junior')],
   },
   高中: {
     rhetoric: [L('rhetoric-senior')],
@@ -30,6 +36,9 @@ export const BANK_SOURCES = {
     lunyu: [L('lunyu-senior')],
     shiji: [L('shiji-senior')],
     duange: [L('duange-senior')],
+    dianlun: [L('dianlun-senior')],
+    caozhi: [L('caozhi-senior')],
+    chushibiao: [L('chushibiao-senior')],
   },
   實戰: {
     rhetoric: [L('exam-rhetoric')],

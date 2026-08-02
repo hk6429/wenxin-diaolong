@@ -1,0 +1,7 @@
+[
+{"id":"rh-j-9501","level":"國中","zone":"修辭","cat":"借代","subcat":"服飾借代","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"『臣本布衣』的『布衣』借代什麼身分？","options":["平民","將軍","皇帝","官服"],"answer":"平民","explain":"粗布衣是平民常見服飾，原文以服飾代指平民身分。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"},
+{"id":"rh-j-9502","level":"國中","zone":"修辭","cat":"映襯","subcat":"正反對照","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"先漢興隆與後漢傾頹並舉，主要支持哪項主張？","options":["親賢遠佞會影響國運","所有朝代結果相同","臣子不必提出意見","戰爭只由天氣決定"],"answer":"親賢遠佞會影響國運","explain":"正反歷史結果成為用人原則的證據。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"},
+{"id":"gr-j-9503","level":"國中","zone":"文法","cat":"文言虛詞","subcat":"所以","qformat":"gr-particle","genre":"非韻文","textForm":"文言文","question":"『此先漢所以興隆也』的『所以』最接近什麼？","options":["……的原因","用來……的工具","如果","雖然"],"answer":"……的原因","explain":"此處『所以』表示先漢興隆的原因。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"},
+{"id":"gr-j-9504","level":"國中","zone":"文法","cat":"文言句式","subcat":"介賓後置","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『躬耕於南陽』依現代語序應如何調整？","options":["於南陽躬耕","躬於耕南陽","南陽於躬耕","躬耕南於陽"],"answer":"於南陽躬耕","explain":"介詞結構『於南陽』置於動詞後，現代語多移到動詞前。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"},
+{"id":"gr-j-9505","level":"國中","zone":"文法","cat":"文言句式","subcat":"判斷句","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『此皆良實，志慮忠純』的『此』指誰？","options":["前文舉薦的臣子","所有敵軍","後漢皇帝","南陽農夫"],"answer":"前文舉薦的臣子","explain":"『此』承接郭攸之、費禕、董允等人，說明其忠良。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"}
+]

@@ -308,6 +308,52 @@ test('短歌行專屬題庫三學段各五題，五項委託皆可選足五題',
   }
 });
 
+test('曹丕、曹植、諸葛亮依序解鎖，三章皆具七幕、專屬題庫與人物對戰', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  for (const id of [CHAPTER_ID, 'warring-quyuan', 'dream-confucius', 'han-simaqian']) markChapterFound(meta, new Date(), id);
+  const cases = [
+    { previous: 'jianan-caocao', id: 'wei-caopi', file: 'caopi', bank: 'dianlun', opponent: '曹丕' },
+    { previous: 'wei-caopi', id: 'wei-caozhi', file: 'caozhi', bank: 'caozhi', opponent: '曹植' },
+    { previous: 'wei-caozhi', id: 'shuhan-zhugeliang', file: 'zhugeliang', bank: 'chushibiao', opponent: '諸葛亮' },
+  ];
+  for (const item of cases) {
+    assert.equal(isChapterUnlocked(meta, item.id), false, `${item.id} 不應提前解鎖`);
+    markChapterFound(meta, new Date(), item.previous);
+    assert.equal(isChapterUnlocked(meta, item.id), true, `${item.id} 應在前章完成後解鎖`);
+    const definition = CHAPTERS.find((chapter) => chapter.id === item.id);
+    const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, `data/adventure/${item.file}.json`), 'utf8'));
+    assert.deepEqual(validateChapter(chapter).errors, []);
+    assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
+    assert.equal(chapter.scenes.filter((scene) => scene.quest).length, 4);
+    assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => scene.quest.bankKey === item.bank));
+    assert.equal(chapter.scenes.find((scene) => scene.visual?.mode === 'duel').visual.opponent, item.opponent);
+    assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
+  }
+});
+
+test('典論、曹植、出師表三級專屬題庫皆可支援每項五題委託', () => {
+  const cases = [
+    { file: 'caopi', bank: 'dianlun' },
+    { file: 'caozhi', bank: 'caozhi' },
+    { file: 'zhugeliang', bank: 'chushibiao' },
+  ];
+  for (const item of cases) {
+    const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, `data/adventure/${item.file}.json`), 'utf8'));
+    for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
+      const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${item.bank}-${suffix}.json`), 'utf8'));
+      assert.equal(entries.length, 5);
+      assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
+      assert.equal(new Set(entries.map((entry) => entry.question)).size, 5);
+      for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
+        const quest = resolveQuest(scene.quest, level);
+        assert.equal(quest.bankKey, item.bank);
+        assert.equal(selectQuestEntries(entries, quest).length, 5, `${item.file} ${level} ${scene.id} 題目不足`);
+      }
+    }
+  }
+});
+
 test('舊玩家資料遷移時保留文心珠並補上冒險狀態', () => {
   const old = { v: 1, collection: { 'rh-e-0001': { earnedAt: '2026-01-01', grade: 0 } } };
   const map = new Map([[META_KEY, JSON.stringify(old)]]);

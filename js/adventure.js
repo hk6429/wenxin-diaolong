@@ -64,6 +64,36 @@ export const CHAPTERS = Object.freeze([
       '高中': ['引用', '映襯', '文言虛詞', '詞類活用', '詩體判別'],
     } },
   },
+  {
+    id: 'wei-caopi', order: 6, number: '六', era: '曹魏・文論殿', figure: '曹丕', file: 'caopi',
+    title: '曹魏・曹丕〈文章千秋〉', heroTitle: '走入文論殿，遇見曹丕',
+    pageName: '文論之頁', echoTitle: '千秋回聲', art: 'caopi',
+    sceneIds: ['caopi-prologue', 'mirror-broom', 'genre-hall', 'qi-scale', 'immortal-essay', 'caopi-trial', 'archive-return-caopi'],
+    rewards: ['criticism-page', 'genre-seal', 'friend-caopi'],
+    echoQuest: { bankKey: 'dianlun', count: 3, catsByLevel: {
+      '國小': ['詞性', '句型', '譬喻', '設問'], '國中': ['文言虛詞', '文言句式', '引用', '映襯'], '高中': ['文言虛詞', '詞類活用', '文言句式', '引用'],
+    } },
+  },
+  {
+    id: 'wei-caozhi', order: 7, number: '七', era: '曹魏・洛川', figure: '曹植', file: 'caozhi',
+    title: '曹魏・曹植〈洛水驚鴻〉', heroTitle: '渡過洛川，遇見曹植',
+    pageName: '驚鴻之頁', echoTitle: '洛水回聲', art: 'caozhi',
+    sceneIds: ['luo-prologue', 'astonished-swan', 'cloud-moon', 'river-distance', 'white-horse', 'caozhi-trial', 'archive-return-caozhi'],
+    rewards: ['imagery-page', 'luo-river-jade', 'friend-caozhi'],
+    echoQuest: { bankKey: 'caozhi', count: 3, catsByLevel: {
+      '國小': ['譬喻', '摹寫', '設問', '詞性'], '國中': ['譬喻', '轉化', '引用', '句型'], '高中': ['譬喻', '映襯', '文言虛詞', '詞類活用'],
+    } },
+  },
+  {
+    id: 'shuhan-zhugeliang', order: 8, number: '八', era: '蜀漢・出師前夜', figure: '諸葛亮', file: 'zhugeliang',
+    title: '蜀漢・諸葛亮〈出師忠策〉', heroTitle: '走入蜀漢，遇見諸葛亮',
+    pageName: '忠策之頁', echoTitle: '出師回聲', art: 'zhugeliang',
+    sceneIds: ['shu-prologue', 'open-counsel', 'fair-law', 'worthy-gate', 'thatched-cottage', 'zhugeliang-trial', 'archive-return-zhugeliang'],
+    rewards: ['loyalty-page', 'feather-fan-token', 'friend-zhugeliang'],
+    echoQuest: { bankKey: 'chushibiao', count: 3, catsByLevel: {
+      '國小': ['詞性', '句型', '類疊', '設問'], '國中': ['借代', '映襯', '文言虛詞', '文言句式'], '高中': ['文言虛詞', '文言句式', '詞類活用', '映襯'],
+    } },
+  },
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。

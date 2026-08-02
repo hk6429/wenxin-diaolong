@@ -1,0 +1,7 @@
+[
+{"id":"rh-e-9401","level":"國小","zone":"修辭","cat":"譬喻","subcat":"明喻","qformat":"rh-identify","genre":"韻文","textForm":"古典詩","question":"『翩若驚鴻，婉若游龍』把洛神的姿態比作什麼？","options":["鴻雁與游龍","朝露與明月","高山與大海","松樹與白馬"],"answer":"鴻雁與游龍","explain":"兩個明喻從輕盈與婉轉兩面描寫洛神姿態。","origin":"自編","citation":"曹植《洛神賦》","difficulty":"易"},
+{"id":"rh-e-9402","level":"國小","zone":"修辭","cat":"摹寫","subcat":"視覺摹寫","qformat":"rh-pick","genre":"韻文","textForm":"古典詩","question":"哪一句最能形成花朵出水的視覺畫面？","options":["灼若芙蕖出淥波","心振蕩而不怡","吾將歸乎東路","性命安可懷"],"answer":"灼若芙蕖出淥波","explain":"盛開荷花從清波中顯現，形成鮮明近景。","origin":"自編","citation":"曹植《洛神賦》","difficulty":"易"},
+{"id":"rh-e-9403","level":"國小","zone":"修辭","cat":"設問","subcat":"提問","qformat":"rh-identify","genre":"韻文","textForm":"古典詩","question":"『彼何人斯？若此之豔也？』主要運用哪種修辭？","options":["設問","排比","類疊","頂真"],"answer":"設問","explain":"敘述者直接以問句詢問眼前人物，引出洛神身分與描寫。","origin":"自編","citation":"曹植《洛神賦》","difficulty":"易"},
+{"id":"gr-e-9404","level":"國小","zone":"文法","cat":"詞性","subcat":"動詞","qformat":"gr-pos","genre":"韻文","textForm":"古典詩","question":"『白馬飾金羈，連翩西北馳』的『馳』是哪種詞性？","options":["動詞","名詞","形容詞","副詞"],"answer":"動詞","explain":"『馳』表示白馬奔跑的動作，因此是動詞。","origin":"自編","citation":"曹植《白馬篇》","difficulty":"易"},
+{"id":"rh-e-9405","level":"國小","zone":"修辭","cat":"譬喻","subcat":"明喻","qformat":"rh-identify","genre":"韻文","textForm":"古典詩","question":"『勇剽若豹螭』主要在讚美游俠什麼？","options":["勇猛矯健","衣服華麗","聲音柔和","居處安靜"],"answer":"勇猛矯健","explain":"以豹與螭的勇猛敏捷比喻游俠身手。","origin":"自編","citation":"曹植《白馬篇》","difficulty":"易"}
+]

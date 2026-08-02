@@ -1,0 +1,7 @@
+[
+{"id":"gr-e-9301","level":"國小","zone":"文法","cat":"詞性","subcat":"動詞","qformat":"gr-pos","genre":"非韻文","textForm":"文言文","question":"『文人相輕』的『輕』表示看輕別人，在句中是哪一種詞性？","options":["動詞","名詞","形容詞","副詞"],"answer":"動詞","explain":"『輕』在此表示輕視的動作，因此作動詞使用。","origin":"自編","citation":"曹丕《典論・論文》","difficulty":"易"},
+{"id":"gr-e-9302","level":"國小","zone":"文法","cat":"句型","subcat":"判斷句","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『文章經國之大業，不朽之盛事』主要在判定文章的價值，屬於哪類句子？","options":["判斷句","疑問句","祈使句","有無句"],"answer":"判斷句","explain":"句子判定文章是治理國家的大業與不朽盛事。","origin":"自編","citation":"曹丕《典論・論文》","difficulty":"中"},
+{"id":"rh-e-9303","level":"國小","zone":"修辭","cat":"譬喻","subcat":"借喻","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"『家有敝帚，享之千金』用自家破掃帚說明哪種情況？","options":["人容易偏愛自己的作品","掃帚可以賣很高價格","作家應該整理房間","文章一定愈舊愈好"],"answer":"人容易偏愛自己的作品","explain":"破掃帚被視如千金，比喻人常高估自己擁有或創作的東西。","origin":"自編","citation":"曹丕《典論・論文》","difficulty":"易"},
+{"id":"rh-e-9304","level":"國小","zone":"修辭","cat":"設問","subcat":"提問","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"若評文章時先問『這篇文章要完成什麼任務？』，主要使用哪種修辭？","options":["設問","排比","類疊","轉化"],"answer":"設問","explain":"以問句引導讀者思考文體目的，是設問的運用。","origin":"自編","citation":"依曹丕《典論・論文》文體觀自編","difficulty":"易"},
+{"id":"gr-e-9305","level":"國小","zone":"文法","cat":"句型","subcat":"轉折複句","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『文章都重要，但是不同文體有不同任務』主要是哪種關係？","options":["轉折","因果","條件","選擇"],"answer":"轉折","explain":"後句以『但是』轉入差異，補充並修正前句的共同性。","origin":"自編","citation":"依曹丕《典論・論文》自編","difficulty":"易"}
+]

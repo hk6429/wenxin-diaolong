@@ -34,6 +34,9 @@ const CHAPTER_COVER_ART = {
   'dream-confucius': 'adventure-confucius-dream.webp',
   'han-simaqian': 'adventure-simaqian-archive.webp',
   'jianan-caocao': 'adventure-caocao-camp.webp',
+  'wei-caopi': 'adventure-caopi-hall.webp',
+  'wei-caozhi': 'adventure-caozhi-river.webp',
+  'shuhan-zhugeliang': 'adventure-zhugeliang-tent.webp',
 };
 const CHAPTER_FRIEND_LINES = {
   'preqin-zhuangzi': '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。',
@@ -41,6 +44,9 @@ const CHAPTER_FRIEND_LINES = {
   'dream-confucius': '孔子已成為你的第三位文友，竹簡書籤也從夢中落入守卷閣。',
   'han-simaqian': '司馬遷已成為你的第四位文友，紀傳竹簡也收入守卷閣。',
   'jianan-caocao': '曹操已成為你的第五位文友，晨露之杯也收入守卷閣。',
+  'wei-caopi': '曹丕已成為你的第六位文友，文體印也收入守卷閣。',
+  'wei-caozhi': '曹植已成為你的第七位文友，洛水玉佩也收入守卷閣。',
+  'shuhan-zhugeliang': '諸葛亮已成為你的第八位文友，羽扇信物也收入守卷閣。',
 };
 let deps;
 let chapterMap = null;

@@ -156,7 +156,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險沒有顯示莊子至曹操五章');
+if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險沒有顯示莊子至諸葛亮八章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -212,7 +212,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
-if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險沒有顯示第五章曹操入口');
+if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險沒有顯示曹丕、曹植與諸葛亮入口');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
@@ -265,7 +265,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見司馬遷'));
-if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險章回數不是五章');
+if (await page.locator('.adventure-chapter-tab').count() !== 8) fail('冒險章回數不是八章');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-simaqian-archive.webp')) fail('司馬遷篇沒有漢宮書房滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-cover.png`, fullPage: true });
@@ -342,6 +342,46 @@ if ((await page.textContent('#quiz-opponent-name')) !== '曹操') fail('曹操�
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/caocao-duel.png`, fullPage: true });
 await page.click('#btn-quiz-exit');
 await page.click('#btn-adventure-back');
+
+// 曹丕、曹植、諸葛亮：逐章解鎖，封面與最終對戰皆使用人物專屬圖片
+const laterChapters = [
+  { previous: 'jianan-caocao', id: 'wei-caopi', figure: '曹丕', title: '魏文問章', cover: 'adventure-caopi-hall.webp', duel: 'adventure-caopi-duel.webp', shot: 'caopi' },
+  { previous: 'wei-caopi', id: 'wei-caozhi', figure: '曹植', title: '子建問象', cover: 'adventure-caozhi-river.webp', duel: 'adventure-caozhi-duel.webp', shot: 'caozhi' },
+  { previous: 'wei-caozhi', id: 'shuhan-zhugeliang', figure: '諸葛亮', title: '孔明問策', cover: 'adventure-zhugeliang-tent.webp', duel: 'adventure-zhugeliang-duel.webp', shot: 'zhugeliang' },
+];
+for (const item of laterChapters) {
+  await page.evaluate(({ previous, id }) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    meta.adventure.chapters[previous].chapterStatus = 'found';
+    meta.adventure.currentChapterId = id;
+    meta.adventure.chapterId = id;
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+  }, item);
+  await page.reload();
+  await page.click('#btn-adventure');
+  await page.waitForFunction((figure) => document.querySelector('#adventure-stage h2')?.textContent.includes(`遇見${figure}`), item.figure);
+  if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes(item.cover)) fail(`${item.figure}篇沒有專屬滿版封面`);
+  await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+  if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/${item.shot}-cover.png`, fullPage: true });
+  await page.evaluate((id) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    meta.adventure.chapters[id].vowId = 'smoke-vow';
+    meta.adventure.chapters[id].sceneIndex = 5;
+    meta.adventure.sceneIndex = 5;
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+  }, item.id);
+  await page.reload();
+  await page.click('#btn-adventure');
+  await page.waitForFunction((title) => document.querySelector('#adventure-stage h2')?.textContent.includes(title), item.title);
+  await page.click('[data-scene-choice]');
+  await page.click('#btn-scene-next');
+  await page.waitForSelector('#quiz-story-visual:not([hidden])');
+  if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes(item.duel)) fail(`${item.figure}篇沒有專屬對戰圖`);
+  if ((await page.textContent('#quiz-opponent-name')) !== item.figure) fail(`${item.figure}篇最終對手錯誤`);
+  if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/${item.shot}-duel.png`, fullPage: true });
+  await page.click('#btn-quiz-exit');
+  await page.click('#btn-adventure-back');
+}
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');

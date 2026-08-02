@@ -1,0 +1,7 @@
+[
+{"id":"gr-e-9501","level":"國小","zone":"文法","cat":"詞性","subcat":"動詞","qformat":"gr-pos","genre":"非韻文","textForm":"文言文","question":"『親賢臣，遠小人』的『親』表示親近，是哪種詞性？","options":["動詞","名詞","形容詞","副詞"],"answer":"動詞","explain":"『親』表示主動親近賢臣的行為，在句中作動詞。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"易"},
+{"id":"gr-e-9502","level":"國小","zone":"文法","cat":"句型","subcat":"判斷句","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『此誠危急存亡之秋也』主要是哪類句子？","options":["判斷句","疑問句","祈使句","有無句"],"answer":"判斷句","explain":"句子判定當下正是國家危急存亡的時刻。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"中"},
+{"id":"rh-e-9503","level":"國小","zone":"修辭","cat":"類疊","subcat":"類字","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"『親賢臣，遠小人；親小人，遠賢臣』反覆使用『親、遠』兩字，包含哪種修辭？","options":["類疊","譬喻","轉化","摹寫"],"answer":"類疊","explain":"相同的『親、遠』反覆出現，形成整齊節奏，也凸顯相反的用人選擇。","origin":"自編","citation":"諸葛亮《出師表》","difficulty":"易"},
+{"id":"rh-e-9504","level":"國小","zone":"修辭","cat":"設問","subcat":"引導提問","qformat":"rh-identify","genre":"非韻文","textForm":"文言文","question":"讀完『開張聖聽』後問『領導者為何要聽不同意見？』，主要是哪種修辭？","options":["設問","排比","感嘆","摹寫"],"answer":"設問","explain":"以問題引導讀者思考納諫的重要性，屬於設問。","origin":"自編","citation":"依諸葛亮《出師表》自編","difficulty":"易"},
+{"id":"gr-e-9505","level":"國小","zone":"文法","cat":"句型","subcat":"轉折複句","qformat":"gr-pattern","genre":"非韻文","textForm":"文言文","question":"『天下雖然危急，但是忠臣仍不懈怠』主要是哪種關係？","options":["轉折","因果","選擇","條件"],"answer":"轉折","explain":"『雖然……但是……』表示後句結果與前句情勢形成轉折。","origin":"自編","citation":"依諸葛亮《出師表》自編","difficulty":"易"}
+]
