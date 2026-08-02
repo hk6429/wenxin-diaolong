@@ -693,7 +693,16 @@ function escapeHtml(s) {
 }
 
 /* ---------- 事件綁定 ---------- */
-$('btn-home').addEventListener('click', () => { renderHome(); showScreen('screen-home'); });
+function returnToHome() {
+  renderHome();
+  showScreen('screen-home');
+}
+
+$('btn-home').addEventListener('click', returnToHome);
+$('btn-practice-back').addEventListener('click', returnToHome);
+$('btn-codex-back').addEventListener('click', returnToHome);
+$('btn-weak-back').addEventListener('click', returnToHome);
+$('btn-pets-back').addEventListener('click', returnToHome);
 $('btn-profile').addEventListener('click', () => openProfileEditor(false));
 $('btn-profile-cancel').addEventListener('click', closeProfileEditor);
 $('profile-form').addEventListener('submit', (event) => {

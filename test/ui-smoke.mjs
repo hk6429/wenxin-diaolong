@@ -63,6 +63,23 @@ if (await page.locator('script[data-site="wenxin-diaolong"]').count() !== 1) fai
 const failedEntryArt = await page.locator('.entry-card .entry-art').evaluateAll((images) => images.filter((img) => !img.complete || img.naturalWidth === 0).length);
 if (failedEntryArt) fail(`首頁有 ${failedEntryArt} 張配圖載入失敗`);
 
+// 六個首頁入口都要有清楚可見的返回首頁按鈕，不要求學生猜「站名可以按」。
+for (const [entryId, screenId, backId] of [
+  ['btn-practice', 'screen-practice', 'btn-practice-back'],
+  ['btn-codex', 'screen-codex', 'btn-codex-back'],
+  ['btn-weak', 'screen-weak', 'btn-weak-back'],
+  ['btn-pets', 'screen-pets', 'btn-pets-back'],
+  ['btn-battle', 'screen-battle', 'btn-battle-back'],
+  ['btn-rt', 'screen-rt', 'btn-rt-back'],
+]) {
+  await page.click(`#${entryId}`);
+  await page.waitForSelector(`#${screenId}:not([hidden])`);
+  const backLabel = await page.textContent(`#${backId}`);
+  if (!backLabel?.includes('回首頁')) fail(`${entryId} 沒有清楚標示回首頁`);
+  await page.click(`#${backId}`);
+  await page.waitForSelector('#screen-home:not([hidden])');
+}
+
 // 古代冒險：開卷立誓→章回選擇→智慧/全文注音→五題委託
 await page.click('#btn-adventure');
 await page.waitForSelector('#adventure-stage h2');

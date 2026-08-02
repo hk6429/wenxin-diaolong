@@ -217,6 +217,8 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .zone-mix { border-bottom: 4px solid var(--gold); }
 
 .quiz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; min-height: 34px; }
+.section-top { margin-bottom: 12px; }
+.section-top h2 { margin: 0; font-size: 1.25rem; text-align: right; }
 .ghost-btn {
   background: none; border: 1px solid rgba(92, 83, 70, .4); border-radius: 8px;
   min-height: 38px; padding: 4px 12px;

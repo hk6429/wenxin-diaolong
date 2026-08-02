@@ -112,7 +112,10 @@
   <!-- 練功 -->
   <section id="screen-practice" class="screen" hidden aria-label="練功">
     <div id="practice-zones" class="zone-pick">
-      <h2>選擇練功分區</h2>
+      <div class="quiz-top section-top">
+        <button id="btn-practice-back" class="ghost-btn">← 回首頁</button>
+        <h2>選擇練功分區</h2>
+      </div>
       <div id="practice-level-guide" class="practice-level-guide"></div>
       <div class="zone-grid">
         <button class="zone-card zone-rh" data-bank="rhetoric"><img src="assets/img/zone-rhetoric.webp" alt=""><span><b>修辭</b><small>觀形辨義・化意成象</small></span></button>
@@ -123,7 +126,7 @@
     </div>
     <div id="quiz-panel" hidden>
       <div class="quiz-top">
-        <button id="btn-quiz-exit" class="ghost-btn">← 離開</button>
+        <button id="btn-quiz-exit" class="ghost-btn">← 回練功分區</button>
         <span id="quiz-progress"></span>
         <span id="quiz-combo" class="combo" hidden></span>
       </div>
@@ -166,6 +169,10 @@
 
   <!-- 文心圖鑑 -->
   <section id="screen-codex" class="screen" hidden aria-label="文心圖鑑">
+    <div class="quiz-top section-top">
+      <button id="btn-codex-back" class="ghost-btn">← 回首頁</button>
+      <h2>文心圖鑑</h2>
+    </div>
     <div class="tabs" role="tablist" aria-label="圖鑑分頁">
       <button class="tab" role="tab" data-tab="修辭">修辭</button>
       <button class="tab" role="tab" data-tab="文法">文法</button>
@@ -186,7 +193,10 @@
 
   <!-- 弱點複習 -->
   <section id="screen-weak" class="screen" hidden aria-label="弱點複習">
-    <h2>弱點雷達</h2>
+    <div class="quiz-top section-top">
+      <button id="btn-weak-back" class="ghost-btn">← 回首頁</button>
+      <h2>弱點雷達</h2>
+    </div>
     <div id="weak-list"></div>
     <button id="btn-weak-train" class="primary-btn">開始弱點特訓（常錯 15 題）</button>
   </section>
@@ -244,7 +254,10 @@
 
   <!-- 文心四靈 -->
   <section id="screen-pets" class="screen" hidden aria-label="文心四靈">
-    <h2>文心四靈</h2>
+    <div class="quiz-top section-top">
+      <button id="btn-pets-back" class="ghost-btn">← 回首頁</button>
+      <h2>文心四靈</h2>
+    </div>
     <p class="pets-hint">靈獸的力量來自你真正練熟的題目——沒有捷徑。</p>
     <div id="pets-grid" class="pets-grid"></div>
   </section>
