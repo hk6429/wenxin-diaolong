@@ -157,7 +157,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險沒有顯示莊子至曹雪芹五十三章');
+if (await page.locator('.adventure-chapter-tab').count() !== 57) fail('冒險沒有顯示莊子至曹雪芹五十七章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -213,7 +213,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
-if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險沒有顯示全部五十三章入口');
+if (await page.locator('.adventure-chapter-tab').count() !== 57) fail('冒險沒有顯示全部五十七章入口');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
@@ -266,7 +266,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見司馬遷'));
-if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險章回數不是五十三章');
+if (await page.locator('.adventure-chapter-tab').count() !== 57) fail('冒險章回數不是五十七章');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-simaqian-archive.webp')) fail('司馬遷篇沒有漢宮書房滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-cover.png`, fullPage: true });
@@ -625,26 +625,50 @@ await smokeWorkChapter({
   duelArt: 'adventure-dufu-duel.webp', opponent: '杜甫',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-dufu', chapterId: 'high-tang-wangmeng', heroText: '遇見王維・孟浩然', label: '王孟篇',
-  cover: 'adventure-wangmeng-cover.webp', vowId: 'hear-stillness', questIndex: 1, questTitle: '空山新雨',
-  sceneArt: 'adventure-wangmeng-cover.webp', bank: 'wangmeng', duelIndex: 6, duelTitle: '王孟雙璧',
-  duelArt: 'adventure-wangmeng-duel.webp', opponent: '王維・孟浩然',
+  previousId: 'high-tang-dufu', chapterId: 'high-tang-wangwei', heroText: '遇見王維', label: '王維篇',
+  cover: 'adventure-wangmeng-cover.webp', vowId: 'wangwei-vow-1', questIndex: 1, questTitle: '山居秋暝・初見',
+  sceneArt: 'adventure-wangmeng-cover.webp', bank: 'wangwei', duelIndex: 5, duelTitle: '王維問筆',
+  duelArt: 'adventure-wangmeng-duel.webp', opponent: '王維',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-wangmeng', chapterId: 'high-tang-frontier', heroText: '遇見高適・王昌齡・岑參', label: '邊塞三家篇',
-  cover: 'adventure-frontier-cover.webp', vowId: 'three-views', questIndex: 1, questTitle: '燕歌出塞',
-  sceneArt: 'adventure-frontier-cover.webp', bank: 'frontier', duelIndex: 7, duelTitle: '三家邊聲',
-  duelArt: 'adventure-frontier-duel.webp', opponent: '高適・王昌齡・岑參',
+  previousId: 'high-tang-wangwei', chapterId: 'high-tang-menghaoran', heroText: '遇見孟浩然', label: '孟浩然篇',
+  cover: 'adventure-wangmeng-cover.webp', vowId: 'menghaoran-vow-1', questIndex: 1, questTitle: '過故人莊・初見',
+  sceneArt: 'adventure-wangmeng-cover.webp', bank: 'menghaoran', duelIndex: 5, duelTitle: '孟浩然問筆',
+  duelArt: 'adventure-wangmeng-duel.webp', opponent: '孟浩然',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-frontier', chapterId: 'high-tang-twin-towers', heroText: '遇見王之渙・崔顥', label: '雙樓篇',
-  cover: 'adventure-twintowers-cover.webp', vowId: 'two-routes', questIndex: 2, questTitle: '千里之目',
-  sceneArt: 'adventure-twintowers-cover.webp', bank: 'twintowers', duelIndex: 6, duelTitle: '雙樓對望',
-  duelArt: 'adventure-twintowers-duel.webp', opponent: '王之渙・崔顥',
+  previousId: 'high-tang-menghaoran', chapterId: 'high-tang-gaoshi', heroText: '遇見高適', label: '高適篇',
+  cover: 'adventure-frontier-cover.webp', vowId: 'gaoshi-vow-1', questIndex: 1, questTitle: '燕歌行並序・初見',
+  sceneArt: 'adventure-frontier-cover.webp', bank: 'gaoshi', duelIndex: 5, duelTitle: '高適問筆',
+  duelArt: 'adventure-frontier-duel.webp', opponent: '高適',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-gaoshi', chapterId: 'high-tang-wangchangling', heroText: '遇見王昌齡', label: '王昌齡篇',
+  cover: 'adventure-frontier-cover.webp', vowId: 'wangchangling-vow-1', questIndex: 1, questTitle: '出塞其一・初見',
+  sceneArt: 'adventure-frontier-cover.webp', bank: 'wangchangling', duelIndex: 5, duelTitle: '王昌齡問筆',
+  duelArt: 'adventure-frontier-duel.webp', opponent: '王昌齡',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-wangchangling', chapterId: 'high-tang-censhen', heroText: '遇見岑參', label: '岑參篇',
+  cover: 'adventure-frontier-cover.webp', vowId: 'censhen-vow-1', questIndex: 1, questTitle: '白雪歌送武判官歸京・初見',
+  sceneArt: 'adventure-frontier-cover.webp', bank: 'censhen', duelIndex: 5, duelTitle: '岑參問筆',
+  duelArt: 'adventure-frontier-duel.webp', opponent: '岑參',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-censhen', chapterId: 'high-tang-wangzhihuan', heroText: '遇見王之渙', label: '王之渙篇',
+  cover: 'adventure-twintowers-cover.webp', vowId: 'wangzhihuan-vow-1', questIndex: 1, questTitle: '登鸛雀樓・初見',
+  sceneArt: 'adventure-twintowers-cover.webp', bank: 'wangzhihuan', duelIndex: 5, duelTitle: '王之渙問筆',
+  duelArt: 'adventure-twintowers-duel.webp', opponent: '王之渙',
+});
+await smokeWorkChapter({
+  previousId: 'high-tang-wangzhihuan', chapterId: 'high-tang-cuihao', heroText: '遇見崔顥', label: '崔顥篇',
+  cover: 'adventure-twintowers-cover.webp', vowId: 'cuihao-vow-1', questIndex: 1, questTitle: '黃鶴樓・初見',
+  sceneArt: 'adventure-twintowers-cover.webp', bank: 'cuihao', duelIndex: 5, duelTitle: '崔顥問筆',
+  duelArt: 'adventure-twintowers-duel.webp', opponent: '崔顥',
 });
 
-// 第 22–53 章：逐章確認滿版封面、本人作品題庫與本人章末對戰。
-for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 22)) {
+// 第 26–57 章：逐章確認滿版封面、本人作品題庫與本人章末對戰。
+for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 26)) {
   const chapter = JSON.parse(await readFile(join(ROOT, `data/adventure/${definition.file}.json`), 'utf8'));
   const questIndex = chapter.scenes.findIndex((scene) => scene.quest && scene.visual?.mode !== 'duel');
   const duelIndex = chapter.scenes.findIndex((scene) => scene.visual?.mode === 'duel');

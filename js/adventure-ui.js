@@ -47,9 +47,13 @@ const CHAPTER_COVER_ART = {
   'early-tang-dushenyan': 'adventure-dushenyan-spring.webp',
   'high-tang-libai': 'adventure-libai-moon.webp',
   'high-tang-dufu': 'adventure-dufu-cottage.webp',
-  'high-tang-wangmeng': 'adventure-wangmeng-cover.webp',
-  'high-tang-frontier': 'adventure-frontier-cover.webp',
-  'high-tang-twin-towers': 'adventure-twintowers-cover.webp',
+  'high-tang-wangwei': 'adventure-wangmeng-cover.webp',
+  'high-tang-menghaoran': 'adventure-wangmeng-cover.webp',
+  'high-tang-gaoshi': 'adventure-frontier-cover.webp',
+  'high-tang-wangchangling': 'adventure-frontier-cover.webp',
+  'high-tang-censhen': 'adventure-frontier-cover.webp',
+  'high-tang-wangzhihuan': 'adventure-twintowers-cover.webp',
+  'high-tang-cuihao': 'adventure-twintowers-cover.webp',
 };
 const CHAPTER_FRIEND_LINES = {
   'preqin-zhuangzi': '莊周已成為你的第一位文友，夢蝶書籤也收入守卷閣。',
@@ -70,9 +74,13 @@ const CHAPTER_FRIEND_LINES = {
   'early-tang-dushenyan': '杜審言已成為你的第十六位文友，黃鳥信物也收入守卷閣。',
   'high-tang-libai': '李白已成為你的第十七位文友，青蓮信物也收入守卷閣。',
   'high-tang-dufu': '杜甫已成為你的第十八位文友，家書信物也收入守卷閣。',
-  'high-tang-wangmeng': '王維與孟浩然已成為你的第十九組文友，月泉菊花信物也收入守卷閣。',
-  'high-tang-frontier': '高適、王昌齡與岑參已成為你的第二十組文友，風雪關月信物也收入守卷閣。',
-  'high-tang-twin-towers': '王之渙與崔顥已成為你的第二十一組文友，黃鶴落日信物也收入守卷閣。',
+  'high-tang-wangwei': '王維已成為你的第十九位文友，松泉信物也收入守卷閣。',
+  'high-tang-menghaoran': '孟浩然已成為你的第二十位文友，菊約信物也收入守卷閣。',
+  'high-tang-gaoshi': '高適已成為你的第二十一位文友，燕歌信物也收入守卷閣。',
+  'high-tang-wangchangling': '王昌齡已成為你的第二十二位文友，秦月信物也收入守卷閣。',
+  'high-tang-censhen': '岑參已成為你的第二十三位文友，雪歌信物也收入守卷閣。',
+  'high-tang-wangzhihuan': '王之渙已成為你的第二十四位文友，鸛樓信物也收入守卷閣。',
+  'high-tang-cuihao': '崔顥已成為你的第二十五位文友，黃鶴信物也收入守卷閣。',
 };
 let deps;
 let chapterMap = null;

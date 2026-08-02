@@ -20,8 +20,8 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
 
-test('五十三章全部使用人物專屬題庫，不再以通用題庫假裝分級', () => {
-  assert.equal(CHAPTERS.length, 53);
+test('五十七章全部使用人物專屬題庫，不再以通用題庫假裝分級', () => {
+  assert.equal(CHAPTERS.length, 57);
   for (const definition of CHAPTERS) {
     assert.ok(!GENERIC_BANKS.has(definition.echoQuest.bankKey), `${definition.figure} 回聲仍使用通用題庫`);
     const chapter = readJson(`data/adventure/${definition.file}.json`);
@@ -33,7 +33,7 @@ test('五十三章全部使用人物專屬題庫，不再以通用題庫假裝�
 
 test('每一位文人的三級題庫皆符合學段能力、難度與閱讀分類', () => {
   const bankKeys = [...new Set(CHAPTERS.map((chapter) => chapter.echoQuest.bankKey))];
-  assert.equal(bankKeys.length, 53);
+  assert.equal(bankKeys.length, 57);
   for (const bankKey of bankKeys) {
     for (const [level, design] of Object.entries(LEVELS)) {
       const entries = readJson(`data/${bankKey}-${design.suffix}.json`);
@@ -70,7 +70,7 @@ test('國小、國中、高中不是換標籤：同序題的題幹、答案與�
   }
 });
 
-test('五十三章各幕與七日回聲在三個學段都能選足題目', () => {
+test('五十七章各幕與七日回聲在三個學段都能選足題目', () => {
   for (const definition of CHAPTERS) {
     const chapter = readJson(`data/adventure/${definition.file}.json`);
     const quests = [...chapter.scenes.filter((item) => item.quest).map((item) => item.quest), definition.echoQuest];

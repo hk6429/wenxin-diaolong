@@ -13,7 +13,7 @@ const REBUILD_KEYS = [
 const EARLIER_KEYS = [
   'lunyu', 'shiji', 'duange', 'dianlun', 'caozhi', 'chushibiao', 'jikang', 'shishuo',
   'taoyuanming', 'xielingyun', 'wangxizhi', 'wangbo', 'luobinwang', 'dushenyan',
-  'libai', 'dufu', 'wangmeng', 'frontier', 'twintowers',
+  'libai', 'dufu', 'wangwei', 'menghaoran', 'gaoshi', 'wangchangling', 'censhen', 'wangzhihuan', 'cuihao',
 ];
 
 const EARLIER_CHAPTER_FILES = {
@@ -21,7 +21,8 @@ const EARLIER_CHAPTER_FILES = {
   caozhi: 'caozhi', chushibiao: 'zhugeliang', jikang: 'jikang', shishuo: 'shishuo',
   taoyuanming: 'taoyuanming', xielingyun: 'xielingyun', wangxizhi: 'wangxizhi',
   wangbo: 'wangbo', luobinwang: 'luobinwang', dushenyan: 'dushenyan', libai: 'libai',
-  dufu: 'dufu', wangmeng: 'wangmeng', frontier: 'frontier', twintowers: 'twintowers',
+  dufu: 'dufu', wangwei: 'wangwei', menghaoran: 'menghaoran', gaoshi: 'gaoshi',
+  wangchangling: 'wangchangling', censhen: 'censhen', wangzhihuan: 'wangzhihuan', cuihao: 'cuihao',
 };
 
 const CUSTOM_FACTS = {

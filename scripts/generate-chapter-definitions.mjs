@@ -44,11 +44,12 @@ function chineseNumber(value) {
 }
 
 const definitions = rows.map(([key, order, era, figure]) => {
+  const shiftedOrder = order + 4;
   const chapter = JSON.parse(fs.readFileSync(`data/adventure/${key}.json`, 'utf8'));
   return {
     id: chapter.id,
-    order,
-    number: chineseNumber(order),
+    order: shiftedOrder,
+    number: chineseNumber(shiftedOrder),
     era,
     figure,
     file: key,

@@ -672,123 +672,64 @@ test('杜甫三級題庫各十五題，春望、石壕吏、登高各五題且�
   }
 });
 
-test('王孟第十九章為八幕雙人章，兩位詩人以本人作品共同對戰', () => {
-  const meta = {};
-  ensureAdventure(meta);
-  for (const definition of CHAPTERS.slice(0, 17)) markChapterFound(meta, new Date(), definition.id);
-  assert.equal(isChapterUnlocked(meta, 'high-tang-wangmeng'), false);
-  markChapterFound(meta, new Date(), 'high-tang-dufu');
-  assert.equal(isChapterUnlocked(meta, 'high-tang-wangmeng'), true);
-  const definition = CHAPTERS.find((item) => item.id === 'high-tang-wangmeng');
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/wangmeng.json'), 'utf8'));
-  assert.deepEqual(validateChapter(chapter).errors, []);
-  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
-  assert.equal(chapter.scenes.length, 8);
-  assert.equal(chapter.scenes.find((scene) => scene.visual?.mode === 'duel').visual.opponent, '王維・孟浩然');
-  assert.match(JSON.stringify(chapter), /開筵.*開軒|開軒.*開筵/);
-  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
-});
-
-test('王孟三級各十題，作者作品配對固定且雙人對戰各抽三題', () => {
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/wangmeng.json'), 'utf8'));
-  const allowedPairs = new Set(['王維|山居秋暝', '孟浩然|過故人莊']);
-  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
-    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/wangmeng-${suffix}.json`), 'utf8'));
-    assert.equal(entries.length, 10);
-    assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
-    assert.ok(entries.every((entry) => allowedPairs.has(`${entry.author}|${entry.work}`)));
-    assert.equal(entries.filter((entry) => entry.author === '王維').length, 5);
-    assert.equal(entries.filter((entry) => entry.author === '孟浩然').length, 5);
-    for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
-      const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
-      assert.equal(selected.length, scene.quest.count, `${level} ${scene.id} 王孟題目不足`);
-      if (scene.visual?.mode === 'duel') {
-        assert.equal(selected.filter((entry) => entry.author === '王維').length, 3);
-        assert.equal(selected.filter((entry) => entry.author === '孟浩然').length, 3);
-      } else if (scene.quest.authors?.length === 1) {
-        assert.ok(selected.every((entry) => entry.author === scene.quest.authors[0]));
+test('盛唐七位詩人各自擁有獨立章回、作品題庫與本人對戰', () => {
+  const cases = [
+    ['wangwei', '王維', '山居秋暝'], ['menghaoran', '孟浩然', '過故人莊'],
+    ['gaoshi', '高適', '燕歌行並序'], ['wangchangling', '王昌齡', '出塞其一'],
+    ['censhen', '岑參', '白雪歌送武判官歸京'], ['wangzhihuan', '王之渙', '登鸛雀樓'],
+    ['cuihao', '崔顥', '黃鶴樓'],
+  ];
+  assert.deepEqual(CHAPTERS.slice(18, 25).map((item) => item.figure), cases.map((item) => item[1]));
+  for (const [key, author, work] of cases) {
+    const definition = CHAPTERS.find((item) => item.file === key);
+    const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, `data/adventure/${key}.json`), 'utf8'));
+    assert.deepEqual(validateChapter(chapter).errors, [], `${author}章 schema`);
+    assert.equal(chapter.scenes.length, 7);
+    assert.ok(chapter.variantNote, `${author}章缺少版本或判讀邊界`);
+    assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
+    assert.equal(chapter.scenes.find((scene) => scene.visual?.mode === 'duel').visual.opponent, author);
+    assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => scene.quest.authors[0] === author && scene.quest.works[0] === work));
+    assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
+    for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
+      const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${key}-${suffix}.json`), 'utf8'));
+      assert.equal(entries.length, 5, `${author}${level}題數`);
+      assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.author === author && entry.work === work));
+      for (const scene of chapter.scenes.filter((item) => item.quest)) {
+        assert.equal(selectQuestEntries(entries, resolveQuest(scene.quest, level)).length, 5, `${author}${level} ${scene.id} 抽題不足`);
       }
     }
   }
 });
 
-test('邊塞三家第二十章為九幕，三位詩人只以本人作品共同對戰', () => {
+test('章回選擇器維持一位文人一張卡，不再出現合併姓名', () => {
+  assert.equal(CHAPTERS.length, 57);
+  assert.ok(CHAPTERS.every((chapter) => !/[・、與和]/.test(chapter.figure)));
+  assert.equal(new Set(CHAPTERS.map((chapter) => chapter.figure)).size, CHAPTERS.length);
+});
+
+test('盛唐獨立章依序解鎖，舊三個合併章的完成紀錄會安全轉移', () => {
   const meta = {};
   ensureAdventure(meta);
   for (const definition of CHAPTERS.slice(0, 18)) markChapterFound(meta, new Date(), definition.id);
-  assert.equal(isChapterUnlocked(meta, 'high-tang-frontier'), false);
-  markChapterFound(meta, new Date(), 'high-tang-wangmeng');
-  assert.equal(isChapterUnlocked(meta, 'high-tang-frontier'), true);
-  const definition = CHAPTERS.find((item) => item.id === 'high-tang-frontier');
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/frontier.json'), 'utf8'));
-  assert.deepEqual(validateChapter(chapter).errors, []);
-  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
-  assert.equal(chapter.scenes.length, 9);
-  assert.equal(chapter.scenes.find((scene) => scene.visual?.mode === 'duel').visual.opponent, '高適・王昌齡・岑參');
-  assert.match(JSON.stringify(chapter), /不把詩句直接當戰史|不把詩當逐日戰報/);
-  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
-});
-
-test('邊塞三級各十五題，每位詩人五題且三人對戰各抽兩題', () => {
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/frontier.json'), 'utf8'));
-  const allowedPairs = new Set(['高適|燕歌行並序', '王昌齡|出塞其一', '岑參|白雪歌送武判官歸京']);
-  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
-    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/frontier-${suffix}.json`), 'utf8'));
-    assert.equal(entries.length, 15);
-    assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
-    assert.ok(entries.every((entry) => allowedPairs.has(`${entry.author}|${entry.work}`)));
-    for (const author of ['高適', '王昌齡', '岑參']) assert.equal(entries.filter((entry) => entry.author === author).length, 5);
-    for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
-      const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
-      assert.equal(selected.length, scene.quest.count, `${level} ${scene.id} 邊塞題目不足`);
-      if (scene.visual?.mode === 'duel') {
-        for (const author of ['高適', '王昌齡', '岑參']) assert.equal(selected.filter((entry) => entry.author === author).length, 2);
-      } else if (scene.quest.authors?.length === 1) {
-        assert.ok(selected.every((entry) => entry.author === scene.quest.authors[0] && entry.work === scene.quest.works[0]));
-      }
-    }
+  assert.equal(isChapterUnlocked(meta, 'high-tang-wangwei'), true);
+  for (let index = 18; index < 24; index += 1) {
+    assert.equal(isChapterUnlocked(meta, CHAPTERS[index + 1].id), false);
+    markChapterFound(meta, new Date(), CHAPTERS[index].id);
+    assert.equal(isChapterUnlocked(meta, CHAPTERS[index + 1].id), true);
   }
-});
 
-test('雙樓第二十一章為八幕，正名王之渙並保留作品歸屬與詩筆邊界', () => {
-  const meta = {};
-  ensureAdventure(meta);
-  for (const definition of CHAPTERS.slice(0, 19)) markChapterFound(meta, new Date(), definition.id);
-  assert.equal(isChapterUnlocked(meta, 'high-tang-twin-towers'), false);
-  markChapterFound(meta, new Date(), 'high-tang-frontier');
-  assert.equal(isChapterUnlocked(meta, 'high-tang-twin-towers'), true);
-  const definition = CHAPTERS.find((item) => item.id === 'high-tang-twin-towers');
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/twintowers.json'), 'utf8'));
-  assert.deepEqual(validateChapter(chapter).errors, []);
-  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
-  assert.equal(chapter.scenes.length, 8);
-  assert.equal(chapter.scenes.find((scene) => scene.visual?.mode === 'duel').visual.opponent, '王之渙・崔顥');
-  assert.match(JSON.stringify(chapter), /王之渙，不是.*楊之渙/);
-  assert.match(JSON.stringify(chapter), /一作朱斌|通行.*王之渙/);
-  assert.match(JSON.stringify(chapter), /詩筆.*延展|不能.*直接看見.*入海/);
-  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => fs.existsSync(path.join(ROOT, 'assets/img', scene.visual.art))));
-});
-
-test('雙樓三級各十題，作者作品固定且雙人對戰確實涵蓋兩人', () => {
-  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/twintowers.json'), 'utf8'));
-  const allowedPairs = new Set(['王之渙|登鸛雀樓', '崔顥|黃鶴樓']);
-  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
-    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/twintowers-${suffix}.json`), 'utf8'));
-    assert.equal(entries.length, 10);
-    assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
-    assert.ok(entries.every((entry) => allowedPairs.has(`${entry.author}|${entry.work}`)));
-    assert.equal(entries.filter((entry) => entry.author === '王之渙').length, 5);
-    assert.equal(entries.filter((entry) => entry.author === '崔顥').length, 5);
-    for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
-      const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
-      assert.equal(selected.length, scene.quest.count, `${level} ${scene.id} 雙樓題目不足`);
-      if (scene.visual?.mode === 'duel') {
-        assert.ok(selected.some((entry) => entry.author === '王之渙'));
-        assert.ok(selected.some((entry) => entry.author === '崔顥'));
-      } else {
-        assert.ok(selected.every((entry) => entry.author === scene.quest.authors[0] && entry.work === scene.quest.works[0]));
-      }
-    }
+  const migrated = { adventure: { currentChapterId: 'high-tang-frontier', chapters: {
+    'high-tang-wangmeng': { chapterStatus: 'found', sceneIndex: 7, rewards: ['legacy-wangmeng'] },
+    'high-tang-frontier': { chapterStatus: 'stable', sceneIndex: 8, rewards: ['legacy-frontier'] },
+    'high-tang-twin-towers': { chapterStatus: 'found', sceneIndex: 7, rewards: ['legacy-towers'] },
+  } } };
+  ensureAdventure(migrated);
+  assert.equal(migrated.adventure.currentChapterId, 'high-tang-gaoshi');
+  for (const id of ['high-tang-wangwei', 'high-tang-menghaoran', 'high-tang-wangzhihuan', 'high-tang-cuihao']) {
+    assert.equal(migrated.adventure.chapters[id].chapterStatus, 'found');
+  }
+  for (const id of ['high-tang-gaoshi', 'high-tang-wangchangling', 'high-tang-censhen']) {
+    assert.equal(migrated.adventure.chapters[id].chapterStatus, 'stable');
   }
 });
 

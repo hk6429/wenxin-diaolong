@@ -5,6 +5,7 @@ const L = (name) => ({ path: `data/${name}.json` });
 
 const NEW_ADVENTURE_KEYS = [
   'zhuangzi', 'quyuan',
+  'wangwei', 'menghaoran', 'gaoshi', 'wangchangling', 'censhen', 'wangzhihuan', 'cuihao',
   'hanyu', 'liuzongyuan', 'baijuyi', 'liuyuxi', 'dumu', 'lishangyin', 'liyu',
   'ouyangxiu', 'wanganshi', 'suxun', 'sushi', 'suzhe', 'zenggong', 'fanzhongyan',
   'liuyong', 'huangtingjian', 'qinguan', 'yanshu',
@@ -39,9 +40,6 @@ export const BANK_SOURCES = {
     dushenyan: [L('dushenyan-elementary')],
     libai: [L('libai-elementary')],
     dufu: [L('dufu-elementary')],
-    wangmeng: [L('wangmeng-elementary')],
-    frontier: [L('frontier-elementary')],
-    twintowers: [L('twintowers-elementary')],
     ...adventureBanks('elementary'),
   },
   國中: {
@@ -65,9 +63,6 @@ export const BANK_SOURCES = {
     dushenyan: [L('dushenyan-junior')],
     libai: [L('libai-junior')],
     dufu: [L('dufu-junior')],
-    wangmeng: [L('wangmeng-junior')],
-    frontier: [L('frontier-junior')],
-    twintowers: [L('twintowers-junior')],
     ...adventureBanks('junior'),
   },
   高中: {
@@ -91,9 +86,6 @@ export const BANK_SOURCES = {
     dushenyan: [L('dushenyan-senior')],
     libai: [L('libai-senior')],
     dufu: [L('dufu-senior')],
-    wangmeng: [L('wangmeng-senior')],
-    frontier: [L('frontier-senior')],
-    twintowers: [L('twintowers-senior')],
     ...adventureBanks('senior'),
   },
   實戰: {

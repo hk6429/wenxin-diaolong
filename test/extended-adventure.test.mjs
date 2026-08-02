@@ -28,10 +28,10 @@ function readJson(relative) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relative), 'utf8'));
 }
 
-test('第 22 至 53 章連續成冊，每章都以本人作品出題並在章末迎戰本人', () => {
-  const extended = CHAPTERS.filter((chapter) => chapter.order >= 22);
-  assert.equal(CHAPTERS.length, 53);
-  assert.deepEqual(extended.map((chapter) => chapter.order), Array.from({ length: 32 }, (_, index) => index + 22));
+test('第 26 至 57 章連續成冊，每章都以本人作品出題並在章末迎戰本人', () => {
+  const extended = CHAPTERS.filter((chapter) => chapter.order >= 26);
+  assert.equal(CHAPTERS.length, 57);
+  assert.deepEqual(extended.map((chapter) => chapter.order), Array.from({ length: 32 }, (_, index) => index + 26));
 
   for (const definition of extended) {
     const [author] = EXPECTED[definition.file];
@@ -58,7 +58,7 @@ test('第 22 至 53 章連續成冊，每章都以本人作品出題並在章末
 });
 
 test('三級題庫數量符合人物權重，且每一道題作者、作品與關卡完全對應', () => {
-  for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 22)) {
+  for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 26)) {
     const [author, expectedCount] = EXPECTED[definition.file];
     const chapter = readJson(`data/adventure/${definition.file}.json`);
     const declaredWorks = new Set(chapter.scenes.flatMap((scene) => scene.quest?.works || []));
@@ -103,7 +103,7 @@ test('高風險章節明示歸屬、版本與虛構邊界', () => {
 
 test('新增題庫 ID 全域唯一，公版原典皆有可追溯來源', () => {
   const ids = [];
-  for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 22)) {
+  for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 26)) {
     const chapter = readJson(`data/adventure/${definition.file}.json`);
     const primarySources = chapter.sources.filter((source) => source.kind === 'primary');
     assert.ok(primarySources.length > 0, `${definition.figure}缺原典來源`);

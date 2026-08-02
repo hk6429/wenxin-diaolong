@@ -1,4 +1,5 @@
 import { EXTENDED_CHAPTERS } from './adventure-chapters.js';
+import { INDIVIDUAL_TANG_CHAPTERS } from './adventure-individual-chapters.js';
 
 const READING_CATS_BY_LEVEL = Object.freeze({
   '國小': Object.freeze(['明示訊息', '事件順序', '字詞理解', '簡單推論', '文體辨識']),
@@ -238,42 +239,7 @@ export const CHAPTERS = Object.freeze([
       '高中': ['句型', '文言句式', '摹寫', '映襯', '詩體判別', '誇飾', '類疊'],
     } },
   },
-  {
-    id: 'high-tang-wangmeng', order: 19, number: '十九', era: '盛唐・山水田園', figure: '王維・孟浩然', file: 'wangmeng',
-    title: '盛唐・王維與孟浩然〈空山故莊〉', heroTitle: '走入雙重詩境，遇見王維與孟浩然',
-    pageName: '王孟之頁', echoTitle: '空山故莊回音', art: 'wangmeng',
-    sceneIds: ['wangmeng-prologue', 'empty-mountain-after-rain', 'moon-spring-bamboo-lotus', 'old-friend-chicken-millet', 'field-garden-mulberry-hemp', 'two-landscapes-mirror', 'wangmeng-trial', 'archive-return-wangmeng'],
-    rewards: ['wangmeng-page', 'moon-chrysanthemum-token', 'friend-wangmeng'],
-    echoQuest: { bankKey: 'wangmeng', count: 4, authors: ['王維', '孟浩然'], works: ['山居秋暝', '過故人莊'], catsByLevel: {
-      '國小': ['句型', '詞性', '摹寫', '詩體判別'],
-      '國中': ['句型', '詞性', '文言句式', '映襯', '對仗', '詩體判別'],
-      '高中': ['句型', '文言句式', '摹寫', '映襯', '對仗', '詩體判別'],
-    } },
-  },
-  {
-    id: 'high-tang-frontier', order: 20, number: '二十', era: '盛唐・邊塞詩', figure: '高適・王昌齡・岑參', file: 'frontier',
-    title: '盛唐・邊塞三家〈風雪未歸〉', heroTitle: '走入邊塞三重詩境，遇見高適、王昌齡與岑參',
-    pageName: '邊聲之頁', echoTitle: '風雪未歸回音', art: 'frontier',
-    sceneIds: ['frontier-prologue', 'yan-song-departure', 'yan-song-cost', 'moon-pass', 'unreturned-road', 'snow-bloom', 'wheel-tower-farewell', 'frontier-trial', 'archive-return-frontier'],
-    rewards: ['frontier-page', 'snow-moon-token', 'friend-frontier'],
-    echoQuest: { bankKey: 'frontier', count: 6, authors: ['高適', '王昌齡', '岑參'], works: ['燕歌行並序', '出塞其一', '白雪歌送武判官歸京'], catsByLevel: {
-      '國小': ['句型', '詞性', '譬喻', '摹寫', '感嘆'],
-      '國中': ['句型', '譬喻', '映襯', '文言虛詞', '詩體判別'],
-      '高中': ['文言句式', '文言虛詞', '映襯', '互文', '詩體判別'],
-    } },
-  },
-  {
-    id: 'high-tang-twin-towers', order: 21, number: '二十一', era: '盛唐・登樓詩', figure: '王之渙・崔顥', file: 'twintowers',
-    title: '盛唐・王之渙與崔顥〈雙樓望遠〉', heroTitle: '登上雙樓，遇見王之渙與崔顥',
-    pageName: '雙樓之頁', echoTitle: '雙樓望遠回音', art: 'twintowers',
-    sceneIds: ['twin-towers-prologue', 'stork-tower-horizon', 'one-more-storey', 'yellow-crane-legend', 'hanyang-trees', 'sunset-homeland', 'twin-towers-trial', 'archive-return-twin-towers'],
-    rewards: ['twin-towers-page', 'crane-sunset-token', 'friend-twin-towers'],
-    echoQuest: { bankKey: 'twintowers', count: 6, authors: ['王之渙', '崔顥'], works: ['登鸛雀樓', '黃鶴樓'], catsByLevel: {
-      '國小': ['句型', '詞性', '摹寫', '詩體判別'],
-      '國中': ['句型', '文言虛詞', '對仗', '設問', '詩體判別'],
-      '高中': ['文言句式', '文言虛詞', '對仗', '設問', '詩體判別'],
-    } },
-  },
+  ...INDIVIDUAL_TANG_CHAPTERS,
   ...EXTENDED_CHAPTERS,
 ].map(withReadingEcho));
 
@@ -312,12 +278,39 @@ function syncLegacyAliases(state) {
   return state;
 }
 
+const LEGACY_GROUP_SPLITS = Object.freeze({
+  'high-tang-wangmeng': ['high-tang-wangwei', 'high-tang-menghaoran'],
+  'high-tang-frontier': ['high-tang-gaoshi', 'high-tang-wangchangling', 'high-tang-censhen'],
+  'high-tang-twin-towers': ['high-tang-wangzhihuan', 'high-tang-cuihao'],
+});
+
+function migrateGroupedChapters(state) {
+  for (const [legacyId, replacementIds] of Object.entries(LEGACY_GROUP_SPLITS)) {
+    const legacy = state.chapters?.[legacyId];
+    if (!legacy) continue;
+    const completed = ['found', 'stable'].includes(legacy.chapterStatus);
+    replacementIds.forEach((replacementId, index) => {
+      if (state.chapters[replacementId]) return;
+      const definition = chapterDefinition(replacementId);
+      const migrated = completed
+        ? { ...legacy, sceneIndex: definition.sceneIds.length - 1, rewards: [...definition.rewards] }
+        : index === 0 ? legacy : {};
+      state.chapters[replacementId] = normalizeProgress(migrated, definition);
+    });
+    if (state.currentChapterId === legacyId || state.chapterId === legacyId) {
+      state.currentChapterId = replacementIds[0];
+      state.chapterId = replacementIds[0];
+    }
+  }
+}
+
 export function ensureAdventure(meta) {
   if (!meta.adventure || typeof meta.adventure !== 'object') meta.adventure = {};
   const state = meta.adventure;
   state.level = ['國小', '國中', '高中'].includes(state.level) ? state.level : '國小';
   state.zhuyinMode = ['smart', 'full', 'off'].includes(state.zhuyinMode) ? state.zhuyinMode : 'smart';
   state.rewards = Array.isArray(state.rewards) ? [...new Set(state.rewards)] : [];
+  migrateGroupedChapters(state);
 
   const hasKnownChapter = state.chapters && typeof state.chapters === 'object' && !Array.isArray(state.chapters)
     && CHAPTERS.some((definition) => state.chapters[definition.id]);
