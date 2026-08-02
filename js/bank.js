@@ -3,6 +3,19 @@ import { loadQuizBank } from './quiz-loader.js';
 
 const L = (name) => ({ path: `data/${name}.json` });
 
+const NEW_ADVENTURE_KEYS = [
+  'hanyu', 'liuzongyuan', 'baijuyi', 'liuyuxi', 'dumu', 'lishangyin', 'liyu',
+  'ouyangxiu', 'wanganshi', 'suxun', 'sushi', 'suzhe', 'zenggong', 'fanzhongyan',
+  'liuyong', 'huangtingjian', 'qinguan', 'yanshu',
+  'yuefei', 'liqingzhao', 'luyou', 'xinqiji', 'wentianxiang',
+  'guanhanqing', 'mazhiyuan', 'baipu', 'zhengguangzu',
+  'luoguanzhong', 'shinaian', 'wuchengen', 'pusongling', 'caoxueqin',
+];
+
+const adventureBanks = (suffix) => Object.fromEntries(
+  NEW_ADVENTURE_KEYS.map((key) => [key, [L(`${key}-${suffix}`)]]),
+);
+
 export const BANK_SOURCES = {
   國小: {
     rhetoric: [L('rhetoric-elementary')],
@@ -28,6 +41,7 @@ export const BANK_SOURCES = {
     wangmeng: [L('wangmeng-elementary')],
     frontier: [L('frontier-elementary')],
     twintowers: [L('twintowers-elementary')],
+    ...adventureBanks('elementary'),
   },
   國中: {
     rhetoric: [L('rhetoric-junior')],
@@ -53,6 +67,7 @@ export const BANK_SOURCES = {
     wangmeng: [L('wangmeng-junior')],
     frontier: [L('frontier-junior')],
     twintowers: [L('twintowers-junior')],
+    ...adventureBanks('junior'),
   },
   高中: {
     rhetoric: [L('rhetoric-senior')],
@@ -78,6 +93,7 @@ export const BANK_SOURCES = {
     wangmeng: [L('wangmeng-senior')],
     frontier: [L('frontier-senior')],
     twintowers: [L('twintowers-senior')],
+    ...adventureBanks('senior'),
   },
   實戰: {
     rhetoric: [L('exam-rhetoric')],

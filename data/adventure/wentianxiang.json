@@ -1,0 +1,532 @@
+{
+  "id": "southern-song-wentianxiang",
+  "title": "南宋・文天祥〈丹心所向〉",
+  "version": 1,
+  "storyFrame": {
+    "tagline": "土室諸氣、零丁洋風雨與《指南錄》的逃亡路線疊在一起。你要讀出作者如何記錄處境、思考義與生，而不是把死亡當成遊戲分數。",
+    "epithet": "文天祥・文山・在危境中記錄選擇與責任的作者",
+    "vows": [
+      {
+        "id": "name-conditions",
+        "quote": "諸氣萃然",
+        "insight": "先看清身體與環境的真實壓力。"
+      },
+      {
+        "id": "read-metaphor",
+        "quote": "身世浮沉雨打萍",
+        "insight": "分辨山河、身世與比喻的對照。"
+      },
+      {
+        "id": "choose-life-work",
+        "quote": "將以有為也",
+        "insight": "理解忍辱求生也可能是責任的一部分。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "zhengqi",
+      "kind": "primary",
+      "label": "文天祥〈正氣歌〉（維基文庫公版文本）",
+      "url": "https://zh.wikisource.org/zh-hant/正氣歌"
+    },
+    {
+      "id": "lingding",
+      "kind": "primary",
+      "label": "文天祥〈過零丁洋〉（維基文庫公版文本）",
+      "url": "https://zh.wikisource.org/zh-hant/過伶仃洋"
+    },
+    {
+      "id": "guide",
+      "kind": "primary",
+      "label": "文天祥〈指南錄後序〉（維基文庫公版文本）",
+      "url": "https://zh.wikisource.org/zh-hant/指南錄/後序"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "穿卷場景、任務對話、合流與作者對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "wentianxiang-prologue",
+      "title": "開卷・文脈現形",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "zhengqi",
+        "lingding",
+        "guide",
+        "fiction"
+      ],
+      "story": {
+        "國小": "文天祥的作品化成可以行走的場景，你要帶著原文證據完成任務。",
+        "國中": "土室諸氣、零丁洋風雨與《指南錄》的逃亡路線疊在一起。你要讀出作者如何記錄處境、思考義與生，而不是把死亡當成遊戲分數。",
+        "高中": "本章把作品形式、歷史處境與後設創作分層；所有判斷回到公版原典，不以後世傳說或現代改編補成唯一答案。"
+      },
+      "body": {
+        "國小": "先認識作品、場景和閱讀規則。",
+        "國中": "沿意象、語氣、結構與轉折建立閱讀證據。",
+        "高中": "比較文體機制、歷史指涉與詮釋邊界。"
+      },
+      "factNote": "穿卷與玩家同行設定為本站原創；原作文本取自所列公版來源。",
+      "choices": [
+        {
+          "id": "wentianxiang-0-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-0-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-0-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ]
+    },
+    {
+      "id": "wentianxiang-prison-airs",
+      "title": "土室諸氣・身體承受的現場",
+      "contentKind": "primary",
+      "sourceIds": [
+        "zhengqi",
+        "fiction"
+      ],
+      "story": {
+        "國小": "讀文天祥〈正氣歌〉的關鍵畫面，找出文字怎麼讓人看見、聽見或感到轉折。",
+        "國中": "序文逐項列舉水、土、日、火、米、人與穢氣，再說明自己如何在惡劣環境中自持。",
+        "高中": "以篇章位置、語言形式與文體規則檢驗判讀：序文逐項列舉水、土、日、火、米、人與穢氣，再說明自己如何在惡劣環境中自持。"
+      },
+      "body": {
+        "國小": "圈出〈正氣歌〉中最重要的景物、動作或聲音。",
+        "國中": "說明〈正氣歌〉如何由細節推進情緒與情節。",
+        "高中": "分析〈正氣歌〉的結構功能，並區分文本、史實與後設創作。"
+      },
+      "factNote": "環境描寫是監禁處境的記錄，不宜把苦難美化成必經升級關卡。",
+      "choices": [
+        {
+          "id": "wentianxiang-1-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-1-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-1-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wentianxiang-cover.webp",
+        "alt": "文天祥作品世界的無文字歷史場景",
+        "log": "土室諸氣・身體承受的現場；以原文證據完成4題。"
+      },
+      "quest": {
+        "id": "wentianxiang-prison-airs-quest",
+        "bankKey": "wentianxiang",
+        "count": 4,
+        "authors": [
+          "文天祥"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "類疊",
+            "句型",
+            "摹寫",
+            "詩體判別",
+            "譬喻"
+          ],
+          "國中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ],
+          "高中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ]
+        },
+        "works": [
+          "正氣歌"
+        ]
+      }
+    },
+    {
+      "id": "wentianxiang-ocean-couplets",
+      "title": "風絮雨萍・地名雙關",
+      "contentKind": "primary",
+      "sourceIds": [
+        "lingding",
+        "fiction"
+      ],
+      "story": {
+        "國小": "讀文天祥〈過零丁洋〉的關鍵畫面，找出文字怎麼讓人看見、聽見或感到轉折。",
+        "國中": "頷聯以風絮、雨萍分寫山河與身世；頸聯又借惶恐灘、零丁洋地名疊入情緒。",
+        "高中": "以篇章位置、語言形式與文體規則檢驗判讀：頷聯以風絮、雨萍分寫山河與身世；頸聯又借惶恐灘、零丁洋地名疊入情緒。"
+      },
+      "body": {
+        "國小": "圈出〈過零丁洋〉中最重要的景物、動作或聲音。",
+        "國中": "說明〈過零丁洋〉如何由細節推進情緒與情節。",
+        "高中": "分析〈過零丁洋〉的結構功能，並區分文本、史實與後設創作。"
+      },
+      "factNote": "結尾談丹心與汗青，題目重在倫理選擇與修辭，不以犧牲生命換取分數。",
+      "choices": [
+        {
+          "id": "wentianxiang-2-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-2-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-2-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wentianxiang-scene.webp",
+        "alt": "文天祥作品世界的無文字歷史場景",
+        "log": "風絮雨萍・地名雙關；以原文證據完成3題。"
+      },
+      "quest": {
+        "id": "wentianxiang-ocean-couplets-quest",
+        "bankKey": "wentianxiang",
+        "count": 3,
+        "authors": [
+          "文天祥"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "類疊",
+            "句型",
+            "摹寫",
+            "詩體判別",
+            "譬喻"
+          ],
+          "國中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ],
+          "高中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ]
+        },
+        "works": [
+          "過零丁洋"
+        ]
+      }
+    },
+    {
+      "id": "wentianxiang-record-escape",
+      "title": "指南後序・死生之間記事",
+      "contentKind": "primary",
+      "sourceIds": [
+        "guide",
+        "fiction"
+      ],
+      "story": {
+        "國小": "讀文天祥〈指南錄後序〉的關鍵畫面，找出文字怎麼讓人看見、聽見或感到轉折。",
+        "國中": "作者詳記奉使、被拘與脫逃，並說「隱忍以行」是為了日後有所作為。",
+        "高中": "以篇章位置、語言形式與文體規則檢驗判讀：作者詳記奉使、被拘與脫逃，並說「隱忍以行」是為了日後有所作為。"
+      },
+      "body": {
+        "國小": "圈出〈指南錄後序〉中最重要的景物、動作或聲音。",
+        "國中": "說明〈指南錄後序〉如何由細節推進情緒與情節。",
+        "高中": "分析〈指南錄後序〉的結構功能，並區分文本、史實與後設創作。"
+      },
+      "factNote": "篇中既有求死也有求生的抉擇，不能簡化成只推崇死亡。",
+      "choices": [
+        {
+          "id": "wentianxiang-3-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-3-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-3-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wentianxiang-cover.webp",
+        "alt": "文天祥作品世界的無文字歷史場景",
+        "log": "指南後序・死生之間記事；以原文證據完成3題。"
+      },
+      "quest": {
+        "id": "wentianxiang-record-escape-quest",
+        "bankKey": "wentianxiang",
+        "count": 3,
+        "authors": [
+          "文天祥"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "類疊",
+            "句型",
+            "摹寫",
+            "詩體判別",
+            "譬喻"
+          ],
+          "國中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ],
+          "高中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ]
+        },
+        "works": [
+          "指南錄後序"
+        ]
+      }
+    },
+    {
+      "id": "wentianxiang-three-testimonies",
+      "title": "正氣丹心指南・三種見證",
+      "contentKind": "primary",
+      "sourceIds": [
+        "guide",
+        "fiction"
+      ],
+      "story": {
+        "國小": "讀文天祥〈指南錄後序〉的關鍵畫面，找出文字怎麼讓人看見、聽見或感到轉折。",
+        "國中": "詩、歌與序從不同文體保存環境、心志與行動路線，互相照見而不互相取代。",
+        "高中": "以篇章位置、語言形式與文體規則檢驗判讀：詩、歌與序從不同文體保存環境、心志與行動路線，互相照見而不互相取代。"
+      },
+      "body": {
+        "國小": "圈出〈指南錄後序〉中最重要的景物、動作或聲音。",
+        "國中": "說明〈指南錄後序〉如何由細節推進情緒與情節。",
+        "高中": "分析〈指南錄後序〉的結構功能，並區分文本、史實與後設創作。"
+      },
+      "factNote": "合流場景為本站原創；《指南錄後序》分配較少題，三作合計每級十題。",
+      "choices": [
+        {
+          "id": "wentianxiang-4-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-4-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-4-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wentianxiang-scene.webp",
+        "alt": "文天祥作品世界的無文字歷史場景",
+        "log": "正氣丹心指南・三種見證；以原文證據完成五題。"
+      },
+      "quest": {
+        "id": "wentianxiang-three-testimonies-quest",
+        "bankKey": "wentianxiang",
+        "count": 5,
+        "authors": [
+          "文天祥"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "類疊",
+            "句型",
+            "摹寫",
+            "詩體判別",
+            "譬喻"
+          ],
+          "國中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ],
+          "高中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ]
+        },
+        "works": [
+          "正氣歌",
+          "過零丁洋",
+          "指南錄後序"
+        ]
+      }
+    },
+    {
+      "id": "wentianxiang-trial",
+      "title": "文天祥對戰・原典守關",
+      "contentKind": "primary",
+      "sourceIds": [
+        "zhengqi",
+        "lingding",
+        "guide",
+        "fiction"
+      ],
+      "story": {
+        "國小": "文天祥親自出題，五問只從本章所列本人作品抽出。",
+        "國中": "對戰交錯意象、語氣、結構與文體常識；每一答都要能回到原文。",
+        "高中": "最終對戰檢驗跨篇比較、詮釋邊界與形式分析，不以生平傳說替代文本。"
+      },
+      "body": {
+        "國小": "用五題證明你讀懂作品。",
+        "國中": "跨作品辨認證據與轉折。",
+        "高中": "比較文本機制並守住史實邊界。"
+      },
+      "factNote": "對戰為本站原創；題目只取本章所列作者作品與公版原典。",
+      "choices": [
+        {
+          "id": "wentianxiang-5-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-5-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-5-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-wentianxiang-duel.webp",
+        "alt": "學子與文天祥在無文字卷境中展開文心對戰",
+        "opponent": "文天祥",
+        "realm": "南宋・文天祥〈丹心所向〉",
+        "log": "文天祥展開原典卷軸；五題只從本人作品抽出。"
+      },
+      "quest": {
+        "id": "wentianxiang-duel",
+        "bankKey": "wentianxiang",
+        "count": 5,
+        "authors": [
+          "文天祥"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "類疊",
+            "句型",
+            "摹寫",
+            "詩體判別",
+            "譬喻"
+          ],
+          "國中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ],
+          "高中": [
+            "類疊",
+            "句型",
+            "引用",
+            "詩體判別",
+            "譬喻",
+            "雙關"
+          ]
+        },
+        "works": [
+          "正氣歌",
+          "過零丁洋",
+          "指南錄後序"
+        ]
+      }
+    },
+    {
+      "id": "archive-return-wentianxiang",
+      "title": "守卷閣歸來・文心歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶回的不是角色戰利品，而是一套能回到原文查證的閱讀方法。",
+        "國中": "作品中的聲音、畫面、結構與選擇各自歸位，留下可以重讀的證據鏈。",
+        "高中": "章回收束於閱讀責任：公版原典可再檢核，詮釋可討論，史實與後設創作不可混同。"
+      },
+      "body": {
+        "國小": "整理一個最重要的畫面與一句理由。",
+        "國中": "七日後再從作品轉折重建理解。",
+        "高中": "保留一個可由原典繼續追問的問題。"
+      },
+      "factNote": "歸閣與收藏設定為本站原創，不新增原作沒有的生平事實。",
+      "choices": [
+        {
+          "id": "wentianxiang-6-evidence",
+          "label": "先以原文與舞臺結構建立證據",
+          "response": "卷頁亮起，判斷有了可以核對的根據。"
+        },
+        {
+          "id": "wentianxiang-6-shortcut",
+          "label": "只用一個流行標籤概括全篇",
+          "response": "標籤太快，作品中的轉折與限制還沒有被看見。"
+        },
+        {
+          "id": "wentianxiang-6-invent",
+          "label": "把想像場景直接當成史實",
+          "response": "守卷閣提醒：文本想像與歷史證據必須分層。"
+        }
+      ]
+    }
+  ]
+}

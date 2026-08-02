@@ -1,0 +1,318 @@
+{
+  "id": "late-tang-liuzongyuan",
+  "title": "中唐・柳宗元〈永州心境〉",
+  "version": 1,
+  "riskNotes": [
+    "永州山水遊記包含作者觀看與情緒安排，不是現代地理調查；「心凝形釋」等句不可脫離貶謫處境硬解成單純勵志。",
+    "古典原作為公有領域；本站不搬用現代譯注、教科書題目或受著作權保護的改寫。"
+  ],
+  "storyFrame": {
+    "tagline": "柳宗元把作品放上案前：先看見人物，再判斷文字如何使故事成立。",
+    "epithet": "柳宗元・以作品等待校讀的文人",
+    "vows": [
+      {
+        "id": "liuzongyuan-read",
+        "quote": "先讀作品，再下判斷",
+        "insight": "人物印象必須由文本證據支持。"
+      },
+      {
+        "id": "liuzongyuan-layers",
+        "quote": "分清故事、推論與史實",
+        "insight": "文學真實不等於逐字歷史紀錄。"
+      },
+      {
+        "id": "liuzongyuan-versions",
+        "quote": "版本有別，答案才公平",
+        "insight": "先鎖定底本，才不以異文設陷阱。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "liuzongyuan-primary",
+      "kind": "primary",
+      "label": "柳宗元本章作品（維基文庫公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/永州八記"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "守卷閣相遇、對話、選擇與人物對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "liuzongyuan-prologue",
+      "title": "柳宗元入卷・先認作品再闖關",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "liuzongyuan-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "守卷閣開出柳宗元的作品長卷，你要先分清人物、作品和故事。",
+        "國中": "同一位作家的不同作品各有文體與觀看位置，本章從證據建立閱讀地圖。",
+        "高中": "本章同步處理敘事策略、版本來源與史實邊界，不把後世印象當原文。"
+      },
+      "body": {
+        "國小": "選擇用作品線索前進。",
+        "國中": "辨認作者、作品與章法。",
+        "高中": "鎖定底本並保留可爭議處。"
+      },
+      "factNote": "https://zh.wikisource.org/zh-hant/永州八記 為公版原典入口；守卷閣相遇與闖關對話為本站原創。",
+      "choices": [
+        {
+          "id": "liuzongyuan-prologue-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "liuzongyuan-prologue-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "liuzongyuan-prologue-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    },
+    {
+      "id": "liuzongyuan-western-hill",
+      "title": "始得西山・觀看位置改變",
+      "contentKind": "primary",
+      "sourceIds": [
+        "liuzongyuan-primary"
+      ],
+      "story": {
+        "國小": "你走進〈始得西山宴遊記〉的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "永州山水遊記包含作者觀看與情緒安排，不是現代地理調查；「心凝形釋」等句不可脫離貶謫處境硬解成單純勵志。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "liuzongyuan-western-hill-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "liuzongyuan-western-hill-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "liuzongyuan-western-hill-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-liuzongyuan-cover.webp",
+        "alt": "柳宗元〈始得西山宴遊記〉原創情境圖",
+        "log": "依〈始得西山宴遊記〉完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "liuzongyuan-western-hill-quest",
+        "bankKey": "liuzongyuan",
+        "count": 5,
+        "authors": [
+          "柳宗元"
+        ],
+        "works": [
+          "始得西山宴遊記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫"
+          ],
+          "國中": [
+            "映襯"
+          ],
+          "高中": [
+            "示現"
+          ]
+        }
+      }
+    },
+    {
+      "id": "liuzongyuan-stone-pool",
+      "title": "小石潭・清景轉幽情",
+      "contentKind": "primary",
+      "sourceIds": [
+        "liuzongyuan-primary"
+      ],
+      "story": {
+        "國小": "你走進〈小石潭記〉的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "永州山水遊記包含作者觀看與情緒安排，不是現代地理調查；「心凝形釋」等句不可脫離貶謫處境硬解成單純勵志。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "liuzongyuan-stone-pool-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "liuzongyuan-stone-pool-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "liuzongyuan-stone-pool-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-liuzongyuan-scene.webp",
+        "alt": "柳宗元〈小石潭記〉原創情境圖",
+        "log": "依〈小石潭記〉完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "liuzongyuan-stone-pool-quest",
+        "bankKey": "liuzongyuan",
+        "count": 5,
+        "authors": [
+          "柳宗元"
+        ],
+        "works": [
+          "小石潭記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "句型"
+          ],
+          "國中": [
+            "文言句式"
+          ],
+          "高中": [
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "liuzongyuan-trial",
+      "title": "柳宗元問卷・作品證據對決",
+      "contentKind": "primary",
+      "sourceIds": [
+        "liuzongyuan-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "柳宗元親自展卷，答對才能讓文字重新發光。",
+        "國中": "最後一戰混合本章作品，但作者與作品不會越界。",
+        "高中": "對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。"
+      },
+      "body": {
+        "國小": "迎戰本人，靠作品過關。",
+        "國中": "從本章題庫抽出跨作品五題。",
+        "高中": "以底本與敘事證據完成校讀。"
+      },
+      "factNote": "人物對戰為本站原創遊戲橋段；所有問題仍只取自柳宗元本章所列公版作品。",
+      "choices": [
+        {
+          "id": "liuzongyuan-trial-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "liuzongyuan-trial-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "liuzongyuan-trial-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-liuzongyuan-duel.webp",
+        "alt": "學子以筆迎戰柳宗元",
+        "opponent": "柳宗元",
+        "realm": "中唐・永州山水",
+        "log": "柳宗元展開作品長卷，等待你的證據。"
+      },
+      "quest": {
+        "id": "liuzongyuan-duel",
+        "bankKey": "liuzongyuan",
+        "count": 5,
+        "authors": [
+          "柳宗元"
+        ],
+        "works": [
+          "始得西山宴遊記",
+          "小石潭記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫",
+            "句型"
+          ],
+          "國中": [
+            "映襯",
+            "文言句式"
+          ],
+          "高中": [
+            "示現",
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "archive-return-liuzongyuan",
+      "title": "守卷閣歸來・永州之頁歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶著永州之頁回到守卷閣。",
+        "國中": "作品中的人物、語言與選擇已收入閱讀地圖。",
+        "高中": "本章留下底本、文體、推論與史實邊界，等待七日回聲。"
+      },
+      "body": {
+        "國小": "七日後再回來複習。",
+        "國中": "重新整理作品與證據。",
+        "高中": "保留爭議，拒絕過度確定。"
+      },
+      "factNote": "守卷閣與永州之頁為本站原創；原典著作權已逾期，題目與故事包裝皆為本站自編。",
+      "choices": [
+        {
+          "id": "archive-liuzongyuan-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "archive-liuzongyuan-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "archive-liuzongyuan-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    }
+  ]
+}

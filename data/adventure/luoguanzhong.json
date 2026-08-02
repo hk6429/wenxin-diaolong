@@ -1,0 +1,386 @@
+{
+  "id": "ming-luoguanzhong",
+  "title": "明代・羅貫中《三國演義》〈群雄筆陣〉",
+  "version": 1,
+  "riskNotes": [
+    "本站鎖定維基文庫毛本系統；小說人物、對話與事件安排不可直接當作《三國志》等史書原貌，楊慎〈臨江仙〉也不是羅貫中原創。",
+    "古典原作為公有領域；本站不搬用現代譯注、教科書題目或受著作權保護的改寫。"
+  ],
+  "storyFrame": {
+    "tagline": "羅貫中把作品放上案前：先看見人物，再判斷文字如何使故事成立。",
+    "epithet": "羅貫中・以作品等待校讀的文人",
+    "vows": [
+      {
+        "id": "luoguanzhong-read",
+        "quote": "先讀作品，再下判斷",
+        "insight": "人物印象必須由文本證據支持。"
+      },
+      {
+        "id": "luoguanzhong-layers",
+        "quote": "分清故事、推論與史實",
+        "insight": "文學真實不等於逐字歷史紀錄。"
+      },
+      {
+        "id": "luoguanzhong-versions",
+        "quote": "版本有別，答案才公平",
+        "insight": "先鎖定底本，才不以異文設陷阱。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "luoguanzhong-primary",
+      "kind": "primary",
+      "label": "羅貫中本章作品（維基文庫公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/三國演義"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "守卷閣相遇、對話、選擇與人物對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "luoguanzhong-prologue",
+      "title": "羅貫中入卷・先認作品再闖關",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "luoguanzhong-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "守卷閣開出羅貫中的作品長卷，你要先分清人物、作品和故事。",
+        "國中": "同一位作家的不同作品各有文體與觀看位置，本章從證據建立閱讀地圖。",
+        "高中": "本章同步處理敘事策略、版本來源與史實邊界，不把後世印象當原文。"
+      },
+      "body": {
+        "國小": "選擇用作品線索前進。",
+        "國中": "辨認作者、作品與章法。",
+        "高中": "鎖定底本並保留可爭議處。"
+      },
+      "factNote": "https://zh.wikisource.org/zh-hant/三國演義 為公版原典入口；守卷閣相遇與闖關對話為本站原創。",
+      "choices": [
+        {
+          "id": "luoguanzhong-prologue-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "luoguanzhong-prologue-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "luoguanzhong-prologue-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    },
+    {
+      "id": "luoguanzhong-oath-and-heroes",
+      "title": "群雄登場・人物如何被寫出",
+      "contentKind": "primary",
+      "sourceIds": [
+        "luoguanzhong-primary"
+      ],
+      "story": {
+        "國小": "你走進《三國演義》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本站鎖定維基文庫毛本系統；小說人物、對話與事件安排不可直接當作《三國志》等史書原貌，楊慎〈臨江仙〉也不是羅貫中原創。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "luoguanzhong-oath-and-heroes-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "luoguanzhong-oath-and-heroes-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "luoguanzhong-oath-and-heroes-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-luoguanzhong-cover.webp",
+        "alt": "羅貫中《三國演義》原創情境圖",
+        "log": "依《三國演義》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "luoguanzhong-oath-and-heroes-quest",
+        "bankKey": "luoguanzhong",
+        "count": 5,
+        "authors": [
+          "羅貫中"
+        ],
+        "works": [
+          "三國演義"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫"
+          ],
+          "國中": [
+            "映襯"
+          ],
+          "高中": [
+            "示現"
+          ]
+        }
+      }
+    },
+    {
+      "id": "luoguanzhong-strategy-language",
+      "title": "帳前論勢・計謀如何成立",
+      "contentKind": "primary",
+      "sourceIds": [
+        "luoguanzhong-primary"
+      ],
+      "story": {
+        "國小": "你走進《三國演義》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本站鎖定維基文庫毛本系統；小說人物、對話與事件安排不可直接當作《三國志》等史書原貌，楊慎〈臨江仙〉也不是羅貫中原創。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "luoguanzhong-strategy-language-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "luoguanzhong-strategy-language-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "luoguanzhong-strategy-language-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-luoguanzhong-scene.webp",
+        "alt": "羅貫中《三國演義》原創情境圖",
+        "log": "依《三國演義》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "luoguanzhong-strategy-language-quest",
+        "bankKey": "luoguanzhong",
+        "count": 5,
+        "authors": [
+          "羅貫中"
+        ],
+        "works": [
+          "三國演義"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "句型"
+          ],
+          "國中": [
+            "文言句式"
+          ],
+          "高中": [
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "luoguanzhong-history-fiction",
+      "title": "青史與演義・證據分層",
+      "contentKind": "primary",
+      "sourceIds": [
+        "luoguanzhong-primary"
+      ],
+      "story": {
+        "國小": "你走進《三國演義》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本站鎖定維基文庫毛本系統；小說人物、對話與事件安排不可直接當作《三國志》等史書原貌，楊慎〈臨江仙〉也不是羅貫中原創。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "luoguanzhong-history-fiction-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "luoguanzhong-history-fiction-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "luoguanzhong-history-fiction-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-luoguanzhong-scene.webp",
+        "alt": "羅貫中《三國演義》原創情境圖",
+        "log": "依《三國演義》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "luoguanzhong-history-fiction-quest",
+        "bankKey": "luoguanzhong",
+        "count": 5,
+        "authors": [
+          "羅貫中"
+        ],
+        "works": [
+          "三國演義"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "詞性"
+          ],
+          "國中": [
+            "引用"
+          ],
+          "高中": [
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "luoguanzhong-trial",
+      "title": "羅貫中問卷・作品證據對決",
+      "contentKind": "primary",
+      "sourceIds": [
+        "luoguanzhong-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "羅貫中親自展卷，答對才能讓文字重新發光。",
+        "國中": "最後一戰混合本章作品，但作者與作品不會越界。",
+        "高中": "對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。"
+      },
+      "body": {
+        "國小": "迎戰本人，靠作品過關。",
+        "國中": "從本章題庫抽出跨作品五題。",
+        "高中": "以底本與敘事證據完成校讀。"
+      },
+      "factNote": "人物對戰為本站原創遊戲橋段；所有問題仍只取自羅貫中本章所列公版作品。",
+      "choices": [
+        {
+          "id": "luoguanzhong-trial-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "luoguanzhong-trial-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "luoguanzhong-trial-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-luoguanzhong-duel.webp",
+        "alt": "學子以筆迎戰羅貫中",
+        "opponent": "羅貫中",
+        "realm": "明代・三國演義",
+        "log": "羅貫中展開作品長卷，等待你的證據。"
+      },
+      "quest": {
+        "id": "luoguanzhong-duel",
+        "bankKey": "luoguanzhong",
+        "count": 6,
+        "authors": [
+          "羅貫中"
+        ],
+        "works": [
+          "三國演義",
+          "三國演義",
+          "三國演義"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫",
+            "句型",
+            "詞性"
+          ],
+          "國中": [
+            "映襯",
+            "文言句式",
+            "引用"
+          ],
+          "高中": [
+            "示現",
+            "文言句式",
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "archive-return-luoguanzhong",
+      "title": "守卷閣歸來・三國之頁歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶著三國之頁回到守卷閣。",
+        "國中": "作品中的人物、語言與選擇已收入閱讀地圖。",
+        "高中": "本章留下底本、文體、推論與史實邊界，等待七日回聲。"
+      },
+      "body": {
+        "國小": "七日後再回來複習。",
+        "國中": "重新整理作品與證據。",
+        "高中": "保留爭議，拒絕過度確定。"
+      },
+      "factNote": "守卷閣與三國之頁為本站原創；原典著作權已逾期，題目與故事包裝皆為本站自編。",
+      "choices": [
+        {
+          "id": "archive-luoguanzhong-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "archive-luoguanzhong-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "archive-luoguanzhong-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    }
+  ]
+}

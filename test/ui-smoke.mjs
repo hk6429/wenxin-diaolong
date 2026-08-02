@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 import { chromium } from 'playwright-core';
+import { CHAPTERS } from '../js/adventure.js';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' };
@@ -156,7 +157,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險沒有顯示莊子至雙樓二十一章');
+if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險沒有顯示莊子至曹雪芹五十三章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -212,7 +213,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
-if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險沒有顯示曹丕至雙樓入口');
+if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險沒有顯示全部五十三章入口');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
@@ -265,7 +266,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見司馬遷'));
-if (await page.locator('.adventure-chapter-tab').count() !== 21) fail('冒險章回數不是二十一章');
+if (await page.locator('.adventure-chapter-tab').count() !== 53) fail('冒險章回數不是五十三章');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-simaqian-archive.webp')) fail('司馬遷篇沒有漢宮書房滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-cover.png`, fullPage: true });
@@ -624,23 +625,49 @@ await smokeWorkChapter({
   duelArt: 'adventure-dufu-duel.webp', opponent: '杜甫',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-dufu', chapterId: 'high-tang-wangmeng', heroText: '遇見王維與孟浩然', label: '王孟篇',
+  previousId: 'high-tang-dufu', chapterId: 'high-tang-wangmeng', heroText: '遇見王維・孟浩然', label: '王孟篇',
   cover: 'adventure-wangmeng-cover.webp', vowId: 'hear-stillness', questIndex: 1, questTitle: '空山新雨',
   sceneArt: 'adventure-wangmeng-cover.webp', bank: 'wangmeng', duelIndex: 6, duelTitle: '王孟雙璧',
   duelArt: 'adventure-wangmeng-duel.webp', opponent: '王維・孟浩然',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-wangmeng', chapterId: 'high-tang-frontier', heroText: '遇見高適、王昌齡與岑參', label: '邊塞三家篇',
+  previousId: 'high-tang-wangmeng', chapterId: 'high-tang-frontier', heroText: '遇見高適・王昌齡・岑參', label: '邊塞三家篇',
   cover: 'adventure-frontier-cover.webp', vowId: 'three-views', questIndex: 1, questTitle: '燕歌出塞',
   sceneArt: 'adventure-frontier-cover.webp', bank: 'frontier', duelIndex: 7, duelTitle: '三家邊聲',
   duelArt: 'adventure-frontier-duel.webp', opponent: '高適・王昌齡・岑參',
 });
 await smokeWorkChapter({
-  previousId: 'high-tang-frontier', chapterId: 'high-tang-twin-towers', heroText: '遇見王之渙與崔顥', label: '雙樓篇',
+  previousId: 'high-tang-frontier', chapterId: 'high-tang-twin-towers', heroText: '遇見王之渙・崔顥', label: '雙樓篇',
   cover: 'adventure-twintowers-cover.webp', vowId: 'two-routes', questIndex: 2, questTitle: '千里之目',
   sceneArt: 'adventure-twintowers-cover.webp', bank: 'twintowers', duelIndex: 6, duelTitle: '雙樓對望',
   duelArt: 'adventure-twintowers-duel.webp', opponent: '王之渙・崔顥',
 });
+
+// 第 22–53 章：逐章確認滿版封面、本人作品題庫與本人章末對戰。
+for (const definition of CHAPTERS.filter((chapter) => chapter.order >= 22)) {
+  const chapter = JSON.parse(await readFile(join(ROOT, `data/adventure/${definition.file}.json`), 'utf8'));
+  const questIndex = chapter.scenes.findIndex((scene) => scene.quest && scene.visual?.mode !== 'duel');
+  const duelIndex = chapter.scenes.findIndex((scene) => scene.visual?.mode === 'duel');
+  const previousId = CHAPTERS.find((item) => item.order === definition.order - 1).id;
+  const questScene = chapter.scenes[questIndex];
+  const duelScene = chapter.scenes[duelIndex];
+  await smokeWorkChapter({
+    previousId,
+    chapterId: definition.id,
+    heroText: `遇見${definition.figure}`,
+    label: `${definition.figure}篇`,
+    cover: `adventure-${definition.file}-cover.webp`,
+    vowId: `smoke-${definition.file}`,
+    questIndex,
+    questTitle: questScene.title,
+    sceneArt: questScene.visual.art,
+    bank: definition.file,
+    duelIndex,
+    duelTitle: duelScene.title,
+    duelArt: duelScene.visual.art,
+    opponent: definition.figure,
+  });
+}
 
 // 練功：修辭區答一題
 await page.click('#btn-practice');

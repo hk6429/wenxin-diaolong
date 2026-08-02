@@ -1,3 +1,5 @@
+import { EXTENDED_CHAPTERS } from './adventure-chapters.js';
+
 export const CHAPTERS = Object.freeze([
   {
     id: 'preqin-zhuangzi', order: 1, number: '一', era: '先秦', figure: '莊子', file: 'zhuangzi',
@@ -250,6 +252,7 @@ export const CHAPTERS = Object.freeze([
       '高中': ['文言句式', '文言虛詞', '對仗', '設問', '詩體判別'],
     } },
   },
+  ...EXTENDED_CHAPTERS,
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。

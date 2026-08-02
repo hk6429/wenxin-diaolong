@@ -1,0 +1,386 @@
+{
+  "id": "qing-pusongling",
+  "title": "清代・蒲松齡《聊齋志異》〈鬼狐照人〉",
+  "version": 1,
+  "riskNotes": [
+    "鬼狐為文言小說的敘事角色與象徵資源，不能用故事證明超自然存在；不同刻本篇目、文字或次序可能有差異。",
+    "古典原作為公有領域；本站不搬用現代譯注、教科書題目或受著作權保護的改寫。"
+  ],
+  "storyFrame": {
+    "tagline": "蒲松齡把作品放上案前：先看見人物，再判斷文字如何使故事成立。",
+    "epithet": "蒲松齡・以作品等待校讀的文人",
+    "vows": [
+      {
+        "id": "pusongling-read",
+        "quote": "先讀作品，再下判斷",
+        "insight": "人物印象必須由文本證據支持。"
+      },
+      {
+        "id": "pusongling-layers",
+        "quote": "分清故事、推論與史實",
+        "insight": "文學真實不等於逐字歷史紀錄。"
+      },
+      {
+        "id": "pusongling-versions",
+        "quote": "版本有別，答案才公平",
+        "insight": "先鎖定底本，才不以異文設陷阱。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "pusongling-primary",
+      "kind": "primary",
+      "label": "蒲松齡本章作品（維基文庫公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/聊齋"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "守卷閣相遇、對話、選擇與人物對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "pusongling-prologue",
+      "title": "蒲松齡入卷・先認作品再闖關",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "pusongling-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "守卷閣開出蒲松齡的作品長卷，你要先分清人物、作品和故事。",
+        "國中": "同一位作家的不同作品各有文體與觀看位置，本章從證據建立閱讀地圖。",
+        "高中": "本章同步處理敘事策略、版本來源與史實邊界，不把後世印象當原文。"
+      },
+      "body": {
+        "國小": "選擇用作品線索前進。",
+        "國中": "辨認作者、作品與章法。",
+        "高中": "鎖定底本並保留可爭議處。"
+      },
+      "factNote": "https://zh.wikisource.org/zh-hant/聊齋 為公版原典入口；守卷閣相遇與闖關對話為本站原創。",
+      "choices": [
+        {
+          "id": "pusongling-prologue-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "pusongling-prologue-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "pusongling-prologue-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    },
+    {
+      "id": "pusongling-painted-skin",
+      "title": "畫皮・外表與判斷",
+      "contentKind": "primary",
+      "sourceIds": [
+        "pusongling-primary"
+      ],
+      "story": {
+        "國小": "你走進《聊齋志異》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "鬼狐為文言小說的敘事角色與象徵資源，不能用故事證明超自然存在；不同刻本篇目、文字或次序可能有差異。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "pusongling-painted-skin-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "pusongling-painted-skin-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "pusongling-painted-skin-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-pusongling-cover.webp",
+        "alt": "蒲松齡《聊齋志異》原創情境圖",
+        "log": "依《聊齋志異》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "pusongling-painted-skin-quest",
+        "bankKey": "pusongling",
+        "count": 5,
+        "authors": [
+          "蒲松齡"
+        ],
+        "works": [
+          "聊齋志異"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫"
+          ],
+          "國中": [
+            "映襯"
+          ],
+          "高中": [
+            "示現"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pusongling-cricket",
+      "title": "促織・小蟲背後的制度",
+      "contentKind": "primary",
+      "sourceIds": [
+        "pusongling-primary"
+      ],
+      "story": {
+        "國小": "你走進《聊齋志異》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "鬼狐為文言小說的敘事角色與象徵資源，不能用故事證明超自然存在；不同刻本篇目、文字或次序可能有差異。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "pusongling-cricket-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "pusongling-cricket-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "pusongling-cricket-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-pusongling-scene.webp",
+        "alt": "蒲松齡《聊齋志異》原創情境圖",
+        "log": "依《聊齋志異》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "pusongling-cricket-quest",
+        "bankKey": "pusongling",
+        "count": 5,
+        "authors": [
+          "蒲松齡"
+        ],
+        "works": [
+          "聊齋志異"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "句型"
+          ],
+          "國中": [
+            "文言句式"
+          ],
+          "高中": [
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pusongling-strange-mirror",
+      "title": "異事如鏡・誰才是真正異類",
+      "contentKind": "primary",
+      "sourceIds": [
+        "pusongling-primary"
+      ],
+      "story": {
+        "國小": "你走進《聊齋志異》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "鬼狐為文言小說的敘事角色與象徵資源，不能用故事證明超自然存在；不同刻本篇目、文字或次序可能有差異。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "pusongling-strange-mirror-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "pusongling-strange-mirror-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "pusongling-strange-mirror-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-pusongling-scene.webp",
+        "alt": "蒲松齡《聊齋志異》原創情境圖",
+        "log": "依《聊齋志異》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "pusongling-strange-mirror-quest",
+        "bankKey": "pusongling",
+        "count": 5,
+        "authors": [
+          "蒲松齡"
+        ],
+        "works": [
+          "聊齋志異"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "詞性"
+          ],
+          "國中": [
+            "引用"
+          ],
+          "高中": [
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pusongling-trial",
+      "title": "蒲松齡問卷・作品證據對決",
+      "contentKind": "primary",
+      "sourceIds": [
+        "pusongling-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "蒲松齡親自展卷，答對才能讓文字重新發光。",
+        "國中": "最後一戰混合本章作品，但作者與作品不會越界。",
+        "高中": "對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。"
+      },
+      "body": {
+        "國小": "迎戰本人，靠作品過關。",
+        "國中": "從本章題庫抽出跨作品五題。",
+        "高中": "以底本與敘事證據完成校讀。"
+      },
+      "factNote": "人物對戰為本站原創遊戲橋段；所有問題仍只取自蒲松齡本章所列公版作品。",
+      "choices": [
+        {
+          "id": "pusongling-trial-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "pusongling-trial-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "pusongling-trial-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-pusongling-duel.webp",
+        "alt": "學子以筆迎戰蒲松齡",
+        "opponent": "蒲松齡",
+        "realm": "清代・聊齋異聞",
+        "log": "蒲松齡展開作品長卷，等待你的證據。"
+      },
+      "quest": {
+        "id": "pusongling-duel",
+        "bankKey": "pusongling",
+        "count": 6,
+        "authors": [
+          "蒲松齡"
+        ],
+        "works": [
+          "聊齋志異",
+          "聊齋志異",
+          "聊齋志異"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫",
+            "句型",
+            "詞性"
+          ],
+          "國中": [
+            "映襯",
+            "文言句式",
+            "引用"
+          ],
+          "高中": [
+            "示現",
+            "文言句式",
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "archive-return-pusongling",
+      "title": "守卷閣歸來・聊齋之頁歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶著聊齋之頁回到守卷閣。",
+        "國中": "作品中的人物、語言與選擇已收入閱讀地圖。",
+        "高中": "本章留下底本、文體、推論與史實邊界，等待七日回聲。"
+      },
+      "body": {
+        "國小": "七日後再回來複習。",
+        "國中": "重新整理作品與證據。",
+        "高中": "保留爭議，拒絕過度確定。"
+      },
+      "factNote": "守卷閣與聊齋之頁為本站原創；原典著作權已逾期，題目與故事包裝皆為本站自編。",
+      "choices": [
+        {
+          "id": "archive-pusongling-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "archive-pusongling-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "archive-pusongling-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    }
+  ]
+}

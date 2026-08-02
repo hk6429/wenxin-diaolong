@@ -1,0 +1,386 @@
+{
+  "id": "ming-wuchengen",
+  "title": "明代・吳承恩《西遊記》〈心猿取經〉",
+  "version": 1,
+  "riskNotes": [
+    "本章依通行吳承恩署名本教學，同時承認作者歸屬研究史；神魔情節是小說世界，不作宗教或歷史事實證明。",
+    "古典原作為公有領域；本站不搬用現代譯注、教科書題目或受著作權保護的改寫。"
+  ],
+  "storyFrame": {
+    "tagline": "吳承恩把作品放上案前：先看見人物，再判斷文字如何使故事成立。",
+    "epithet": "吳承恩・以作品等待校讀的文人",
+    "vows": [
+      {
+        "id": "wuchengen-read",
+        "quote": "先讀作品，再下判斷",
+        "insight": "人物印象必須由文本證據支持。"
+      },
+      {
+        "id": "wuchengen-layers",
+        "quote": "分清故事、推論與史實",
+        "insight": "文學真實不等於逐字歷史紀錄。"
+      },
+      {
+        "id": "wuchengen-versions",
+        "quote": "版本有別，答案才公平",
+        "insight": "先鎖定底本，才不以異文設陷阱。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "wuchengen-primary",
+      "kind": "primary",
+      "label": "吳承恩本章作品（維基文庫公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/西遊記"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "守卷閣相遇、對話、選擇與人物對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "wuchengen-prologue",
+      "title": "吳承恩入卷・先認作品再闖關",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "wuchengen-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "守卷閣開出吳承恩的作品長卷，你要先分清人物、作品和故事。",
+        "國中": "同一位作家的不同作品各有文體與觀看位置，本章從證據建立閱讀地圖。",
+        "高中": "本章同步處理敘事策略、版本來源與史實邊界，不把後世印象當原文。"
+      },
+      "body": {
+        "國小": "選擇用作品線索前進。",
+        "國中": "辨認作者、作品與章法。",
+        "高中": "鎖定底本並保留可爭議處。"
+      },
+      "factNote": "https://zh.wikisource.org/zh-hant/西遊記 為公版原典入口；守卷閣相遇與闖關對話為本站原創。",
+      "choices": [
+        {
+          "id": "wuchengen-prologue-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "wuchengen-prologue-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "wuchengen-prologue-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    },
+    {
+      "id": "wuchengen-stone-monkey",
+      "title": "石猴出世・名字與欲望",
+      "contentKind": "primary",
+      "sourceIds": [
+        "wuchengen-primary"
+      ],
+      "story": {
+        "國小": "你走進《西遊記》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本章依通行吳承恩署名本教學，同時承認作者歸屬研究史；神魔情節是小說世界，不作宗教或歷史事實證明。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "wuchengen-stone-monkey-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "wuchengen-stone-monkey-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "wuchengen-stone-monkey-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wuchengen-cover.webp",
+        "alt": "吳承恩《西遊記》原創情境圖",
+        "log": "依《西遊記》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "wuchengen-stone-monkey-quest",
+        "bankKey": "wuchengen",
+        "count": 5,
+        "authors": [
+          "吳承恩"
+        ],
+        "works": [
+          "西遊記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫"
+          ],
+          "國中": [
+            "映襯"
+          ],
+          "高中": [
+            "示現"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wuchengen-pilgrimage-team",
+      "title": "一路同行・團隊如何磨合",
+      "contentKind": "primary",
+      "sourceIds": [
+        "wuchengen-primary"
+      ],
+      "story": {
+        "國小": "你走進《西遊記》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本章依通行吳承恩署名本教學，同時承認作者歸屬研究史；神魔情節是小說世界，不作宗教或歷史事實證明。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "wuchengen-pilgrimage-team-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "wuchengen-pilgrimage-team-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "wuchengen-pilgrimage-team-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wuchengen-scene.webp",
+        "alt": "吳承恩《西遊記》原創情境圖",
+        "log": "依《西遊記》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "wuchengen-pilgrimage-team-quest",
+        "bankKey": "wuchengen",
+        "count": 5,
+        "authors": [
+          "吳承恩"
+        ],
+        "works": [
+          "西遊記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "句型"
+          ],
+          "國中": [
+            "文言句式"
+          ],
+          "高中": [
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wuchengen-trial-and-growth",
+      "title": "九九之難・重複中的變化",
+      "contentKind": "primary",
+      "sourceIds": [
+        "wuchengen-primary"
+      ],
+      "story": {
+        "國小": "你走進《西遊記》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "本章依通行吳承恩署名本教學，同時承認作者歸屬研究史；神魔情節是小說世界，不作宗教或歷史事實證明。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "wuchengen-trial-and-growth-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "wuchengen-trial-and-growth-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "wuchengen-trial-and-growth-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-wuchengen-scene.webp",
+        "alt": "吳承恩《西遊記》原創情境圖",
+        "log": "依《西遊記》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "wuchengen-trial-and-growth-quest",
+        "bankKey": "wuchengen",
+        "count": 5,
+        "authors": [
+          "吳承恩"
+        ],
+        "works": [
+          "西遊記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "詞性"
+          ],
+          "國中": [
+            "引用"
+          ],
+          "高中": [
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wuchengen-trial",
+      "title": "吳承恩問卷・作品證據對決",
+      "contentKind": "primary",
+      "sourceIds": [
+        "wuchengen-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "吳承恩親自展卷，答對才能讓文字重新發光。",
+        "國中": "最後一戰混合本章作品，但作者與作品不會越界。",
+        "高中": "對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。"
+      },
+      "body": {
+        "國小": "迎戰本人，靠作品過關。",
+        "國中": "從本章題庫抽出跨作品五題。",
+        "高中": "以底本與敘事證據完成校讀。"
+      },
+      "factNote": "人物對戰為本站原創遊戲橋段；所有問題仍只取自吳承恩本章所列公版作品。",
+      "choices": [
+        {
+          "id": "wuchengen-trial-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "wuchengen-trial-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "wuchengen-trial-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-wuchengen-duel.webp",
+        "alt": "學子以筆迎戰吳承恩",
+        "opponent": "吳承恩",
+        "realm": "明代・西行幻境",
+        "log": "吳承恩展開作品長卷，等待你的證據。"
+      },
+      "quest": {
+        "id": "wuchengen-duel",
+        "bankKey": "wuchengen",
+        "count": 6,
+        "authors": [
+          "吳承恩"
+        ],
+        "works": [
+          "西遊記",
+          "西遊記",
+          "西遊記"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫",
+            "句型",
+            "詞性"
+          ],
+          "國中": [
+            "映襯",
+            "文言句式",
+            "引用"
+          ],
+          "高中": [
+            "示現",
+            "文言句式",
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "archive-return-wuchengen",
+      "title": "守卷閣歸來・西行之頁歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶著西行之頁回到守卷閣。",
+        "國中": "作品中的人物、語言與選擇已收入閱讀地圖。",
+        "高中": "本章留下底本、文體、推論與史實邊界，等待七日回聲。"
+      },
+      "body": {
+        "國小": "七日後再回來複習。",
+        "國中": "重新整理作品與證據。",
+        "高中": "保留爭議，拒絕過度確定。"
+      },
+      "factNote": "守卷閣與西行之頁為本站原創；原典著作權已逾期，題目與故事包裝皆為本站自編。",
+      "choices": [
+        {
+          "id": "archive-wuchengen-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "archive-wuchengen-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "archive-wuchengen-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    }
+  ]
+}

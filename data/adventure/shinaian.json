@@ -1,0 +1,386 @@
+{
+  "id": "ming-shinaian",
+  "title": "明代・施耐庵《水滸傳》〈江湖眾聲〉",
+  "version": 1,
+  "riskNotes": [
+    "《水滸傳》有七十、百、百二十回等版本，本章鎖定百回本相關篇章；暴力場面只作人物、制度與敘事分析，不做爽感獎勵。",
+    "古典原作為公有領域；本站不搬用現代譯注、教科書題目或受著作權保護的改寫。"
+  ],
+  "storyFrame": {
+    "tagline": "施耐庵把作品放上案前：先看見人物，再判斷文字如何使故事成立。",
+    "epithet": "施耐庵・以作品等待校讀的文人",
+    "vows": [
+      {
+        "id": "shinaian-read",
+        "quote": "先讀作品，再下判斷",
+        "insight": "人物印象必須由文本證據支持。"
+      },
+      {
+        "id": "shinaian-layers",
+        "quote": "分清故事、推論與史實",
+        "insight": "文學真實不等於逐字歷史紀錄。"
+      },
+      {
+        "id": "shinaian-versions",
+        "quote": "版本有別，答案才公平",
+        "insight": "先鎖定底本，才不以異文設陷阱。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "shinaian-primary",
+      "kind": "primary",
+      "label": "施耐庵本章作品（維基文庫公版原典）",
+      "url": "https://zh.wikisource.org/zh-hant/水滸傳"
+    },
+    {
+      "id": "fiction",
+      "kind": "fiction",
+      "label": "守卷閣相遇、對話、選擇與人物對戰均為本站原創"
+    }
+  ],
+  "annotations": [],
+  "scenes": [
+    {
+      "id": "shinaian-prologue",
+      "title": "施耐庵入卷・先認作品再闖關",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "shinaian-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "守卷閣開出施耐庵的作品長卷，你要先分清人物、作品和故事。",
+        "國中": "同一位作家的不同作品各有文體與觀看位置，本章從證據建立閱讀地圖。",
+        "高中": "本章同步處理敘事策略、版本來源與史實邊界，不把後世印象當原文。"
+      },
+      "body": {
+        "國小": "選擇用作品線索前進。",
+        "國中": "辨認作者、作品與章法。",
+        "高中": "鎖定底本並保留可爭議處。"
+      },
+      "factNote": "https://zh.wikisource.org/zh-hant/水滸傳 為公版原典入口；守卷閣相遇與闖關對話為本站原創。",
+      "choices": [
+        {
+          "id": "shinaian-prologue-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "shinaian-prologue-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "shinaian-prologue-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    },
+    {
+      "id": "shinaian-character-voices",
+      "title": "眾聲入場・話語就是性格",
+      "contentKind": "primary",
+      "sourceIds": [
+        "shinaian-primary"
+      ],
+      "story": {
+        "國小": "你走進《水滸傳》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "《水滸傳》有七十、百、百二十回等版本，本章鎖定百回本相關篇章；暴力場面只作人物、制度與敘事分析，不做爽感獎勵。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "shinaian-character-voices-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "shinaian-character-voices-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "shinaian-character-voices-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-shinaian-cover.webp",
+        "alt": "施耐庵《水滸傳》原創情境圖",
+        "log": "依《水滸傳》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "shinaian-character-voices-quest",
+        "bankKey": "shinaian",
+        "count": 5,
+        "authors": [
+          "施耐庵"
+        ],
+        "works": [
+          "水滸傳"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫"
+          ],
+          "國中": [
+            "映襯"
+          ],
+          "高中": [
+            "示現"
+          ]
+        }
+      }
+    },
+    {
+      "id": "shinaian-pressure-and-choice",
+      "title": "逼上梁山・選擇如何被推動",
+      "contentKind": "primary",
+      "sourceIds": [
+        "shinaian-primary"
+      ],
+      "story": {
+        "國小": "你走進《水滸傳》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "《水滸傳》有七十、百、百二十回等版本，本章鎖定百回本相關篇章；暴力場面只作人物、制度與敘事分析，不做爽感獎勵。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "shinaian-pressure-and-choice-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "shinaian-pressure-and-choice-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "shinaian-pressure-and-choice-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-shinaian-scene.webp",
+        "alt": "施耐庵《水滸傳》原創情境圖",
+        "log": "依《水滸傳》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "shinaian-pressure-and-choice-quest",
+        "bankKey": "shinaian",
+        "count": 5,
+        "authors": [
+          "施耐庵"
+        ],
+        "works": [
+          "水滸傳"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "句型"
+          ],
+          "國中": [
+            "文言句式"
+          ],
+          "高中": [
+            "文言句式"
+          ]
+        }
+      }
+    },
+    {
+      "id": "shinaian-versions-and-justice",
+      "title": "忠義之問・版本改變結局",
+      "contentKind": "primary",
+      "sourceIds": [
+        "shinaian-primary"
+      ],
+      "story": {
+        "國小": "你走進《水滸傳》的場景，先看清誰在做什麼。",
+        "國中": "作品把人物、語言與轉折排成一條可追蹤的路。",
+        "高中": "從敘事位置、修辭效果與證據層級重新校讀這段作品。"
+      },
+      "body": {
+        "國小": "用五題找出人物、事件和景物線索。",
+        "國中": "用五題分析句法、對照與敘事推進。",
+        "高中": "用五題辨析推論、版本與文學安排。"
+      },
+      "factNote": "《水滸傳》有七十、百、百二十回等版本，本章鎖定百回本相關篇章；暴力場面只作人物、制度與敘事分析，不做爽感獎勵。 本關題幹、選項與解析均由本站依公版原典自編。",
+      "choices": [
+        {
+          "id": "shinaian-versions-and-justice-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "shinaian-versions-and-justice-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "shinaian-versions-and-justice-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "quest",
+        "art": "adventure-shinaian-scene.webp",
+        "alt": "施耐庵《水滸傳》原創情境圖",
+        "log": "依《水滸傳》完成作品證據校讀。"
+      },
+      "quest": {
+        "id": "shinaian-versions-and-justice-quest",
+        "bankKey": "shinaian",
+        "count": 5,
+        "authors": [
+          "施耐庵"
+        ],
+        "works": [
+          "水滸傳"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "詞性"
+          ],
+          "國中": [
+            "引用"
+          ],
+          "高中": [
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "shinaian-trial",
+      "title": "施耐庵問卷・作品證據對決",
+      "contentKind": "primary",
+      "sourceIds": [
+        "shinaian-primary",
+        "fiction"
+      ],
+      "story": {
+        "國小": "施耐庵親自展卷，答對才能讓文字重新發光。",
+        "國中": "最後一戰混合本章作品，但作者與作品不會越界。",
+        "高中": "對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。"
+      },
+      "body": {
+        "國小": "迎戰本人，靠作品過關。",
+        "國中": "從本章題庫抽出跨作品五題。",
+        "高中": "以底本與敘事證據完成校讀。"
+      },
+      "factNote": "人物對戰為本站原創遊戲橋段；所有問題仍只取自施耐庵本章所列公版作品。",
+      "choices": [
+        {
+          "id": "shinaian-trial-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "shinaian-trial-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "shinaian-trial-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ],
+      "visual": {
+        "mode": "duel",
+        "art": "adventure-shinaian-duel.webp",
+        "alt": "學子以筆迎戰施耐庵",
+        "opponent": "施耐庵",
+        "realm": "明代・水滸群像",
+        "log": "施耐庵展開作品長卷，等待你的證據。"
+      },
+      "quest": {
+        "id": "shinaian-duel",
+        "bankKey": "shinaian",
+        "count": 6,
+        "authors": [
+          "施耐庵"
+        ],
+        "works": [
+          "水滸傳",
+          "水滸傳",
+          "水滸傳"
+        ],
+        "catsByLevel": {
+          "國小": [
+            "摹寫",
+            "句型",
+            "詞性"
+          ],
+          "國中": [
+            "映襯",
+            "文言句式",
+            "引用"
+          ],
+          "高中": [
+            "示現",
+            "文言句式",
+            "引用"
+          ]
+        }
+      }
+    },
+    {
+      "id": "archive-return-shinaian",
+      "title": "守卷閣歸來・水滸之頁歸位",
+      "contentKind": "fiction",
+      "sourceIds": [
+        "fiction"
+      ],
+      "story": {
+        "國小": "你帶著水滸之頁回到守卷閣。",
+        "國中": "作品中的人物、語言與選擇已收入閱讀地圖。",
+        "高中": "本章留下底本、文體、推論與史實邊界，等待七日回聲。"
+      },
+      "body": {
+        "國小": "七日後再回來複習。",
+        "國中": "重新整理作品與證據。",
+        "高中": "保留爭議，拒絕過度確定。"
+      },
+      "factNote": "守卷閣與水滸之頁為本站原創；原典著作權已逾期，題目與故事包裝皆為本站自編。",
+      "choices": [
+        {
+          "id": "archive-shinaian-guess",
+          "label": "只憑印象猜人物與情節",
+          "response": "書頁沒有回應；先回到作品證據。"
+        },
+        {
+          "id": "archive-shinaian-evidence",
+          "label": "沿著原文與敘事線索判讀",
+          "response": "墨線亮起，人物、語言與處境重新連在一起。"
+        },
+        {
+          "id": "archive-shinaian-fact",
+          "label": "把小說或詩文直接當完整史實",
+          "response": "文體與版本邊界模糊了；需要重新分層。"
+        }
+      ]
+    }
+  ]
+}
