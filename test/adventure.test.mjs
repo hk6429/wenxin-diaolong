@@ -279,6 +279,35 @@ test('司馬遷篇每個學段、每一項委託都只從史記題庫選足五�
   }
 });
 
+test('曹操第五章在司馬遷後解鎖，具七幕、短歌行題庫與曹操對戰', () => {
+  const meta = {};
+  ensureAdventure(meta);
+  for (const id of [CHAPTER_ID, 'warring-quyuan', 'dream-confucius']) markChapterFound(meta, new Date(), id);
+  assert.equal(isChapterUnlocked(meta, 'jianan-caocao'), false);
+  markChapterFound(meta, new Date(), 'han-simaqian');
+  assert.equal(isChapterUnlocked(meta, 'jianan-caocao'), true);
+  const definition = CHAPTERS.find((item) => item.id === 'jianan-caocao');
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/caocao.json'), 'utf8'));
+  assert.deepEqual(validateChapter(chapter).errors, []);
+  assert.deepEqual(chapter.scenes.map((scene) => scene.id), definition.sceneIds);
+  assert.equal(chapter.scenes.filter((scene) => scene.quest).length, 5);
+  assert.ok(chapter.scenes.filter((scene) => scene.quest).every((scene) => scene.quest.bankKey === 'duange'));
+  assert.equal(chapter.scenes.find((scene) => scene.id === 'caocao-trial').visual.opponent, '曹操');
+});
+
+test('短歌行專屬題庫三學段各五題，五項委託皆可選足五題', () => {
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/caocao.json'), 'utf8'));
+  for (const [level, suffix] of [['國小', 'elementary'], ['國中', 'junior'], ['高中', 'senior']]) {
+    const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/duange-${suffix}.json`), 'utf8'));
+    assert.equal(entries.length, 5);
+    assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
+    for (const scene of chapter.scenes.filter((item) => item.quest)) {
+      const quest = resolveQuest(scene.quest, level);
+      assert.equal(selectQuestEntries(entries, quest).length, 5, `${level} ${scene.id} 短歌行題目不足`);
+    }
+  }
+});
+
 test('舊玩家資料遷移時保留文心珠並補上冒險狀態', () => {
   const old = { v: 1, collection: { 'rh-e-0001': { earnedAt: '2026-01-01', grade: 0 } } };
   const map = new Map([[META_KEY, JSON.stringify(old)]]);

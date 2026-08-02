@@ -156,7 +156,7 @@ if (!(await page.textContent('#adventure-stage'))?.includes('《文豪笑傳》�
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-quyuan-fragrant.webp')) fail('屈原篇滿版封面未使用章回主視覺');
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('楚澤'));
-if (await page.locator('.adventure-chapter-tab').count() !== 4) fail('冒險沒有顯示莊子、屈原、孔子與司馬遷四章');
+if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險沒有顯示莊子至曹操五章');
 await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('香草之徑'));
@@ -212,7 +212,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見孔子'));
-if (await page.locator('.adventure-chapter-tab').count() !== 4) fail('冒險沒有顯示第四章司馬遷入口');
+if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險沒有顯示第五章曹操入口');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-confucius-dream.webp')) fail('孔子外篇沒有夢境滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/confucius-dream-cover.png`, fullPage: true });
@@ -265,7 +265,7 @@ await page.evaluate(() => {
 await page.reload();
 await page.click('#btn-adventure');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見司馬遷'));
-if (await page.locator('.adventure-chapter-tab').count() !== 4) fail('冒險章回數不是四章');
+if (await page.locator('.adventure-chapter-tab').count() !== 5) fail('冒險章回數不是五章');
 if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-simaqian-archive.webp')) fail('司馬遷篇沒有漢宮書房滿版封面');
 await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-cover.png`, fullPage: true });
@@ -307,6 +307,39 @@ await page.waitForSelector('#quiz-story-visual:not([hidden])');
 if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-simaqian-duel.webp')) fail('司馬遷最終史筆對決沒有專屬戰場圖');
 if ((await page.textContent('#quiz-opponent-name')) !== '司馬遷') fail('司馬遷篇最終對手不是司馬遷');
 if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/simaqian-duel.png`, fullPage: true });
+await page.click('#btn-quiz-exit');
+await page.click('#btn-adventure-back');
+
+// 建安・曹操：完成司馬遷後解鎖，以《短歌行》進入月下求賢
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['han-simaqian'].chapterStatus = 'found';
+  meta.adventure.currentChapterId = 'jianan-caocao';
+  meta.adventure.chapterId = 'jianan-caocao';
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('遇見曹操'));
+if (!(await page.getAttribute('.adventure-cover img', 'src'))?.includes('adventure-caocao-camp.webp')) fail('曹操篇沒有建安月夜滿版封面');
+await page.waitForFunction(() => document.querySelector('.adventure-cover img')?.naturalWidth > 0);
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/caocao-cover.png`, fullPage: true });
+await page.evaluate(() => {
+  const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+  meta.adventure.chapters['jianan-caocao'].vowId = 'seek-talent';
+  meta.adventure.chapters['jianan-caocao'].sceneIndex = 5;
+  meta.adventure.sceneIndex = 5;
+  localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+});
+await page.reload();
+await page.click('#btn-adventure');
+await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('孟德問志'));
+await page.click('[data-scene-choice]');
+await page.click('#btn-scene-next');
+await page.waitForSelector('#quiz-story-visual:not([hidden])');
+if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-caocao-duel.webp')) fail('曹操篇沒有短歌行對戰圖');
+if ((await page.textContent('#quiz-opponent-name')) !== '曹操') fail('曹操篇最終對手不是曹操');
+if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.env.SMOKE_SCREENSHOTS_DIR}/caocao-duel.png`, fullPage: true });
 await page.click('#btn-quiz-exit');
 await page.click('#btn-adventure-back');
 

@@ -52,6 +52,18 @@ export const CHAPTERS = Object.freeze([
       },
     },
   },
+  {
+    id: 'jianan-caocao', order: 5, number: '五', era: '漢末・建安', figure: '曹操', file: 'caocao',
+    title: '建安・曹操〈月下求賢〉', heroTitle: '踏入建安，遇見曹操',
+    pageName: '求賢之頁', echoTitle: '月下回聲', art: 'caocao',
+    sceneIds: ['jianan-prologue', 'morning-dew', 'deer-feast', 'magpie-road', 'mountain-sea', 'caocao-trial', 'archive-return-caocao'],
+    rewards: ['talent-page', 'morning-dew-cup', 'friend-caocao'],
+    echoQuest: { bankKey: 'duange', count: 3, catsByLevel: {
+      '國小': ['譬喻', '設問', '摹寫', '感嘆', '詞性'],
+      '國中': ['譬喻', '設問', '引用', '句型', '押韻'],
+      '高中': ['引用', '映襯', '文言虛詞', '詞類活用', '詩體判別'],
+    } },
+  },
 ]);
 
 // 保留第一章常數，讓既有資料與外部測試不必一次改名。

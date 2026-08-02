@@ -1,0 +1,7 @@
+[
+{"id":"rh-e-9201","level":"國小","zone":"修辭","cat":"設問","subcat":"提問","qformat":"rh-identify","genre":"韻文","textForm":"古典詩","question":"『對酒當歌，人生幾何？』用問句感嘆生命有限，主要運用哪一種修辭？","options":["設問","排比","類疊","轉化"],"answer":"設問","explain":"『人生幾何』直接提出問題，引出對生命短暫的感慨。","origin":"自編","citation":"曹操《短歌行》","difficulty":"易"},
+{"id":"rh-e-9202","level":"國小","zone":"修辭","cat":"譬喻","subcat":"明喻","qformat":"rh-identify","genre":"韻文","textForm":"古典詩","question":"『譬如朝露，去日苦多』把短暫人生比作什麼？","options":["早晨露水","夜空明月","高山大海","南飛烏鵲"],"answer":"早晨露水","explain":"朝露出現不久便消失，用來比喻人生與時間短暫。","origin":"自編","citation":"曹操《短歌行》","difficulty":"易"},
+{"id":"rh-e-9203","level":"國小","zone":"修辭","cat":"摹寫","subcat":"視覺摹寫","qformat":"rh-pick","genre":"韻文","textForm":"古典詩","question":"哪一句最直接描寫夜空與鳥群的視覺畫面？","options":["月明星稀，烏鵲南飛","何以解憂？唯有杜康","但為君故，沉吟至今","山不厭高，海不厭深"],"answer":"月明星稀，烏鵲南飛","explain":"明月、稀星與南飛烏鵲共同形成可看見的夜景。","origin":"自編","citation":"曹操《短歌行》","difficulty":"易"},
+{"id":"rh-e-9204","level":"國小","zone":"修辭","cat":"感嘆","subcat":"抒情","qformat":"rh-pick","genre":"韻文","textForm":"古典詩","question":"哪一句最直接表達憂愁難以忘記？","options":["憂思難忘","食野之苹","越陌度阡","天下歸心"],"answer":"憂思難忘","explain":"詩人直接說出憂思無法忘懷，是明白而強烈的情感表達。","origin":"自編","citation":"曹操《短歌行》","difficulty":"易"},
+{"id":"gr-e-9205","level":"國小","zone":"文法","cat":"詞性","subcat":"動詞","qformat":"gr-pos","genre":"韻文","textForm":"古典詩","question":"『烏鵲南飛』的『飛』表示動作，屬於哪一種詞性？","options":["動詞","名詞","形容詞","副詞"],"answer":"動詞","explain":"『飛』表示烏鵲移動的動作，因此在句中是動詞。","origin":"自編","citation":"曹操《短歌行》","difficulty":"易"}
+]
