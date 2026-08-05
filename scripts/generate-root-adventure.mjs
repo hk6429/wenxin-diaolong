@@ -315,7 +315,7 @@ function chapterFor(spec) {
     scenes.push({
       id: `${spec.key}-${segment.slug}`, title: segment.title, contentKind: 'primary', sourceIds: [sourceId],
       story: levelText(`你走進${formatWork(segment.work)}的場景，先看清誰在做什麼。`, `作品把人物、語言與轉折排成一條可追蹤的路。`, `從敘事位置、修辭效果與證據層級重新校讀這段作品。`),
-      body: levelText('用五題找出人物、事件和景物線索。', '用五題分析句法、對照與敘事推進。', '用五題辨析推論、版本與文學安排。'),
+      body: levelText('依本關題數找出人物、事件和景物線索。', '依本關題數分析句法、對照與敘事推進。', '依本關題數辨析推論、版本與文學安排。'),
       factNote: `${spec.risk} 本關題幹、選項與解析均由本站依公版原典自編。`, choices: choices(`${spec.key}-${segment.slug}`),
       visual: { mode: 'quest', art: `adventure-${spec.key}-${index === 0 ? 'cover' : 'scene'}.webp`, alt: `${spec.author}${formatWork(segment.work)}原創情境圖`, log: `依${formatWork(segment.work)}完成作品證據校讀。` },
       quest: { id: `${spec.key}-${segment.slug}-quest`, bankKey: spec.key, count: 5, authors: [spec.author], works: [segment.work], catsByLevel: Object.fromEntries(LEVELS.map((level) => [level.label, [CAT_SETS[level.label][index % CAT_SETS[level.label].length]]])) },
@@ -324,7 +324,7 @@ function chapterFor(spec) {
   scenes.push({
     id: `${spec.key}-trial`, title: `${spec.author}問卷・作品證據對決`, contentKind: 'primary', sourceIds: [sourceId, 'fiction'],
     story: levelText(`${spec.author}親自展卷，答對才能讓文字重新發光。`, `最後一戰混合本章作品，但作者與作品不會越界。`, `對戰檢驗文本、推論、版本與史實四層，不以背誦名句取代分析。`),
-    body: levelText('迎戰本人，靠作品過關。', '從本章題庫抽出跨作品五題。', '以底本與敘事證據完成校讀。'),
+    body: levelText('迎戰本人，靠作品過關。', '從本章題庫抽出跨作品題目。', '以底本與敘事證據完成校讀。'),
     factNote: `人物對戰為本站原創遊戲橋段；所有問題仍只取自${spec.author}本章所列公版作品。`, choices: choices(`${spec.key}-trial`),
     visual: { mode: 'duel', art: `adventure-${spec.key}-duel.webp`, alt: `學子以筆迎戰${spec.author}`, opponent: spec.author, realm: spec.era, log: `${spec.author}展開作品長卷，等待你的證據。` },
     quest: { id: `${spec.key}-duel`, bankKey: spec.key, count: Math.min(spec.segments.length * 5, spec.segments.length >= 3 ? 6 : 5), authors: [spec.author], works: spec.segments.map((segment) => segment.work), catsByLevel: Object.fromEntries(LEVELS.map((level) => [level.label, spec.segments.map((_, index) => CAT_SETS[level.label][index % CAT_SETS[level.label].length])])) },

@@ -31,12 +31,6 @@
       "url": "https://zh.wikisource.org/zh-hant/蘭亭集序"
     },
     {
-      "id": "ctext",
-      "kind": "primary",
-      "label": "中國哲學書電子化計劃〈蘭亭集序〉（交叉核對）",
-      "url": "https://ctext.org/wiki.pl?if=gb&res=394889"
-    },
-    {
       "id": "fiction",
       "kind": "fiction",
       "label": "守卷閣、墨流迷境與蘭亭對戰均為本站原創"
@@ -124,7 +118,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "lanting",
-        "ctext",
         "fiction"
       ],
       "story": {
@@ -202,7 +195,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "lanting",
-        "ctext",
         "fiction"
       ],
       "story": {
@@ -280,7 +272,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "lanting",
-        "ctext",
         "fiction"
       ],
       "story": {
@@ -358,7 +349,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "lanting",
-        "ctext",
         "fiction"
       ],
       "story": {
@@ -436,7 +426,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "lanting",
-        "ctext",
         "fiction"
       ],
       "story": {

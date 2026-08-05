@@ -8,7 +8,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「文本重點」的第 1 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "開篇以頑石、空空道人與抄錄故事建立多層敘事框架",
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
@@ -22,7 +22,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-01"
   },
   {
     "id": "rd-e-17411",
@@ -33,7 +34,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「文本重點」的第 2 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "黛玉進賈府時謹慎觀察環境與禮節，讀者也跟著她逐步認識家族空間",
@@ -47,7 +48,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-02"
   },
   {
     "id": "rd-e-17421",
@@ -58,7 +60,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「文本重點」的第 3 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -72,7 +74,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-03"
   },
   {
     "id": "rd-e-17431",
@@ -83,7 +86,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「文本重點」的第 4 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "由這一條線索可斷定作品中的所有人物想法完全相同。",
@@ -97,7 +100,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-04"
   },
   {
     "id": "rd-e-17402",
@@ -108,7 +112,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「結構推進」的第 5 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "「真事隱」「假語村言」讓人名與真假問題互相映照",
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
@@ -122,7 +126,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-05"
   },
   {
     "id": "rd-e-17412",
@@ -133,7 +138,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「結構推進」的第 6 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "人物外貌、座次、稱謂與對話共同呈現親疏和權力關係",
@@ -147,7 +152,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-06"
   },
   {
     "id": "rd-e-17422",
@@ -158,7 +164,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「結構推進」的第 7 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -172,7 +178,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-07"
   },
   {
     "id": "rd-e-17432",
@@ -183,7 +190,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「結構推進」的第 8 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -197,7 +204,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-08"
   },
   {
     "id": "rd-e-17403",
@@ -208,7 +216,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「語言效果」的第 9 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "石頭想進入紅塵，故事先提出欲望、經歷與回望的循環",
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
@@ -222,7 +230,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-09"
   },
   {
     "id": "rd-e-17413",
@@ -233,7 +242,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「語言效果」的第 10 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "王熙鳳先聞其聲後見其人，以出場次序強化鮮明性格",
@@ -247,7 +256,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-10"
   },
   {
     "id": "rd-e-17423",
@@ -258,7 +268,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「語言效果」的第 11 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "這段主要列出作品名稱，沒有描寫人物的行動或所見景物。",
@@ -272,7 +282,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-11"
   },
   {
     "id": "rd-e-17433",
@@ -283,7 +294,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「語言效果」的第 12 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -297,7 +308,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-12"
   },
   {
     "id": "rd-e-17404",
@@ -308,7 +320,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「合理推論」的第 13 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "神話框架不是家族史實本身，而是引導讀者理解繁華與幻滅",
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
@@ -322,7 +334,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-13"
   },
   {
     "id": "rd-e-17414",
@@ -333,7 +346,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「合理推論」的第 14 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "寶黛初見帶有似曾相識感，與前文神話線索形成呼應",
@@ -347,7 +360,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-14"
   },
   {
     "id": "rd-e-17424",
@@ -358,7 +372,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「合理推論」的第 15 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "不同版本的文字一定完全相同，不需要確認採用哪一種。",
@@ -372,7 +386,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-15"
   },
   {
     "id": "rd-e-17434",
@@ -383,7 +398,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「合理推論」的第 16 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "這段主要列出作品名稱，沒有描寫人物的行動或所見景物。",
@@ -397,7 +412,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-16"
   },
   {
     "id": "rd-e-17405",
@@ -408,7 +424,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「版本邊界」的第 17 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "不同版本的回目與文字有差異，引用時須先鎖定底本",
       "作品先寫結果，再補寫一件與結果無關的往事。",
@@ -422,7 +438,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-17"
   },
   {
     "id": "rd-e-17415",
@@ -433,7 +450,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「版本邊界」的第 18 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "不能只用「多愁善感」概括黛玉，還要看她的觀察、判斷與自我保護",
@@ -447,7 +464,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-18"
   },
   {
     "id": "rd-e-17425",
@@ -458,7 +476,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「版本邊界」的第 19 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "由這一條線索可斷定作品中的所有人物想法完全相同。",
@@ -472,7 +490,8 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-19"
   },
   {
     "id": "rd-e-17435",
@@ -483,7 +502,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《紅樓夢》時，關於「版本邊界」的第 20 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《紅樓夢》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "不同版本的文字一定完全相同，不需要確認採用哪一種。",
@@ -497,6 +516,7 @@
     "difficulty": "易",
     "author": "曹雪芹",
     "work": "紅樓夢",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "caoxueqin-20"
   }
 ]

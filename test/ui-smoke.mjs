@@ -127,7 +127,7 @@ if (await page.locator('[data-vow-id]').count() !== 3) fail('莊子篇立誓選�
 await page.click('[data-vow-id]');
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('殘卷飛蝶'));
 if (!(await page.textContent('#adventure-stage'))?.includes('殘卷飛蝶')) fail('莊子序章未顯示');
-if (!(await page.textContent('#adventure-level-note'))?.includes('五題挑戰會一起更換')) fail('冒險學段差異未說明');
+if (!(await page.textContent('#adventure-level-note'))?.includes('關卡挑戰會一起更換')) fail('冒險學段差異未說明');
 await page.click('[data-story-level="國中"]');
 await page.waitForFunction(() => document.querySelector('.adventure-copy')?.textContent.includes('教室翻開'));
 await page.click('[data-story-level="高中"]');
@@ -147,8 +147,9 @@ await page.waitForSelector('#quiz-options .opt-btn');
 await page.waitForSelector('#quiz-story-visual:not([hidden])');
 await page.waitForSelector('#quiz-reading:not([hidden])');
 if (!(await page.textContent('#quiz-reading'))?.includes('夢為胡蝶')) fail('蝶夢之門作答前沒有顯示〈齊物論〉本文');
+if (!(await page.textContent('#quiz-reading'))?.includes('白話譯文（本站自譯）')) fail('國小版原文沒有本站白話譯文');
 if (!(await page.textContent('#quiz-reading'))?.includes('不用先背過')) fail('蝶夢之門沒有說明可直接依本文作答');
-if (!(await page.textContent('#btn-quiz-exit'))?.includes('暫停委託，回到莊子篇')) fail('冒險五題的返回按鈕仍會讓人誤以為已完成關卡');
+if (!(await page.textContent('#btn-quiz-exit'))?.includes('完成前不保留')) fail('未完成委託的離開按鈕沒有誠實說明進度規則');
 if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-zhuangzi-butterfly.webp')) fail('蝶夢之門沒有顯示專屬插畫');
 await page.waitForFunction(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0);
 if (!(await page.evaluate(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0))) fail('蝶夢之門配圖載入失敗');
@@ -156,9 +157,16 @@ if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.
 for (let i = 0; i < 5; i += 1) {
   await page.click('#quiz-options .opt-btn');
   await page.waitForSelector('#quiz-feedback:not([hidden])');
-  if (i === 4 && !(await page.textContent('#btn-next'))?.includes('完成五題，繼續莊子篇')) fail('第五題後沒有清楚標示完成並繼續章回');
-  await page.click('#btn-next');
-  if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+  if (i === 4) {
+    if (!(await page.textContent('#btn-next'))?.includes('完成5題，繼續莊子篇')) fail('第五題後沒有清楚標示完成並繼續章回');
+    if (!(await page.textContent('#btn-quiz-exit'))?.includes('本關已完成')) fail('最後一題後未標示進度已安全保存');
+    const savedSceneIndex = await page.evaluate(() => JSON.parse(localStorage.getItem('wxdl_meta')).adventure.chapters['preqin-zhuangzi'].sceneIndex);
+    if (savedSceneIndex !== 2) fail('最後一題答完當下尚未持久化章回進度');
+    await page.click('#btn-quiz-exit');
+  } else {
+    await page.click('#btn-next');
+    await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
+  }
 }
 await page.waitForFunction(() => document.querySelector('#adventure-stage h2')?.textContent.includes('北冥風口'));
 await page.click('[data-scene-choice]');
@@ -934,6 +942,45 @@ await page.click('#btn-rt-back');
 await page.click('#btn-home');
 await page.click('.level-btn[data-level="國中"]');
 await page.waitForTimeout(500);
+
+// 非莊子代表章：短詩與長篇小說都必須在作答前顯示本站整理材料；國小另有白話導讀。
+async function openRepresentativeReadingCard(targetId) {
+  const targetIndex = CHAPTERS.findIndex((definition) => definition.id === targetId);
+  const unlockedIds = CHAPTERS.slice(0, targetIndex).map((definition) => definition.id);
+  await page.evaluate(({ id, previousIds }) => {
+    const meta = JSON.parse(localStorage.getItem('wxdl_meta'));
+    for (const previousId of previousIds) meta.adventure.chapters[previousId].chapterStatus = 'found';
+    const target = meta.adventure.chapters[id];
+    Object.assign(target, { chapterStatus: 'locked', sceneIndex: 0, vowId: '', sceneChoices: {}, questResults: {} });
+    meta.adventure.currentChapterId = id;
+    meta.adventure.chapterId = id;
+    meta.adventure.level = '國小';
+    localStorage.setItem('wxdl_meta', JSON.stringify(meta));
+    localStorage.setItem('wxdl:level', '國小');
+  }, { id: targetId, previousIds: unlockedIds });
+  await page.reload();
+  await page.waitForSelector('#screen-home:not([hidden])');
+  await page.click('#btn-adventure');
+  await page.waitForSelector('[data-vow-id]');
+  await page.click('[data-vow-id]');
+  await page.waitForSelector('[data-scene-choice]');
+  await page.click('[data-scene-choice]');
+  await page.click('#btn-scene-next');
+  await page.waitForSelector('[data-scene-choice]');
+  await page.click('[data-scene-choice]');
+  await page.click('#btn-scene-next');
+  await page.waitForSelector('#quiz-reading:not([hidden])');
+}
+
+await openRepresentativeReadingCard('high-tang-wangzhihuan');
+if (!(await page.textContent('#quiz-reading'))?.includes('本站整理')) fail('短詩關卡沒有顯示本站整理閱讀卡');
+if (!(await page.textContent('#quiz-reading'))?.includes('白話導讀（本站自編）')) fail('短詩國小關卡沒有白話導讀');
+if (!/\/(?:zh-hant\/|w\/index\.php\?.*variant=zh-hant)/u.test(await page.getAttribute('#quiz-reading a', 'href') || '')) fail('短詩完整原文連結未鎖定繁體介面');
+
+await openRepresentativeReadingCard('qing-caoxueqin');
+if (!(await page.textContent('#quiz-reading'))?.includes('本站整理')) fail('長篇小說關卡沒有顯示本站整理閱讀卡');
+if (!(await page.textContent('#quiz-reading'))?.includes('白話導讀（本站自編）')) fail('長篇小說國小關卡沒有白話導讀');
+if (!(await page.getAttribute('#quiz-reading a', 'href'))?.includes('/zh-hant/')) fail('長篇小說完整原文連結未鎖定繁體介面');
 
 // 橫向捲動檢查
 const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);

@@ -239,7 +239,7 @@ test('論語專屬題庫三學段各十五題，全部通過驗證並標示公�
     assert.equal(entries.length, 15);
     assert.ok(entries.every((entry) => validateEntry(entry).valid));
     assert.ok(entries.every((entry) => entry.origin === '自編' && entry.citation.startsWith('《論語・')));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, entries.length);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, entries.length);
   }
 });
 
@@ -278,7 +278,7 @@ test('史記專屬題庫三學段各十五題，全部通過驗證並標示公�
     assert.equal(entries.length, 15);
     assert.ok(entries.every((entry) => validateEntry(entry).valid));
     assert.ok(entries.every((entry) => entry.origin === '自編' && entry.citation.startsWith('《史記・')));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, entries.length);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, entries.length);
   }
 });
 
@@ -359,7 +359,7 @@ test('典論、曹植、出師表三級專屬題庫皆可支援每項五題委�
       const entries = JSON.parse(fs.readFileSync(path.join(ROOT, `data/${item.bank}-${suffix}.json`), 'utf8'));
       assert.equal(entries.length, 5);
       assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
-      assert.equal(new Set(entries.map((entry) => entry.question)).size, 5);
+      assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 5);
       for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
         const quest = resolveQuest(scene.quest, level);
         assert.equal(quest.bankKey, item.bank);
@@ -394,7 +394,7 @@ test('嵇康三級作品題庫各十題，每項委託只會抽到嵇康作品',
     assert.equal(entries.length, 10);
     assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
     assert.ok(entries.every((entry) => entry.author === '嵇康' && entry.work === '與山巨源絕交書'));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, 10);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 10);
     for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
       const quest = resolveQuest(scene.quest, level);
       const selected = selectQuestEntries(entries, quest);
@@ -428,7 +428,7 @@ test('世說新語三級作品題庫各十題，涵蓋四門故事且不混入�
     assert.equal(entries.length, 10);
     assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
     assert.ok(entries.every((entry) => entry.author === '劉義慶' && entry.work === '世說新語'));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, 10);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 10);
     for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
       const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
       assert.equal(selected.length, 5, `${level} ${scene.id} 世說題目不足`);
@@ -463,7 +463,7 @@ test('陶淵明三級題庫各十五題，三篇作品各五題且作品關卡�
     assert.equal(entries.length, 15);
     assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
     assert.ok(entries.every((entry) => entry.author === '陶淵明' && expectedWorks.has(entry.work)));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, 15);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 15);
     for (const work of expectedWorks) assert.equal(entries.filter((entry) => entry.work === work).length, 5);
     for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
       const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
@@ -508,7 +508,7 @@ test('謝靈運與王羲之三級題庫各十題，每個作品任務只抽本�
       assert.equal(entries.length, 10);
       assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
       assert.ok(entries.every((entry) => entry.author === config.author && config.works.has(entry.work)));
-      assert.equal(new Set(entries.map((entry) => entry.question)).size, 10);
+      assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 10);
       for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
         const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
         assert.equal(selected.length, 5, `${level} ${scene.id} ${config.author}題目不足`);
@@ -543,7 +543,7 @@ test('王勃三級題庫各十題，只用滕王閣序且所有任務可抽滿�
     assert.equal(entries.length, 10);
     assert.ok(entries.every((entry) => validateEntry(entry).valid && entry.origin === '自編'));
     assert.ok(entries.every((entry) => entry.author === '王勃' && entry.work === '滕王閣序'));
-    assert.equal(new Set(entries.map((entry) => entry.question)).size, 10);
+    assert.equal(new Set(entries.map((entry) => entry.readingKey)).size, 10);
     for (const scene of chapter.scenes.filter((entry) => entry.quest)) {
       const selected = selectQuestEntries(entries, resolveQuest(scene.quest, level));
       assert.equal(selected.length, 5, `${level} ${scene.id} 王勃題目不足`);

@@ -24,6 +24,7 @@ import { initBattleUI, openBattleScreen } from './battle-ui.js';
 import { initRtUI, openRtScreen } from './rtbattle-ui.js';
 import { initAdventureUI, openAdventureScreen } from './adventure-ui.js';
 import { renderZhuyin } from './zhuyin.js';
+import { buildReadingMaterial, displayOptionText } from './reading-material.js';
 import { CHAPTERS, chapterDefinition, ensureAdventure, getChapterProgress, isEchoDue, selectChapter } from './adventure.js';
 
 const $ = (id) => document.getElementById(id);
@@ -196,8 +197,12 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
     annotations: options.annotations || [],
     zhuyinMode: options.zhuyinMode || 'off',
     readingGuides: options.readingGuides || {},
+    readingFallback: options.readingFallback || null,
     exitLabel: options.exitLabel || '← 回練功分區',
     completeLabel: options.completeLabel || '完成本節（Enter）',
+    completeExitLabel: options.completeExitLabel || options.exitLabel || '← 回練功分區',
+    onTargetReached: typeof options.onTargetReached === 'function' ? options.onTargetReached : null,
+    targetReachedHandled: false,
     visual: options.visual || null,
     duel: options.visual?.mode === 'duel' ? { playerHp: 100, opponentHp: 100 } : null,
     completePending: false,
@@ -232,8 +237,8 @@ function nextQuestion() {
 
 function renderQuestion(e) {
   const isMulti = e.qformat === 'exam-mc-multi';
+  const material = renderQuizReading(e);
   renderQuizVisual();
-  renderQuizReading(e);
   $('btn-next').textContent = '下一題（Enter）';
   $('quiz-progress').textContent = quiz.target
     ? `${quiz.title ? quiz.title + '・' : ''}${quiz.answered + 1}／${quiz.target}`
@@ -255,7 +260,7 @@ function renderQuestion(e) {
     const b = document.createElement('button');
     b.className = 'opt-btn';
     b.dataset.opt = opt;
-    b.innerHTML = `<span class="kbd">${i + 1}</span><span>${renderZhuyin(opt, quiz.annotations, quiz.zhuyinMode)}</span>`;
+    b.innerHTML = `<span class="kbd">${i + 1}</span><span>${renderZhuyin(displayOptionText(opt, material), quiz.annotations, quiz.zhuyinMode)}</span>`;
     b.addEventListener('click', () => (isMulti ? toggleMulti(b, opt) : submitAnswer([opt])));
     box.appendChild(b);
   });
@@ -263,17 +268,41 @@ function renderQuestion(e) {
 
 function renderQuizReading(e) {
   const reading = $('quiz-reading');
-  const guide = quiz?.readingGuides?.[e.work];
-  if (!guide) {
+  const guide = quiz?.readingGuides?.[e.readingKey] || quiz?.readingGuides?.[e.work];
+  const material = buildReadingMaterial(e, { guide, fallback: quiz?.readingFallback });
+  if (!material) {
     reading.hidden = true;
     reading.innerHTML = '';
-    return;
+    return null;
   }
   reading.hidden = false;
-  reading.innerHTML = `<div class="quiz-reading-head"><small>作答依據・本文就在這裡</small><strong>《莊子・${escapeHtml(e.work)}》節錄</strong></div>
-    <blockquote>${renderZhuyin(guide.excerpt, quiz.annotations, quiz.zhuyinMode)}</blockquote>
-    <p><b>閱讀提示：</b>${escapeHtml(guide.support)} 本題可直接依上文判讀，不用先背過全文。</p>
-    <a href="${escapeHtml(guide.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看完整公版原文</a>`;
+  const sourceLink = material.sourceUrl
+    ? `<a href="${escapeHtml(material.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(material.sourceLabel)}</a>`
+    : '';
+
+  if (material.kind === 'public-domain-excerpt') {
+    const translation = material.translation
+      ? `<div class="quiz-reading-translation"><b>${escapeHtml(material.translationLabel)}</b><p>${escapeHtml(material.translation)}</p></div>`
+      : '';
+    reading.innerHTML = `<div class="quiz-reading-head"><small>作答依據・公版原文</small><strong>${escapeHtml(material.title)}</strong></div>
+      <blockquote>${renderZhuyin(material.excerpt, quiz.annotations, quiz.zhuyinMode)}</blockquote>
+      ${translation}
+      <p><b>閱讀提示：</b>${escapeHtml(material.support)} 本題可直接依上文判讀，不用先背過全文。</p>
+      <p class="quiz-reading-rights">古典原文已屬公版；白話譯文為本站自譯。</p>
+      ${sourceLink}`;
+    return material;
+  }
+
+  const note = material.note && material.note !== material.text
+    ? `<p class="quiz-reading-note"><b>補充提醒：</b>${escapeHtml(material.note)}</p>`
+    : '';
+  reading.innerHTML = `<div class="quiz-reading-head"><small>作答依據・本站整理</small><strong>${escapeHtml(material.title)}</strong></div>
+    <div class="quiz-reading-translation"><b>${escapeHtml(material.translationLabel || '閱讀線索（本站自編）')}</b><p>${escapeHtml(material.text)}</p></div>
+    ${note}
+    <p><b>閱讀提示：</b>${escapeHtml(material.support)}</p>
+    <p class="quiz-reading-rights">本站自行撰寫，不轉載現代出版社翻譯或注釋；完整原典請見繁體公版來源。</p>
+    ${sourceLink}`;
+  return material;
 }
 
 function renderQuizVisual() {
@@ -320,12 +349,13 @@ function closeProfileEditor() {
 
 function resolveDuelAnswer(correct) {
   if (!quiz.duel) return;
+  const damage = Math.ceil(100 / Math.max(1, quiz.target || 5));
   if (correct) {
-    quiz.duel.opponentHp = Math.max(0, quiz.duel.opponentHp - 20);
-    quiz.visual.log = `你以文本證據破招，${quiz.visual.opponent}文氣 −20；你的文氣不變。`;
+    quiz.duel.opponentHp = Math.max(0, quiz.duel.opponentHp - damage);
+    quiz.visual.log = `你以文本證據破招，${quiz.visual.opponent}文氣 −${damage}；你的文氣不變。`;
   } else {
-    quiz.duel.playerHp = Math.max(0, quiz.duel.playerHp - 16);
-    quiz.visual.log = `${quiz.visual.opponent}抓住判讀破綻反擊，你的文氣 −16；對手文氣不變。`;
+    quiz.duel.playerHp = Math.max(0, quiz.duel.playerHp - damage);
+    quiz.visual.log = `${quiz.visual.opponent}抓住判讀破綻反擊，你的文氣 −${damage}；對手文氣不變。`;
   }
   renderQuizVisual();
 }
@@ -391,6 +421,11 @@ function submitAnswer(picked) {
   if (quiz.target && quiz.answered >= quiz.target) {
     quiz.completePending = true;
     $('btn-next').textContent = quiz.completeLabel;
+    $('btn-quiz-exit').textContent = quiz.completeExitLabel;
+    if (!quiz.targetReachedHandled) {
+      quiz.targetReachedHandled = true;
+      quiz.onTargetReached?.({ answered: quiz.answered, correct: quiz.correct, target: quiz.target });
+    }
   } else {
     $('btn-next').textContent = '下一題（Enter）';
   }

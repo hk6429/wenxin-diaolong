@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import { buildLevelFields, LEVEL_DESIGN, READING_CATS } from './level-design.mjs';
 
+const READING_BASE_FACTS = JSON.parse(fs.readFileSync('data/reading-base-facts.json', 'utf8'));
+
 const REBUILD_KEYS = [
   'hanyu', 'liuzongyuan', 'baijuyi', 'liuyuxi', 'dumu', 'lishangyin', 'liyu',
   'ouyangxiu', 'wanganshi', 'suxun', 'sushi', 'suzhe', 'zenggong', 'fanzhongyan',
@@ -105,7 +107,7 @@ function useReadingCategories(chapterFile) {
 
 for (const key of REBUILD_KEYS) {
   const elementary = readBank(key, 'elementary');
-  const baseFacts = (CUSTOM_FACTS[key] || elementary.map((entry) => entry.answer))
+  const baseFacts = (CUSTOM_FACTS[key] || READING_BASE_FACTS[key])
     .map((fact, index) => FACT_OVERRIDES[key]?.[index] || fact);
   if (baseFacts.length !== elementary.length) throw new Error(`${key} 基礎敘述數量不符`);
 
@@ -123,7 +125,8 @@ for (const key of REBUILD_KEYS) {
 }
 
 for (const key of EARLIER_KEYS) {
-  const baseFacts = readBank(key, 'elementary').map((entry) => entry.answer);
+  const baseFacts = READING_BASE_FACTS[key];
+  if (!baseFacts) throw new Error(`${key} 缺少閱讀基礎敘述`);
   for (const [level, design] of Object.entries(LEVEL_DESIGN)) {
     const entries = readBank(key, design.suffix).map((entry, index) => ({
       ...entry,

@@ -289,6 +289,10 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .quiz-reading blockquote { margin: 10px 0; padding-left: 12px; border-left: 3px solid var(--gold); font-family: "Noto Serif TC","Songti TC","PMingLiU",serif; line-height: 1.9; }
 .quiz-reading p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.65; }
 .quiz-reading a { display: inline-block; margin-top: 8px; color: var(--indigo); font-size: .78rem; }
+.quiz-reading-translation { margin: 10px 0; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--paper) 76%, white); }
+.quiz-reading-translation b { display: block; margin-bottom: 4px; color: var(--cinnabar); font-size: .8rem; }
+.quiz-reading-note { margin-top: 8px !important; }
+.quiz-reading-rights { margin-top: 8px !important; color: var(--ink-muted) !important; font-size: .74rem !important; }
 .quiz-tag { margin: 0 0 8px; font-size: .78rem; color: var(--ink-soft); letter-spacing: .1em; }
 .quiz-tag .zone-chip { padding: 2px 8px; border-radius: 999px; color: #fff; margin-right: 6px; }
 .zone-chip.z-修辭 { background: var(--rh); }

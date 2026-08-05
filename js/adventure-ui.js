@@ -21,6 +21,7 @@ import { saveMeta } from './meta/store.js';
 import { loadBank } from './bank.js';
 import { shuffle } from './shuffle.js';
 import { buildAdventureViewModel } from './gamification/adventure.js';
+import { questActionLabel, questCompleteLabel } from './quest-copy.js';
 
 const $ = (id) => document.getElementById(id);
 const LEVELS = ['國小', '國中', '高中'];
@@ -132,6 +133,18 @@ function sourceLine(chapter, scene) {
   return labels.length ? `<p class="adventure-source">內容依據：${labels.join('；')}</p>` : '';
 }
 
+function questReadingFallback(chapter, scene, level) {
+  const sceneSources = (scene.sourceIds || [])
+    .map((id) => chapter.sources.find((source) => source.id === id))
+    .filter(Boolean);
+  return {
+    title: scene.title,
+    summary: selectLevelText(scene.body, level),
+    note: scene.factNote,
+    sources: sceneSources.length ? sceneSources : chapter.sources.filter((source) => source.kind === 'primary'),
+  };
+}
+
 function progressLabel(definition, progress) {
   if (progress.replayActive) return `第${definition.number}章・重遊 ${progress.sceneIndex + 1}／${definition.sceneIds.length}`;
   if (progress.chapterStatus === 'stable') return `${definition.pageName}・已穩固`;
@@ -150,7 +163,7 @@ function renderControls(root) {
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-  $('adventure-level-note').innerHTML = `<strong>目前冒險：${root.level}版</strong>｜${LEVEL_NOTES[root.level]}切換後，故事文字與五題挑戰會一起更換，不只是按鈕外觀。`;
+  $('adventure-level-note').innerHTML = `<strong>目前冒險：${root.level}版</strong>｜${LEVEL_NOTES[root.level]}切換後，故事文字與關卡挑戰會一起更換，不只是按鈕外觀。`;
 }
 
 function renderChapterNav(meta, root) {
@@ -265,6 +278,8 @@ async function renderAdventure() {
     return;
   }
   const scene = chapter.scenes[progress.sceneIndex];
+  const activeQuest = scene.quest ? resolveQuest(scene.quest, root.level) : null;
+  const questAction = activeQuest ? questActionLabel(activeQuest.count, scene.visual?.mode === 'duel') : '';
   const body = selectLevelText(scene.body, root.level);
   const story = selectLevelText(scene.story, root.level);
   const isFinal = scene.id === definition.sceneIds.at(-1);
@@ -283,7 +298,7 @@ async function renderAdventure() {
       <aside class="story-fact"><b>史實小註</b><p>${scene.factNote}</p></aside>
       ${choiceBlock}
       ${sourceLine(chapter, scene)}
-      ${selectedChoice ? `<button id="btn-scene-next" class="primary-btn">${scene.quest ? '接受五題委託' : isFinal ? `修復${definition.pageName}` : '翻到下一幕'}</button>` : '<p class="story-choice-hint">先替角色作出選擇，故事才會繼續。</p>'}
+      ${selectedChoice ? `<button id="btn-scene-next" class="primary-btn">${scene.quest ? questAction : isFinal ? `修復${definition.pageName}` : '翻到下一幕'}</button>` : '<p class="story-choice-hint">先替角色作出選擇，故事才會繼續。</p>'}
     </div>`, true);
   document.querySelectorAll('[data-scene-choice]').forEach((button) => button.addEventListener('click', () => {
     if (!chooseScenePath(meta, scene.id, button.dataset.sceneChoice, definition.id)) return;
@@ -323,8 +338,10 @@ async function startQuest(scene) {
       ...guide,
       support: selectLevelText(guide.support, root.level),
     }])),
-    exitLabel: `← 暫停委託，回到${definition.figure}篇`,
-    completeLabel: `完成五題，繼續${definition.figure}篇（Enter）`,
+    readingFallback: questReadingFallback(chapter, scene, root.level),
+    exitLabel: `← 離開${scene.visual?.mode === 'duel' ? '對戰' : '委託'}（完成前不保留）`,
+    completeExitLabel: `← 回到${definition.figure}篇（本關已完成）`,
+    completeLabel: questCompleteLabel(quest.count, definition.figure, scene.visual?.mode === 'duel'),
     visual: scene.visual ? {
       ...scene.visual,
       title: scene.title,
@@ -332,14 +349,14 @@ async function startQuest(scene) {
       image: `assets/img/${scene.visual.art}`,
     } : null,
     onExit: openAdventureScreen,
-    onComplete: (summary) => {
+    onTargetReached: (summary) => {
       const meta = deps.getCtx().meta;
       const progress = getChapterProgress(meta, definition.id);
       progress.questResults[scene.id] = { ...summary, completedAt: new Date().toISOString() };
       completeScene(meta, scene.id, definition.id);
       saveMeta(meta);
-      openAdventureScreen();
     },
+    onComplete: openAdventureScreen,
   });
 }
 
@@ -357,16 +374,23 @@ async function startEcho() {
       ...guide,
       support: selectLevelText(guide.support, root.level),
     }])),
-    exitLabel: `← 暫停回聲，回到${definition.figure}篇`,
-    completeLabel: `完成三題，回到${definition.figure}篇（Enter）`,
+    readingFallback: {
+      title: definition.echoTitle,
+      summary: `回想${definition.figure}篇各幕的作品線索，再完成這次短驗收。`,
+      note: '題目只取本章人物作品；本站整理文字不冒充原文。',
+      sources: chapter.sources.filter((source) => source.kind === 'primary'),
+    },
+    exitLabel: `← 離開回聲（完成前不保留）`,
+    completeExitLabel: `← 回到${definition.figure}篇（本次已完成）`,
+    completeLabel: `完成${quest.count}題，回到${definition.figure}篇（Enter）`,
     onExit: openAdventureScreen,
-    onComplete: (summary) => {
+    onTargetReached: (summary) => {
       const meta = deps.getCtx().meta;
       if (summary.correct >= 2 && stabilizeChapter(meta, new Date(), definition.id)) deps.toast(`${definition.pageName}已穩固！`);
       else deps.toast('再溫習一次也沒關係，理解正在長出來');
       saveMeta(meta);
-      openAdventureScreen();
     },
+    onComplete: openAdventureScreen,
   });
 }
 

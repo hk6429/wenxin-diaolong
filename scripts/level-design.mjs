@@ -18,10 +18,12 @@ export function readingId(entry, level) {
 }
 
 const NOVELS = new Set(['三國演義', '水滸傳', '西遊記', '聊齋志異', '紅樓夢', '世說新語']);
+const BOOK_PREFIXES = ['論語', '史記', '莊子', '楚辭'];
 
-export function formatWork(work = '本篇作品') {
+export function formatWork(work) {
+  if (!work) throw new Error('閱讀題缺少 work，停止產生題庫');
   if (/^[《〈]/.test(work)) return work;
-  return NOVELS.has(work) ? `《${work}》` : `〈${work}〉`;
+  return NOVELS.has(work) || BOOK_PREFIXES.some((prefix) => work.startsWith(prefix)) ? `《${work}》` : `〈${work}〉`;
 }
 
 function elementaryDistractors(mode) {
@@ -164,13 +166,14 @@ export function buildLevelFields(entry, level, index, baseFact = entry.answer) {
     options.splice(answerPosition, 0, fact);
     return {
       id: readingId(entry, level),
+      readingKey: entry.readingKey,
       level,
       zone: '閱讀',
       cat: READING_CATS[level][mode],
       qformat: 'rd-pick',
       difficulty: design.difficulty,
       learningFocus: design.learningFocus,
-      question: `閱讀${work}時，關於「${entry.subcat || '作品內容'}」的第 ${index + 1} 組線索，哪一項最符合文字直接提供的內容？`,
+      question: `閱讀${work}時，關於「${entry.subcat || '作品內容'}」，哪一項最符合文字直接提供的內容？`,
       options,
       answer: fact,
       explain: `${fact}。國小階段先找人物、事件、景物或句中明白寫出的線索，再排除與原文相反的說法。`,
@@ -184,13 +187,14 @@ export function buildLevelFields(entry, level, index, baseFact = entry.answer) {
   options.splice(answerPosition, 0, answer);
   return {
     id: readingId(entry, level),
+    readingKey: entry.readingKey,
     level,
     zone: '閱讀',
     cat: READING_CATS[level][mode],
     qformat: 'rd-pick',
     difficulty: design.difficulty,
     learningFocus: design.learningFocus,
-    question: `${task.question(work)}（第 ${index + 1} 組線索）`,
+    question: task.question(work),
     options,
     answer,
     explain: level === '國中'

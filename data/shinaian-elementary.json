@@ -8,7 +8,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「文本重點」的第 1 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "人物常以口頭語、綽號、動作與出場事件共同建立性格",
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
@@ -22,7 +22,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-01"
   },
   {
     "id": "rd-e-16811",
@@ -33,7 +34,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「文本重點」的第 2 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "「逼上梁山」可從制度壓力、人際陷害與人物選擇多方面理解",
@@ -47,7 +48,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-02"
   },
   {
     "id": "rd-e-16821",
@@ -58,7 +60,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「文本重點」的第 3 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -72,7 +74,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-03"
   },
   {
     "id": "rd-e-16802",
@@ -83,7 +86,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「結構推進」的第 4 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "由這一條線索可斷定作品中的所有人物想法完全相同。",
@@ -97,7 +100,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-04"
   },
   {
     "id": "rd-e-16812",
@@ -108,7 +112,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「結構推進」的第 5 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "林沖故事以一再退讓和處境惡化形成層遞，使轉變具有過程",
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
@@ -122,7 +126,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-05"
   },
   {
     "id": "rd-e-16822",
@@ -133,7 +138,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「結構推進」的第 6 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "「忠」與「義」有時互相支持，有時造成角色難以化解的衝突",
@@ -147,7 +152,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-06"
   },
   {
     "id": "rd-e-16803",
@@ -158,7 +164,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「語言效果」的第 7 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -172,7 +178,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-07"
   },
   {
     "id": "rd-e-16813",
@@ -183,7 +190,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「語言效果」的第 8 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -197,7 +204,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-08"
   },
   {
     "id": "rd-e-16823",
@@ -208,7 +216,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「語言效果」的第 9 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "群像敘事讓讀者同時看到個人豪氣、團體規範與權力代價",
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
@@ -222,7 +230,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-09"
   },
   {
     "id": "rd-e-16804",
@@ -233,7 +242,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「合理推論」的第 10 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "敘事者有時讚嘆好漢，也會展示衝動與暴力造成的後果",
@@ -247,7 +256,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-10"
   },
   {
     "id": "rd-e-16814",
@@ -258,7 +268,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「合理推論」的第 11 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "這段主要列出作品名稱，沒有描寫人物的行動或所見景物。",
@@ -272,7 +282,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-11"
   },
   {
     "id": "rd-e-16824",
@@ -283,7 +294,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「合理推論」的第 12 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -297,7 +308,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-12"
   },
   {
     "id": "rd-e-16805",
@@ -308,7 +320,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「版本邊界」的第 13 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "人物原型與歷史事件經小說擴寫，不能把所有細節當宋代實錄",
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
@@ -322,7 +334,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-13"
   },
   {
     "id": "rd-e-16815",
@@ -333,7 +346,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「版本邊界」的第 14 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "暴力行動是文本分析對象，不宜設成鼓勵學生模仿的遊戲獎勵",
@@ -347,7 +360,8 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-14"
   },
   {
     "id": "rd-e-16825",
@@ -358,7 +372,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《水滸傳》時，關於「版本邊界」的第 15 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《水滸傳》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "不同版本的文字一定完全相同，不需要確認採用哪一種。",
@@ -372,6 +386,7 @@
     "difficulty": "易",
     "author": "施耐庵",
     "work": "水滸傳",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "shinaian-15"
   }
 ]

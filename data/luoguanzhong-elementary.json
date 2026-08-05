@@ -8,7 +8,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「文本重點」的第 1 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "章回題目與開場評語先建立亂世框架，再讓人物透過行動和對話登場",
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
@@ -22,7 +22,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-01"
   },
   {
     "id": "rd-e-16611",
@@ -33,7 +34,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「文本重點」的第 2 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "謀略場面往往先交代資訊差，再透過問答展示人物如何判讀局勢",
@@ -47,7 +48,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-02"
   },
   {
     "id": "rd-e-16621",
@@ -58,7 +60,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「文本重點」的第 3 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「文本重點」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -72,7 +74,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-03"
   },
   {
     "id": "rd-e-16602",
@@ -83,7 +86,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「結構推進」的第 4 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "由這一條線索可斷定作品中的所有人物想法完全相同。",
@@ -97,7 +100,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-04"
   },
   {
     "id": "rd-e-16612",
@@ -108,7 +112,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「結構推進」的第 5 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "隆中對以天下形勢、地理與人心安排長程策略，重點不只是背出地名",
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
@@ -122,7 +126,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-05"
   },
   {
     "id": "rd-e-16622",
@@ -133,7 +138,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「結構推進」的第 6 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「結構推進」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "章回末常以詩句或評論收束人物，這是引導讀者評價的敘事裝置",
@@ -147,7 +152,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-06"
   },
   {
     "id": "rd-e-16603",
@@ -158,7 +164,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「語言效果」的第 7 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -172,7 +178,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-07"
   },
   {
     "id": "rd-e-16613",
@@ -183,7 +190,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「語言效果」的第 8 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
       "句中景物只是背景，與人物當下的觀察和情緒完全無關。",
@@ -197,7 +204,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-08"
   },
   {
     "id": "rd-e-16623",
@@ -208,7 +216,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「語言效果」的第 9 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「語言效果」，哪一項最符合文字直接提供的內容？",
     "options": [
       "虛構對話可以表現人物衝突，但不能宣稱古人當時逐字如此說話",
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
@@ -222,7 +230,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-09"
   },
   {
     "id": "rd-e-16604",
@@ -233,7 +242,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「合理推論」的第 10 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "同一事件常由不同陣營觀看，讀者必須分辨人物立場與敘事判斷",
@@ -247,7 +256,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-10"
   },
   {
     "id": "rd-e-16614",
@@ -258,7 +268,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「合理推論」的第 11 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只交代作者所處的年代，沒有呈現作品中的人物或事件。",
       "這段主要列出作品名稱，沒有描寫人物的行動或所見景物。",
@@ -272,7 +282,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-11"
   },
   {
     "id": "rd-e-16624",
@@ -283,7 +294,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「合理推論」的第 12 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「合理推論」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品先寫結果，再補寫一件與結果無關的往事。",
       "前後景物同時出現，沒有移動、發現或情緒變化的先後。",
@@ -297,7 +308,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-12"
   },
   {
     "id": "rd-e-16605",
@@ -308,7 +320,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「版本邊界」的第 13 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "「演義」會整合史料、傳說與藝術虛構，不能用小說細節代替史料查證",
       "這個寫法只交代時間，沒有形成畫面、聲音或人物感受。",
@@ -322,7 +334,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-13"
   },
   {
     "id": "rd-e-16615",
@@ -333,7 +346,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「版本邊界」的第 14 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "這段只能說明作者姓名，不能推知人物的處境或感受。",
       "小說讚嘆智慧時仍會選擇敘事立場，讀者可以比較誰的代價被省略",
@@ -347,7 +360,8 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-14"
   },
   {
     "id": "rd-e-16625",
@@ -358,7 +372,7 @@
     "qformat": "rd-pick",
     "genre": "非韻文",
     "textForm": "小說",
-    "question": "閱讀《三國演義》時，關於「版本邊界」的第 15 組線索，哪一項最符合文字直接提供的內容？",
+    "question": "閱讀《三國演義》時，關於「版本邊界」，哪一項最符合文字直接提供的內容？",
     "options": [
       "作品裡的對話、夢境與想像都能直接當成完整歷史紀錄。",
       "不同版本的文字一定完全相同，不需要確認採用哪一種。",
@@ -372,6 +386,7 @@
     "difficulty": "易",
     "author": "羅貫中",
     "work": "三國演義",
-    "learningFocus": "明示理解"
+    "learningFocus": "明示理解",
+    "readingKey": "luoguanzhong-15"
   }
 ]

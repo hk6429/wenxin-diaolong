@@ -33,12 +33,6 @@
       "url": "https://zh.wikisource.org/zh-hant/和晉陵陸丞早春遊望"
     },
     {
-      "id": "appreciation",
-      "kind": "reference",
-      "label": "南通大學詩詞鑑賞資料（用於核對篇章、意象與寫景動詞）",
-      "url": "https://sxss.ntu.edu.cn/2018/0124/c6266a165748/page.htm"
-    },
-    {
       "id": "fiction",
       "kind": "fiction",
       "label": "守卷閣、江南春信與物候對戰均為本站原創"
@@ -126,7 +120,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "poem",
-        "appreciation",
         "fiction"
       ],
       "story": {
@@ -204,7 +197,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "poem",
-        "appreciation",
         "fiction"
       ],
       "story": {
@@ -282,7 +274,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "poem",
-        "appreciation",
         "fiction"
       ],
       "story": {
@@ -360,7 +351,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "poem",
-        "appreciation",
         "fiction"
       ],
       "story": {
@@ -438,7 +428,6 @@
       "contentKind": "primary",
       "sourceIds": [
         "poem",
-        "appreciation",
         "fiction"
       ],
       "story": {
