@@ -93,8 +93,12 @@ function setAdventureStage(content, cinematic = false) {
   stage.innerHTML = content;
 }
 
+function chapterArt(definition) {
+  return CHAPTER_COVER_ART[definition.id] || `${definition.art}.webp`;
+}
+
 function cinematicHeader(definition, kicker, title, extra = '') {
-  const art = CHAPTER_COVER_ART[definition.id] || `${definition.art}.webp`;
+  const art = chapterArt(definition);
   return `<div class="adventure-cover adventure-cover-${definition.id}">
     <img src="assets/img/${art}" alt="${definition.figure}章回情境插畫">
     <div class="adventure-cover-copy">
@@ -174,7 +178,8 @@ function renderChapterNav(meta, root) {
     const progress = getChapterProgress(meta, definition.id);
     const stateLabel = !unlocked ? '尚未解鎖' : progress.replayActive ? '重遊中' : progress.chapterStatus === 'stable' ? '已穩固' : progress.chapterStatus === 'found' ? '已尋回' : progress.sceneIndex ? '旅途中' : '可挑戰';
     return `<button class="adventure-chapter-tab${active ? ' active' : ''}" data-adventure-chapter="${definition.id}" ${unlocked ? '' : 'disabled'} aria-pressed="${active}">
-      <small>第${definition.number}章・${definition.era}</small><b>${definition.figure}</b><span>${stateLabel}</span>
+      <img class="adventure-chapter-thumb" src="assets/img/${chapterArt(definition)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <span class="adventure-chapter-copy"><small>第${definition.number}章・${definition.era}</small><b>${definition.figure}</b><span>${stateLabel}</span></span>
     </button>`;
   }).join('');
   const activeButton = chapterNav.querySelector('.adventure-chapter-tab.active');
