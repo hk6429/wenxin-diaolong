@@ -16,6 +16,23 @@ function zoneStats(meta, bank) {
   });
 }
 
+function readingProgress(meta) {
+  const collection = meta?.collection || {};
+  const ids = Object.keys(collection).filter((id) => /^rd-/u.test(id));
+  const attempted = ids.length;
+  const mastered = ids.filter((id) => Boolean(collection[id]?.earnedAt)).length;
+  const stageTotal = ids.reduce((sum, id) => {
+    const fallback = collection[id]?.earnedAt ? 5 : collection[id]?.wrong === 0 ? 2 : 1;
+    const box = clamp(meta?.leitner?.[id] ?? fallback, 1, 5);
+    return sum + (box - 1);
+  }, 0);
+  return {
+    attempted,
+    mastered,
+    pct: attempted ? Math.round((stageTotal / (attempted * 4)) * 100) : 0,
+  };
+}
+
 function nextMilestone(percent) {
   return [25, 50, 75, 100].find((mark) => percent < mark) || 100;
 }
@@ -37,6 +54,7 @@ export function buildInterfaceView({ meta = {}, bank = [], adventure = {}, chapt
     recommendedZone: { ...recommended, reason: recommended.total ? `目前精熟 ${recommended.pct}%，最適合優先補強` : '先從生活語句開始' },
     rewardPreview: { five: '完成 5 題可累積題目熟練度與墨珠', noLootBox: true },
     masteryCompass: zones,
+    readingProgress: readingProgress(meta),
     nextMilestone: { current: Math.round(journeyPercent), target: milestone, remaining: Math.max(0, milestone - Math.round(journeyPercent)) },
     calmMode: { available: true, label: '靜心模式', effect: '減少動畫與慶祝效果，不影響任何進度或獎勵' },
     autonomy: { level, message: '隨時離開、換區或改題數都不會扣分，也不會失去既有進度。' },

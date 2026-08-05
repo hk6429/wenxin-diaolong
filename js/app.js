@@ -1,6 +1,6 @@
 // 文心雕龍主控：畫面路由＋練習閉環。機制全走 js/meta/kernel.js 掛鉤，本檔只管 UI。
 import { getLevel, setLevel, loadBank } from './bank.js';
-import { initSession, onPracticeAnswer } from './meta/kernel.js';
+import { initSession, onPracticeAnswer, registerSessionEntries } from './meta/kernel.js';
 import { getMasteryStats, getCollection, getMostWrong, GRADES } from './meta/collection.js';
 import { getProgress } from './meta/progress.js';
 import { getBalance } from './meta/economy.js';
@@ -25,6 +25,7 @@ import { initRtUI, openRtScreen } from './rtbattle-ui.js';
 import { initAdventureUI, openAdventureScreen } from './adventure-ui.js';
 import { renderZhuyin } from './zhuyin.js';
 import { buildReadingMaterial, displayOptionText } from './reading-material.js';
+import { initReportUI } from './report.js';
 import { CHAPTERS, chapterDefinition, ensureAdventure, getChapterProgress, isEchoDue, selectChapter } from './adventure.js';
 
 const $ = (id) => document.getElementById(id);
@@ -181,6 +182,7 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
     toast('這個分區目前沒有題目');
     return;
   }
+  registerSessionEntries(ctx, entries);
   quiz = {
     entries,
     byId: new Map(entries.map((e) => [e.id, e])),
@@ -747,6 +749,35 @@ function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+function currentReportContext() {
+  const screen = SCREENS.find((id) => !$(id).hidden) || 'unknown';
+  const entry = quiz?.byId?.get(quiz.currentId);
+  const summary = learningSummary(ctx?.meta || {}, CHAPTERS);
+  const readingIds = Object.keys(ctx?.meta?.collection || {}).filter((id) => /^rd-/u.test(id));
+  const adventure = ctx?.meta ? ensureAdventure(ctx.meta) : {};
+  return {
+    screen,
+    level: getLevel(),
+    chapterId: adventure.currentChapterId || '',
+    sceneId: getChapterProgress(ctx?.meta || {}, adventure.currentChapterId)?.sceneIndex ?? '',
+    quizTitle: quiz?.title || '',
+    question: entry ? {
+      id: entry.id,
+      work: entry.work || entry.citation || '',
+      cat: entry.cat || '',
+      prompt: entry.question || '',
+      options: entry.options || [],
+      answer: entry.answer || '',
+    } : {},
+    progress: {
+      todayAnswered: summary.todayAnswered,
+      totalAnswered: summary.answered,
+      mastered: summary.mastered,
+      readingAttempted: readingIds.length,
+    },
+  };
+}
+
 /* ---------- 事件綁定 ---------- */
 function returnToHome() {
   renderHome();
@@ -826,6 +857,7 @@ initGamificationUI({
   },
   refresh: renderHome,
 });
+initReportUI(currentReportContext);
 
 document.addEventListener('keydown', (ev) => {
   if (!quiz || $('quiz-panel').hidden) return;

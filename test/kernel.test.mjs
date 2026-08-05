@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { setStorageBackend, loadMeta } from '../js/meta/store.js';
-import { initSession, onPracticeAnswer, onBattleEnd } from '../js/meta/kernel.js';
+import { initSession, onPracticeAnswer, onBattleEnd, registerSessionEntries } from '../js/meta/kernel.js';
 import { DAILY_EARN_CAP } from '../js/meta/economy.js';
 
 function freshStorage() {
@@ -12,6 +12,7 @@ function freshStorage() {
     setItem: (k, v) => map.set(k, String(v)),
     removeItem: (k) => map.delete(k),
   });
+  return map;
 }
 
 const bank = [
@@ -70,4 +71,32 @@ test('onBattleEnd 勝場計數與獎勵', () => {
   onBattleEnd(ctx, { won: true, bestCombo: 5 });
   assert.equal(ctx.meta.ach.stats.wins, 1);
   assert.equal(ctx.meta.ach.stats.bestCombo, 5);
+});
+
+test('一般練功存檔不會清除先前章回題的 Leitner 進度', () => {
+  const storage = freshStorage();
+  storage.set('wxdl_meta', JSON.stringify({ leitner: { 'rd-e-18001': 2 } }));
+  const ctx = initSession(bank);
+  onPracticeAnswer(ctx, 'rh-e-0001', true);
+  assert.equal(loadMeta().leitner['rd-e-18001'], 2);
+});
+
+test('章回題會註冊到同一套學習核心並累積閱讀弱點', () => {
+  freshStorage();
+  const ctx = initSession(bank);
+  registerSessionEntries(ctx, [{ id: 'rd-e-18001', zone: '閱讀', cat: '明示訊息', difficulty: '易' }]);
+  onPracticeAnswer(ctx, 'rd-e-18001', true);
+  assert.equal(ctx.meta.leitner['rd-e-18001'], 2);
+  assert.deepEqual(ctx.meta.weak['閱讀·明示訊息'], { correct: 1, wrong: 0 });
+});
+
+test('舊版遺失盒位但保留零錯誤紀錄時，恢復第一次答對的進度', () => {
+  const storage = freshStorage();
+  storage.set('wxdl_meta', JSON.stringify({
+    leitner: {},
+    collection: { 'rd-e-18001': { earnedAt: '', wrong: 0 } },
+  }));
+  const ctx = initSession(bank);
+  registerSessionEntries(ctx, [{ id: 'rd-e-18001', zone: '閱讀', cat: '明示訊息', difficulty: '易' }]);
+  assert.equal(ctx.leitner.get('rd-e-18001'), 2);
 });

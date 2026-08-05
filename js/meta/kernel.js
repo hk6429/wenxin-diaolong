@@ -60,6 +60,24 @@ export function initSession(banks = []) {
   return { meta, today, byId, siblingsOfId, leitner };
 }
 
+export function registerSessionEntries(ctx, entries = []) {
+  const incoming = entries.filter((entry) => entry?.id);
+  for (const entry of incoming) {
+    ctx.byId.set(entry.id, entry);
+    if (!ctx.leitner.has(entry.id)) {
+      const record = ctx.meta.collection?.[entry.id];
+      const recoveredBox = record?.earnedAt ? 5 : record && record.wrong === 0 ? 2 : 1;
+      ctx.leitner.set(entry.id, ctx.meta.leitner?.[entry.id] ?? recoveredBox);
+    }
+  }
+  const affected = new Set(incoming.map((entry) => weakKeyOf(entry)).filter(Boolean));
+  for (const key of affected) {
+    const ids = [...ctx.byId.values()].filter((entry) => weakKeyOf(entry) === key).map((entry) => entry.id);
+    for (const id of ids) ctx.siblingsOfId.set(id, ids.filter((siblingId) => siblingId !== id));
+  }
+  return ctx;
+}
+
 function processAnswer(ctx, id, correct, mode) {
   const { meta } = ctx;
   const events = [];

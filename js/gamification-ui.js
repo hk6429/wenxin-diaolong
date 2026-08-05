@@ -63,6 +63,7 @@ export function renderGamificationHub(view) {
   const prefs = readPrefs();
   applyCalm(prefs.calm);
   const compass = view.masteryCompass.map((item) => `<div><span>${item.zone}</span><b>${item.pct}%</b><i><em style="width:${item.pct}%"></em></i></div>`).join('');
+  const reading = view.readingProgress || { attempted: 0, mastered: 0, pct: 0 };
   const retentionItems = view.retention ? Object.values(view.retention) : [];
   root.innerHTML = `
     <div class="game-hub-head"><div><small>TODAY'S QUEST</small><h2>今日文心任務</h2></div><button type="button" class="calm-toggle" data-interface-id="U09" data-game-action="calm" aria-pressed="${prefs.calm}">${prefs.calm ? '靜心中' : '開啟靜心'}</button></div>
@@ -73,7 +74,14 @@ export function renderGamificationHub(view) {
       <button type="button" data-interface-id="U03" data-game-action="weak"><small>修補破綻</small><b>${escapeHtml(view.weaknessShortcut.label)}</b><span>只練需要複習的內容</span></button>
     </div>
     <div class="game-session-row" data-interface-id="U04"><span>這一回合想練多久？</span><div>${view.sessionChoices.map((item) => `<button type="button" data-session-size="${item.count}" class="${prefs.sessionSize === item.count ? 'active' : ''}">${item.label}<small>約 ${item.minutes} 分</small></button>`).join('')}</div></div>
-    <div class="game-compass" data-interface-id="U07" aria-label="三區精熟羅盤">${compass}</div>
+    <div class="game-compass" data-interface-id="U07" aria-label="三藝精熟羅盤">${compass}</div>
+    <div class="reading-practice-progress" aria-label="章回閱讀熟練進度">
+      <div><span>章回閱讀熟練</span><b>${reading.pct}%</b></div>
+      <i><em style="width:${reading.pct}%"></em></i>
+      <small>${reading.attempted
+        ? `已練 ${reading.attempted} 題；其中 ${reading.mastered} 題完成間隔複習、達到精熟。`
+        : '第一次作答就會累積熟練度；經過間隔複習後，才會列為精熟。'}</small>
+    </div>
     <div class="game-hub-foot"><span data-interface-id="U08">下一個旅程碑：${view.nextMilestone.target}%（還差 ${view.nextMilestone.remaining}%）</span><span data-interface-id="U06">${escapeHtml(view.rewardPreview.five)}</span></div>
     <p class="game-autonomy" data-interface-id="U10">${escapeHtml(view.autonomy.message)}</p>
     ${retentionItems.length ? `<details class="healthy-play"><summary>健康練習與收卷提醒</summary>

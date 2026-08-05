@@ -21,7 +21,7 @@ export function loadLeitnerState(meta, ids) {
 }
 
 export function persistLeitner(meta, leitnerMap) {
-  meta.leitner = Object.fromEntries(leitnerMap);
+  meta.leitner = { ...(meta.leitner || {}), ...Object.fromEntries(leitnerMap) };
   return meta;
 }
 

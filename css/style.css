@@ -175,6 +175,13 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .game-compass b { color: var(--ink); }
 .game-compass i { grid-column: 1/-1; height: 5px; overflow: hidden; border-radius: 99px; background: rgba(92,83,70,.15); }
 .game-compass em { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--indigo),var(--gold)); }
+.reading-practice-progress { margin-top: 10px; padding: 9px 10px; border: 1px solid rgba(86,104,132,.22); border-radius: 10px; background: rgba(255,255,255,.42); }
+.reading-practice-progress > div { display: flex; justify-content: space-between; gap: 10px; font-size: .72rem; }
+.reading-practice-progress > div span { color: var(--ink); font-weight: 800; }
+.reading-practice-progress > div b { color: var(--indigo); }
+.reading-practice-progress > i { display: block; height: 6px; margin: 5px 0; overflow: hidden; border-radius: 99px; background: rgba(92,83,70,.15); }
+.reading-practice-progress > i em { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--indigo),var(--gold)); }
+.reading-practice-progress small { color: var(--ink-soft); font-size: .62rem; line-height: 1.5; }
 .game-hub-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; color: var(--ink-soft); font-size: .63rem; }
 .game-autonomy { margin: 10px 0 0; padding-top: 8px; border-top: 1px dashed rgba(92,83,70,.25); color: var(--ink-soft); font-size: .65rem; text-align: center; }
 .healthy-play { margin-top: 10px; border-top: 1px dashed rgba(92,83,70,.25); padding-top: 8px; }
@@ -532,6 +539,23 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
 .profile-card input { width: 100%; min-height: 48px; padding: 9px 12px; border: 1.5px solid rgba(92,83,70,.38); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-size: 1.05rem; }
 .profile-card input:focus { outline: 3px solid color-mix(in srgb,var(--gold) 35%,transparent); border-color: var(--gold); }
 .profile-card .profile-error { margin: 5px 0 0; color: var(--bad); font-size: .8rem; }
+.report-trigger { position: fixed; left: 16px; bottom: 16px; z-index: 55; min-height: 44px; padding: 8px 14px; border: 1px solid rgba(168,132,44,.65); border-radius: 999px; background: var(--ink); color: var(--paper); box-shadow: var(--shadow); font: inherit; font-size: .78rem; font-weight: 800; }
+.report-trigger:focus-visible { outline: 3px solid color-mix(in srgb,var(--gold) 55%,transparent); outline-offset: 2px; }
+.report-overlay { z-index: 80; }
+.report-card { width: min(480px,calc(100vw - 28px)); max-width: 480px; max-height: calc(100vh - 28px); overflow-y: auto; }
+.report-card > small { color: var(--gold); font-weight: 900; letter-spacing: .12em; }
+.report-card h2 { margin: 5px 0; }
+.report-card > p { color: var(--ink-soft); font-size: .8rem; }
+.report-card fieldset { margin: 14px 0 10px; padding: 0; border: 0; }
+.report-card legend, .report-note { display: block; margin-bottom: 6px; font-weight: 800; }
+.report-reasons { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; }
+.report-reasons input { position: absolute; opacity: 0; pointer-events: none; }
+.report-reasons span { display: grid; min-height: 44px; place-items: center; padding: 7px; border: 1px solid rgba(92,83,70,.28); border-radius: 9px; background: var(--paper); color: var(--ink); font-size: .75rem; text-align: center; }
+.report-reasons input:checked + span { border-color: var(--gold); background: color-mix(in srgb,var(--paper) 78%,#f2d981); box-shadow: inset 0 0 0 1px var(--gold); font-weight: 800; }
+.report-reasons input:focus-visible + span { outline: 3px solid color-mix(in srgb,var(--gold) 35%,transparent); }
+.report-card textarea { width: 100%; padding: 9px 10px; resize: vertical; border: 1.5px solid rgba(92,83,70,.35); border-radius: 9px; background: var(--paper); color: var(--ink); font: inherit; }
+.report-privacy { margin: 6px 0; font-size: .68rem !important; }
+.report-status { min-height: 1.5em; margin: 8px 0 0; color: var(--indigo) !important; font-weight: 800; }
 
 @media (max-width: 420px) {
   .entry-grid, .zone-grid, .pets-grid { grid-template-columns: 1fr 1fr; }
@@ -554,6 +578,8 @@ main { max-width: 720px; margin: 0 auto; padding: 14px 14px 60px; }
   .healthy-play-grid, .adventure-journal-grid { grid-template-columns: 1fr; }
   .daily-limit { align-items: flex-start; flex-wrap: wrap; }
   .adventure-game-summary { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .report-trigger { left: 10px; bottom: 10px; }
+  .report-reasons { grid-template-columns: 1fr; }
 }
 
 /* ---------- 對戰（PvE 試煉＋PvP 過招） ---------- */

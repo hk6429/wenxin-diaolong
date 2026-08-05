@@ -30,6 +30,24 @@ test('U06-U10：獎勵透明、精熟羅盤、里程碑、靜心與自主權皆�
   assert.match(view.autonomy.message, /不會扣分/);
 });
 
+test('章回題第一次作答後就顯示熟練進度，不會誤稱已精熟', () => {
+  const readingMeta = {
+    daily: { todayAnswered: 5 },
+    collection: Object.fromEntries(Array.from({ length: 5 }, (_, i) => [`rd-e-${i + 1}`, { earnedAt: '' }])),
+    leitner: Object.fromEntries(Array.from({ length: 5 }, (_, i) => [`rd-e-${i + 1}`, 2])),
+  };
+  const view = buildInterfaceView({ meta: readingMeta, bank, adventure: { sceneIndex: 2 }, chapter, level: '國小' });
+  assert.deepEqual(view.readingProgress, { attempted: 5, mastered: 0, pct: 25 });
+});
+
+test('舊版章回盒位若曾被覆寫，零錯誤作答紀錄仍可恢復首次進度', () => {
+  const view = buildInterfaceView({
+    meta: { collection: { 'rd-e-1': { earnedAt: '', wrong: 0 } }, leitner: {} },
+    bank, adventure: {}, chapter, level: '國小',
+  });
+  assert.deepEqual(view.readingProgress, { attempted: 1, mastered: 0, pct: 25 });
+});
+
 test('空資料也能安全產生介面，不以零除或負值製造壓力', () => {
   const view = buildInterfaceView();
   assert.ok(Number.isFinite(view.nextMilestone.current));
