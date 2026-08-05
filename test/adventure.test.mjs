@@ -88,6 +88,24 @@ test('莊子首章具備七幕、三學段、來源分層與可執行任務', ()
   assert.ok(chapter.sources.every((source) => ['primary', 'reference', 'fiction'].includes(source.kind)));
 });
 
+test('莊子四篇關卡提供內嵌原文與分級白話提示，不要求先讀課文', () => {
+  const chapter = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/adventure/zhuangzi.json'), 'utf8'));
+  const works = ['齊物論', '逍遙遊', '養生主', '秋水'];
+
+  assert.deepEqual(Object.keys(chapter.readingGuides), works);
+  for (const work of works) {
+    const guide = chapter.readingGuides[work];
+    assert.ok(guide.excerpt.length >= 20, `${work}缺少可作答的原文節錄`);
+    assert.ok(guide.sourceUrl.startsWith('https://zh.wikisource.org/'), `${work}缺少原典連結`);
+    assert.deepEqual(Object.keys(guide.support), ['國小', '國中', '高中']);
+    assert.ok(Object.values(guide.support).every((text) => text.length >= 20), `${work}缺少分級白話提示`);
+  }
+  assert.match(chapter.readingGuides.齊物論.excerpt, /夢為胡蝶.*物化/);
+  assert.match(chapter.readingGuides.逍遙遊.excerpt, /宋榮子.*列子.*有所待.*無所可用/);
+  assert.match(chapter.readingGuides.養生主.excerpt, /十九年.*每至於族.*得養生/);
+  assert.match(chapter.readingGuides.秋水.excerpt, /曳尾.*鯈魚.*請循其本/);
+});
+
 test('開卷立誓與每幕選擇只記錄一次，且兩章互不覆蓋', () => {
   const meta = {};
   ensureAdventure(meta);

@@ -319,6 +319,12 @@ async function startQuest(scene) {
     title: scene.title,
     annotations: chapter.annotations,
     zhuyinMode: root.zhuyinMode,
+    readingGuides: Object.fromEntries(Object.entries(chapter.readingGuides || {}).map(([work, guide]) => [work, {
+      ...guide,
+      support: selectLevelText(guide.support, root.level),
+    }])),
+    exitLabel: `← 暫停委託，回到${definition.figure}篇`,
+    completeLabel: `完成五題，繼續${definition.figure}篇（Enter）`,
     visual: scene.visual ? {
       ...scene.visual,
       title: scene.title,
@@ -347,6 +353,12 @@ async function startEcho() {
   deps.startPractice(null, null, {
     entries: selected,
     limit: quest.count, title: definition.echoTitle, annotations: chapter.annotations, zhuyinMode: root.zhuyinMode,
+    readingGuides: Object.fromEntries(Object.entries(chapter.readingGuides || {}).map(([work, guide]) => [work, {
+      ...guide,
+      support: selectLevelText(guide.support, root.level),
+    }])),
+    exitLabel: `← 暫停回聲，回到${definition.figure}篇`,
+    completeLabel: `完成三題，回到${definition.figure}篇（Enter）`,
     onExit: openAdventureScreen,
     onComplete: (summary) => {
       const meta = deps.getCtx().meta;

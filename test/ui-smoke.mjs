@@ -145,6 +145,10 @@ await page.click('[data-scene-choice]');
 await page.click('#btn-scene-next');
 await page.waitForSelector('#quiz-options .opt-btn');
 await page.waitForSelector('#quiz-story-visual:not([hidden])');
+await page.waitForSelector('#quiz-reading:not([hidden])');
+if (!(await page.textContent('#quiz-reading'))?.includes('夢為胡蝶')) fail('蝶夢之門作答前沒有顯示〈齊物論〉本文');
+if (!(await page.textContent('#quiz-reading'))?.includes('不用先背過')) fail('蝶夢之門沒有說明可直接依本文作答');
+if (!(await page.textContent('#btn-quiz-exit'))?.includes('暫停委託，回到莊子篇')) fail('冒險五題的返回按鈕仍會讓人誤以為已完成關卡');
 if (!(await page.getAttribute('#quiz-story-image', 'src'))?.includes('adventure-zhuangzi-butterfly.webp')) fail('蝶夢之門沒有顯示專屬插畫');
 await page.waitForFunction(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0);
 if (!(await page.evaluate(() => document.querySelector('#quiz-story-image')?.naturalWidth > 0))) fail('蝶夢之門配圖載入失敗');
@@ -152,6 +156,7 @@ if (process.env.SMOKE_SCREENSHOTS_DIR) await page.screenshot({ path: `${process.
 for (let i = 0; i < 5; i += 1) {
   await page.click('#quiz-options .opt-btn');
   await page.waitForSelector('#quiz-feedback:not([hidden])');
+  if (i === 4 && !(await page.textContent('#btn-next'))?.includes('完成五題，繼續莊子篇')) fail('第五題後沒有清楚標示完成並繼續章回');
   await page.click('#btn-next');
   if (i < 4) await page.waitForSelector('#quiz-feedback[hidden]', { state: 'attached' });
 }

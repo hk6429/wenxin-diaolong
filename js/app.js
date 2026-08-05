@@ -195,6 +195,9 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
     title: options.title || '',
     annotations: options.annotations || [],
     zhuyinMode: options.zhuyinMode || 'off',
+    readingGuides: options.readingGuides || {},
+    exitLabel: options.exitLabel || '← 回練功分區',
+    completeLabel: options.completeLabel || '完成本節（Enter）',
     visual: options.visual || null,
     duel: options.visual?.mode === 'duel' ? { playerHp: 100, opponentHp: 100 } : null,
     completePending: false,
@@ -202,6 +205,7 @@ async function startPractice(bankKey, fixedIds = null, options = {}) {
   };
   $('practice-zones').hidden = true;
   $('quiz-panel').hidden = false;
+  $('btn-quiz-exit').textContent = quiz.exitLabel;
   showScreen('screen-practice');
   nextQuestion();
 }
@@ -229,6 +233,7 @@ function nextQuestion() {
 function renderQuestion(e) {
   const isMulti = e.qformat === 'exam-mc-multi';
   renderQuizVisual();
+  renderQuizReading(e);
   $('btn-next').textContent = '下一題（Enter）';
   $('quiz-progress').textContent = quiz.target
     ? `${quiz.title ? quiz.title + '・' : ''}${quiz.answered + 1}／${quiz.target}`
@@ -254,6 +259,21 @@ function renderQuestion(e) {
     b.addEventListener('click', () => (isMulti ? toggleMulti(b, opt) : submitAnswer([opt])));
     box.appendChild(b);
   });
+}
+
+function renderQuizReading(e) {
+  const reading = $('quiz-reading');
+  const guide = quiz?.readingGuides?.[e.work];
+  if (!guide) {
+    reading.hidden = true;
+    reading.innerHTML = '';
+    return;
+  }
+  reading.hidden = false;
+  reading.innerHTML = `<div class="quiz-reading-head"><small>作答依據・本文就在這裡</small><strong>《莊子・${escapeHtml(e.work)}》節錄</strong></div>
+    <blockquote>${renderZhuyin(guide.excerpt, quiz.annotations, quiz.zhuyinMode)}</blockquote>
+    <p><b>閱讀提示：</b>${escapeHtml(guide.support)} 本題可直接依上文判讀，不用先背過全文。</p>
+    <a href="${escapeHtml(guide.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看完整公版原文</a>`;
 }
 
 function renderQuizVisual() {
@@ -370,7 +390,7 @@ function submitAnswer(picked) {
   $('quiz-feedback').hidden = false;
   if (quiz.target && quiz.answered >= quiz.target) {
     quiz.completePending = true;
-    $('btn-next').textContent = '完成本節（Enter）';
+    $('btn-next').textContent = quiz.completeLabel;
   } else {
     $('btn-next').textContent = '下一題（Enter）';
   }
